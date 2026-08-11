@@ -1,0 +1,2468 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>결혼 준비 — 실견적 기록부</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f1ea; --bg-deep:#efe7db; --surface:#fffdf9; --ink:#211c17; --sub:#786e62; --faint:#a89c8c;
+  --line:#e4d9c9; --line-strong:#d2c3ab; --accent:#a1462c; --accent-ink:#7c3520; --good:#3c6e4a; --warn:#a1462c;
+  --serif:"Noto Serif KR", ui-serif, Georgia, serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",Pretendard,"Noto Sans KR",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.7;font-family:var(--sans);-webkit-text-size-adjust:100%}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px 150px}
+a{color:inherit}
+hr.rule{border:none;border-top:1px solid var(--line);margin:0}
+
+/* ── gate ── */
+#gate{position:fixed;inset:0;z-index:100;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:24px}
+#gate .box{text-align:center;max-width:320px;width:100%}
+#gate .mark{font-family:var(--serif);font-size:13px;letter-spacing:.3em;color:var(--accent);text-transform:uppercase;margin-bottom:18px}
+#gate h2{font-family:var(--serif);font-size:22px;font-weight:600;margin:0 0 6px}
+#gate p{font-size:13px;color:var(--sub);margin:0 0 22px}
+#gate input{width:100%;padding:13px 4px;border:none;border-bottom:1.5px solid var(--line-strong);background:none;font-size:16px;font-family:inherit;text-align:center;letter-spacing:.15em;color:var(--ink)}
+#gate input:focus{outline:none;border-color:var(--accent)}
+#gate button{width:100%;margin-top:20px;padding:13px;border:1px solid var(--ink);border-radius:2px;background:var(--ink);color:var(--bg);font-size:13.5px;letter-spacing:.08em;font-family:inherit;cursor:pointer;transition:.15s}
+#gate button:hover{background:var(--accent);border-color:var(--accent)}
+#gate .err{color:var(--warn);font-size:12px;margin-top:12px;min-height:16px}
+
+/* ── header ── */
+header{padding:64px 0 0;text-align:center}
+.eyebrow{font-family:var(--serif);font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);font-weight:600}
+h1{font-family:var(--serif);font-weight:600;font-size:32px;line-height:1.35;margin:16px 0 14px;letter-spacing:-.01em}
+.lead{color:var(--sub);font-size:14px;max-width:560px;margin:0 auto;line-height:1.75}
+.factstrip{display:flex;flex-wrap:wrap;justify-content:center;gap:0;margin:30px 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.factstrip .f{padding:14px 20px;text-align:center;flex:1;min-width:130px;border-right:1px solid var(--line)}
+.factstrip .f:last-child{border-right:none}
+.factstrip .k{display:block;font-size:10.5px;letter-spacing:.1em;color:var(--faint);text-transform:uppercase;margin-bottom:4px}
+.factstrip .v{font-family:var(--serif);font-size:15px;font-weight:600}
+
+/* ── nav ── */
+nav{position:sticky;top:0;z-index:30;background:rgba(246,241,234,.94);backdrop-filter:saturate(160%) blur(10px);
+  border-bottom:1px solid var(--line);margin:26px -20px 0;padding:0 20px;overflow-x:auto;white-space:nowrap}
+nav .inner{max-width:980px;margin:0 auto;display:flex;gap:22px}
+nav button{border:none;background:none;color:var(--sub);padding:14px 0;font-size:13.5px;font-weight:600;
+  font-family:inherit;cursor:pointer;border-bottom:2px solid transparent;letter-spacing:.01em}
+nav button.on{color:var(--accent);border-color:var(--accent)}
+
+.page{display:none;padding-top:36px}
+.page.on{display:block}
+
+/* ── section headers, cardless composition ── */
+section{margin-bottom:52px}
+.sechead{margin:0 0 6px}
+.sechead .n{font-family:var(--serif);font-size:11px;color:var(--faint);letter-spacing:.14em}
+.sechead h2{font-family:var(--serif);font-size:21px;font-weight:600;margin:2px 0 0;letter-spacing:-.005em}
+.secsub{color:var(--sub);font-size:13.5px;margin:8px 0 18px;max-width:640px}
+
+/* typographic note blocks — replaces boxed card grids */
+.notes{display:grid;gap:0}
+@media(min-width:720px){.notes.c2{grid-template-columns:1fr 1fr;gap:0 34px}}
+.note-block{padding:16px 0;border-top:1px solid var(--line)}
+.note-block:first-child{border-top:none}
+@media(min-width:720px){.notes.c2 .note-block{border-top:1px solid var(--line)}
+  .notes.c2 .note-block:nth-child(-n+2){border-top:none}}
+.note-block .lb{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:7px}
+.note-block p{margin:.4em 0;font-size:13.5px;color:var(--sub);line-height:1.7}
+.note-block p strong{color:var(--ink)}
+.note-block ul{margin:.4em 0;padding-left:18px;font-size:13.5px;color:var(--sub)}
+.note-block li{margin:.3em 0}
+
+.callout{border-left:2.5px solid var(--accent);padding:13px 0 13px 18px;font-size:13.5px;margin:16px 0;color:var(--sub);line-height:1.75}
+.callout b{color:var(--ink)}
+.callout.warn{border-color:var(--warn)}
+
+/* ── controls ── */
+.controls{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:13px;align-items:center}
+.chip{border:1px solid var(--line-strong);background:var(--surface);color:var(--sub);border-radius:3px;padding:6px 12px;
+  font-size:12.5px;cursor:pointer;font-family:inherit;transition:.13s}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.divider{width:1px;height:16px;background:var(--line-strong);margin:0 4px}
+.inl{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--sub)}
+.inl input[type=number]{width:64px;padding:6px 7px;border:1px solid var(--line-strong);border-radius:3px;font-family:inherit;font-size:13px;text-align:right;background:var(--surface);color:var(--ink)}
+.search{flex:1;min-width:150px;padding:7px 11px;border:1px solid var(--line-strong);border-radius:3px;font-family:inherit;font-size:13px;background:var(--surface);color:var(--ink)}
+
+/* ── tables ── */
+.scroll{overflow:auto;max-height:min(72vh,780px);border:1px solid var(--line-strong);background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:600px}
+th,td{padding:10px 13px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+th{background:var(--bg-deep);font-size:11px;letter-spacing:.05em;color:var(--sub);font-weight:700;position:sticky;top:0;z-index:2;text-transform:uppercase}
+tbody tr:last-child td{border-bottom:none}
+tbody tr{cursor:pointer;transition:background .12s}
+tbody tr:hover{background:var(--bg-deep)}
+tbody tr.sel{background:#f1e4d5}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+td.nm{font-weight:600;white-space:normal;min-width:126px}
+.tot{font-weight:700}.lo{color:var(--good)}.hi{color:var(--warn)}
+.tag{display:inline-block;font-size:10.5px;padding:2px 7px;border-radius:2px;background:var(--bg-deep);color:var(--sub);font-weight:600}
+.tag.g{background:#e7efe8;color:var(--good)}.tag.r{background:#f6e7e2;color:var(--warn)}.tag.n{background:var(--bg-deep);color:var(--sub)}
+caption{caption-side:bottom;text-align:left;padding:12px 2px;font-size:12px;color:var(--sub);line-height:1.7}
+
+/* ── vendor / SDM lists (cardless rows) ── */
+.vlist{border-top:1px solid var(--line-strong)}
+.vgroup{border-bottom:1px solid var(--line-strong)}
+.vhead{display:flex;align-items:flex-start;gap:12px;padding:16px 0;cursor:pointer}
+.vhead input{margin-top:4px;width:16px;height:16px;accent-color:var(--accent);flex:none}
+.vhead .vmain{flex:1;min-width:0}
+.vhead .vtop{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.vname{font-weight:700;font-size:14.5px;font-family:var(--serif)}
+.vprice{margin-left:auto;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--accent-ink)}
+.vsummary{font-size:13px;color:var(--sub);margin-top:4px;line-height:1.65}
+.vdetail{padding:0 0 16px 28px}
+.vdetail .row{padding:11px 0;border-top:1px dashed var(--line)}
+.vdetail .row:first-child{border-top:none}
+.vdetail .rtop{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.vdetail .rname{font-weight:700;font-size:13.5px}
+.vdetail .rprice{margin-left:auto;font-weight:700;font-size:13px;color:var(--accent-ink)}
+.vdetail .rnote{font-size:12.5px;color:var(--sub);margin-top:3px;line-height:1.65}
+.vdetail .rsrc{font-size:11px;color:var(--faint);margin-top:3px}
+.vdetail .empty{font-size:12.5px;color:var(--faint);font-style:italic;padding:6px 0}
+.vtip{font-size:12.5px;color:var(--accent-ink);margin-top:8px;background:#f8ede4;padding:9px 12px;border-radius:2px}
+
+/* ── sticky total ── */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:0 20px 14px}
+.bar .inner{max-width:980px;margin:0 auto;background:rgba(255,253,249,.96);backdrop-filter:saturate(160%) blur(12px);
+  border:1px solid var(--line-strong);padding:13px 18px;box-shadow:0 -6px 26px -10px rgba(33,28,23,.18)}
+.bar .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.bar .who{font-size:12.5px;color:var(--sub);flex:1;min-width:170px}
+.bar .who b{color:var(--ink)}
+.bar .amt{font-family:var(--serif);font-size:24px;font-weight:700;letter-spacing:-.01em;font-variant-numeric:tabular-nums;color:var(--accent-ink)}
+.bar .amt small{font-size:12.5px;font-weight:600;color:var(--sub);margin-left:2px;font-family:var(--sans)}
+.bd{display:flex;gap:10px;flex-wrap:wrap;margin-top:7px;font-size:11.5px;color:var(--sub)}
+.bd b{color:var(--ink)}
+.reset{border:1px solid var(--line-strong);background:none;color:var(--sub);border-radius:2px;padding:5px 10px;font-size:11.5px;cursor:pointer;font-family:inherit}
+.reset:hover{border-color:var(--accent);color:var(--accent)}
+
+details{border-top:1px solid var(--line-strong);padding:14px 0}
+details:last-of-type{border-bottom:1px solid var(--line-strong)}
+summary{cursor:pointer;font-weight:700;font-size:14.5px;font-family:var(--serif);list-style:none;display:flex;align-items:center;gap:8px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";color:var(--accent);font-family:var(--sans);font-weight:400;width:14px}
+details[open] summary::before{content:"–"}
+details ul{margin:12px 0 2px;padding-left:20px;font-size:13.5px;color:var(--sub);line-height:1.75}
+details li{margin:.4em 0}
+
+footer{margin-top:60px;padding:24px 0 0;border-top:1px solid var(--line);font-size:11.5px;color:var(--faint);line-height:1.8}
+.note{font-size:12.5px;color:var(--sub);margin-top:10px}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="box">
+    <div class="mark">Private · 개인 열람용</div>
+    <h2>결혼 준비 실견적 기록부</h2>
+    <p>비밀번호를 입력해주세요</p>
+    <input id="pw" type="password" placeholder="••••" autocomplete="off">
+    <button id="go">입장하기</button>
+    <div class="err" id="err"></div>
+  </div>
+</div>
+
+<div class="wrap" id="app" style="display:none">
+<header>
+  <div class="eyebrow">Our Wedding · Field Notes</div>
+  <h1>서울 웨딩홀 · 스드메 · 부대업체<br>실견적 기록부</h1>
+  <p class="lead">네이버 카페 7곳의 실계약 후기, 웨딩북·아이웨딩·스마트웨딩·다이렉트웨딩 등 공식 웨딩 정보 사이트 정가, 지인이 직접 받은 견적서, 그리고 4개 플래너의 실제 가격표를 한 곳에 모았습니다.
+     고르면 하단에서 총액이 자동으로 계산됩니다.</p>
+  <div class="factstrip">
+    <div class="f"><span class="k">하객 동선</span><span class="v">군자·휘경동·의왕</span></div>
+    <div class="f"><span class="k">예식</span><span class="v">토·일 15시 이전</span></div>
+    <div class="f"><span class="k">보증</span><span class="v">200명</span></div>
+    <div class="f"><span class="k">식대</span><span class="v">5~7만원대</span></div>
+    <div class="f"><span class="k">대관</span><span class="v">최소</span></div>
+  </div>
+</header>
+
+<nav><div class="inner" id="nav">
+  <button class="on" data-p="hall">웨딩홀</button>
+  <button data-p="timing">요일·시간</button>
+  <button data-p="sdm">스드메</button>
+  <button data-p="vendor">부대업체</button>
+  <button data-p="timeline">준비 타임라인</button>
+  <button data-p="check">체크리스트</button>
+</div></nav>
+
+<!-- ══ 웨딩홀 ══ -->
+<div class="page on" id="p-hall">
+<section>
+  <div class="sechead"><span class="n">Ⅰ</span><h2>웨딩홀 실견적 67곳</h2></div>
+  <p class="secsub">행을 눌러 선택하세요. 총액 = 대관료 + (식대 × 보증인원). 필수옵션·부가세·봉사료는 별도입니다.</p>
+  <div class="controls" id="hallCtl">
+    <button class="chip on" data-f="all">전체</button>
+    <button class="chip" data-f="east">동쪽 생활권</button>
+    <button class="chip" data-f="weekend">토·일 15시 이전</button>
+    <button class="chip" data-f="budget">1,900만 이하</button>
+    <span class="divider"></span>
+    <button class="chip on" data-s="total">총액 ↑</button>
+    <button class="chip" data-s="meal">식대 ↑</button>
+    <button class="chip" data-s="rent">대관 ↑</button>
+    <span class="inl" style="margin-left:auto">보증 <input id="guar" type="number" value="200" min="50" max="500" step="10">명</span>
+  </div>
+  <div class="scroll">
+    <table id="hallTable">
+      <thead><tr><th>웨딩홀</th><th>지역</th><th>요일·시간</th><th class="num">대관</th><th class="num">식대</th><th>구분</th><th class="num">총액</th><th>출처</th></tr></thead>
+      <tbody></tbody>
+      <caption><span class="tag g">할인가</span> 실제 견적·계약가 · <span class="tag n">정가</span> 할인 전 · <span class="tag r">정찰제</span> 할인 없음<br>
+        후기의 원래 보증인원과 입력값이 다를 수 있어 비교용 기준선으로만 쓰세요.</caption>
+    </table>
+  </div>
+  <div id="hallDetail" style="display:none;border:1px solid var(--line-strong);background:var(--surface);padding:18px 20px;margin:14px 0"></div>
+  <div id="unknownHalls"></div>
+  <div id="priceGoKr" class="note-block" style="border-top:1px solid var(--line-strong);margin-top:6px;padding-top:14px"></div>
+</section>
+
+<section>
+  <div class="sechead"><span class="n">Ⅱ</span><h2>지인 실견적 2건 — 카페 후기와 출처가 다른 자료</h2></div>
+  <p class="secsub">지인이 직접 받은 견적서·상담 결과입니다. 서초·강남권이라 우리 조건(동쪽 생활권)과는 별도지만, 신뢰도 높은 1차 자료라 함께 기록합니다.</p>
+  <div class="notes c2">
+    <div class="note-block">
+      <div class="lb">더리버사이드호텔 · 서초 잠원동</div>
+      <p><strong>2027년 6월 재개발 공사 시작, 잠원동 부지 폐업이 확정된 호텔</strong>입니다(2030년 특급호텔로 재개장 예정). 지인이 200명 보증으로 상무·회장 인맥을 통해 받은 견적은 <strong>초가 2,270만원 → 최종 2,000~2,100만원</strong>(식대 77,000원 포함, 홀비+기타 500만원대).</p>
+      <p>일반 공식 판매기준(iwedding)은 <strong>식대 90,000~130,000원, 최소 보증 100명</strong>으로 나옵니다. 지인 채널이 없으면 일반 견적은 이 가격대만 나올 것 같습니다.</p>
+    </div>
+    <div class="note-block">
+      <div class="lb">루클라비 더 화이트 · 강남 논현동</div>
+      <p>지인이 실제 상담받은 <strong>견적서 원본</strong>입니다. 아래 표에서 3개 날짜를 비교해보세요. 200명 보증 기준이고, 날짜별로 대관료가 750만~800만원대인 걸 직접 확인할 수 있어요. 강남 논현동이라 우리 조건과는 별도입니다.</p>
+    </div>
+  </div>
+  <div class="scroll" style="max-height:none;margin-top:11px">
+    <table id="luklaviTable"><thead><tr><th>날짜·시간</th><th class="num">대관(정가→할인)</th><th class="num">식대(정가→할인)</th><th class="num">총액(200명)</th></tr></thead><tbody></tbody>
+      <caption>가격 모든 항목 <strong>당일계약 할인 적용가</strong>입니다(대관 -200만/-100만, 식대 -5,000/-2,000원). 부가세 10% 포함, 봉사료 없음.<br>
+      당일계약 시 본식스냅 110만·DVD 60만·플라워샤워 30만·포토테이블 50만 = <strong>250만원 상당 서비스가 무료로 따라옴</strong>. 이것이 앞서 체크리스트의 오늘 계약하시면 무료 서비스 질문을 던졌을 때 실제 나온 예시입니다.</caption>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><span class="n">Ⅲ</span><h2>보증인원 낮출 수 있는 곳</h2></div>
+  <p class="secsub">실제 하객이 200명보다 적으면 총액이 크게 달라집니다.</p>
+  <div class="notes">
+    <div class="note-block"><p><strong>120명 · 레노스블랑쉬</strong>(왕십리) — 비성수기 한정(원래 150명)</p></div>
+    <div class="note-block"><p><strong>100명 · 엘로라인가든</strong>(송파 장지) — 12:30 예식에도 가능</p></div>
+    <div class="note-block"><p><strong>150명 · 제이오스티엘</strong>(구로) — 8월 비수기가 더 저렴</p></div>
+    <div class="note-block"><p><strong>150명 · 명동 라루체</strong> 아이리스홀 — 잔여타임 = 대관 무료 + 꽃 할인 사례</p></div>
+    <div class="note-block"><p><strong>170명 · 신도림 웨딩시티</strong> — 식대 51,500원 · 대관 265만</p></div>
+    <div class="note-block"><p><strong>50~100명 · 플로렌스</strong>(오목교·보라매) — 100명 총액 1,000만원 미만</p></div>
+  </div>
+</section>
+</div>
+
+<!-- ══ 요일·시간 ══ -->
+<div class="page" id="p-timing">
+<section>
+  <div class="sechead"><span class="n">Ⅰ</span><h2>요일·시간대만 바꿨을 때 차액</h2></div>
+  <p class="secsub">같은 홀에서 실제로 확인된 차이입니다. 토요일 12~13시(골든타임)는 할인이 거의 없습니다.</p>
+  <div class="scroll" style="max-height:none">
+    <table>
+      <thead><tr><th>홀</th><th>비싼 조건</th><th>싼 조건</th><th class="num">차이</th></tr></thead>
+      <tbody>
+        <tr><td class="nm">동대문 메리어트</td><td>토요일 · 대관 1,800만 / 14만</td><td class="lo">일요일 · 대관 250만 / 12.6만</td><td class="num tot">대관 −1,550만</td></tr>
+        <tr><td class="nm">더컨벤션 잠실</td><td>정가 · 1,100만 / 11만</td><td class="lo">토 잔여타임 · 530만 / 6.2만</td><td class="num tot">−1,530만</td></tr>
+        <tr><td class="nm">엘타워 양재</td><td>정가 · 660만 / 13만</td><td class="lo">일 15:00 · 330만 / 8만</td><td class="num tot">−1,580만*</td></tr>
+        <tr><td class="nm">여의도웨딩컨벤션</td><td>토 점심 · 760만 / 7.9만</td><td class="lo">오후 · 450만 / 6.9만</td><td class="num tot">−510만</td></tr>
+        <tr><td class="nm">서울웨딩타워</td><td>27/9 오전 · 950만 / 9.5만</td><td class="lo">27/9 오후 · 800만 / 8.2만</td><td class="num tot">−475만</td></tr>
+        <tr><td class="nm">DMC타워웨딩</td><td>27/6 오전 · 640만 / 6.4만</td><td class="lo">27/3 오후 · 420만 / 5.7만</td><td class="num tot">−360만</td></tr>
+        <tr><td class="nm">상록아트홀</td><td>토 12:30 성수기</td><td class="hi">할인 전무</td><td class="num">0</td></tr>
+      </tbody>
+      <caption>*250명 기준 환산. 상록아트홀 후기 원문: 성수기 토요일 점심 타임은 할인이 전무합니다. 대신 시간을 조금 바꾸거나 일요일로 바꾸면 갑자기 견적이 확 좋아집니다.</caption>
+    </table>
+  </div>
+  <div class="notes c2" style="margin-top:16px">
+    <div class="note-block"><div class="lb">우리 조건 안 최적</div>
+      <p><strong>토요일 14:00~15:00</strong> — 토요일 프리미엄은 유지하고 골든타임 할증만 빠지는 구간. 홀 타임표상 13:20 / 14:40 슬롯.</p>
+      <p><strong>일요일 12:00~15:00</strong> — 할인폭 최대. 대관료가 절반 이하로 내려간 사례 다수.</p></div>
+    <div class="note-block"><div class="lb">감안할 점</div>
+      <p>엘타워 일요일 15:00 계약자 후기 원문: <strong>오후 3시이다보니 비선호시간대라 하객분들이 예상만큼 오실까 싶어요</strong></p>
+      <p>친구가 전국구·양가 본가가 의왕·휘경동이라 일요일 오후는 지방 하객 당일 왕복이 부담될 수 있습니다.</p></div>
+  </div>
+</section>
+</div>
+
+<!-- ══ 스드메 ══ -->
+<div class="page" id="p-sdm">
+<section>
+  <div class="sechead"><span class="n">Ⅰ</span><h2>스드메 4개 플래너 실가격표</h2></div>
+  <p class="secsub">보유한 「스드메 견적 자동산출」 자료 기준입니다. 베리굿·다이렉트·제이웨딩·신부야 4개 플래너가 같은 업체를 얼마에 파는지 나란히 비교합니다. 셀을 누르면 하단 총액에 반영됩니다.</p>
+  <div class="controls" id="sdmCtl">
+    <button class="chip on" data-c="studio">스튜디오</button>
+    <button class="chip" data-c="dress">드레스</button>
+    <button class="chip" data-c="makeup">메이크업</button>
+    <span class="divider"></span>
+    <button class="chip on" data-o="asc">최저가 ↑</button>
+    <button class="chip" data-o="desc">최저가 ↓</button>
+    <input class="search" id="sdmQ" placeholder="업체명 검색">
+  </div>
+  <div class="scroll">
+    <table id="sdmTable">
+      <thead><tr><th>업체명</th><th class="num">베리굿</th><th class="num">다이렉트</th><th class="num">제이웨딩</th><th class="num">신부야</th><th class="num">최저가</th></tr></thead>
+      <tbody></tbody>
+      <caption>숫자는 기본가(만원) 최저~최대 범위이며 <strong>추가금은 제외</strong>입니다 — 원본·수정본, 앨범 페이지 추가, 헬퍼비, 헤어변형, 피팅비, 담당자 직급 지정, 얼리스타트, 2부 드레스, 혼주 비용 등.
+        셀을 클릭하면 아래 상세 패널에 해당 플래너의 추가금 안내가 표시됩니다.</caption>
+    </table>
+  </div>
+  <div id="sdmDetail" class="note" style="display:none;border:1px solid var(--line-strong);padding:14px 16px;margin-top:10px;background:var(--surface)"></div>
+
+  <div class="notes c2" style="margin-top:20px">
+    <div class="note-block"><div class="lb">스튜디오를 넣으면 표가 깨진다</div>
+      <p>스튜디오 진행 시 <strong>추가금만 100만원 가까이</strong> 붙습니다 — 원본 수정본 <strong>+44만</strong>, 헬퍼비 <strong>+25만</strong>, 헤어변형 <strong>+35만</strong>.</p>
+      <p>야외 스냅이 싸다도 사실이 아니고 오히려 추가금이 더 많습니다. 대안은 <strong>스튜디오 생략 + 일반 사진관(50만원대 이하)</strong> 또는 커플 스냅 대체.</p>
+    </div>
+    <div class="note-block"><div class="lb">드메에서 하나만 고르라면 메이크업</div>
+      <ul>
+        <li><strong>드레스</strong>: 투어 대신 지정하면 지정 혜택(2부 무료·블랙라벨 업그레이드) + 피팅비 절약</li>
+        <li><strong>메이크업</strong>: 샵을 한 단계 낮추고 직급을 지정하는 게 더 쌀 수 있음</li>
+      </ul>
+      <p>가성비 조회는 한국소비자원 <strong>참가격</strong>(price.go.kr).</p>
+    </div>
+  </div>
+  <div class="callout warn"><b>⚠️ 지인이 오픈채팅방에서 직접 들은 피드백: "다이렉트 플래너는 하지 않는 걸 추천".</b> 포인트로 저렴하게 하는 곳이라 오히려 <b>시작 가격이 비싸게</b> 잡히는 구조라고 합니다. 차라리 워크인이 낫다는 의견이 많았고, 스드메 외에는 거의 도와주지 않는다는 평이에요. <b>실제 계약은 다른 플래너와 반드시 비교해보세요.</b></div>
+</section>
+
+<section>
+  <div class="sechead"><span class="n">Ⅱ</span><h2>준비 타임라인 참고</h2></div>
+  <div class="notes c2">
+    <div class="note-block">
+      <div class="lb">스튜디오 촬영 일정은 여유있게</div>
+      <p><strong>원본은 몇 주</strong> 안에 받지만 <strong>보정본과 액자는 짧게는 3개월, 길게는 5개월</strong>까지 걸립니다. 예식날 몇 달 전에는 최종 보정본이 있어야 청첩장·식전영상을 만들 수 있어서, 촬영을 너무 빠듯하게 잡으면 <strong>원본만 받아 사설 업체에 돈 주고 청첩장을 만들어야 하는 상황</strong>이 생길 수 있어요. 리허설 촬영 = 스튜디오 촬영이라는 것도 참고하세요.</p>
+    </div>
+    <div class="note-block">
+      <div class="lb">베리굿웨딩 진행순서도 (참고용)</div>
+      <p>상담(6~14개월 전) → 드레스샵투어(촬영 2~4개월 전) → 촬영가봉(촬영 2~4주 전) → 웨딩촬영(리허설 촬영) → 사진셀렉(촬영 1~2달 후) → 본식가봉(결혼식 1달 전) → 결혼식</p>
+      <p>샵에 따라 헬퍼비 25~45만, 야외 +5만, 결혼식날 애프터드레스 +5만(안 하면 피팅비 5.5만 발생), 헤어/메이크업 염색·컷·펌 별도 부과, 이른 시작(5~7시) 추가금이 붙는다는 점도 미리 물어보세요.</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ══ 부대업체 ══ -->
+<div class="page" id="p-vendor">
+<section>
+  <div class="sechead"><span class="n">Ⅰ</span><h2>부대업체 — 실제 계약 후기 기준</h2></div>
+  <p class="secsub">카페·블로그 실계약 후기에서 확인된 업체명·가격을 그대로 옮겼습니다. 체크하면 하단 총액에 합산됩니다.</p>
+  <div class="vlist" id="vendList"></div>
+  <p class="note">※ 원판은 대부분 <b>홀 필수 항목</b>입니다. 홀 견적서에 이미 포함됐는지 먼저 확인하세요.</p>
+</section>
+</div>
+
+<!-- ══ 타임라인 ══ -->
+<div class="page" id="p-timeline">
+<section>
+  <div class="sechead"><span class="n">Ⅰ</span><h2>지인의 준비 타임라인 — 실제 업체명 조사</h2></div>
+  <p class="secsub">친구의 개인 준비표에 있던 업체명을 실제로 검색해 확인한 결과입니다. 이 사람의 취향에 맞춘 선택일 뿐 추천 목록은 아니지만, 서로 다른 카테고리를 실제로 어떻게 조합하는지 참고할 수 있습니다.</p>
+  <div class="scroll" style="max-height:none">
+    <table id="timelineTable">
+      <thead><tr><th>단계(업체)</th><th>시기</th><th>카테고리</th><th>확인된 정보</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</section>
+</div>
+
+<!-- ══ 체크리스트 ══ -->
+<div class="page" id="p-check">
+<section>
+  <div class="sechead"><span class="n">Ⅰ</span><h2>상담·계약 체크리스트</h2></div>
+  <p class="secsub">견적 받을 때 그대로 읽으세요.</p>
+  <details open><summary>견적서에 반드시 한 장으로 받을 것</summary><ul>
+    <li><strong>최종 납부액</strong>: 식대·대관·꽃·연출·음료·주류·폐백·혼구·스크린·부가세·봉사료 전부 한 장에</li>
+    <li>식대가 <strong>세금 포함 단가</strong>인지, 음료·주류 포함인지, 미성년/유아식·도시락 단가까지</li>
+    <li>보증인원 <strong>신랑·신부 합산 기준</strong>인지 (따로 계산하면 손해)</li>
+    <li>보증인원 <strong>최종 하향 가능일</strong>, 당일 추가 인원 단가, 노쇼·잔여식권 처리</li>
+    <li>대관료 0원 함정: 필수 꽃 업그레이드·연출·음향·폐백실·혼구·주차비로 대체 청구되는지</li>
+  </ul></details>
+  <details><summary>주차·동선</summary><ul>
+    <li>하객 무료 시간, 혼주 종일주차 대수, <strong>동시 주차 가능 대수</strong></li>
+    <li>만차 시 대체 주차장 위치·요금·부담 주체, 셔틀 간격</li>
+    <li>주차장 <strong>진입로 폭</strong> (아펠가모 잠실·더파티움 여의도·웨딩여율리가 여기서 갈림)</li>
+    <li>주차장 → 홀 동선 환승 횟수 (루이비스 중구는 1층 경유 필수)</li>
+  </ul></details>
+  <details><summary>외부 업체 반입 — 부대업체 직접 고를 때 핵심</summary><ul>
+    <li>본식 스냅·DVD·사회자를 <strong>외부 업체로 할 수 있나요? 반입비·패널티는?</strong></li>
+    <li>지정 업체만 가능할 때 → <strong>스냅 원본을 추가금 없이 받나요?</strong> 별도 구매면 얼마?</li>
+    <li>첫 타임 <strong>원판 촬영</strong>이 가능한가요? 예식 전후 원판은?</li>
+    <li>혼주 헤어메이크업이 홀 연계면 <strong>추가금·소요시간·가발 추가 기준</strong>을 미리 전화 확인</li>
+  </ul></details>
+  <details><summary>협상에 쓸 문장</summary><ul>
+    <li>잔여 타임 할인이 되나요? / <strong>일요일이나 오후 시간대</strong>는 견적이 어떻게 달라지나요?</li>
+    <li>오늘 계약하면 추가 혜택이 더 있나요? → 꽃 업그레이드·폐백 서비스·보증인원 조정 중 하나는 나옵니다</li>
+    <li>다른 곳은 최소 보증이 조금 낮았는데, 맞춰주실 수 있을까요? (공격적으로 말하지 않기)</li>
+    <li>마지막에 한 번 더: 대관료나 식대 조금만 조정 가능할까요? → <strong>식대 2천원 = 200명이면 40만원</strong></li>
+  </ul></details>
+  <details><summary>계약서 특약에 문장으로 넣을 것</summary><ul>
+    <li>보증인원은 <strong>신랑·신부 합산 기준</strong>이라고 명시</li>
+    <li>부가세·봉사료 포함 여부와 <strong>카드/현금 가격 차이</strong> 명시</li>
+    <li>무료 주차시간(하객/혼주)·외부주차장 거리·셔틀 명시</li>
+    <li>계약 취소·날짜 변경의 <strong>시점별 위약금</strong>과 업체 사정 취소 시 보상 명시</li>
+    <li>서비스, 무료 업그레이드, 보증인원 조정 가능은 <strong>특약란에 문장으로</strong></li>
+  </ul></details>
+</section>
+
+<footer>
+  <p><strong>출처</strong> · 웨딩홀·부대업체: 네이버 카페 7곳 실계약·견적 후기(메이크마이웨딩·웨딩킹·다이렉트 결혼준비·요즘웨딩·혀니웨딩·웨딩크라우드·결혼이야기) + 공식 웨딩정보 사이트(웨딩북·아이웨딩·스마트웨딩·다이렉트웨딩·웨딩노트) 정가 정보 + 네이버 블로그 실계약 후기 + 지인 카카오톡 대화 및 견적서 원본, 2024~2026<br>
+  스드메 4플래너 비교표: 개인 보유 자료(작성자 @wedding.log_, 출처 한국소비자원 참가격 2025.4분기 + 오딩). <strong>무단배포·재가공 금지 명시 자료라 개인 열람 용도로만 사용하며, 이 링크는 외부에 공유하지 않습니다.</strong><br>
+  체크리스트: 예식장 체크 list · 웨딩홀 계약서 함정조항 체크리스트(개인 정리 자료)</p>
+  <p style="margin-top:9px">웨딩홀 견적은 날짜·시간·계약 시점·잔여타임 여부에 따라 매번 달라집니다. 협상 기준선이지 보장 가격이 아닙니다.
+  다이렉트 결혼준비 후기 335건 중 257건(77%)은 카페 포인트를 받고 작성된 글이라 긍정 편향이 있습니다.</p>
+</footer>
+</div>
+
+<div class="bar" id="bar" style="display:none"><div class="inner">
+  <div class="row">
+    <div class="who" id="who">웨딩홀 · 스드메 · 부대업체를 골라보세요.</div>
+    <button class="reset" id="reset">초기화</button>
+    <div class="amt" id="amt">0<small>만원</small></div>
+  </div>
+  <div class="bd" id="bd"></div>
+</div></div>
+
+<script>
+/* ── 우리 결혼식 견적 데이터 ────────────────────────────────────────
+   웨딩홀    : 네이버 카페 7곳 실계약·견적 후기 + 지인(카톡) 실견적서
+   스드메    : SDM_DB(sdm-db.js) — 4개 플래너(베리굿·다이렉트·제이웨딩·신부야) 실가격표
+   부대업체  : 네이버 카페·블로그·인스타그램·숨고·크몽 등에서 확인된 실제 업체명·가격
+   참가격    : 한국소비자원 참가격(price.go.kr) 공식 통계 — 협상 기준선
+   ────────────────────────────────────────────────────────────── */
+
+/* name, area, when, rent(만원), meal(원), baseGuar, kind, src, east, weekend */
+const HALLS = [
+  ["서울동부지법 동백홀","광진 구의","—",30,39000,250,"정찰","요즘웨딩",1,0],
+  ["노원 비엔티(BNT)","노원 하계","27/11",180,58000,150,"할인가","멕마웨",1,0],
+  ["구로 명품웨딩프로포즈","구로","당일계약",180,53000,150,"할인가","웨딩킹",0,0],
+  ["제이오스티엘","구로역","이벤트가",210,49000,150,"할인가","웨딩킹",0,0],
+  ["위례 밀리토피아호텔","위례","군 할인",250,50000,250,"할인가","웨딩킹",1,0],
+  ["신도림 웨딩시티","구로 신도림","26/8 오후",265,51500,170,"할인가","멕마웨",0,1],
+  ["여의도 FKI플라자","영등포 여의도","일 12시",300,72000,200,"할인가","멕마웨",0,1],
+  ["빌라드지디 논현","강남 논현","27/5 오후",300,80000,200,"할인가","멕마웨",0,1],
+  ["엘타워","서초 양재","일 15:00",330,80000,250,"할인가","멕마웨",0,1],
+  ["규수당","영등포 문래","당일현장계약",350,55000,200,"할인가","웨딩킹",0,0],
+  ["로얄호텔서울","중구 명동","토 11:30",400,80000,250,"할인가","멕마웨",0,1],
+  ["DMC타워웨딩","마포 상암","27/3 오후",420,57000,200,"할인가","멕마웨",0,1],
+  ["더리버사이드호텔","서초 잠원동","지인특가·2027/6 폐업",500,77000,200,"지인특가","지인 실견적",0,0],
+  ["여의도웨딩컨벤션","영등포 여의도","26/8 오후",450,69000,200,"할인가","멕마웨",0,1],
+  ["빌라드지디 안양","안양","당일계약",480,65000,200,"할인가","웨딩킹",1,0],
+  ["명동 로얄호텔","중구 명동","일 15시",500,80000,200,"할인가","멕마웨",0,1],
+  ["H스퀘어","성동 왕십리","—",500,70000,150,"정가","웨딩킹",1,0],
+  ["아펠가모 잠실","송파 잠실","27/1",506,61000,200,"정찰","멕마웨",1,0],
+  ["더컨벤션 반포","서초 반포","27/3~4",510,68000,200,"할인가","멕마웨",0,1],
+  ["더컨벤션 잠실","송파 잠실","토 잔여타임",530,62000,200,"할인가","멕마웨",1,1],
+  ["DMC타워웨딩","마포 상암","27/8 점심",550,64000,200,"할인가","멕마웨",0,1],
+  ["마곡 보타닉파크","강서 마곡","토",600,73000,200,"정찰","멕마웨",0,1],
+  ["아만티호텔","마포 홍대","—",650,75000,200,"할인가","웨딩킹",0,0],
+  ["루클라비 더 화이트","강남 논현동","27/7/4 일 11시",750,87000,200,"실견적서","지인 실견적",0,1],
+  ["더채플앳청담","강남 청담","26/12 오후",659,78100,200,"할인가","멕마웨",0,1],
+  ["루이비스 중구","중구 충정로","토 12:10",660,77000,300,"할인가","멕마웨",0,1],
+  ["합정 웨딩시그니처","마포 합정","27/8",680,73000,200,"할인가","멕마웨",0,0],
+  ["루이비스 강서","강서 가양","27/8 오후",690,81000,250,"할인가","멕마웨",0,1],
+  ["테라리움","노원 하계","—",700,75000,200,"정가","요즘웨딩",1,0],
+  ["더뉴컨벤션","강서","13:20",750,70000,200,"할인가","멕마웨",0,1],
+  ["여의도웨딩컨벤션","영등포 여의도","토 점심",760,79000,200,"할인가","멕마웨",0,1],
+  ["서울웨딩타워","송파 가락","27/9 오후",800,82000,250,"할인가","멕마웨",1,1],
+  ["벨라루체","동대문 회기","—",880,88000,200,"정가","웨딩킹",1,0],
+  ["더컨벤션 송파문정","송파 문정","토 12:10",900,92000,200,"할인가","멕마웨",1,1],
+  ["남산예술원","중구 남산","—",900,68000,200,"정찰","웨딩킹",0,0],
+  ["상록아트홀","강남 대치","토 12:30",1050,103000,250,"정찰","멕마웨",0,1],
+  ["라움","광진 건대","—",1100,110000,200,"할인가","웨딩킹",1,0],
+  ["더컨벤션 영등포", "영등포", "정가 기준", 1100, 110000, 200, "정가", "스마트웨딩·웨딩북", 0, 1],
+  ["더베네치아 잠실", "송파 잠실", "정가 기준", 750, 75000, 200, "정가", "웨딩북·다이렉트웨딩", 1, 1],
+  ["아르베 강남", "강남 봉은사로", "정가 기준", 980, 95000, 200, "정가", "웨딩북·스마트웨딩", 0, 1],
+  ["더베뉴지 강서", "강서 발산", "정가 기준(베뉴지홀)", 1000, 75000, 200, "정가", "다이렉트웨딩", 0, 1],
+  ["웨스턴베니비스 영등포", "영등포", "정가 기준", 1430, 132000, 200, "정가", "웨딩북·아이웨딩", 0, 1],
+  ["웨스턴베니비스 신도림", "구로 신도림", "정가 기준", 690, 69000, 200, "정가", "웨딩북·아이웨딩", 0, 1],
+  ["더베르지 영등포", "영등포", "대관+필수연출료 합산", 1800, 140000, 200, "정가(연출료포함)", "요즘웨딩·스마트웨딩", 0, 1],
+  ["세인트메리엘 강남역", "강남역", "정가 기준", 980, 98000, 200, "정가", "스마트웨딩·웨딩북", 0, 1],
+  ["월드컵컨벤션 상암", "마포 상암", "정가 기준", 750, 79000, 200, "정가", "스마트웨딩", 0, 1],
+  ["PJ호텔 을지로", "중구 을지로", "정가 기준(뮤즈홀)", 790, 78000, 200, "정가", "다이렉트웨딩·웨딩북", 0, 0],
+  ["케이터틀 신촌", "마포 신촌", "정가 기준", 790, 79000, 200, "정가", "웨딩북·스마트웨딩", 0, 0],
+  ["라루체 명동", "중구 명동", "정가 기준", 1500, 107000, 200, "정가", "다이렉트웨딩·베리굿웨딩", 0, 0],
+  ["더링크호텔서울 구로", "구로", "정가 기준(호텔)", 2800, 170000, 300, "정가", "웨딩노트·다이렉트웨딩", 0, 0],
+  ["루벨 강동", "강동", "정가 기준", 650, 71600, 150, "정가", "스마트웨딩·다이렉트웨딩", 1, 0],
+  ["지타워 구로", "구로 디지털단지", "25/11 일 할인가", 650, 82000, 200, "할인가", "초이스홀스·다이렉트웨딩", 0, 1],
+  ["그레이스파티 관악", "관악 신림", "정가 기준", 955, 80000, 200, "정가", "웨딩북·스마트웨딩", 0, 0],
+  ["포레스트원 성북", "성북 한성대", "정가 기준", 680, 58000, 200, "정가", "웨딩북·다이렉트웨딩", 1, 0],
+  ["디노체 왕십리", "성동 왕십리", "정가 기준", 800, 80000, 200, "정가", "웨딩북·아이웨딩", 1, 0],
+  ["웨딩여율리 여의도", "영등포 여의도", "정가 기준", 1100, 95000, 200, "정가", "웨딩북·다이렉트웨딩", 0, 0],
+  ["엘로라인가든 송파", "송파 장지", "정가 기준", 790, 79000, 200, "정가", "웨딩북·스마트웨딩", 1, 0],
+  ["라비니움 천호", "송파/강동 천호", "정가 기준", 1300, 95000, 200, "정가", "요즘웨딩·다이렉트웨딩", 1, 0],
+  ["스타시티아트홀 건대", "광진 건대", "정가 기준", 900, 85000, 200, "정가", "스마트웨딩·다이렉트웨딩", 1, 0],
+  ["까사그랑데 건대", "광진 건대", "정가 기준", 1430, 110000, 200, "정가", "웨딩북·스마트웨딩", 1, 0],
+  ["레노스블랑쉬 왕십리", "성동 왕십리", "정가 기준", 1430, 95000, 200, "정가", "웨딩북·다이렉트웨딩", 1, 0],
+  ["브라이튼하우스(과천)", "경기 과천", "대관+필수연출료 합산", 900, 95000, 180, "정가(연출료포함)", "아이웨딩", 0, 0],
+  ["라브르에드니아 종합운동장", "송파 잠실", "2027 오픈예정·대관+연출료 합산", 1700, 150000, 200, "정가(연출료포함,오픈예정)", "아이웨딩", 1, 0],
+  ["메종드아나하 선릉", "강남 선릉", "정가 기준", 1550, 150000, 200, "정가", "다이렉트웨딩·아이웨딩", 0, 0],
+  ["KDW 강동", "강동역", "정가 기준", 90, 88000, 150, "정가", "웨딩북·아이웨딩", 1, 0],
+  ["라온제나 강남구청", "강남 학동로", "정가 기준", 770, 70000, 200, "정가", "스마트웨딩·웨딩북", 0, 0],
+  ["로프트가든344 오목교", "양천 오목교", "정가 기준", 850, 72000, 200, "정가", "스마트웨딩·웨딩북", 0, 0],
+  ["아펠가모 반포", "서초 반포", "정가 기준", 1100, 110000, 300, "정가", "요즘웨딩·웨딩노트", 0, 0],
+  ["루이비스 송파문정", "송파 문정", "정가 기준", 950, 87000, 200, "정가", "스마트웨딩", 1, 1]
+];
+
+/* 실제 견적서 원본 — 루클라비 더 화이트 (강남 논현동, 200명 보증, 지인 실상담) */
+const LUKLAVI = {
+  venue: "루클라비 더 화이트 (LUKLAVI THE WHITE)", addr: "서울 강남구 논현로 742",
+  rows: [
+    ["27/6/6(일) 11:00", 1600, 750, 130000, 92000, 2590],
+    ["27/7/4(일) 11:00", 1600, 750, 130000, 87000, 2490],
+    ["27/7/4(일) 12:30", 1600, 800, 130000, 90000, 2600],
+  ],
+  freebies: ["본식스냅(라이트댓) 110만","DVD(이브닝글로우) 60만","플라워샤워 30만","포토테이블 50만"],
+  freebiesTotal: 250,
+};
+
+/* 한국소비자원 참가격(price.go.kr) 공식 통계 — 협상 기준선으로 사용.
+   2025년 조사분. 개별 홀이 아니라 지역 평균/중간값이라는 점에 유의. */
+const PRICE_GO_KR = {
+  updated: "2025년 조사분(격월 갱신)",
+  rows: [
+    ["서울(강남)", "3,454만원", "식대 2,069만(59.9%) · 대관 750만(21.7%) · 기본장식 224만(6.5%) · 스드메 411만(11.9%)"],
+    ["서울(강남 외)", "2,991만원", "식대 1,717만(57.4%) · 대관 676만(22.6%) · 기본장식 115만(3.8%) · 스드메 484만(16.2%)"],
+  ],
+  medians: [
+    ["대관료 중간값", "서울 600만원", "전국 350만원 · 경인 300만원 · 5대광역시 250만원"],
+    ["1인당 식대 중간값", "서울 8.0만원", "전국 5.9만원 · 경인 6.3만원 · 5대광역시 5.4만원"],
+    ["최소보증인원", "서울 200명", "5대광역시 180명 · 그외지역 200명"],
+  ],
+  note: "위 숫자는 개별 홀 가격이 아니라 지역 평균·중간값입니다. 우리가 확보한 실견적(웨딩홀 탭)이 이 기준선보다 낮으면 상당히 좋은 조건이라는 뜻입니다.",
+  url: "https://www.price.go.kr/tprice/portal/wedding/areaStatistic.do",
+};
+
+/* 미확인 후보 2곳 — 이번에 추가로 찾은 사실 */
+const UNKNOWN_HALLS = [
+  {
+    name: "강변 웨딩스퀘어", addr: "광진구 광나루로56길 85 · 강변테크노마트 3~4층, 강변역 1·2번출구 도보 2~3분",
+    facts: [
+      "주차 2,500대(2시간 무료, 이후 30분당 1,000원)",
+      "4개 홀(그레이스·아모르·베니르·루시드) 모두 대관료 750~800만원, 식대 75,000~80,000원 선으로 확인(공식 사이트·참가격 언급 기준)",
+      "3층(베니르·루시드)/4층(아모르·그레이스)로 나뉘며, 아모르홀은 원형테이블의 어두운홀, 그레이스홀은 버진로드가 반사재질이라 화려한 편",
+    ],
+    caveat: "이 숫자는 공식 사이트·참가격 인용 기준이며, 실제 계약자가 직접 공개한 최종 할인가는 카페 7곳에서 확인되지 않았습니다. 위치(강변역 직결 + 동서울터미널 인접 + 주차 2,500대)는 하객 동선 조건에 가장 잘 맞는 후보라 직접 상담을 권장합니다.",
+    src: "공식 홈페이지(weddingsquare.co.kr) · price.go.kr 참가격",
+  },
+  {
+    name: "하나 그랜드홀", addr: "명동(하나금융그룹 사옥) · 여의도 · 청라 등 지역 확대 중",
+    facts: [
+      "대관료 무료 — 단, 식대·스드메·조명음향·진행인력은 별도(케이터링 직접 섭외)",
+      "신청 자격(2023년 확인 기준): 다문화가정 · 다자녀가정 · 소방공무원 · 한부모및조손가정 · 소상공인 · 차상위계층",
+      "신청 방법: 하나은행 모바일 앱 '하나원큐'에서 결혼 6개월~3개월 전 신청",
+      "명동 홀은 300명 수용, 토·일요일 하루 1팀만 진행",
+    ],
+    caveat: "이 정보는 2023년 기준입니다. 2026~2027년 현재도 같은 자격·방식인지는 확인되지 않았습니다 — 하나원큐 앱에서 최신 공고를 직접 확인해야 합니다.",
+    src: "하나금융그룹 공식 발표(2023) · 블로그",
+  },
+];
+
+/* ══════════════════════════════════════════════════════════════
+   부대업체 — 카페·블로그·인스타그램·숨고·크몽 실계약 후기에서 확인된 실제 업체
+   ══════════════════════════════════════════════════════════════ */
+const VENDORS = [
+  {
+    key:"hair", label:"혼주 헤어메이크업", amount:50,
+    summary:"카페 답변 시세: 여혼주 18~20만/인, 남혼주 6~7만/인(비싼 곳은 20만 중반). 양가 4인 기준 어림 50만원.",
+    vendors:[
+      {name:"주니엠", price:"79만원 (양가 6인)", note:"신랑측 여혼주2·남혼주1 + 신부측 여혼주2·남혼주1. 한 룸 여성 2명 동시 진행시 -3만, 양가 진행시 -1만 할인. 플래너 경유 불가, 다이렉트 문의만 가능.", src:"멕마웨 카페 실계약 후기"},
+      {name:"다들스타일", price:"39만원 (2인, 출장)", note:"새언니+친오빠 메이크업, 출장비+얼리스타트 포함.", src:"멕마웨 카페 실계약 후기"},
+    ],
+  },
+  {
+    key:"mc", label:"사회자", amount:20,
+    summary:"홀 연계 포함이면 0원. 숨고 견적은 10만~40만원까지 편차가 큼 — 경력·인지도 차이.",
+    vendors:[
+      {name:"이재련 (MC련키)", price:"가격 미확인", note:"경력 12년, 3,500회 이상 진행, 후기 3,000개 이상. 예약이 1년~1년 반 전에 마감되는 인기 사회자.", src:"인스타그램 @mc_ryeonkee"},
+      {name:"최상민 (숨고)", price:"가격 미확인", note:"아나운서 경력. \"딕션 정확, 감미로운 보이스\"로 추천됨.", src:"웨딩킹 카페 본식 후기"},
+      {name:"임하람 (숨고)", price:"10만~20만원", note:"숨고 시세표 기준 합리적인 가격대로 평가.", src:"숨고 시세 페이지"},
+      {name:"쏘뉴웨딩", price:"10만원대 후반~40만원", note:"전문 사회자, 블로그 후기 다수.", src:"네이버 블로그"},
+    ],
+  },
+  {
+    key:"desk", label:"축의대 대행", amount:60,
+    summary:"양측 모두 업체 이용 시 40만~80만원대로 폭이 넓음. 인당 사례비(20만원 안팎)와 비슷하거나 조금 더 들지만, 하객이 식을 직접 볼 수 있고 정산이 투명함.",
+    vendors:[
+      {name:"수다축의대행", price:"한측 39만원 · 양측 74만원 (정찰제)", note:"공식 홈페이지 정찰가. 현금영수증 의무 발행, 추가금 없음이 원칙.", src:"공식 웹사이트(withsuda.com)"},
+      {name:"나랑메리", price:"75만원 (양측, 3시간)", note:"공식 홈페이지 기준 양측 계약가. 2026년부터 한측 150명 미만이면 축의금 개봉+계수 서비스 무료, 150명 이상은 봉투 미개봉 또는 1인 추가(+15만원). 짝꿍할인 인당 1만원.", src:"멕마웨 카페 실계약 후기"},
+      {name:"엘리웨딩", price:"양측 70만~80만원", note:"대표가 직접 참석, 현금 계수 가능, 짝꿍 할인 있음.", src:"네이버 블로그"},
+      {name:"메리쥬빌레", price:"가격 미확인", note:"대표 직접 운영(알바 아님). 축의금 장부+엑셀 정리+현금 계수기+현장 출력.", src:"멕마웨 카페 실계약 후기"},
+      {name:"메리아리", price:"60만원~ (이벤트가)", note:"양쪽 계약 기준 이벤트 가격 60만원부터 시작.", src:"제이웨딩 카페"},
+      {name:"뉴베일데스크", price:"30만원 / 65만원 (이벤트가)", note:"오픈 기념 할인 진행 중이라는 인스타그램 게시물 확인.", src:"인스타그램"},
+    ],
+  },
+  {
+    key:"snap", label:"본식 메인 스냅", amount:70,
+    summary:"가성비 라인 50~70만원대(1인). 숨고·신생업체·협찬 활용. 0원 스냅은 경력 불분명·노쇼 위험 — 포트폴리오·사업자등록증 필수 확인.",
+    vendors:[
+      {name:"비엔 노블레스", price:"가격 미확인", note:"실제 청첩장 벤더 리스트에 메인스냅으로 기재된 업체. 홀 연계 대신 별도 계약한 사례.", src:"네이버 블로그 벤더 리스트(ab_fu)"},
+    ],
+  },
+  {
+    key:"subsnap", label:"서브스냅 (아이폰스냅 대안)", amount:35,
+    summary:"메인 스냅과 별도로 부모님·하객 위주 스냅을 담당. 인기 업체는 예약이 매우 빠르게 마감됨(이른바 히켓팅). 가격 스펙트럼이 매우 넓음(5.5만~60만원).",
+    vendors:[
+      {name:"히아츠스냅 (heartssnap.official)", price:"35만원 (2025.1.2~ 인상가, 이전 29만원)", note:"1인 대표 촬영, 신부대기실~연회장 추가금 없음, 원본 JPG 1,300장 이상 + 보정본 25장. 추가금: 차량씬 +5만, 초상권 비동의 +5만.", src:"네이버 블로그 실계약 후기(ab_fu)"},
+      {name:"모노페이퍼", price:"60만원", note:"균일한 퀄리티, 보정본 30장, 할인 이벤트 진행.", src:"공식 사이트(monopaper.co.kr)"},
+      {name:"혀노스냅", price:"15만원", note:"원본+보정본 15장, 일주일 내 제공. SNS 후기 작성 시 보정본 +3장.", src:"카카오톡 오픈채팅"},
+      {name:"세울스냅 / 만원의행복", price:"5.5만~9만원 (초저가)", note:"초상권 동의 조건. 만원의행복은 예약까지 2달가량 대기.", src:"블로그"},
+    ],
+  },
+  {
+    key:"banpan", label:"원판 (홀 필수인 경우)", amount:80,
+    summary:"대부분 홀에서 지정 업체로 진행됨. 원판 10P + 스냅 40/50P 3권 임의셀렉 구성이 흔하고, 원본 파일은 별도 구매인 경우가 많음. 벨라루체 110만·남산예술원 140만은 필수 포함 항목. 홀 지정이 아니라 별도 계약할 경우 시세는 아래 참고.",
+    vendors:[
+      {name:"모노페이퍼", price:"180만원(2인) · 150만원(1인)", note:"원판촬영 포함, 수정본 80장(2인)·60장(1인), 원본 제공.", src:"공식 사이트(monopaper.co.kr)"},
+      {name:"온더브라이드 / 올바른스냅", price:"50만원대", note:"합리적인 가격대로 소개되는 업체. 포트폴리오 확인 필수.", src:"공식 사이트"},
+    ],
+  },
+  {
+    key:"dvd", label:"본식 DVD", amount:49,
+    summary:"1인 2캠 4K 기준 35만~55만원대가 흔한 시세. 3캠·드론 구성은 130만원 넘는 곳도 있음.",
+    vendors:[
+      {name:"가로수필름", price:"49만원 (1인 2캠 4K)", note:"정가 55만원에서 얼리버드+추천인+일요예식 할인 -6만원. 클래식(1인 3캠 4K)은 짐벌+구간 60p 촬영 포함. 납품까지 약 3개월.", src:"멕마웨 카페 실계약 후기"},
+      {name:"고혹필름", price:"79만원(SIMPLE 1인2캠 4K) · 129만원(CLASSIC) · 154만원(TRINITY 2인3캠 6K)", note:"대표 직접 편집. 4K/6K 시네마 품질, 웨딩필름+피로연+원본 포함.", src:"공식 사이트(gohokfilm.com)"},
+      {name:"홍차필름", price:"39만~55만원(1인3캠) · 49만~65만원(1인4캠)", note:"영상 공개 동의 시 -10만원, 스냅 함께 계약 시 -6만원 추가 할인.", src:"공식 사이트"},
+      {name:"리얼다큐웨딩", price:"35만원 (1인 2캠)", note:"10년 이상 경험, 축하메시지 포함.", src:"공식 사이트"},
+      {name:"어반필름", price:"가격 미확인", note:"따뜻한 느낌의 영상미, 대표가 직접 편집. 지인의 개인 준비 타임라인표에 실제 계약 업체로 기재됨(27/5/30 예식).", src:"공식 사이트(urban-film.com)"},
+      {name:"블루머", price:"20만원대", note:"가성비 라인 본식 DVD.", src:"웨딩크라우드 카페"},
+    ],
+  },
+  {
+    key:"iphone", label:"아이폰 스냅", amount:22,
+    summary:"19.5만원(크몽 최저)~50만원, 정찰제 업체도 등장. 이벤트 시즌엔 20만원대 초반까지 내려감.",
+    vendors:[
+      {name:"퍼스트러브 (First Love)", price:"10만원대~22만원 (오픈이벤트)", note:"아이폰 16/17 Pro + 디카 병행 촬영. 가성비 좋은 편으로 이벤트 진행 중.", src:"인스타그램 @firstlove.snap"},
+      {name:"에하스냅 (Heuer)", price:"33만원 (정찰제)", note:"iPhone Pro 촬영, 500컷 이상, 당일 전송, 보정본 10장.", src:"공식 사이트(heuer.kr)"},
+      {name:"크몽 아이폰스냅", price:"19.5만~33만원 (3단계)", note:"Standard/Deluxe/Premium 옵션 — 가성비로 소개됨.", src:"크몽"},
+      {name:"디마로스냅", price:"가격 미확인", note:"본식 1시간 30분 전 시작, 기본 촬영시간 2시간 30분, +30분 연장 시 5만 5천원. 3인 대표가 직접 촬영.", src:"멕마웨 카페 실계약 후기"},
+    ],
+    tip:"끝나고 땡큐카드(사진 3장) 만들어주는 업체가 있음 — 예약 전 서비스 항목 확인.",
+  },
+  {
+    key:"song", label:"축가 또는 축사", amount:20,
+    summary:"둘 중 하나만 선택. 지인 축가 또는 축가 대행 중 택1. 전공자·경력 있는 대행업체는 20만~30만원대.",
+    vendors:[
+      {name:"크몽 축가 대행(김트루 등)", price:"18만~30만원", note:"현직 가수·앨범 발매 가수 등 경력자, MR 반주 포함, 1회 수정 가능.", src:"크몽"},
+      {name:"베스트뮤직", price:"14만원(일반) · 20만원(프리미엄) · 27만원(2인 듀엣)", note:"음악대학 전공자, 예식 40분 전 도착, 정찰제.", src:"공식 사이트"},
+    ],
+  },
+  {
+    key:"helper", label:"헬퍼비", amount:25,
+    summary:"기본 15만~30만원. 저녁예식 +5만, 2부 드레스 +5만. 경력 있는 헬퍼를 선택하는 게 현장 동선 숙련도 면에서 낫다는 후기가 많음.",
+    vendors:[
+      {name:"헬퍼향단", price:"19만원(서울, 3시간) · 시간당 6.5만~7.5만원", note:"본식 드레스 헬퍼 전문.", src:"네이버 블로그"},
+    ],
+  },
+  {
+    key:"bouquet", label:"부케", amount:15,
+    summary:"스마트스토어 기본 부케 10만원대. 플라워 디렉팅 업체를 쓰면 10만원대~100만원 이상까지 편차 큼.",
+    vendors:[
+      {name:"아뜰리에윤 (엠마우드 부케)", price:"14만원", note:"부케+코사지+부토니에+헤어장식+배송(강남권) 일체 포함 — 가성비로 소개됨.", src:"블로그"},
+      {name:"르랜드 (조화 플라워)", price:"10만원대~100만원+", note:"조화 부케·센터피스 전문. 브라이덜샤워 공간 장식까지 확장 가능. 지인의 준비 타임라인표에 플라워디렉팅 업체로 기재됨.", src:"인스타그램 @le_land__flower"},
+    ],
+  },
+  {
+    key:"invite", label:"청첩장·모청·식권·식전영상", amount:5,
+    summary:"셀프 제작(미리캔버스) + 인쇄업체 조합이 가장 저렴. 200매 기준 업체별 가격 차이가 3배 가까이 남.",
+    vendors:[
+      {name:"성원애드피아", price:"4만원대 (2단 접지, 200매)", note:"고급 용지(띤또레또 추천), 교정 확인 무료, 성수역 직수령 가능.", src:"블로그"},
+      {name:"비즈하우스", price:"5.14만원 (2단형 포토, 200매)", note:"셀프 디자인 가능, 빠른 배송.", src:"블로그"},
+      {name:"디얼디어", price:"11.05만원", note:"고급 용지, 모바일청첩장·식권·컬러봉투·스티커 무료 제공.", src:"공식 사이트"},
+    ],
+  },
+  {
+    key:"hanbok", label:"혼주 한복 2인", amount:60,
+    summary:"대여 기준 혼주 25만~35만원, 신랑신부 15만~25만원. 종로 직영 공방이 가성비 좋은 편.",
+    vendors:[
+      {name:"민정란한복", price:"혼주 2벌 50만원 · 신랑신부 2벌 28만원", note:"30년 경력, 드라마 협찬(철인왕후) 경력, 명인 인증, 정찰제.", src:"공식 사이트"},
+      {name:"실크루트", price:"혼주 25만~35만원 · 신랑신부 15만~25만원", note:"종로 실크원단 직영공장, 4벌 가족패키지 85만원.", src:"공식 사이트"},
+    ],
+  },
+  {
+    key:"suit", label:"예복 (신랑)", amount:58,
+    summary:"청담 루스플렌 실제 견적 기준. 대여인데도 가격이 투명하게 공개돼 있어 비교가 쉬움.",
+    vendors:[
+      {name:"루스플렌", price:"본식 19만+VAT · 촬영 17만+VAT (1벌 기준)", note:"청담(도산대로78길 24) 소재. 실제 계약 사례: 본식예복 1벌 + 촬영정장 2벌(2+1 패키지) = 총 58.3만원(세트당 19.4만원 꼴). 당일계약 시 화이트 셔츠+구두 무료 서비스, 조끼는 +4.4만원 추가.", src:"네이버 블로그 실계약 후기(iamrachel-)"},
+    ],
+    tip:"촬영을 한다면 대여보다 맞춤이 이득이라는 의견도 있음 — 기성복 대여는 촬영용 수트가 따로 필요해 이중 지출 가능성. 맞춤 시 구두·넥타이 대여 서비스로 포함되는 경우 많음.",
+  },
+  {
+    key:"jewel", label:"예물", amount:150,
+    summary:"백화점·청담 대신 종로 가성비 라인. 랩그로운 다이아는 천연과 4Cs가 같으면서 1/6~1/9 가격.",
+    vendors:[
+      {name:"로이드 공식몰", price:"6.99만원 (커플링)", note:"브랜드 커플링 저가형 라인.", src:"공식 사이트"},
+      {name:"종로 공방(평균)", price:"150만~250만원 (커플링 세트, 2인)", note:"14K 골드, 맞춤 가능, 백화점보다 30~50% 저렴.", src:"블로그"},
+      {name:"랩그로운 다이아 1캐럿", price:"88만~120만원", note:"천연 다이아(500만~800만원대) 대비 1/6~1/9 가격, 같은 4Cs 등급 가능.", src:"블로그"},
+    ],
+  },
+];
+
+/* 지인의 개인 준비 타임라인 참고 (베리굿웨딩 진행) — 업체 실명 조사 결과.
+   본인 취향의 선택일 뿐, 추천이 아니라 실제로 이렇게 진행한다는 참고용 사례. */
+const TIMELINE_REF = [
+  ["상담(조앤힐)", "2026.5.21", "웨딩홀/스드메 상담", ""],
+  ["상담·계약(베리굿)", "2026.5.28~6.1", "스드메 플래너", "다이렉트 플래너는 비추천 의견 다수 — 포인트 구조라 시작가가 비쌈"],
+  ["도쿄스냅 (Serein)", "2026.7.3", "해외 스냅", "5~24만원대 패키지, 마이리얼트립 후기 180건+"],
+  ["촬영가봉(시작by이명순)", "2026.11.11", "드레스", "촬영+본식 패키지 184만~482만원, 아이웨딩 평점 9.3/10"],
+  ["촬영헤메(이경민포레 청담)", "2026.11.17", "메이크업", "청담 단독건물"],
+  ["플라워디렉팅(르랜드)", "2026.12.17", "부케·장식", "조화 전문, 10만원대~100만원+"],
+  ["스튜디오 촬영(부겐빌리아)", "2026.12.17", "스튜디오", "150평 단독건물, 자연광, 예약 대기 김"],
+  ["헤어변형(듀이이슬)", "2026.12.17", "헤어변형", "1인 운영, 30만원(3시간)·40만원(4시간)"],
+  ["사회자(이재련)", "2027.5.30", "사회자", "MC련키, 경력 12년"],
+  ["본식 DVD(어반필름)", "2027.5.30", "DVD", "가격 미확인"],
+  ["아이폰스냅(퍼스트러브)", "2027.5.30", "아이폰스냅", "10만원대~22만원"],
+];
+
+</script>
+<script>
+const SDM_DB = {"studio":[{"name":"ST정우","planners":{"다이렉트":{"min":124,"max":124,"text":124,"note":"• 선수정본: 5장에 5.5\n• 촬영의상추가: 캐주얼 1벌당 5\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[10,10],"outdoor":[22,22],"night":[22,22]}},"제이웨딩":{"min":117,"max":117,"text":117,"note":"-","addons":null},"신부야":{"min":102,"max":118,"text":"102~118","note":null,"addons":null}}},{"name":"s스튜디오","planners":{"신부야":{"min":124,"max":124,"text":124,"note":null,"addons":null}}},{"name":"구호","planners":{"다이렉트":{"min":124,"max":124,"text":124,"note":"• 선수정본: 5장 11 / 8장 15\n• 촬영의상추가: 1벌당 5.5 (단, 대여드레스의 경우 종류별 상이)\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[20,20],"outdoor":[11,11],"night":[11,11]}},"신부야":{"min":102,"max":129,"text":"102~129","note":null,"addons":null}}},{"name":"그가사랑하는순간","planners":{"베리굿":{"min":165,"max":176,"text":"165~176","note":"• (드레스) 벌수 1벌당 22• 앨범 장수 1장당 3.3• 수정본 컬러 3컷부터 1컷당 5.5• 액자 변경 22만원• 선수정본 5장당 5.5• 들러리 촬영 1인 22","addons":{"staff":[22,110]}},"신부야":{"min":165,"max":180,"text":"165~180","note":null,"addons":null}}},{"name":"그레이스케일","planners":{"베리굿":{"min":143,"max":154,"text":"143~154","note":"• (드레스) 벌수 1벌당 11• 앨범 장수 1장당 3.3• 수정본 컬러 11• 액자 변경 33~55• 선수정본 11","addons":{"staff":[11,88],"outdoor":[22,22]}},"제이웨딩":{"min":172,"max":172,"text":"10시 150 / 12시 172 / 15시 161","note":"-","addons":null},"신부야":{"min":101.5,"max":157,"text":"101.5~157","note":null,"addons":null}}},{"name":"그림비","planners":{"다이렉트":{"min":147,"max":147,"text":147,"note":"• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"outdoor":[11,11],"night":[11,11]}}}},{"name":"글렌하우스","planners":{"제이웨딩":{"min":216,"max":216,"text":"오전 194 / 오후 216","note":"-","addons":null},"신부야":{"min":179,"max":201,"text":"179~201","note":null,"addons":null}}},{"name":"노라벨하우스","planners":{"베리굿":{"min":185,"max":380,"text":"185~380","note":"• 앨범 장수 1장당 4.4• 액자 변경 27.5~55","addons":{"staff":[11,55]}}}},{"name":"노르웨스","planners":{"베리굿":{"min":153,"max":198,"text":"153~198","note":"• 앨범 장수 1장당 3.3• 수정본 컬러 1컷, 추가 5.5• 액자 변경 25~125• 선수정본 11~16.5• 필름 촬영 추가 22","addons":{"staff":[11,55]}}}},{"name":"노아고즈","planners":{"신부야":{"min":180,"max":370,"text":"180~370","note":null,"addons":null}}},{"name":"노우드하우스","planners":{"베리굿":{"min":220,"max":220,"text":220,"note":"• 앨범 장수 1장당 3.3• 액자 변경 25~• 선수정본 15","addons":{"staff":[11,110],"outdoor":[33,66],"night":[33,33]}},"신부야":{"min":49,"max":220,"text":"49~220","note":null,"addons":null}}},{"name":"노을 스튜디오","planners":{"신부야":{"min":124,"max":157,"text":"124~157","note":null,"addons":null}}},{"name":"노이즈","planners":{"베리굿":{"min":180,"max":240,"text":"180~240","note":"• (드레스) 벌수 1벌당 16.5• 앨범 장수 1장당 3.3• 수정본 컬러 11• 액자 변경 3~• 선수정본 8장 11• 촬영 시간 추가 30분 11 / 2인 촬영 시 55","addons":{"staff":[11,22],"outdoor":[22,22]}}}},{"name":"느와르블랑하우스","planners":{"신부야":{"min":220,"max":220,"text":220,"note":null,"addons":null}}},{"name":"더델라스튜디오","planners":{"다이렉트":{"min":134,"max":134,"text":134,"note":"• 앨범페이지추가: 1페이지당 3.3","addons":{"outdoor":[10,15],"night":[10,15]}}}},{"name":"더청담스튜디오","planners":{"다이렉트":{"min":154,"max":154,"text":154,"note":"• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[20,20],"outdoor":[11,11],"night":[11,11]}},"신부야":{"min":124,"max":140,"text":"124~140","note":null,"addons":null}}},{"name":"드 플레","planners":{"제이웨딩":{"min":154,"max":154,"text":154,"note":"-","addons":null}}},{"name":"디하우스","planners":{"베리굿":{"min":154,"max":176,"text":"154~176","note":"• (드레스) 벌수 1벌당 11• 앨범 장수 1장당 3.3• 액자 변경 25~66","addons":{"staff":[22,99],"night":[22,22]}},"제이웨딩":{"min":2,"max":183,"text":"3~10월 (10시 161 / 13시 172 / 16시 183)11~2월 (11시 161 / 14시 30분 161)","note":"-","addons":null}}},{"name":"라망드비","planners":{"제이웨딩":{"min":139,"max":139,"text":139,"note":"20p촬영","addons":null}}},{"name":"라망스튜디오","planners":{"다이렉트":{"min":139,"max":139,"text":139,"note":"• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[20,50],"outdoor":[11,11],"night":[11,11]}}}},{"name":"라뮤즈스튜디오","planners":{"베리굿":{"min":143,"max":154,"text":"143~154","note":"드레스 벌수 1벌당 11앨범 장수 3.3수정본 컷 22액자 변경 16.5~77선작업 0.55클리닝 11반려견 촬영 11","addons":{"staff":[22,22],"outdoor":[33,33],"night":[11,11]}},"다이렉트":{"min":150,"max":150,"text":150,"note":"• 앨범페이지추가: 1페이지당 3.3","addons":{"outdoor":[11,33],"night":[11,33]}}}},{"name":"라앤디스튜디오","planners":{"신부야":{"min":190,"max":190,"text":190,"note":null,"addons":null}}},{"name":"라크마","planners":{"제이웨딩":{"min":183,"max":183,"text":183,"note":"-","addons":null}}},{"name":"라흐 스튜디오","planners":{"신부야":{"min":181,"max":181,"text":181,"note":null,"addons":null}}},{"name":"랑게","planners":{"베리굿":{"min":143,"max":143,"text":"143","note":"드레스 벌수 1벌당 22앨범 장수 1장당 3.3액자 변경 30~40","addons":{"staff":[11,22],"outdoor":[11,11]}},"제이웨딩":{"min":150,"max":150,"text":150,"note":"-","addons":null},"신부야":{"min":146,"max":146,"text":"146","note":null,"addons":null}}},{"name":"레이디로즈","planners":{"베리굿":{"min":154,"max":176,"text":"154~176","note":"드레스 벌수 1벌당 11앨범 장수 3.3수정본 컷 11~33액자 변경 11선작업 11클리닝 촬영 11~22반려견 촬영 11","addons":{"staff":[33,55],"outdoor":[22,22]}}}},{"name":"로그에이","planners":{"베리굿":{"min":330,"max":330,"text":"30p 기준 330","note":"드레스 벌수 1벌당 22앨범 장수 3.3수정본 컷 5.5액자 변경 22선작업 5.5클리닝 촬영 22","addons":{"staff":[55,110]}},"신부야":{"min":130,"max":440,"text":"130~440","note":null,"addons":null}}},{"name":"로라스튜디오","planners":{"다이렉트":{"min":154,"max":154,"text":154,"note":"• 촬영의상추가: 1벌당 11~33\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[11,11],"outdoor":[16.5,16.5],"night":[16.5,16.5]}},"신부야":{"min":135,"max":162,"text":"135~162","note":null,"addons":null}}},{"name":"로렌하우스","planners":{"다이렉트":{"min":134,"max":134,"text":134,"note":"• 선수정본: 5장에 3.5만원\n• 촬영의상추가: 유색드레스 1벌 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"outdoor":[22,22],"night":[22,22]}},"신부야":{"min":113,"max":118,"text":"113~118","note":null,"addons":null}}},{"name":"로마스튜디오","planners":{"다이렉트":{"min":304,"max":304,"text":304,"note":"• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"outdoor":[1,33],"night":[1,33]}}}},{"name":"로맨틱애비뉴","planners":{"신부야":{"min":118,"max":118,"text":118,"note":null,"addons":null}}},{"name":"로브아스튜디오","planners":{"베리굿":{"min":132,"max":132,"text":132,"note":"드레스 벌수 1벌당 11앨범 장수 4수정본 컷 11액자 변경 25선작업 7장당 7시간 추가 촬영 5시간부터 추가 30분당 5.5클리닝 촬영 11","addons":{"staff":[22,22],"night":[11,11]}}}},{"name":"로이스튜디오","planners":{"다이렉트":{"min":150,"max":150,"text":150,"note":"• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"outdoor":[11,11],"night":[11,11]}}}},{"name":"루미에르브","planners":{"다이렉트":{"min":159,"max":159,"text":159,"note":"• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[11,33]}}}},{"name":"루미에르스튜디오","planners":{"제이웨딩":{"min":161,"max":161,"text":161,"note":"-","addons":null}}},{"name":"루미에스튜디오","planners":{"다이렉트":{"min":139,"max":139,"text":139,"note":"• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[20,40],"outdoor":[16.5,16.5],"night":[16.5,16.5]}},"제이웨딩":{"min":139,"max":139,"text":139,"note":"-","addons":null}}},{"name":"르안스튜디오","planners":{"제이웨딩":{"min":139,"max":139,"text":139,"note":"-","addons":null}}},{"name":"리에스튜디오","planners":{"신부야":{"min":180,"max":210,"text":"180~210","note":null,"addons":null}}},{"name":"메리드하우스","planners":{"다이렉트":{"min":149,"max":149,"text":149,"note":"• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[44,44],"outdoor":[11,22],"night":[11,22]}}}},{"name":"메리미용마","planners":{"베리굿":{"min":121,"max":132,"text":"121~132","note":"드레스 벌수 1벌당 11앨범 장수 3.3수정본 컷 16.5~77액자 변경 16.5선작업 16.5의뢰 희망 컷 사용료 54시간 촬영후 추가 1시간당 11한복대여 16.5~22","addons":{"staff":[22,22],"outdoor":[55,55],"night":[11,11]}},"다이렉트":{"min":154,"max":154,"text":"154","note":"• 개인드레스촬영시: 1벌 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[30,30],"outdoor":[11,11],"night":[11,11]}}}},{"name":"메이든스튜디오","planners":{"신부야":{"min":135,"max":135,"text":135,"note":null,"addons":null}}},{"name":"메이스튜디오","planners":{"다이렉트":{"min":134,"max":134,"text":134,"note":"• 촬영의상추가: 1벌당 10~\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[22,22],"outdoor":[11,22],"night":[11,22]}}}},{"name":"메종드힐","planners":{"베리굿":{"min":143,"max":154,"text":"143~154","note":"드레스 벌수 1벌당 11앨범 장수 3.3수정본 컷 22액자 변경 11~88선작업 2클리닝 촬영 11시간 추가 촬영 5시간 촬영 후 추가 1시간당 11","addons":{"staff":[11,22],"outdoor":[15,15]}},"다이렉트":{"min":204,"max":204,"text":204,"note":"• 선수정본: 촬영본 구매시 가격 4\n• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[22,88],"outdoor":[16.5,16.5],"night":[16.5,16.5]}},"제이웨딩":{"min":172,"max":172,"text":"오전 161 / 오후 172","note":"-","addons":null}}},{"name":"모노그램","planners":{"다이렉트":{"min":139,"max":139,"text":139,"note":"• 선수정본: 1장당 1\n• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"outdoor":[11,11],"night":[11,11]}}}},{"name":"모노페이퍼","planners":{"베리굿":{"min":220,"max":220,"text":220,"note":"드레스 벌수 1벌당 33앨범 장수 1장당 2.2선작업 1.1원본 시간추가 1시간당 33","addons":{"staff":[33,110],"outdoor":[22,22]}}}},{"name":"모스트","planners":{"다이렉트":{"min":139,"max":139,"text":"139 [세미3시간]","note":"• 앨범페이지추가: 1페이지당 3.3","addons":{"outdoor":[16.5,16.5],"night":[16.5,16.5]}},"제이웨딩":{"min":161,"max":161,"text":"토탈 세미 106.5 / 토탈 베이비 128 / 토탈 웨딩 161","note":"-","addons":null},"신부야":{"min":97.5,"max":151,"text":"97.5~151","note":null,"addons":null}}},{"name":"무이스튜디오","planners":{"베리굿":{"min":220,"max":260,"text":"220~260","note":"드레스 벌수 1벌당 22앨범 장수 1장당 3.3액자 변경 27.5~33","addons":{"staff":[11,55]}}}},{"name":"뮤아스튜디오","planners":{"다이렉트":{"min":134,"max":134,"text":134,"note":"• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[22,22],"outdoor":[1,20],"night":[1,20]}}}},{"name":"미루스튜디오","planners":{"베리굿":{"min":121,"max":121,"text":121,"note":"드레스 벌수 1벌당 11앨범 장수 1장당 3.3수정본 컷 5.5액자 변경 11~33선작업 5장당 6","addons":{"outdoor":[11,22]}},"다이렉트":{"min":189,"max":189,"text":189,"note":"• 선수정본: 5장 추가 6 / 10장 추가 11\n• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"outdoor":[22,22],"night":[22,22]}},"제이웨딩":{"min":139,"max":139,"text":139,"note":"-","addons":null},"신부야":{"min":157,"max":157,"text":"157","note":null,"addons":null}}},{"name":"미모아","planners":{"베리굿":{"min":154,"max":154,"text":"154","note":"드레스 벌수 1벌당 11앨범 장수 1장당 3.3수정본 컷 11액자 변경 11~프리미엄리터칭 3반려견 촬영 11","addons":{"staff":[22,55],"outdoor":[11,33],"night":[11,11]}},"다이렉트":{"min":149,"max":149,"text":149,"note":"• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[11,55],"outdoor":[11,11],"night":[11,11]}},"신부야":{"min":157,"max":157,"text":"157","note":null,"addons":null}}},{"name":"미세인트(구.리유) 스튜디오","planners":{"신부야":{"min":165,"max":220,"text":"165~220","note":null,"addons":null}}},{"name":"바로오늘그날","planners":{"베리굿":{"min":165,"max":165,"text":165,"note":"드레스 벌수 1벌당 15앨범 장수 1장당 3.3수정본 컷 11액자 변경 11~88선작업 1클리닝 촬영 22반려견 촬영 11","addons":{"staff":[15,50]}}}},{"name":"바로오늘이그날 (청담)","planners":{"신부야":{"min":165,"max":165,"text":165,"note":null,"addons":null}}},{"name":"바시움","planners":{"다이렉트":{"min":159,"max":159,"text":159,"note":"• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[11,33],"outdoor":[22,22],"night":[22,22]}},"제이웨딩":{"min":150,"max":150,"text":150,"note":"-","addons":null}}},{"name":"바이메이든","planners":{"신부야":{"min":124,"max":124,"text":124,"note":null,"addons":null}}},{"name":"발렌스튜디오","planners":{"베리굿":{"min":200,"max":240,"text":"200~240","note":"드레스 벌수 1벌당 15앨범 장수 1장당 2.5수정본 컷 셀렉 포함, 추가컷 11액자 변경 10~80선작업 11","addons":{"staff":[10,30],"outdoor":[15,15]}}}},{"name":"백개인주의스튜디오","planners":{"베리굿":{"min":180,"max":270,"text":"180~270","note":"앨범 장수 1장당 2.2촬영 시간추가 1시간당 22","addons":{"staff":[20,20]}}}},{"name":"버드투블룸","planners":{"다이렉트":{"min":154,"max":154,"text":154,"note":"• 선수정본: 10장 8.8\n• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[11,22],"outdoor":[22,22],"night":[22,22]}},"제이웨딩":{"min":150,"max":150,"text":"오전 139 / 오후 150","note":"-","addons":null},"신부야":{"min":146,"max":146,"text":146,"note":null,"addons":null}}},{"name":"보다연희재","planners":{"베리굿":{"min":143,"max":143,"text":143,"note":"드레스 벌수 1벌당 11앨범 장수 1장당 3.3수정본 컷 11액자 변경 22~선작업 11","addons":null},"다이렉트":{"min":150,"max":150,"text":150,"note":"• 촬영의상추가: 1벌당 16.5\n• 앨범페이지추가: 1페이지당 3.3","addons":null}}},{"name":"보어하우스","planners":{"신부야":{"min":124,"max":168,"text":"124~168","note":null,"addons":null}}},{"name":"볼라르스튜디오(구. 바오그남산)","planners":{"신부야":{"min":160,"max":380,"text":"160~380","note":null,"addons":null}}},{"name":"봄스튜디오","planners":{"베리굿":{"min":143,"max":143,"text":143,"note":"드레스 벌수 1벌당 20앨범 장수 1장당 3.8수정본 컷 11액자 변경 15~30선작업 15","addons":{"staff":[50,50],"night":[22,22]}},"다이렉트":{"min":154,"max":154,"text":154,"note":"• 촬영의상추가: 1벌당 10~20\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[50,70],"outdoor":[22,22],"night":[22,22]}},"제이웨딩":{"min":139,"max":139,"text":139,"note":"-","addons":null}}},{"name":"봉스튜디오","planners":{"신부야":{"min":135,"max":140,"text":"135~140","note":null,"addons":null}}},{"name":"부겐빌리아","planners":{"베리굿":{"min":154,"max":154,"text":154,"note":"드레스 벌수 1벌당 11앨범 장수 1장당 3.3수정본 컷 11액자 변경 27.5~88선작업 11서비스 컷 22","addons":{"staff":[11,33],"night":[22,22]}},"다이렉트":{"min":172,"max":172,"text":172,"note":"• 선수정본: 5컷 11\n• 촬영의상추가: 1벌당 11","addons":{"staff":[11,33],"outdoor":[22,22],"night":[22,22]}},"신부야":{"min":157,"max":157,"text":"157","note":null,"addons":null}}},{"name":"뷰시엘스튜디오","planners":{"다이렉트":{"min":154,"max":154,"text":154,"note":"• 선수정본: 1장당 11\n• 촬영의상추가: 1벌당 16.5\n• 앨범페이지추가: 1페이지당 3.3","addons":null}}},{"name":"블라르스튜디오","planners":{"베리굿":{"min":160,"max":220,"text":"160~220","note":"드레스 벌수 1벌당 15앨범 장수 1장당 3.3수정본 컷 11액자 변경 11~88선작업 11클리닝 촬영 22반려견 촬영 11","addons":{"staff":[15,50]}}}},{"name":"비마이","planners":{"베리굿":{"min":143,"max":143,"text":"143","note":"드레스 벌수 1벌당 11앨범 장수 1장당 3.3수정본 컷 11액자 변경 5~44선작업 11서비스 컷 22","addons":{"staff":[11,33],"night":[22,22]}},"다이렉트":{"min":154,"max":154,"text":"154","note":"• 선수정본: 5장 11\n• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[11,33],"outdoor":[22,22],"night":[22,22]}},"제이웨딩":{"min":161,"max":161,"text":161,"note":"-","addons":null},"신부야":{"min":157,"max":157,"text":"157","note":null,"addons":null}}},{"name":"비비엔다스튜디오","planners":{"베리굿":{"min":180,"max":240,"text":"180~240","note":"드레스 벌수 1벌당 16.5앨범 장수 1장당 3.3수정본 컷 1.1액자 변경 3~선작업 8장당 11촬영 시간추가 30분당 11 / 2인촬영시 55","addons":{"staff":[11,22],"outdoor":[22,22]}},"신부야":{"min":180,"max":370,"text":"180~370","note":null,"addons":null}}},{"name":"비슈어 스튜디오","planners":{"신부야":{"min":201,"max":201,"text":201,"note":null,"addons":null}}},{"name":"비아잔떼무드","planners":{"베리굿":{"min":187,"max":187,"text":187,"note":"드레스 벌수 1벌당 30앨범 장수 1장당 30선작업 2","addons":null}}},{"name":"비포원","planners":{"제이웨딩":{"min":144,"max":144,"text":144,"note":"-","addons":null}}},{"name":"빌라이나모라레","planners":{"베리굿":{"min":210,"max":210,"text":210,"note":"드레스 벌수 1벌당 15앨범 장수 1장당 1액자 변경 5~55선작업 11","addons":{"staff":[11,33],"outdoor":[11,11]}}}},{"name":"섬 글로우","planners":{"제이웨딩":{"min":139,"max":139,"text":139,"note":"앨범 제작 없음 (데이터만 제공)","addons":null}}},{"name":"섬스튜디오","planners":{"베리굿":{"min":143,"max":143,"text":143,"note":"드레스 벌수 1벌당 11~33앨범 장수 1장당 3.3수정본 컷 11액자 변경 16.5~55선작업 7한복 추가촬영 22","addons":{"staff":[15,15],"night":[22,22]}},"다이렉트":{"min":134,"max":134,"text":134,"note":"• 선수정본: 7컷 4\n• 촬영의상추가: 1벌당 11~33\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[15,15],"outdoor":[22,22],"night":[22,22]}},"제이웨딩":{"min":139,"max":139,"text":"139","note":"20p촬영","addons":null},"신부야":{"min":124,"max":151,"text":"124~151","note":null,"addons":null}}},{"name":"세미앙","planners":{"다이렉트":{"min":189,"max":189,"text":189,"note":"• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[22,33],"outdoor":[22,22],"night":[22,22]}},"신부야":{"min":168,"max":168,"text":"168","note":null,"addons":null}}},{"name":"세인트무드","planners":{"제이웨딩":{"min":139,"max":139,"text":139,"note":"20p촬영","addons":null}}},{"name":"셀럽비비","planners":{"다이렉트":{"min":139,"max":139,"text":139,"note":"• 선수정본: 5컷 5.5\n• 촬영의상추가: 1벌당 11~22\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[22,110],"outdoor":[11,11],"night":[11,11]}}}},{"name":"셀럽비비 라비앙","planners":{"신부야":{"min":124,"max":140,"text":"124~140","note":null,"addons":null}}},{"name":"소율","planners":{"제이웨딩":{"min":189,"max":189,"text":"189 / 117(세미)","note":"세미 액범 별도","addons":null}}},{"name":"소파소스튜디오","planners":{"베리굿":{"min":210,"max":270,"text":"210~270","note":"앨범 장수 1장당 4.4액자 변경 27.5~55","addons":{"staff":[11,55]}}}},{"name":"스유디오네쥬","planners":{"베리굿":{"min":220,"max":220,"text":220,"note":"앨범 장수 1장당 4.4액자 변경 27.5~55","addons":{"staff":[11,55]}}}},{"name":"스토리지고유","planners":{"베리굿":{"min":165,"max":165,"text":165,"note":"드레스 벌수 1벌당 11앨범 장수 1장당 3.3수정본 컷 16.5액자 변경 22~55선작업 11시간 추가 촬영 1시간당 11","addons":{"staff":[11,55]}}}},{"name":"스튜디오사이","planners":{"베리굿":{"min":148.5,"max":170.5,"text":"148.5~170.5","note":"드레스 벌수 1벌당 11앨범 장수 1장당 3.3수정본 컷 2.2액자 변경 11~77선작업 1.5","addons":{"staff":[22,55],"outdoor":[22,22],"night":[22,22]}},"다이렉트":{"min":184.5,"max":184.5,"text":184.5,"note":"• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[22,55],"outdoor":[22,22],"night":[22,22]}}}},{"name":"스튜디오콜레트","planners":{"베리굿":{"min":132,"max":132,"text":132,"note":"드레스 벌수 1벌당 11앨범 장수 1장당 3.3액자 변경 22~55선작업 3들러리 촬영 11","addons":{"staff":[5.5,55]}}}},{"name":"스튜디오클로드논현","planners":{"베리굿":{"min":180,"max":180,"text":180,"note":"드레스 벌수 1벌당 11앨범 장수 1장당 3.3액자 변경 22~55선작업 3 들러리 촬영 11","addons":{"staff":[5.5,55]}}}},{"name":"스튜디오클로드청담","planners":{"베리굿":{"min":180,"max":180,"text":180,"note":"드레스 발수 1벌당 11앨범 장수 1장당 3액자 변경 22~55선작업 3 들러리촬영 11","addons":{"staff":[5.5,55]}}}},{"name":"스튜디오피프티","planners":{"베리굿":{"min":150,"max":150,"text":150,"note":"드레스 발수 1벌당 20앨범 장수 1장당 3.3수정본 컷 1회 포함, 추가 1회 3.3 액자 변경 10~60","addons":{"staff":[50,100],"outdoor":[20,40]}}}},{"name":"스튜디오휴일","planners":{"다이렉트":{"min":144,"max":144,"text":144,"note":"• 앨범페이지추가: 1페이지당 3.3","addons":{"outdoor":[22,22],"night":[22,22]}}}},{"name":"식스플로어","planners":{"다이렉트":{"min":161,"max":161,"text":161,"note":"• 선수정본: 1장당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[11,11],"outdoor":[11,11],"night":[11,11]}},"신부야":{"min":102,"max":113,"text":"102~113","note":null,"addons":null}}},{"name":"실버문","planners":{"다이렉트":{"min":139,"max":139,"text":139,"note":"• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"outdoor":[22,22],"night":[22,22]}},"신부야":{"min":124,"max":140,"text":"124~140","note":null,"addons":null}}},{"name":"아뜰리에포유","planners":{"베리굿":{"min":176,"max":176,"text":176,"note":"드레스 발수 1벌당 11앨범 장수 1장당 3.3액자 변경 22~55선작업 1.1반려견 촬영 5.5","addons":{"staff":[11,11],"outdoor":[22,22],"night":[22,22]}},"신부야":{"min":120,"max":187,"text":"120~187","note":null,"addons":null}}},{"name":"아르센","planners":{"제이웨딩":{"min":183,"max":183,"text":183,"note":"-","addons":null},"신부야":{"min":91,"max":146,"text":"91~146","note":null,"addons":null}}},{"name":"아우드스튜디오","planners":{"베리굿":{"min":220,"max":260,"text":"220~260","note":"앨범 장수 1장당 3.3수정본 컷 1액자 변경 27.5선작업 5장당 11","addons":{"staff":[22,55]}},"신부야":{"min":230,"max":500,"text":"230~500","note":null,"addons":null}}},{"name":"아우라스튜디오","planners":{"제이웨딩":{"min":144,"max":144,"text":"144","note":"-","addons":null},"신부야":{"min":113,"max":113,"text":113,"note":null,"addons":null}}},{"name":"아우어스위트홈","planners":{"베리굿":{"min":143,"max":143,"text":143,"note":"드레스 발수 1벌당 11앨범 장수 1장당 3.3액자 변경 20선작업 16.5반려견 / 들러리 촬영 11 샴폐인샤워 / 폭죽촬영 5.5","addons":{"staff":[11,55],"outdoor":[11,11],"night":[11,11]}}}},{"name":"아우어스튜디오","planners":{"베리굿":{"min":132,"max":132,"text":132,"note":"드레스 발수 1벌당 11앨범 장수 1장당 3.3액자 변경 20선작업 16.5반려견 촬영 11","addons":{"staff":[11,55],"night":[22,22]}},"다이렉트":{"min":149,"max":149,"text":149,"note":"• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[22,33],"outdoor":[11,11],"night":[11,11]}},"신부야":{"min":96,"max":135,"text":"96~135","note":null,"addons":null}}},{"name":"아이브스튜디오","planners":{"베리굿":{"min":231,"max":231,"text":231,"note":"앨범 장수 1장당 3.3액자 변경 22~55선작업 3 들러리 촬영 11","addons":{"staff":[11,22]}}}},{"name":"아카스튜디오","planners":{"베리굿":{"min":143,"max":143,"text":143,"note":"드레스 발수 1벌당 22앨범 장수 1장당 3.3액자 변경 30~40","addons":{"staff":[11,22],"outdoor":[11,11]}}}},{"name":"아키","planners":{"제이웨딩":{"min":149,"max":149,"text":149,"note":"-","addons":null},"신부야":{"min":146,"max":146,"text":"146","note":null,"addons":null}}},{"name":"아테소","planners":{"베리굿":{"min":200,"max":385,"text":"200~385","note":"드레스 발수 1벌당 22앨범 장수 1장당 3.3수정본 컷 횟수 1회당 5.5액자 변경 22~선작업 5장당 5.5 들러리 촬영 1인 22","addons":{"staff":[22,110]}},"신부야":{"min":200,"max":385,"text":"200~385","note":null,"addons":null}}},{"name":"앤드류권","planners":{"베리굿":{"min":250,"max":250,"text":250,"note":"드레스 발수 1벌당 30앨범 장수 1장당 4수정본 컷 20액자 변경 5~55","addons":{"staff":[20,100],"outdoor":[60,60]}},"신부야":{"min":130,"max":480,"text":"130~480","note":null,"addons":null}}},{"name":"어뮤즈하우스","planners":{"베리굿":{"min":154,"max":154,"text":154,"note":"드레스 발수 1벌당 11앨범 장수 1장당 3.3수정본 컷 11액자 변경 22~55선작업 10장당 11","addons":{"staff":[10,30],"outdoor":[11,11]}},"다이렉트":{"min":161,"max":161,"text":161,"note":"• 선수정본: 10장 11\n• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[10,30],"outdoor":[11,11],"night":[11,11]}},"신부야":{"min":146,"max":146,"text":"146","note":null,"addons":null}}},{"name":"어반스튜디오","planners":{"베리굿":{"min":122,"max":122,"text":122,"note":"드레스 벌수 1벌당 11앨범 장수 1장당 3.3수정본 컨펌 1회 포함, 추가 1회 5.5액자 변경 33~","addons":{"staff":[10,300],"night":[22,22]}},"다이렉트":{"min":144,"max":144,"text":144,"note":"• 선수정본: 1장당 3.3\n• 촬영의상추가: 1벌당 11~33\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[11,300],"outdoor":[2,22],"night":[2,22]}},"제이웨딩":{"min":139,"max":139,"text":139,"note":"-","addons":null},"신부야":{"min":124,"max":140,"text":"124~140","note":null,"addons":null}}},{"name":"에밀리스튜디오","planners":{"다이렉트":{"min":161,"max":161,"text":161,"note":"• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[11,33],"outdoor":[11,11],"night":[11,11]}}}},{"name":"에스티무드","planners":{"다이렉트":{"min":139,"max":139,"text":139,"note":"• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[20,50],"outdoor":[11,11],"night":[11,11]}}}},{"name":"엘린스튜디오","planners":{"베리굿":{"min":165,"max":165,"text":165,"note":"드레스 벌수 1벌당 11앨범 장수 3.3액자 변경 15~48선작업 11원본 제공 22클리닝 촬영 22반려견 촬영 22","addons":{"staff":[33,55],"night":[11,11]}}}},{"name":"온뜰에피움","planners":{"다이렉트":{"min":124,"max":124,"text":124,"note":"• 선수정본: 7컷 7.7\n• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[22,22],"outdoor":[11,22],"night":[11,22]}},"제이웨딩":{"min":128,"max":128,"text":128,"note":"앨범 제작 없음 (데이터만 제공)","addons":null},"신부야":{"min":108,"max":124,"text":"108~124","note":null,"addons":null}}},{"name":"원규스튜디오","planners":{"다이렉트":{"min":154,"max":154,"text":154,"note":"• 선수정본: 5컷 5.5\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[11,22],"outdoor":[11,22],"night":[11,22]}},"신부야":{"min":135,"max":162,"text":"135~162","note":null,"addons":null}}},{"name":"원세컨드","planners":{"다이렉트":{"min":125,"max":125,"text":"125 [세미2시간]","note":"• 선수정본: 셀렉컷 5.5\n• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[10,30],"outdoor":[0,15],"night":[0,15]}},"제이웨딩":{"min":121.5,"max":121.5,"text":"121.5 (세미)","note":"앨범 제작 없음 (데이터만 제공)","addons":null},"신부야":{"min":85,"max":158,"text":"85~158","note":null,"addons":null}}},{"name":"유온드포토그라피","planners":{"베리굿":{"min":154,"max":176,"text":"154~176","note":"드레스 벌수 1벌당 11앨범 장수 1장당 3.3수정본 컨펌 16.5액자 변경 1.1시간 추가 촬영 1시간당 11들러리 촬영 11반려견 촬영 11","addons":{"staff":[22,22],"outdoor":[11,11]}}}},{"name":"이건사진스튜디오","planners":{"다이렉트":{"min":137,"max":137,"text":137,"note":"• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[20,20],"outdoor":[11,16.5],"night":[11,16.5]}}}},{"name":"이경호포토그라피","planners":{"베리굿":{"min":250,"max":250,"text":250,"note":"앨범 장수 1장당 3.3수정본 컨펌 1회 포함, 추가 1회 5.5액자 변경 25~125선작업 11~16.5","addons":{"staff":[11,110]}}}},{"name":"이브로제하우스","planners":{"베리굿":{"min":200,"max":260,"text":"200~260","note":"드레스 벌수 1벌당 16.5앨범 장수 3.3수정본 컨펌 11액자 변경 3~선작업 8장당 11촬영 시간추가 30분당 11 / 2인 촬영시 55","addons":{"staff":[11,22],"outdoor":[22,22]}},"신부야":{"min":200,"max":390,"text":"200~390","note":null,"addons":null}}},{"name":"이포토에세이","planners":{"다이렉트":{"min":154,"max":154,"text":154,"note":"• 촬영의상추가: 1벌당 11~22\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[22,22],"outdoor":[4,22],"night":[4,22]}},"신부야":{"min":129,"max":129,"text":129,"note":null,"addons":null}}},{"name":"줄리의 정원","planners":{"제이웨딩":{"min":161,"max":161,"text":161,"note":"-","addons":null}}},{"name":"지니어스스튜디오","planners":{"다이렉트":{"min":144,"max":144,"text":144,"note":"• 촬영의상추가: 드레스추가 1벌당 10\n• 개인의상추가: 1벌당 5\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[20,20],"outdoor":[15,15],"night":[15,15]}},"신부야":{"min":104,"max":129,"text":"104~129","note":null,"addons":null}}},{"name":"지엠마지","planners":{"베리굿":{"min":190,"max":250,"text":"190~250","note":"드레스 벌수 1벌당 16.5앨범 장수 1장당 3.3수정본 컨펌 11액자 변경 3~선작업 8장당 11촬영 시간추가 30분당 11 / 2인 촬영시 55","addons":{"staff":[11,22],"outdoor":[22,22]}},"신부야":{"min":190,"max":380,"text":"190~380","note":null,"addons":null}}},{"name":"카마스튜디오","planners":{"베리굿":{"min":170,"max":400,"text":"170~400","note":"드레스 벌수 1벌당 30앨범 장수 1장당 5~10수정본 컨펌 5~10액자 변경 10~","addons":{"staff":[100,100],"outdoor":[10,50]}}}},{"name":"클랑디스튜디오","planners":{"베리굿":{"min":143,"max":143,"text":143,"note":"• (드레스) 벌수 1벌당 11• 앨범 장수 1장당 4• 수정본 컬러 11• 액자 변경 25~• 선수정본 7장 7.7• 시간 추가 촬영 5시간부터 30분당 5.5• 들러리 촬영 11","addons":{"staff":[22,22],"night":[11,11]}}}},{"name":"클레","planners":{"제이웨딩":{"min":128,"max":128,"text":"A Type : 128","note":"-","addons":null}}},{"name":"탱자스튜디오","planners":{"다이렉트":{"min":164,"max":164,"text":164,"note":"• 선수정본: 1컷당 6,500\n• 촬영의상추가: 22~\n• 앨범페이지추가: 1페이지당 3.3","addons":{"outdoor":[1,22],"night":[1,22]}}}},{"name":"테라스","planners":{"제이웨딩":{"min":129,"max":129,"text":129,"note":"-","addons":null},"신부야":{"min":124,"max":124,"text":"124","note":null,"addons":null}}},{"name":"테레지아","planners":{"다이렉트":{"min":154,"max":154,"text":154,"note":"• 선수정본: 5컷 5.5\n• 촬영의상추가: 1벌당 12\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[22,22],"outdoor":[22,22],"night":[22,22]}},"제이웨딩":{"min":161,"max":161,"text":161,"note":"20p촬영","addons":null},"신부야":{"min":135,"max":162,"text":"135~162","note":null,"addons":null}}},{"name":"테오그라피","planners":{"다이렉트":{"min":139,"max":139,"text":139,"note":"• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[55,55],"outdoor":[11,22],"night":[11,22]}}}},{"name":"테이크마인드","planners":{"베리굿":{"min":250,"max":250,"text":250,"note":"앨범 장수 1장당 3.3액자 변경 30~","addons":{"staff":[20,50]}}}},{"name":"틸른스튜디오","planners":{"베리굿":{"min":190,"max":190,"text":190,"note":"앨범 장수 1장당 3.3액자 변경 5~55","addons":{"staff":[11,33],"outdoor":[25,25]}}}},{"name":"페레","planners":{"베리굿":{"min":132,"max":132,"text":"132","note":"드레스 벌수 1벌당 11앨범 장수 1장당 3.3액자 변경 25~66","addons":{"staff":[22,99],"night":[22,22]}},"제이웨딩":{"min":134,"max":134,"text":134,"note":"-","addons":null},"신부야":{"min":135,"max":135,"text":"135","note":null,"addons":null}}},{"name":"플라츠스튜디오","planners":{"베리굿":{"min":200,"max":200,"text":200,"note":"드레스 벌수 1벌당 30앨범 장수 1장당 5액자 변경 10~","addons":{"staff":[30,50]}}}},{"name":"플레하우스","planners":{"베리굿":{"min":165,"max":165,"text":165,"note":"드레스 벌수 1벌당 22앨범 장수 1장당 3.3액자 변경 30~40","addons":{"staff":[11,22],"outdoor":[11,11]}},"신부야":{"min":157,"max":157,"text":"157","note":null,"addons":null}}},{"name":"플로우","planners":{"다이렉트":{"min":149,"max":149,"text":"149","note":"• 선수정본: 1컷당 11\n• 커플드레스제작: 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[11,33],"outdoor":[11,11],"night":[11,11]}},"제이웨딩":{"min":150,"max":150,"text":150,"note":"-","addons":null},"신부야":{"min":124,"max":146,"text":"124~146","note":null,"addons":null}}},{"name":"피아스튜디오","planners":{"다이렉트":{"min":179,"max":179,"text":179,"note":"• 선수정본: 5컷 11\n• 포토데이용 원본리텍: 5컷 27.5 (촬영당일결제: 22)\n• 촬영의상추가: 1벌당 11\n• 앨범페이지추가: 1페이지당 3.3","addons":{"staff":[22,33]}}}},{"name":"해밀스튜디오","planners":{"베리굿":{"min":121,"max":132,"text":"121~132","note":"드레스 벌수 1벌당 22앨범 장수 1장당 3.3액자 변경 30~40","addons":{"staff":[11,22],"outdoor":[11,11]}},"제이웨딩":{"min":139,"max":139,"text":"139","note":"-","addons":null},"신부야":{"min":129,"max":129,"text":129,"note":null,"addons":null}}},{"name":"헤이쥬드스튜디오","planners":{"베리굿":{"min":165,"max":165,"text":165,"note":"드레스 벌수 1벌당 11앨범 장수 1장당 3.3수정본 컨펌 1.1액자 변경 15~선작업 1.1","addons":{"staff":[11,55]}}}},{"name":"헤이허니스튜디오","planners":{"베리굿":{"min":165,"max":165,"text":165,"note":"드레스 벌수 1벌당 11앨범 장수 1장당 3.3수정본 컨펌 1.1액자 변경 15~선작업 1.1","addons":{"staff":[11,55]}}}}],"dress":[{"name":"누벨드블랑","planners":{"제이웨딩":{"min":139,"max":139,"text":"본식 139","note":null,"addons":{"fit":[1,25]}},"신부야":{"min":140,"max":140,"text":"본식 140","note":null,"addons":{"fit":[1,25]}}}},{"name":"니콜스포사","planners":{"베리굿":{"min":121,"max":121,"text":"본식 121","note":"재가봉비 11","addons":{"fit":[1,25],"design":[66,66],"first":[33,33],"extra":[33,33]}},"다이렉트":{"min":118,"max":118,"text":"본식 118","note":"-","addons":{"fit":[25,25],"design":[55,110]}},"제이웨딩":{"min":128,"max":128,"text":"본식 128","note":null,"addons":{"fit":[1,25]}},"신부야":{"min":123,"max":123,"text":"본식 123","note":null,"addons":{"fit":[25,25]}}}},{"name":"더에이미","planners":{"다이렉트":{"min":160,"max":160,"text":"본식 160","note":"-","addons":{"fit":[25,25]}},"제이웨딩":{"min":161,"max":161,"text":"본식 161","note":null,"addons":{"fit":[1,25]}},"신부야":{"min":151,"max":151,"text":"본식 151","note":null,"addons":{"fit":[25,25]}}}},{"name":"더케네스블랑","planners":{"다이렉트":{"min":100,"max":100,"text":"본식 100","note":"-","addons":{"fit":[25,25],"design":[22,110]}},"제이웨딩":{"min":110,"max":110,"text":"본식 110","note":null,"addons":{"fit":[1,25]}},"신부야":{"min":96,"max":96,"text":"본식 96","note":null,"addons":{"fit":[25,25]}}}},{"name":"더화이트 엘리자베스","planners":{"신부야":{"min":233,"max":233,"text":"본식 233","note":null,"addons":{"fit":[25,25]}}}},{"name":"도와브라이드","planners":{"제이웨딩":{"min":161,"max":161,"text":"본식 161","note":null,"addons":{"fit":[1,25]}}}},{"name":"도화브라이드","planners":{"다이렉트":{"min":140,"max":140,"text":"본식 140","note":"-","addons":{"fit":[25,25],"design":[50,150]}}}},{"name":"드이베","planners":{"베리굿":{"min":120,"max":120,"text":"본식 120","note":"-","addons":{"fit":[1,25],"design":[10,20],"extra":[25,25]}}}},{"name":"디아뜨르","planners":{"다이렉트":{"min":80,"max":80,"text":"본식 80","note":"-","addons":{"fit":[25,25],"design":[50,70]}}}},{"name":"디아시","planners":{"다이렉트":{"min":115,"max":115,"text":"본식 115","note":"-","addons":{"fit":[25,25],"design":[35,60],"first":[30,30]}}}},{"name":"디아일","planners":{"제이웨딩":{"min":117,"max":117,"text":"본식 117","note":null,"addons":{"fit":[1,25]}}}},{"name":"디유드라포엠","planners":{"다이렉트":{"min":140,"max":140,"text":"본식 140","note":"-","addons":{"fit":[25,25],"design":[110,220],"first":[55,55]}},"제이웨딩":{"min":150,"max":150,"text":"본식 150","note":null,"addons":{"fit":[1,25]}}}},{"name":"디케이웨딩","planners":{"다이렉트":{"min":115,"max":115,"text":"본식 115","note":"-","addons":{"fit":[25,25],"design":[66,110]}}}},{"name":"라비노체","planners":{"신부야":{"min":170,"max":170,"text":"본식 170","note":null,"addons":{"fit":[25,25]}}}},{"name":"라포레","planners":{"제이웨딩":{"min":216,"max":216,"text":"본식 216","note":null,"addons":{"fit":[1,25]}}}},{"name":"레이나모라","planners":{"제이웨딩":{"min":130,"max":130,"text":"본식 130","note":null,"addons":{"fit":[1,25]}},"신부야":{"min":125,"max":125,"text":"본식 125","note":null,"addons":{"fit":[25,25]}}}},{"name":"레이첼웨딩","planners":{"다이렉트":{"min":107,"max":107,"text":"본식 107","note":"-","addons":{"fit":[25,25],"design":[22,150]}},"신부야":{"min":96,"max":96,"text":"본식 96","note":null,"addons":{"fit":[25,25]}}}},{"name":"렌느브라이덜","planners":{"다이렉트":{"min":95,"max":95,"text":"본식 95","note":"-","addons":{"fit":[25,25]}}}},{"name":"로브마지오","planners":{"다이렉트":{"min":100,"max":100,"text":"본식 100","note":"-","addons":{"fit":[25,25],"design":[55,55]}}}},{"name":"로아블랑","planners":{"제이웨딩":{"min":117,"max":117,"text":"본식 117","note":null,"addons":{"fit":[1,25]}}}},{"name":"로우케이","planners":{"신부야":{"min":107,"max":107,"text":"본식 107","note":null,"addons":{"fit":[25,25]}}}},{"name":"로즈로사","planners":{"베리굿":{"min":194,"max":194,"text":"본식 194","note":"재가봉비 11","addons":{"fit":[1,25],"extra":[50,50]}},"신부야":{"min":195,"max":195,"text":"본식 195","note":null,"addons":{"fit":[25,25]}}}},{"name":"로즈로사 시그니처","planners":{"제이웨딩":{"min":190,"max":190,"text":"본식 190","note":null,"addons":{"fit":[1,25]}}}},{"name":"루비나엘 웨딩","planners":{"다이렉트":{"min":85,"max":85,"text":"본식 85","note":"-","addons":{"fit":[25,25],"design":[30,80]}},"제이웨딩":{"min":73,"max":73,"text":"본식 73","note":null,"addons":{"fit":[1,25]}}}},{"name":"루이즈블랑","planners":{"베리굿":{"min":154,"max":154,"text":"본식 154","note":"재가봉비 11","addons":{"fit":[1,25],"design":[66,110],"first":[55,55],"extra":[33,55]}}}},{"name":"루자스포사","planners":{"다이렉트":{"min":100,"max":100,"text":"본식 100","note":"-","addons":{"fit":[25,25],"design":[66,110],"first":[22,22]}}}},{"name":"르메르바이노비아","planners":{"베리굿":{"min":220,"max":220,"text":"본식 220","note":"재가봉비 5.5","addons":{"fit":[1,25],"design":[55,88],"extra":[33,66]}}}},{"name":"르블랑","planners":{"다이렉트":{"min":175,"max":175,"text":"본식 175","note":"-","addons":{"fit":[25,25]}},"제이웨딩":{"min":185,"max":185,"text":"본식 185","note":null,"addons":{"fit":[1,25]}}}},{"name":"리디아브라이드","planners":{"다이렉트":{"min":107,"max":107,"text":"본식 107","note":"-","addons":{"fit":[25,25],"design":[55,132]}},"제이웨딩":{"min":100,"max":100,"text":"본식 100","note":null,"addons":{"fit":[1,25]}},"신부야":{"min":107,"max":107,"text":"본식 107","note":null,"addons":{"fit":[25,25]}}}},{"name":"리안마리","planners":{"다이렉트":{"min":118,"max":118,"text":"본식 118","note":"-","addons":{"fit":[25,25]}},"제이웨딩":{"min":128,"max":128,"text":"본식 128","note":null,"addons":{"fit":[1,25]}}}},{"name":"마리레나 by블랑","planners":{"제이웨딩":{"min":70,"max":70,"text":"본식 70","note":null,"addons":{"fit":[1,25]}}}},{"name":"마리레나바이브랑","planners":{"신부야":{"min":60,"max":60,"text":"본식 60","note":null,"addons":{"fit":[25,25]}}}},{"name":"마리에드오늘","planners":{"다이렉트":{"min":105,"max":105,"text":"본식 105","note":"-","addons":{"fit":[25,25],"design":[50,77]}},"제이웨딩":{"min":116,"max":116,"text":"본식 116","note":null,"addons":{"fit":[1,25]}}}},{"name":"마틴드세븐","planners":{"다이렉트":{"min":110,"max":110,"text":"본식 110","note":"-","addons":{"fit":[25,25],"design":[80,120]}}}},{"name":"마틴드아뜰리에","planners":{"다이렉트":{"min":110,"max":110,"text":"본식 110","note":"-","addons":{"fit":[25,25],"design":[44,66]}}}},{"name":"메라키웨딩","planners":{"베리굿":{"min":154,"max":154,"text":"본식 154","note":"재가봉비 5.5","addons":{"fit":[1,25],"design":[55,143],"extra":[55,99]}},"다이렉트":{"min":118,"max":118,"text":"본식 118","note":"-","addons":{"fit":[25,25],"design":[33,55]}},"신부야":{"min":140,"max":140,"text":"본식 140","note":null,"addons":{"fit":[25,25]}}}},{"name":"메이제인바이김영주","planners":{"다이렉트":{"min":140,"max":140,"text":"본식 140","note":"-","addons":{"fit":[25,25],"design":[30,100]}},"신부야":{"min":118,"max":118,"text":"본식 118","note":null,"addons":{"fit":[25,25]}}}},{"name":"메종 올리비아 (88size ~)","planners":{"제이웨딩":{"min":150,"max":150,"text":"본식 150","note":null,"addons":{"fit":[1,30]}}}},{"name":"메종클로이","planners":{"다이렉트":{"min":130,"max":130,"text":"본식 130","note":"-","addons":{"fit":[25,25],"design":[44,44]}},"제이웨딩":{"min":117,"max":117,"text":"본식 117","note":null,"addons":{"fit":[1,30]}}}},{"name":"모네뜨아르","planners":{"신부야":{"min":74,"max":74,"text":"본식 74","note":null,"addons":{"fit":[25,25]}}}},{"name":"모니카블랑쉬","planners":{"다이렉트":{"min":180,"max":180,"text":"본식 180","note":"-","addons":{"fit":[25,25],"design":[50,400]}},"제이웨딩":{"min":145,"max":145,"text":"본식 145","note":null,"addons":{"fit":[1,25]}},"신부야":{"min":162,"max":162,"text":"본식 162","note":null,"addons":{"fit":[25,25]}}}},{"name":"모리엠포티","planners":{"제이웨딩":{"min":128,"max":128,"text":"본식 128","note":null,"addons":{"fit":[1,25]}},"신부야":{"min":108,"max":108,"text":"본식 108","note":null,"addons":{"fit":[25,25]}}}},{"name":"발레리아스포사","planners":{"다이렉트":{"min":145,"max":145,"text":"본식 145","note":"-","addons":{"fit":[25,25],"design":[88,120]}}}},{"name":"벨에포크","planners":{"다이렉트":{"min":165,"max":165,"text":"본식 165","note":"-","addons":{"fit":[25,25],"design":[88,220]}},"신부야":{"min":151,"max":151,"text":"본식 151","note":null,"addons":{"fit":[25,25]}}}},{"name":"보네르웨딩","planners":{"신부야":{"min":151,"max":151,"text":"본식 151","note":null,"addons":{"fit":[25,25]}}}},{"name":"보니타베일리","planners":{"다이렉트":{"min":140,"max":140,"text":"본식 140","note":"-","addons":{"fit":[25,25],"design":[55,88]}},"제이웨딩":{"min":128,"max":128,"text":"본식 128","note":null,"addons":{"fit":[1,25]}},"신부야":{"min":108,"max":108,"text":"본식 108","note":null,"addons":{"fit":[25,25]}}}},{"name":"보다이승진","planners":{"신부야":{"min":162,"max":162,"text":"본식 162","note":null,"addons":{"fit":[25,25]}}}},{"name":"브라이덜공","planners":{"신부야":{"min":385,"max":385,"text":"본식 385","note":null,"addons":{"fit":[30,30]}}}},{"name":"브라이덜수지","planners":{"베리굿":{"min":110,"max":110,"text":"본식 110","note":"재가봉비 5.5","addons":{"fit":[1,25],"first":[88,100],"extra":[15,15]}},"다이렉트":{"min":96,"max":96,"text":"본식 96","note":"-","addons":{"fit":[25,25],"design":[33,110]}}}},{"name":"브라이드K","planners":{"다이렉트":{"min":90,"max":90,"text":"본식 90","note":"-","addons":{"fit":[25,25],"design":[22,55]}}}},{"name":"브라이드로제","planners":{"베리굿":{"min":121,"max":121,"text":"본식 121","note":"재가봉비 5.5","addons":{"fit":[1,25],"design":[50,80],"extra":[20,30]}},"다이렉트":{"min":129,"max":129,"text":"본식 129","note":"-","addons":{"fit":[25,25],"design":[50,250]}}}},{"name":"브라이드메이","planners":{"다이렉트":{"min":60,"max":60,"text":"본식 60","note":"-","addons":{"fit":[25,25],"design":[60,60]}}}},{"name":"브라이드벨라","planners":{"다이렉트":{"min":65,"max":65,"text":"본식 65","note":"-","addons":{"fit":[25,25],"design":[60,80]}},"제이웨딩":{"min":73,"max":73,"text":"본식 73","note":null,"addons":{"fit":[1,25]}},"신부야":{"min":63,"max":63,"text":"본식 63","note":null,"addons":{"fit":[25,25]}}}},{"name":"브라이드손윤희","planners":{"베리굿":{"min":198,"max":198,"text":"본식 198","note":"재가봉비 11","addons":{"fit":[1,25],"extra":[33,55]}},"신부야":{"min":179,"max":179,"text":"본식 179","note":null,"addons":{"fit":[25,25]}}}},{"name":"브라이드영","planners":{"다이렉트":{"min":90,"max":90,"text":"본식 90","note":"-","addons":{"fit":[25,25],"design":[30,100]}},"신부야":{"min":80,"max":80,"text":"본식 80","note":null,"addons":{"fit":[25,25]}}}},{"name":"브라이드케이","planners":{"제이웨딩":{"min":95,"max":95,"text":"본식 95","note":null,"addons":{"fit":[1,25]}},"신부야":{"min":85,"max":85,"text":"본식 85","note":null,"addons":{"fit":[25,25]}}}},{"name":"블랑코노비아","planners":{"다이렉트":{"min":100,"max":100,"text":"본식 100","note":"-","addons":{"fit":[25,25],"design":[66,154]}}}},{"name":"비비드블랑","planners":{"다이렉트":{"min":120,"max":120,"text":"본식 120","note":"-","addons":{"fit":[25,25],"design":[88,200]}},"제이웨딩":{"min":139,"max":139,"text":"본식 139","note":null,"addons":{"fit":[1,25]}},"신부야":{"min":129,"max":129,"text":"본식 129","note":null,"addons":{"fit":[25,25]}}}},{"name":"비비탐탐","planners":{"신부야":{"min":200,"max":200,"text":"본식 200","note":null,"addons":{"fit":[25,25]}}}},{"name":"세인트","planners":{"제이웨딩":{"min":139,"max":139,"text":"본식 139","note":null,"addons":{"fit":[1,25]}},"신부야":{"min":118,"max":118,"text":"본식 118","note":null,"addons":{"fit":[25,25]}}}},{"name":"세인트헬레나","planners":{"다이렉트":{"min":120,"max":120,"text":"본식 120","note":"-","addons":{"fit":[25,25],"design":[50,80],"first":[100,100]}},"신부야":{"min":160,"max":160,"text":"본식 160","note":null,"addons":{"fit":[25,25]}}}},{"name":"셀레네","planners":{"다이렉트":{"min":90,"max":90,"text":"본식 90","note":"-","addons":{"fit":[25,25],"design":[33,110]}}}},{"name":"셀레브","planners":{"신부야":{"min":250,"max":250,"text":"본식 250","note":null,"addons":{"fit":[25,25]}}}},{"name":"셀렉션H","planners":{"신부야":{"min":162,"max":162,"text":"본식 162","note":null,"addons":{"fit":[25,25]}}}},{"name":"셀린아뜰리에","planners":{"다이렉트":{"min":107,"max":107,"text":"본식 107","note":"-","addons":{"fit":[25,25],"design":[55,100],"first":[44,44]}},"신부야":{"min":118,"max":118,"text":"본식 118","note":null,"addons":{"fit":[25,25]}}}},{"name":"소노","planners":{"베리굿":{"min":187,"max":187,"text":"본식 187","note":"재가봉비 5.5","addons":{"fit":[1,25],"design":[44,88],"extra":[33,33]}}}},{"name":"스띨레디허","planners":{"다이렉트":{"min":100,"max":100,"text":"본식 100","note":"-","addons":{"fit":[25,25],"design":[30,150]}},"제이웨딩":{"min":106,"max":106,"text":"본식 106","note":null,"addons":{"fit":[1,25]}},"신부야":{"min":96,"max":96,"text":"본식 96","note":null,"addons":{"fit":[25,25]}}}},{"name":"시그니처 B","planners":{"제이웨딩":{"min":95,"max":95,"text":"본식 95","note":null,"addons":{"fit":[1,25]}}}},{"name":"시그니처 엘리자베스","planners":{"신부야":{"min":233,"max":233,"text":"본식 233","note":null,"addons":{"fit":[25,25]}}}},{"name":"시즌알렉스","planners":{"베리굿":{"min":198,"max":198,"text":"본식 198","note":"재가봉비 5.5","addons":{"fit":[1,25],"design":[55,110],"first":[77,77],"extra":[66,110]}}}},{"name":"아뜨레블랑","planners":{"다이렉트":{"min":70,"max":70,"text":"본식 70","note":"-","addons":{"fit":[25,25],"design":[30,30]}},"신부야":{"min":65,"max":65,"text":"본식 65","note":null,"addons":{"fit":[25,25]}}}},{"name":"아르비체","planners":{"다이렉트":{"min":85,"max":85,"text":"본식 85","note":"-","addons":{"fit":[25,25],"design":[88,165],"first":[33,33]}},"신부야":{"min":74,"max":74,"text":"본식 74","note":null,"addons":{"fit":[25,25]}}}},{"name":"아벨바이케이","planners":{"신부야":{"min":230,"max":230,"text":"본식 230","note":null,"addons":{"fit":[25,25]}}}},{"name":"아브아 드레스","planners":{"신부야":{"min":151,"max":151,"text":"본식 151","note":null,"addons":{"fit":[25,25]}}}},{"name":"아비가일","planners":{"제이웨딩":{"min":95,"max":95,"text":"본식 95","note":null,"addons":{"fit":[1,25]}},"신부야":{"min":85,"max":85,"text":"본식 85","note":null,"addons":{"fit":[25,25]}}}},{"name":"아이테오","planners":{"다이렉트":{"min":184,"max":184,"text":"본식 184","note":"-","addons":{"fit":[25,25],"design":[200,300]}},"제이웨딩":{"min":null,"max":null,"text":194,"note":null,"addons":{"fit":[1,25]}},"신부야":{"min":189,"max":189,"text":"본식 189","note":null,"addons":{"fit":[25,25]}}}},{"name":"안나스포사","planners":{"다이렉트":{"min":100,"max":100,"text":"본식 100","note":"-","addons":{"fit":[25,25],"design":[30,120]}}}},{"name":"안나스포사 클래식","planners":{"신부야":{"min":96,"max":96,"text":"본식 96","note":null,"addons":{"fit":[25,25]}}}},{"name":"알렉산드라","planners":{"다이렉트":{"min":140,"max":140,"text":"본식 140","note":"-","addons":{"fit":[25,25],"design":[110,110]}},"제이웨딩":{"min":null,"max":null,"text":128,"note":null,"addons":{"fit":[1,25]}},"신부야":{"min":151,"max":151,"text":"본식 151","note":null,"addons":{"fit":[25,25]}}}},{"name":"에델린","planners":{"다이렉트":{"min":85,"max":85,"text":"본식 85","note":"-","addons":{"fit":[25,25],"design":[40,70]}}}},{"name":"에스메랄다","planners":{"제이웨딩":{"min":null,"max":null,"text":195,"note":null,"addons":{"fit":[1,25]}},"신부야":{"min":189,"max":189,"text":"본식 189","note":null,"addons":{"fit":[25,25]}}}},{"name":"에스메랄다스포사","planners":{"다이렉트":{"min":null,"max":null,"text":230,"note":"-","addons":{"fit":[25,25]}}}},{"name":"에일린","planners":{"베리굿":{"min":350,"max":350,"text":"본식 350","note":"재가봉비 11","addons":{"fit":[1,30],"design":[110,220],"first":[110,110],"extra":[77,110]}}}},{"name":"엔조최재훈","planners":{"베리굿":{"min":300,"max":300,"text":"본식 300","note":"재가봉비 11","addons":{"fit":[1,25],"design":[30,30],"extra":[30,30]}},"신부야":{"min":300,"max":300,"text":"본식 300","note":null,"addons":{"fit":[25,25]}}}},{"name":"엘리자베스럭스","planners":{"베리굿":{"min":500,"max":500,"text":"본식 500","note":"재가봉비 11","addons":{"fit":[1,30],"design":[200,200],"first":[300,300],"extra":[70,70]}}}},{"name":"우아르","planners":{"베리굿":{"min":110,"max":110,"text":"본식 110","note":"재가봉비 5.5","addons":{"fit":[1,25],"design":[55,77],"first":[33,33],"extra":[33,33]}},"다이렉트":{"min":null,"max":null,"text":120,"note":"-","addons":{"fit":[25,25]}}}},{"name":"우아르웨딩","planners":{"신부야":{"min":107,"max":107,"text":"본식 107","note":null,"addons":{"fit":[25,25]}}}},{"name":"위드브라이드","planners":{"다이렉트":{"min":null,"max":null,"text":110,"note":"-","addons":{"fit":[25,25],"design":[30,150]}}}},{"name":"이네스이든","planners":{"다이렉트":{"min":null,"max":null,"text":150,"note":"-","addons":{"fit":[25,25],"design":[80,200]}}}},{"name":"이브스더데이","planners":{"제이웨딩":{"min":105,"max":105,"text":"본식 105","note":null,"addons":{"fit":[105,105]}},"신부야":{"min":85,"max":85,"text":"본식 85","note":null,"addons":{"fit":[25,25]}}}},{"name":"이승진웨딩","planners":{"제이웨딩":{"min":null,"max":null,"text":172,"note":null,"addons":{"fit":[1,25]}}}},{"name":"장다인웨딩","planners":{"다이렉트":{"min":null,"max":null,"text":85,"note":"-","addons":{"fit":[25,25],"design":[20,30]}},"제이웨딩":{"min":null,"max":null,"text":78.5,"note":null,"addons":{"fit":[1,25]}}}},{"name":"제시카로렌","planners":{"베리굿":{"min":187,"max":187,"text":"본식 187","note":"재가봉비 5.5~11","addons":{"fit":[1,25],"design":[55,88],"first":[55,55],"extra":[33,110]}},"제이웨딩":{"min":null,"max":null,"text":150,"note":null,"addons":{"fit":[1,25]}},"신부야":{"min":167,"max":167,"text":"본식 167","note":null,"addons":{"fit":[25,25]}}}},{"name":"제이미브라이드","planners":{"다이렉트":{"min":null,"max":null,"text":205,"note":"-","addons":{"fit":[25,25]}}}},{"name":"제이스포사","planners":{"다이렉트":{"min":null,"max":null,"text":129,"note":"-","addons":{"fit":[25,25],"design":[50,200]}},"제이웨딩":{"min":null,"max":null,"text":117,"note":null,"addons":{"fit":[1,25]}}}},{"name":"조슈아벨","planners":{"다이렉트":{"min":null,"max":null,"text":118,"note":"-","addons":{"fit":[25,25],"design":[80,100]}},"제이웨딩":{"min":null,"max":null,"text":117,"note":null,"addons":{"fit":[1,25]}}}},{"name":"줄리엣발코니","planners":{"다이렉트":{"min":null,"max":null,"text":90,"note":"-","addons":{"fit":[25,25],"design":[70,70]}},"제이웨딩":{"min":null,"max":null,"text":75,"note":null,"addons":{"fit":[75,75]}},"신부야":{"min":65,"max":65,"text":"본식 65","note":null,"addons":{"fit":[25,25]}}}},{"name":"줄리엣블루니","planners":{"제이웨딩":{"min":75,"max":75,"text":"본식 75","note":null,"addons":{"fit":[1,25]}}}},{"name":"쥬빌리브라이드","planners":{"베리굿":{"min":165,"max":165,"text":"본식 165","note":"재가봉비 11","addons":{"fit":[1,25],"design":[55,165],"first":[55,55],"extra":[33,33]}},"다이렉트":{"min":null,"max":null,"text":175,"note":"-","addons":{"fit":[25,25],"design":[176,220]}},"신부야":{"min":151,"max":151,"text":"본식 151","note":null,"addons":{"fit":[25,25]}}}},{"name":"카이라브라이덜","planners":{"다이렉트":{"min":null,"max":null,"text":140,"note":"-","addons":{"fit":[25,25],"design":[55,121]}}}},{"name":"케이트린","planners":{"다이렉트":{"min":null,"max":null,"text":115,"note":"-","addons":{"fit":[25,25],"design":[55,110]}}}},{"name":"케일라베넷","planners":{"베리굿":{"min":420,"max":420,"text":"본식 420","note":"재가봉비 11","addons":{"fit":[1,30],"design":[200,200],"first":[200,200],"extra":[65,65]}}}},{"name":"켈리손윤희","planners":{"베리굿":{"min":242,"max":242,"text":"본식 242","note":"재가봉비 11","addons":{"fit":[1,25],"design":[66,88],"extra":[33,55]}},"신부야":{"min":228,"max":228,"text":"본식 228","note":null,"addons":{"fit":[25,25]}}}},{"name":"크리드제이","planners":{"베리굿":{"min":143,"max":143,"text":"본식 143","note":"재가봉비 6","addons":{"fit":[1,25],"design":[110,180],"first":[180,220],"extra":[33,55]}},"다이렉트":{"min":null,"max":null,"text":140,"note":"-","addons":{"fit":[25,25],"design":[110,110]}},"제이웨딩":{"min":null,"max":null,"text":130,"note":null,"addons":{"fit":[1,25]}}}},{"name":"클라라웨딩","planners":{"제이웨딩":{"min":172,"max":172,"text":"본식 172","note":null,"addons":{"fit":[1,25]}}}},{"name":"클라리웨딩","planners":{"제이웨딩":{"min":null,"max":null,"text":172,"note":null,"addons":{"fit":[139,139]}}}},{"name":"터치바이해리","planners":{"베리굿":{"min":220,"max":220,"text":"본식 220","note":"재가봉비 5.5~","addons":{"fit":[1,25],"design":[33,55],"first":[55,55],"extra":[33,33]}}}},{"name":"테오마이","planners":{"제이웨딩":{"min":null,"max":null,"text":205,"note":null,"addons":{"fit":[1,25]}},"신부야":{"min":184,"max":184,"text":"본식 184","note":null,"addons":{"fit":[25,25]}}}},{"name":"페르테레이","planners":{"베리굿":{"min":121,"max":121,"text":"본식 121","note":"재가봉비 5.5","addons":{"fit":[1,25],"design":[33,33],"first":[33,33],"extra":[55,55]}},"다이렉트":{"min":null,"max":null,"text":160,"note":"-","addons":{"fit":[25,25],"design":[110,132],"first":[33,33]}}}},{"name":"펠리스노비아","planners":{"다이렉트":{"min":null,"max":null,"text":110,"note":"-","addons":{"fit":[25,25],"design":[33,77]}}}},{"name":"폴라리스","planners":{"다이렉트":{"min":null,"max":null,"text":110,"note":"-","addons":{"fit":[100,100],"design":[25,250],"first":[88,250]}},"제이웨딩":{"min":null,"max":null,"text":95,"note":null,"addons":{"fit":[1,25]}},"신부야":{"min":85,"max":85,"text":"본식 85","note":null,"addons":{"fit":[25,25]}}}},{"name":"프리다브라이덜","planners":{"베리굿":{"min":490,"max":490,"text":"본식 490","note":"재가봉비 11","addons":{"fit":[1,30],"design":[110,330],"first":[220,220],"extra":[55,55]}}}},{"name":"플로렌스","planners":{"다이렉트":{"min":null,"max":null,"text":150,"note":"-","addons":{"fit":[25,25],"design":[55,165]}},"신부야":{"min":129,"max":129,"text":"본식 129","note":null,"addons":{"fit":[25,25]}}}},{"name":"핑크공브라이드","planners":{"베리굿":{"min":330,"max":330,"text":"본식 330","note":"재가봉비 11","addons":{"fit":[1,30],"design":[110,330],"first":[50,50],"extra":[70,70]}}}},{"name":"하우스오브에이미","planners":{"다이렉트":{"min":null,"max":null,"text":200,"note":"-","addons":{"fit":[25,25],"design":[55,110]}},"제이웨딩":{"min":null,"max":null,"text":183,"note":null,"addons":{"fit":[1,25]}},"신부야":{"min":173,"max":173,"text":"본식 173","note":null,"addons":{"fit":[25,25]}}}},{"name":"헤리티크뉴욕","planners":{"베리굿":{"min":490,"max":490,"text":"본식 490","note":"재가봉비 11","addons":{"fit":[1,30],"design":[200,200],"first":[200,200],"extra":[65,65]}}}},{"name":"황정아웨딩","planners":{"신부야":{"min":272,"max":272,"text":"본식 272","note":null,"addons":{"fit":[25,25]}}}}],"makeup":[{"name":"강은","planners":{"베리굿":{"min":55,"max":55,"text":"• 본식: 실장 55 / 부원장 60.5 / 원장 77","note":"여혼주 29.7\n남혼주 8.8","addons":{"hair":[23,23]}}}},{"name":"겐그레아","planners":{"다이렉트":{"min":83,"max":83,"text":"본식 83","note":"• 4시30분: 16.5\n• 5시/5시30분: 11\n• 여혼주: 23\n• 남혼주: 7.7","addons":{"staff":[5.5,5.5],"hair":[10,10]}}}},{"name":"고바이씬","planners":{"제이웨딩":{"min":95,"max":95,"text":"실장급 95\n부원장 106","note":"• 헤어피스 2인 22 / 피스 33\n• 헤어변형 2시간 30.5\n• 3시간 41.5\n• 4시간 50.5 (드림 변경)\n• 지정비 헤어만 5.5","addons":{"staff":[1,5.5],"early":[5,30]}},"신부야":{"min":55,"max":55,"text":"실장 55 / 부원장 66","note":null,"addons":null}}},{"name":"고센뷰티","planners":{"다이렉트":{"min":70,"max":70,"text":"본식 70","note":"• 5시이전: 22\n• 5시~6시이전: 11\n• 여혼주: 22\n• 남혼주: 9.9","addons":{"staff":[5.5,5.5],"hair":[16.5,16.5]}},"제이웨딩":{"min":62,"max":62,"text":"실장급 62\n부원장 65.5\n원장급 67.5","note":"• 1단: 피스 시술비 16.5 + 6(보증금)\n• 2단: 피스 시술비 22 + 6(보증금)\n• 평일 8.8~11","addons":{"staff":[1,5.5],"early":[0,22]}}}},{"name":"고원","planners":{"베리굿":{"min":66,"max":66,"text":"• 본식: 실장 66 / 부원장 71.5 / 원장 77 / 대표원장 143","note":"여혼주 27.5\n남혼주 7.7","addons":{"staff":[1,5.5],"hair":[5,15]}}}},{"name":"김선진끌로에","planners":{"베리굿":{"min":44,"max":44,"text":"• 본식: 실장 44 / 부원장 55 / 원장 63.25","note":"여혼주 27.5\n남혼주 8.8","addons":{"hair":[16.5,16.5]}},"다이렉트":{"min":75,"max":75,"text":"본식 75","note":"• 5시/5시30분: 11\n• 여혼주: 26\n• 남혼주: 11","addons":{"hair":[16.5,16.5]}}}},{"name":"김청경헤어페이스","planners":{"베리굿":{"min":71.5,"max":71.5,"text":"• 본식: 실장 71.5 / 부원장 82.5 / 원장 95.5 / 대표원장 115.5","note":"여혼주 33\n남혼주 9.9","addons":{"staff":[1,5.5],"hair":[13,13]}},"신부야":{"min":80,"max":80,"text":"실장 80 / 부원장 82.5 / 원장 95.5","note":null,"addons":null}}},{"name":"김활란뮤제네프","planners":{"다이렉트":{"min":95,"max":95,"text":"본식 95","note":"• 5시: 11\n• 5시30분: 5.5\n• 여혼주: 33\n• 남혼주: 11","addons":{"staff":[5.5,5.5],"hair":[11,11]}},"제이웨딩":{"min":78.5,"max":78.5,"text":"실장급 78.5\n부원장급 84\n원장급 89.5","note":"• 헤어피스보증금 10\n• 헤어피스 시술비 11\n• 컷팅 3.3\n• 펌 5.5\n• 가발샵 선택 5.5\n• 동가발선택 11","addons":{"early":[0,30]}},"신부야":{"min":68.5,"max":68.5,"text":"실장 68.5 / 부원장 74 / 원장 74.5","note":null,"addons":null}}},{"name":"꼼나나본점","planners":{"베리굿":{"min":55,"max":55,"text":"• 본식: 실장 55 / 부원장 66","note":"여혼주 36.3\n남혼주 13.2","addons":{"staff":[1,5.5],"hair":[10,10]}}}},{"name":"꼼나나청담","planners":{"베리굿":{"min":55,"max":55,"text":"• 본식: 실장 55 / 부원장 66 / 원장 99","note":"여혼주 36.3\n남혼주 13.2","addons":{"staff":[1,5.5],"hair":[10,10]}}}},{"name":"꾸띠원","planners":{"다이렉트":{"min":66,"max":66,"text":"본식 66","note":"• 4시/4시30분: 22\n• 5시/5시30분: 11\n• 여혼주: 22\n• 남혼주: 8.8","addons":{"staff":[5.5,5.5],"hair":[11,11]}},"제이웨딩":{"min":58,"max":58,"text":"실장급 58\n부원장급 67.5\n원장급 73","note":"-","addons":{"staff":[1,5.5],"early":[0,59]}},"신부야":{"min":48,"max":48,"text":"실장 48 / 부원장 57.5 / 원장 63","note":null,"addons":null}}},{"name":"끌로에 청담본점","planners":{"신부야":{"min":63,"max":63,"text":"실장 63 / 부원장 74 / 원장 85","note":null,"addons":null}}},{"name":"노멀샵","planners":{"베리굿":{"min":60.5,"max":60.5,"text":"• 본식: 실장 60.5 / 부원장 66 / 원장 66","note":"여혼주 22\n남혼주 6.6","addons":{"hair":[5,10]}}}},{"name":"드이희","planners":{"베리굿":{"min":77,"max":77,"text":"• 본식: 실장 77 / 원장 88","note":"여혼주 33\n남혼주 8.8","addons":{"hair":[5,15]}}}},{"name":"라메종뷰티","planners":{"베리굿":{"min":55,"max":55,"text":"• 본식: 팀장 55 / 실장 66 / 부원장 71.5 / 원장 82.5","note":"여혼주 27.5\n남혼주 11","addons":{"hair":[5,10]}},"제이웨딩":{"min":76,"max":76,"text":"실장급 76\n부원장 82\n원장급 93","note":"• 헤어피스 16인치 14.3\n• 헤어피스 22인치 19.8\n• 컷팅 5.5","addons":{"staff":[1,5.5],"early":[0,30]}}}},{"name":"로나","planners":{"다이렉트":{"min":80,"max":80,"text":"본식 80","note":"• 4시/4시30분: 22\n• 5시/5시30분: 12.2\n• 여혼주: 22\n• 남혼주: 6.6","addons":{"staff":[5.5,5.5],"hair":[12,12]}},"제이웨딩":{"min":67.5,"max":67.5,"text":"실장급 67.5\n부원장 78.5\n원장급 88.4","note":"• 피스 12\n• 달비 5.5","addons":{"staff":[1,5.5],"early":[0,22]}}}},{"name":"로쉬","planners":{"다이렉트":{"min":80,"max":80,"text":"본식 80","note":"• 4시~4시59분: 20\n• 5시~5시59분: 15\n• 여혼주: 25\n• 남혼주: 9.9","addons":{"staff":[5.5,5.5],"hair":[14.3,14.3]}},"제이웨딩":{"min":67.5,"max":67.5,"text":"부원장 67.5\n부원장 73\n원장급 84","note":"• 헤어피스 16인치 14.3\n• 헤어피스 22인치 19.8\n• 달비 5.5","addons":{"staff":[1,5.5],"early":[0,30]}},"신부야":{"min":79.5,"max":79.5,"text":"실장 79.5 / 부원장 90.5 / 원장 101.5","note":null,"addons":null}}},{"name":"롤링제이","planners":{"베리굿":{"min":60,"max":60,"text":"• 본식: 실장 60 / 부원장 70","note":"여혼주 25.3\n남혼주 9.9","addons":{"staff":[1,5.5],"hair":[11,16.5]}}}},{"name":"룰루","planners":{"베리굿":{"min":66,"max":66,"text":"• 본식: 66 / 실장 66","note":"여혼주 28\n남혼주 6.6","addons":{"hair":[22,22]}}}},{"name":"메이븐","planners":{"베리굿":{"min":60.5,"max":60.5,"text":"• 본식: 실장 60.5 / 부원장 71.5 / 원장 82.5","note":"여혼주 27.5\n남혼주 7.7","addons":{"staff":[1,5.5],"hair":[10,10]}},"다이렉트":{"min":75,"max":75,"text":"본식 75","note":"• 4시~4시29분: 22\n• 4시30분~: 16.5\n• 5시~5시30분: 11\n• 여혼주: 25\n• 남혼주: 8.8","addons":{"staff":[5.5,5.5],"hair":[11,11]}}}},{"name":"멥시","planners":{"베리굿":{"min":77,"max":77,"text":"• 본식: 실장 77 / 부원장 82.5 / 원장 110","note":"여혼주 33\n남혼주 5.5","addons":{"hair":[10,11]}},"신부야":{"min":68.5,"max":68.5,"text":"실장 68.5 / 부원장 74 / 원장 101.5","note":null,"addons":null}}},{"name":"모아위","planners":{"베리굿":{"min":55,"max":55,"text":"• 본식: 부원장 55 / 원장 60.5","note":"여혼주 22\n남혼주 5.5","addons":{"hair":[7,10]}}}},{"name":"미파레","planners":{"베리굿":{"min":71.5,"max":71.5,"text":"• 본식: 부원장 71.5 / 원장 71.5","note":"여혼주 33\n남혼주 11","addons":{"hair":[10,11]}}}},{"name":"밈.mimm","planners":{"다이렉트":{"min":100,"max":100,"text":"본식 100","note":null,"addons":null},"제이웨딩":{"min":78.5,"max":78.5,"text":"실장급 78.5\n부원장 84\n원장급 95","note":null,"addons":null},"신부야":{"min":74,"max":74,"text":"실장 74 / 부원장 85 / 원장 96","note":null,"addons":null}}},{"name":"밈.mimm","planners":{"다이렉트":{"min":100,"max":100,"text":"본식 100","note":"• 4시/4시30분: 22\n• 5시/5시30분: 11\n• 여혼주: 33\n• 남혼주: 11","addons":{"staff":[5.5,5.5],"hair":[15,15]}},"제이웨딩":{"min":78.5,"max":78.5,"text":"실장급 78.5\n부원장 84\n원장급 95","note":"• 피스 시술료 15 + 보증금 10\n• 피스 시술료 26 + 보증금 10\n• 피스 손상시 11만원 + 보증금\n• 달비 시술비 3.3\n• 달비 변경비용 5.5\n• 드라이기대여 스타일링 11\n• 촬영 서비스 11\n• 픽쳐 구매 3.3","addons":{"early":[0,30]}},"신부야":{"min":74,"max":74,"text":"실장 74 / 부원장 85 / 원장 96","note":null,"addons":null}}},{"name":"보보리스","planners":{"베리굿":{"min":49.5,"max":49.5,"text":"• 본식: 실장 49.5 / 부원장 60.5 / 원장 71.5","note":"여혼주 27.5\n남혼주 7.7","addons":{"staff":[1,5.5],"hair":[10,15]}}}},{"name":"보이드바이박철","planners":{"다이렉트":{"min":77,"max":77,"text":"본식 77","note":"• 5시/5시30분: 11\n• 여혼주: 20\n• 남혼주: 6.6","addons":{"staff":[5.5,5.5],"hair":[10,10]}},"신부야":{"min":52,"max":52,"text":"실장 52 / 부원장 55 / 원장 60","note":null,"addons":null}}},{"name":"봉살롱","planners":{"베리굿":{"min":77,"max":77,"text":"• 본식: 원장 77 / 촬영 원장 77","note":"여혼주 27.5\n남혼주 7.7","addons":{"hair":[6.6,11]}},"다이렉트":{"min":84,"max":84,"text":"본식 84","note":"• 4시~4시59분: 22\n• 5시~5시59분: 11\n• 여혼주: 25\n• 남혼주: 8.8","addons":{"hair":[17,17]}}}},{"name":"부티크벨by민하","planners":{"다이렉트":{"min":84,"max":84,"text":"본식 84","note":"• 4시~4시59분: 22\n• 5시~5시59분: 11\n• 여혼주: 22\n• 남혼주: 8.8","addons":{"staff":[5.5,5.5],"hair":[10,10]}}}},{"name":"뷰티진동희 and 그랜드점","planners":{"제이웨딩":{"min":72.5,"max":72.5,"text":"팀장급 72.5\n실장급 78.5\n부원장 84\n원장급 95","note":"• 헤어피스 11\n• 헤어변형 33\n• 헤어피스 보증금 5\n• 헤어변형 레이트 21:00~22:00 / 5.5\n• 헤어변형 레이트 23:00~ / 11","addons":{"staff":[1,5.5],"early":[0,30]}}}},{"name":"뷰티진동희청담점","planners":{"베리굿":{"min":55,"max":55,"text":"• 본식: 팀장 55 / 실장 66 / 부원장 77 / 원장 88","note":"여혼주 27.5\n남혼주 6.6","addons":{"hair":[5,10]}}}},{"name":"비기닝","planners":{"다이렉트":{"min":80,"max":80,"text":"본식 80","note":"• 4시30분: 22\n• 5시~5시30분: 16.5\n• 여혼주: 22\n• 남혼주: 8","addons":{"staff":[5.5,5.5],"hair":[16,26]}}}},{"name":"비율","planners":{"제이웨딩":{"min":65.5,"max":65.5,"text":"실장급 65.5\n부원장 70.5\n원장급 73.5","note":"• 헤어피스 구매 15","addons":{"staff":[1,5.5],"early":[0,30]}}}},{"name":"빈헤어메이크업","planners":{"베리굿":{"min":44,"max":44,"text":"• 본식: 부원장 44 / 원장 55","note":"여혼주 24.2\n남혼주 6.6","addons":{"staff":[1,5.5],"hair":[15,15]}}}},{"name":"서의","planners":{"베리굿":{"min":55,"max":55,"text":"• 본식: 실장 55 / 부원장 60.5 / 원장 77","note":"여혼주 38.5\n남혼주 14.3","addons":{"staff":[1,5.5]}}}},{"name":"선화청담","planners":{"베리굿":{"min":44,"max":44,"text":"• 본식: 팀장 44 / 실장 55 / 원장 99","note":"여혼주 33\n남혼주 11","addons":{"hair":[15,15]}}}},{"name":"설영","planners":{"베리굿":{"min":71.5,"max":71.5,"text":"• 본식: 실장 71.5 / 부원장 82.5 / 원장 88","note":"여혼주 27.5\n남혼주 7.7","addons":{"staff":[1,10],"hair":[14.3,28.6]}},"제이웨딩":{"min":78.5,"max":78.5,"text":"실장급 78.5\n부원장 89.5\n원장급 95","note":"• 피스 구매 16인치 14.3\n• 피스 구매 20인치 17.6\n• 개인 피스 사용시 시술비 7.7\n• 달비 5.5","addons":{"staff":[1,5.5],"early":[0,30]}},"신부야":{"min":85,"max":85,"text":"실장 85 / 부원장 96 / 원장 107","note":null,"addons":null}}},{"name":"순수","planners":{"베리굿":{"min":55,"max":55,"text":"• 본식: 실장 55 / 부원장 77 / 원장 93","note":"여혼주 26.4\n남혼주 5.5","addons":{"staff":[1,9.9],"hair":[13.2,16.5]}}}},{"name":"순수 청담","planners":{"제이웨딩":{"min":78,"max":78,"text":"실장급 78\n부원장 89\n원장급 103","note":"• 헤어피스 구매 13.2\n• 달비 4.4\n• 헤어변형 서비스 5.5","addons":{"early":[0,59]}}}},{"name":"스타일플로어","planners":{"베리굿":{"min":77,"max":77,"text":"• 본식: 부원장 77 / 원장 88","note":"여혼주 28\n남혼주 8.8","addons":{"staff":[1,5.5],"hair":[10,10]}},"신부야":{"min":63,"max":63,"text":"실장 63 / 부원장 74 / 원장 85","note":null,"addons":null}}},{"name":"아도르","planners":{"베리굿":{"min":77,"max":77,"text":"• 본식: 실장 77 / 부원장 88 / 원장 121","note":"여혼주 27.5\n남혼주 7.7","addons":{"hair":[10,10]}}}},{"name":"아디도","planners":{"베리굿":{"min":88,"max":88,"text":"• 본식: 원장 88 / 촬영 원장 88","note":"여혼주 33\n남혼주 8.8","addons":{"staff":[1,5.5],"hair":[5,10]}}}},{"name":"아티청담","planners":{"베리굿":{"min":60.5,"max":60.5,"text":"• 본식: 실장 60.5 / 부원장 66 / 원장 71.5","note":"여혼주 24.2\n남혼주 11","addons":{"staff":[1,5.5],"hair":[1,17]}}}},{"name":"알루","planners":{"베리굿":{"min":60.5,"max":60.5,"text":"• 본식: 실장 60.5 / 부원장 66 / 원장 77","note":"여혼주 22\n남혼주 5.5","addons":{"staff":[1,5.5],"hair":[21,21]}},"다이렉트":{"min":80,"max":80,"text":"본식 80","note":"• 5시/5시30분: 11\n• 여혼주: 22\n• 남혼주: 6.6","addons":{"staff":[5.5,5.5],"hair":[11,11]}}}},{"name":"알루 본점","planners":{"신부야":{"min":57.5,"max":57.5,"text":"실장 57.5 / 부원장 63 / 원장 74","note":null,"addons":null}}},{"name":"애브뉴준오","planners":{"베리굿":{"min":77,"max":77,"text":"• 본식: 실장 77 / 부원장 88 / 원장 99","note":"여혼주 35.2\n남혼주 8.8","addons":{"hair":[10,16.5]}}}},{"name":"에이라빛","planners":{"베리굿":{"min":49.5,"max":49.5,"text":"• 본식: 실장 49.5 / 부원장 55 / 원장 60.5","note":"여혼주 22\n남혼주 5.5","addons":{"hair":[5,10]}}}},{"name":"에이바이봄","planners":{"베리굿":{"min":72,"max":72,"text":"• 본식: 실장 72 / 부원장 77 / 원장 83","note":"여혼주 35.2\n남혼주 9.9","addons":{"staff":[1,5.5],"hair":[16.5,27.5]}},"신부야":{"min":72,"max":72,"text":"실장 72 / 부원장 77 / 원장 83","note":null,"addons":null}}},{"name":"엔드뮤","planners":{"다이렉트":{"min":88,"max":88,"text":"본식 88","note":"• 4시~4시59분: 22\n• 5시~5시59분: 11\n• 여혼주: 28\n• 남혼주: 8.8","addons":{"staff":[5.5,5.5],"hair":[12,12]}}}},{"name":"오화유","planners":{"베리굿":{"min":44,"max":44,"text":"• 본식: 실장 44 / 부원장 55 / 원장 66","note":"여혼주 22\n남혼주 7.7","addons":{"staff":[1,5.5],"hair":[22,22]}}}},{"name":"요닝","planners":{"베리굿":{"min":63,"max":63,"text":"• 본식: 실장 63 / 부원장 68 / 원장 73","note":"여혼주 22\n남혼주 6.6","addons":{"hair":[5,11]}},"제이웨딩":{"min":70,"max":70,"text":"실장급 70\n부원장급 75\n이사급 80\n원장급 260","note":"• 혼주 답례 5.5\n• 흑채 3.3\n• 샴푸 2.2\n• 헤어피스 구매 14.3 (유품)\n• 헤어피스 구매 23.1 (유품)\n• 헤어피스 대여 16 (보증금 포함)","addons":{"early":[0,55]}}}},{"name":"위위아틀리에","planners":{"베리굿":{"min":77,"max":77,"text":"• 본식: 담당 무작위 77","note":"여혼주 27.5\n남혼주 5.5","addons":{"hair":[14.3,14.3]}}}},{"name":"유림메이크업앤헤어","planners":{"다이렉트":{"min":75,"max":75,"text":"본식 75","note":"• 4시~4시55분: 22\n• 5시~5시55분: 16.5\n• 여혼주: 20\n• 남혼주: 6.6","addons":{"staff":[5.5,5.5],"hair":[13,13]}}}},{"name":"이경민포레","planners":{"제이웨딩":{"min":78.5,"max":78.5,"text":"실장급 78.5\n부원장급 84\n원장급 89.5","note":"• 헤어피스 4p 시술비 10 + 보증금 10\n• 헤어피스 6p 시술비 15 + 보증금 15\n• 헤어피스 8p 시술비 20 + 보증금 20\n• 헤어피스 10p 시술비 25 + 보증금 25\n• 변경지정 3.3\n• 변경 6시이후 종료시 3\n• 변경 8시 이후 종료시 5\n• 변경 10시 종료시 7","addons":{"staff":[1,5.5],"early":[0,30]}},"신부야":{"min":74,"max":74,"text":"실장 74 / 부원장 79.5 / 원장 85","note":null,"addons":null}}},{"name":"이경민포레청담","planners":{"베리굿":{"min":71.5,"max":71.5,"text":"• 본식: 실장 71.5 / 부원장 77 / 원장 82.5","note":"여혼주 33\n남혼주 8.8","addons":{"hair":[10,10]}}}},{"name":"이엘","planners":{"다이렉트":{"min":80,"max":80,"text":"본식 80","note":"• 5시 / 5시30분: 11","addons":{"staff":[5.5,5.5],"hair":[10,10]}},"제이웨딩":{"min":71,"max":71,"text":"실장급 71\n부원장급 76.5\n원장급 82","note":"• 피스 사용료 11~\n• 피스 보증금 22~5.5\n• 달비 5.5","addons":{"early":[0,30]}}}},{"name":"이유메이크업","planners":{"신부야":{"min":61,"max":61,"text":"실장 61 / 부원장 66 / 원장 71","note":null,"addons":null}}},{"name":"재클린","planners":{"베리굿":{"min":66,"max":66,"text":"• 본식: 실장 66 / 부원장 77 / 원장 88","note":"여혼주 33\n남혼주 8.8","addons":{"staff":[1,22],"hair":[5,15]}}}},{"name":"정남","planners":{"베리굿":{"min":77,"max":77,"text":"• 본식: 실장 77 / 부원장 88 / 원장 99 / 대표원장 110","note":"여혼주 33\n남혼주 8.8","addons":{"hair":[11,16.5]}}}},{"name":"정샘물 인스피레이션 EAST점","planners":{"신부야":{"min":79.5,"max":79.5,"text":"실장 79.5 / 부원장 85 / 원장 96","note":null,"addons":null}}},{"name":"정샘물 인스피레이션 WEST점","planners":{"신부야":{"min":74,"max":74,"text":"팀장 74 / 실장 79.5 / 부원장 85 / 원장 90.5","note":null,"addons":null}}},{"name":"정샘물웨스트","planners":{"베리굿":{"min":71.5,"max":71.5,"text":"• 본식: 팀장 71.5 / 실장 77 / 부원장 82.5 / 원장 88","note":"여혼주 33\n남혼주 7.7","addons":{"staff":[1,5.5],"hair":[22,33]}}}},{"name":"정샘물이스트","planners":{"베리굿":{"min":77,"max":77,"text":"• 본식: 실장 77 / 부원장 82.5 / 원장 88","note":"여혼주 33\n남혼주 11","addons":{"staff":[1,5.5],"hair":[22,22]}}}},{"name":"제니하우스","planners":{"베리굿":{"min":71.5,"max":71.5,"text":"• 본식: 팀장 71.5 / 부원장 77 / 원장 82.5 / 대표원장 88","note":"여혼주 29.7\n남혼주 7.7","addons":{"staff":[1,10],"hair":[10,22]}}}},{"name":"제이미로이스타","planners":{"제이웨딩":{"min":53.5,"max":53.5,"text":"실장급 53.5\n부원장급 56.5\n원장급 58.7","note":"• 헤어피스 6.6~16.5\n• 달비 4.4\n• 컷다운 2.2\n• 흑채 2.2","addons":{"early":[0,30]}}}},{"name":"제이바이로이스타","planners":{"다이렉트":{"min":60,"max":60,"text":"본식 60","note":"• 5시30분: 11","addons":{"staff":[3.3,11],"hair":[11,11]}},"신부야":{"min":43.2,"max":43.2,"text":"실장 43.2 / 부원장 46.5 / 원장 48.5","note":null,"addons":null}}},{"name":"제이와이","planners":{"베리굿":{"min":49.5,"max":49.5,"text":"• 본식: 실장 49.5 / 부원장 66 / 원장 71.5","note":"여혼주 27.5\n남혼주 5.5","addons":{"staff":[1,5.5],"hair":[22,22]}},"다이렉트":{"min":75,"max":75,"text":"본식 75","note":"• 6시이전: 11","addons":{"staff":[5.5,5.5],"hair":[14.3,14.3]}}}},{"name":"조이187","planners":{"베리굿":{"min":44,"max":44,"text":"• 본식: 실장44 / 부원장55 / 원장66촬영: 실장44 / 부원장55 / 원장66본식+촬영: 실장77 / 부원장88 / 원장99","note":"여혼주27.5 / 남혼주8.8","addons":{"staff":[1,5.5],"hair":[10,15]}},"다이렉트":{"min":90,"max":90,"text":"본식 90","note":"• 4시 / 4시30분: 22\n• 5시 / 5시30분: 11","addons":{"staff":[5.5,11],"hair":[15,15]}}}},{"name":"차치라보","planners":{"다이렉트":{"min":82,"max":82,"text":"본식 82","note":"• 4시~4시59분: 25\n• 5시~5시29분: 16.5\n• 5시30분~5시59분: 11","addons":{"staff":[5.5,5.5],"hair":[16.5,16.5]}}}},{"name":"청담러비","planners":{"베리굿":{"min":60.5,"max":60.5,"text":"• 본식: 실장60.5 / 부원장70.5 / 원장81.5촬영: 동일본식+촬영: 실장71.5 / 부원장81.5 / 원장91.5","note":"여혼주27.5 / 남혼주5.5","addons":{"staff":[1,7.7],"hair":[15,15]}}}},{"name":"청담어썸","planners":{"다이렉트":{"min":75,"max":75,"text":"본식 75","note":"• 4시: 16.5\n• 5시: 11","addons":{"staff":[5.5,5.5],"hair":[12.7,12.7]}}}},{"name":"청담이유헤어메이크업","planners":{"베리굿":{"min":66,"max":66,"text":"• 본식: 실장66 / 부원장77 / 원장88촬영: 동일본식+촬영: 실장81 / 부원장91 / 원장101","note":"여혼주27.5 / 남혼주9.9","addons":{"staff":[1,5.5],"hair":[16.5,16.5]}}}},{"name":"컬쳐앤네이처","planners":{"베리굿":{"min":58,"max":58,"text":"• 본식: 원장58촬영: 원장58본식+촬영: 77","note":"여혼주22 / 남혼주5.5","addons":{"hair":[15,15]}}}},{"name":"포레스타블랙","planners":{"베리굿":{"min":58.75,"max":58.75,"text":"• 본식: 실장58.75 / 부원장63.75 / 원장68.75촬영: 동일본식+촬영: 실장77 / 부원장82.5 / 원장88","note":"여혼주27.5 / 남혼주8.8","addons":{"hair":[25,25]}}}},{"name":"포레스트블룸","planners":{"제이웨딩":{"min":66,"max":66,"text":"실장급 66\n부원장급 71\n원장급 76","note":"• 피스 시술비 25 (보증금 포함)\n• 피스 보증금 7 (깊이나 반환)\n• 드라이 8.8\n• 샴푸 3.3","addons":{"early":[0,30]}}}},{"name":"프레스티지 블랙","planners":{"신부야":{"min":48,"max":48,"text":"실장 48 / 부원장 53 / 원장 58","note":null,"addons":null}}},{"name":"프렌스","planners":{"베리굿":{"min":55,"max":55,"text":"• 본식: 실장55 / 부원장77 / 원장77촬영: 동일본식+촬영: 실장99 / 부원장132 / 원장132","note":"여혼주29.7 / 남혼주8.8","addons":{"hair":[16.5,33]}}}},{"name":"플리페","planners":{"베리굿":{"min":44,"max":44,"text":"• 본식: 실장44 / 부원장55 / 원장60.5촬영: 동일본식+촬영: 실장66 / 부원장77 / 원장88","note":"여혼주22 / 남혼주5.5","addons":{"staff":[1,16.5],"hair":[10,21]}},"다이렉트":{"min":73,"max":73,"text":"본식 73","note":"• 4시~4시59분: 22\n• 5시~5시59분: 16.5","addons":{"staff":[5.5,16.5],"hair":[11,11]}}}},{"name":"헤움","planners":{"다이렉트":{"min":80,"max":80,"text":"본식 80","note":"• 5시~5시30분 이전: 16.5\n• 5시30분~6시이전: 11","addons":{"staff":[5.5,5.5],"hair":[16.5,16.5]}},"신부야":{"min":58,"max":58,"text":"실장 58 / 부원장 69 / 원장 74","note":null,"addons":null}}},{"name":"히나프","planners":{"베리굿":{"min":71.5,"max":71.5,"text":"• 본식: 실장71.5 / 부원장82.5 / 원장93.5촬영: 동일본식+촬영: 실장110 / 부원장121 / 원장143","note":"여혼주33 / 남혼주9.9","addons":{"staff":[1,5.5],"hair":[22,22]}}}},{"name":"히엘","planners":{"다이렉트":{"min":78,"max":78,"text":"본식 78","note":"• 5시: 16.5\n• 5시30분: 11","addons":{"staff":[5.5,5.5],"hair":[11,11]}},"신부야":{"min":52,"max":52,"text":"실장 52 / 부원장 57.5 / 원장 63","note":null,"addons":null}}}]};
+
+</script>
+<script>
+/* ── 웨딩홀 상세 정보 ─────────────────────────────────────────────
+   HALLS(data.js)의 각 행은 가격 계산용 숫자만 담고 있어서,
+   실제 카페 후기·블로그·공식 사이트에서 확인한 주소·특징·장단점·원문 링크를
+   이 파일에 따로 둡니다. 키는 HALLS의 이름(1번 컬럼)과 동일해야 매칭됩니다.
+
+   depth: "full"  = 카페 후기 다수를 정독해서 뽑은 특징/장단점 (신뢰도 높음)
+          "thin"   = 여전히 자료가 제한적인 곳 (있는 만큼만 반영, 추측 없음)
+   링크가 확실하지 않은 곳은 실제 글 URL 대신 "카페 검색 링크"로 대체해
+   존재하지 않는 글로 잘못 연결되는 일이 없게 했습니다.
+   ────────────────────────────────────────────────────────────── */
+
+function cafeSearchUrl(q){
+  return "https://search.naver.com/search.naver?ssc=tab.cafe.all&query=" + encodeURIComponent(q);
+}
+
+const HALL_DETAIL = {
+  "DMC타워웨딩": {
+    depth:"full", addr:"마포구 상암동 · 디지털미디어시티역(6호선·경의중앙선) 인근",
+    features:["밝은홀(펠리체홀)","자연광 채광","주차 넉넉","3개 홀 규모별 운영"],
+    pros:[
+      "자연광이 들어오는 밝은홀(펠리체홀), 로비가 넓고 안 번잡함",
+      "본식 후기 다수: \"홀 너무 예쁘다\"는 하객 반응이 반복적으로 나옴",
+      "컨시어지~식당~주차까지 운영이 안정적이라는 평이 많음(운영 만족도 최상위)",
+      "4층 펠리체홀(대형)/3층 그랜드볼룸홀(중형)/라피네홀(소형)로 규모 선택 가능"
+    ],
+    cons:["여름 예식은 하객 이동 시 더위 걱정된다는 후기 있음","연회장이 지하에 있어 동선이 다소 번거롭다는 의견"],
+    links:[
+      {title:"상암 DMC 타워웨딩 컨벤션 본식 당일 웨딩홀 후기", url:"https://cafe.naver.com/directwedding/9187205"},
+      {title:"DMC타워웨딩 펠리체홀 본식 후기", url:"https://cafe.naver.com/directwedding/9206099"},
+    ],
+  },
+  "루이비스 강서": {
+    depth:"full", addr:"강서구 가양동 · 가양역(9호선) 인근",
+    features:["천고 7m","단독홀","주차 600대(400+200)","오픈 5개월 신상홀"],
+    pros:[
+      "천고 7m로 홀이 크고 시원함, 버진로드 단차 있어 입장 임팩트 좋음",
+      "음식 150여 가지, 혼주 전용 식사룸 별도 운영",
+      "본관 400대+제2주차장 200대, 2시간 무료",
+      "제휴 한복집·혼주메이크업샵이 같은 건물에 있어 동선 편함"
+    ],
+    cons:["오픈 5개월차라 후기 축적이 적은 편"],
+    links:[
+      {title:"루이비스 강서 상담 후기, 당일 계약(O)", url:"https://cafe.naver.com/directwedding/9177952"},
+      {title:"본식날 루이비스강서점 웨딩홀 후기", url:"https://cafe.naver.com/directwedding/9172687"},
+    ],
+  },
+  "더컨벤션 송파문정": {
+    depth:"full", addr:"송파구 문정동 · 문정역(8호선) 도보 5분, 지하도 연결",
+    features:["12층/13층 2개홀","보증 250명","성인 식대(만7세 이상)","생화 기본 포함"],
+    pros:[
+      "12층은 층고 높고 웅장, 13층은 층고 낮지만 더 밝은 분위기",
+      "주방장이 직접 나와 음식 피드백을 물어보는 등 응대가 세심하다는 후기",
+      "지하도로 연결돼 여름·겨울에도 이동이 편함",
+      "당일계약 시 추가 할인 혜택(잔여타임이면 정가보다 대폭 저렴)"
+    ],
+    cons:["인기 홀이라 1년 전에도 이미 절반 이상 예약이 차 있는 경우가 많음","보증 250명 기준이라 소규모 예식엔 부담"],
+    links:[
+      {title:"더컨벤션 송파문정 그랜드볼룸홀 본식 당일 웨딩홀 후기", url:"https://cafe.naver.com/directwedding/9172898"},
+      {title:"더컨벤션 송파문정 그랜드볼룸홀 - 신랑 입장에서 본 예식 당일 후기", url:"https://cafe.naver.com/directwedding/9175588"},
+    ],
+  },
+  "루이비스 중구": {
+    depth:"full", addr:"중구 충정로 · 서울역 도보 15분(또는 셔틀 10분 간격), 충정로역 인근",
+    features:["단독홀(18층)","주차 540대","연회장 800명 수용","서울역 셔틀"],
+    pros:[
+      "서울역과 셔틀버스 10분 간격 운행 — 지방 하객 접근성 최상위",
+      "신문사 건물 주말 단독 사용, 주차 540대로 여유로움",
+      "연회장 800명 수용 가능해 대규모 하객도 부담 없음",
+      "18층 단독홀이라 다른 예식과 동선이 안 섞임"
+    ],
+    cons:["주차장 진입로가 좁아 혼잡 시간대엔 진출입이 어렵다는 후기","주차장→1층→엘리베이터 환승이 필요해 동선이 한 번 꺾임"],
+    links:[
+      {title:"루이비스 중구 웨딩홀 계약 후기", url:"https://cafe.naver.com/directwedding/9165918"},
+      {title:"루이비스 중구 투어 후기", url:"https://cafe.naver.com/directwedding/9165650"},
+    ],
+  },
+  "더컨벤션 잠실": {
+    depth:"full", addr:"송파구 잠실동 · 잠실역(2·8호선) 인근(舊 교통회관)",
+    features:["1층 그랜드볼룸 단독홀","잠실역 접근성","넓은 뷔페 공간"],
+    pros:[
+      "잠실역 바로 접근 가능 — 대중교통·자차 모두 선택지 있음",
+      "뷔페 공간이 넓어 하객이 몰려도 여유로움, 음식 맛 평가 좋음",
+      "1층 그랜드볼룸은 단독홀로 운영돼 다른 예식과 안 섞임",
+      "조도를 낮춘 클래식한 분위기, 잔여타임 할인폭이 정가 대비 매우 큼(사례: 1,100만→530만)"
+    ],
+    cons:["식전영상이 정면이 아니라 홀 우측 벽면 스크린에서 재생돼 아쉽다는 후기"],
+    links:[
+      {title:"더컨벤션잠실 (그랜드볼룸홀) 홀투어 후기 (계약O)", url:"https://cafe.naver.com/directwedding/9207323"},
+      {title:"잠실 더컨벤션 웨딩홀 계약 후기", url:"https://cafe.naver.com/directwedding/9232331"},
+    ],
+  },
+  "서울웨딩타워": {
+    depth:"full", addr:"송파구 가락동 · 가락시장역(3·8호선) 인근",
+    features:["단독홀","층고 높음","경부·중부고속도로 분기 인접"],
+    pros:[
+      "경부고속도로·중부고속도로 분기 초입이라 지방 하객 접근성 좋음",
+      "단독홀 구조, 층고가 높아 로비에 들어서면 개방감이 확실함",
+      "화려한 샹들리에, 포토월 서비스 제공"
+    ],
+    cons:["신부대기실이 아쉽다는 후기 반복 — 리모델링 1순위로 지목됨","지하철 반대 방향에서 오면 간판이 잘 안 보여 헤맬 수 있음"],
+    links:[
+      {title:"송파웨딩홀 서울웨딩타워 계약 후기!", url:"https://cafe.naver.com/directwedding/9169191"},
+      {title:"<송파웨딩홀> 서울웨딩타워 상담 후기 (계약O)", url:"https://cafe.naver.com/directwedding/9184621"},
+    ],
+  },
+  "더채플앳청담": {
+    depth:"full", addr:"강남구 청담동",
+    features:["채플형 홀","관리 상태 양호","사진 잘 나옴"],
+    pros:["홀 분위기·관리 상태에 대한 호평이 많고 사진이 예쁘게 나온다는 후기 반복"],
+    cons:["구체적인 단점 언급이 상대적으로 적은 편 — 투어 시 직접 확인 필요"],
+    links:[
+      {title:"[더채플앳논현] 라포레홀 10월 예식 계약 후기", url:"https://cafe.naver.com/directwedding/9183310"},
+      {title:"[홀투어 후기] 더채플 앳 논현 [계약 X]", url:"https://cafe.naver.com/directwedding/9196501"},
+    ],
+  },
+  "아펠가모 잠실": {
+    depth:"full", addr:"송파구 잠실동 · 잠실역 인근",
+    features:["분리예식","온라인 가격 공개","밥펠가모(음식 평 좋음)"],
+    pros:[
+      "지하철역 인접, 양가 중간 지점인 경우가 많아 교통 만족도 높음",
+      "홀·대기실 2층 / 연회장 지하 1층, 엘리베이터 다수라 이동은 무리 없음",
+      "밥펠가모로 불릴 만큼 연회장 음식 평가가 좋음",
+      "날짜·시간대별 가격을 온라인에서 전부 확인 가능해 비교가 쉬움(정찰제)"
+    ],
+    cons:["주차장 진입로가 매우 좁다는 후기 반복 — 지하 2층부터 지하 4층까지 내려간 사례 있음","정찰제라 협상 여지가 거의 없음"],
+    links:[
+      {title:"잠실 아펠가모 웨딩홀 본식후기", url:"https://cafe.naver.com/directwedding/9186552"},
+      {title:"(잠실 아펠가모) 신랑입장에서 본 본식날 웨딩홀 후기", url:"https://cafe.naver.com/directwedding/9186430"},
+    ],
+  },
+  "더컨벤션 반포": {
+    depth:"full", addr:"서초구 반포동 · 신반포역(9호선) 도보 7~8분, 고속터미널 인접",
+    features:["단독홀","고속터미널 인접","어두운홀·클래식"],
+    pros:[
+      "고속터미널 근처라 지방에서 버스 타고 올라오는 하객에게 특히 유리",
+      "단독홀·단독건물이라 다른 예식과 안 겹침",
+      "버진로드 길이가 적당하고 화려하면서도 차분한 분위기"
+    ],
+    cons:["주차가 거의 외부 공영주차장 위주라는 후기 — 두 분 우선순위(주차)와 충돌 가능"],
+    links:[
+      {title:"더컨벤션 반포 상담 후기 (계약 X)", url:"https://cafe.naver.com/directwedding/9167462"},
+      {title:"2027년 더컨벤션 반포 상담예약 후기 (계약x)", url:"https://cafe.naver.com/directwedding/9216621"},
+    ],
+  },
+  "마곡 보타닉파크": {
+    depth:"full", addr:"강서구 마곡동 · 마곡나루역(9호선·공항철도) 인근",
+    features:["오키드홀/카라홀","정찰제","플로리스트 상주"],
+    pros:[
+      "플로리스트가 상주하며 꽃 디렉팅에 진심이라는 평(오키드홀 특히 호평)",
+      "주차장에서 에스컬레이터 한 번이면 로비로 바로 이동",
+      "하객으로 방문했을 때 뷔페가 맛있었다는 후기 다수"
+    ],
+    cons:["로비·홀 층고가 낮은 편 — 고급스러운 느낌보다는 스몰웨딩 느낌이 강하다는 의견","정찰제라 할인 협상이 거의 안 됨"],
+    links:[
+      {title:"마곡 보타닉파크웨딩홀 웨딩투어 후 상담 및 계약 완료", url:"https://cafe.naver.com/directwedding/9216385"},
+      {title:"서울 보타닉파크 카라홀 본식날 웨딩홀 후기", url:"https://cafe.naver.com/directwedding/9220477"},
+    ],
+  },
+  "아만티호텔": {
+    depth:"full", addr:"마포구 홍대 인근",
+    features:["차분한 어두운홀","호텔 예식"],
+    pros:["너무 화려하지 않고 예식 자체에 집중되는 차분한 분위기라는 평","조명이 어두워지면서 신랑신부에게 시선이 집중되는 연출 호평"],
+    cons:["구체적 단점 언급이 적어 투어 시 직접 확인 권장"],
+    links:[
+      {title:"홍대 아만티 호텔 계약 후기", url:"https://cafe.naver.com/directwedding/9207038"},
+      {title:"26년 7월 아만티호텔서울 본식 후기", url:"https://cafe.naver.com/directwedding/9240535"},
+    ],
+  },
+  "제이오스티엘": {
+    depth:"full", addr:"구로구 · 구로역 바로 앞",
+    features:["단독홀","60분 예식","주차 3,000대+"],
+    pros:[
+      "구로역 바로 앞이라 접근성 좋음, 주차 3,000대 이상으로 걱정 없음",
+      "단독홀 + 60분 예식으로 여유있게 진행 가능",
+      "어두운홀 조명·BGM 시연을 상담 때 미리 보여줘서 만족도 높음",
+      "8월 비수기 활용 시 보증 150명까지 가능"
+    ],
+    cons:["규모가 크지 않아 대형 예식엔 부적합"],
+    links:[
+      {title:"구로역 \"제이오스티엘\" 웨딩홀 투어 상담 후기입니다", url:"https://cafe.naver.com/directwedding/9224425"},
+      {title:"구로,신도림 제이오스티엘 가성비웨딩 계약후기", url:"https://cafe.naver.com/directwedding/9250143"},
+    ],
+  },
+  "상록아트홀": {
+    depth:"full", addr:"강남구 대치동",
+    features:["계단식 하객석","어두운홀(그랜드볼룸)/밝은홀(아트홀)"],
+    pros:["하객석이 계단식 구조라 신랑신부가 무대 위 주인공처럼 돋보인다는 호평","버진로드가 길고 조명이 화려함"],
+    cons:["식대 10만원 이상으로 비싼 편","성수기 토요일 점심 타임은 할인이 거의 없음 — 시간대를 바꾸거나 일요일로 옮기면 견적이 크게 좋아진다는 후기"],
+    links:[
+      {title:"<강남웨딩홀> 상록아트홀 상담 후기 (계약X)", url:"https://cafe.naver.com/directwedding/9186521"},
+      {title:"강남 상록아트홀 상담 및 계약 후기입니다", url:"https://cafe.naver.com/directwedding/9177965"},
+    ],
+  },
+  "테라리움": {
+    depth:"full", addr:"노원구 하계동 인근",
+    features:["단독홀","조명 연출(민들레홀씨)"],
+    pros:["생화 향과 조명 연출(민들레홀씨 조명)이 예쁘다는 평, 단독홀 운영"],
+    cons:["공용 주차장이라 하객 아닌 외부 차량도 섞여 주차 대란이 있다는 후기","엘리베이터 혼잡 — 하객 수 많으면(300명대) 부담될 수 있음"],
+    links:[
+      {title:"노원 비엔티 컨벤션, 테라리움 웨딩홀 투어 후기", url:"https://cafe.naver.com/directwedding/9195114"},
+      {title:"테라리움 서울 웨딩홀 투어 후기 (계약 0)", url:"https://cafe.naver.com/directwedding/9181177"},
+    ],
+  },
+  "벨라루체": {
+    depth:"full", addr:"동대문구 회기동 · 회기역(1호선·경의중앙선) 2번 출구 바로 앞",
+    features:["채플+가든웨딩 혼합 분위기","단독 웨딩 전용 건물","돔 천장·아치형 구조"],
+    pros:[
+      "회기역 2번 출구 바로 앞이라 접근성이 뛰어남, KTX 환승 하객도 부담 적음",
+      "높은 돔 천장과 아치형 구조로 개방감 있고, 원목 인테리어+화이트 버진로드 조화",
+      "단독 웨딩 전용 건물이라 예식 동선이 깔끔"
+    ],
+    cons:["외관이 연식이 있어 다소 아쉽다는 평","예도(진행요원)가 하객 입장 타이밍을 못 맞췄다는 후기 1건"],
+    links:[
+      {title:"서울 벨라루체 본식 후기", url:"https://cafe.naver.com/directwedding/9191477"},
+      {title:"[신랑시점] 서울 벨라루체 후기", url:"https://cafe.naver.com/directwedding/9213864"},
+    ],
+  },
+  "라움": {
+    depth:"full", addr:"광진구 건대입구 인근",
+    features:["아마리스홀/벨루스홀","화이트+그리너리 분위기"],
+    pros:["아마리스홀은 화이트+그리너리로 개방감 있고 꽃 추가금이 없다는 평","벨루스홀은 핑크빛 꽃 장식으로 로맨틱한 분위기"],
+    cons:["아마리스홀 중간에 큰 기둥이 있음(스크린 배치로 어느정도 보완)","대관료·식대 협상폭이 크지 않은 편(정가 1,500만/13만 → 견적 1,100만/11만)"],
+    links:[{title:"건대입구 결혼식장 라움 웨딩홀 후기 검색", url:cafeSearchUrl("건대 하우스오브더라움 웨딩홀 후기")}],
+  },
+
+  /* ─ 이번 재조사에서 카페 후기를 추가로 읽고 두께를 보강한 홀들 ─ */
+  "여의도웨딩컨벤션": {
+    depth:"full", addr:"영등포구 여의도동 · 여의도역(5·9호선) 인접, KT건물 내",
+    features:["육각형 베뉴","KT건물 내 단독 사용","주차 550대","완만한 경사 버진로드"],
+    pros:[
+      "KT 건물이라 주말엔 회사가 비어 웨딩홀 단독 건물처럼 사용 가능, 주차 550대로 넉넉함",
+      "버진로드가 완만한 경사로 설계돼 신부 입장 연출이 자연스럽다는 후기",
+      "여의도역과 가까워 지방 하객도 동서울터미널 경유로 접근이 수월하다는 평",
+      "위치·주차·어두운홀·뷔페까지 갖춘 \"하객 특화 육각형 베뉴\"로 소개되는 후기 다수"
+    ],
+    cons:["영등포·신도림 쪽에 비해 서쪽이라 강동·의왕 하객은 이동이 조금 더 걸릴 수 있음"],
+    links:[
+      {title:"서울 여의도 웨딩 컨벤션 계약했어요~", url:"https://cafe.naver.com/directwedding/9167035"},
+      {title:"여의도웨딩컨벤션 상담 다녀왔어요~", url:"https://cafe.naver.com/directwedding/9167207"},
+    ],
+  },
+  "빌라드지디 안양": {
+    depth:"full", addr:"안양시 · 단독 건물",
+    features:["1층 어두운홀 / 3층 밝은홀","동선 완전 분리","신부대기실 호평"],
+    pros:[
+      "단독 건물, 1층 어두운홀·3층 밝은홀로 나뉘어 있어 서로 다른 예식 하객과 동선이 안 섞임",
+      "신부대기실이 매우 넓고 화사하다는 후기 반복, 파우더룸도 프라이빗하게 분리",
+      "당일계약 시 대관료가 1,800만에서 500만원 미만까지 크게 낮아진 실사례 확인",
+      "엘리베이터가 넓고 쾌적하다는 평"
+    ],
+    cons:["서울이 아닌 안양 소재 — 위치상 동선 거리를 미리 확인해야 함"],
+    links:[{title:"빌라드지디 안양 안양웨딩홀 투어 후기 (계약O)", url:"https://cafe.naver.com/directwedding/9218449"}],
+  },
+  "명동 로얄호텔": {
+    depth:"full", addr:"중구 명동 인근",
+    features:["양식 3코스/한식 1코스","보증 120~200명 유연"],
+    pros:[
+      "\"여기서 결혼한 친구의 견적을 듣고 킵해놨다\"는 후기처럼 다른 호텔보다 가격 메리트가 있다는 평",
+      "요즘 웨딩홀들이 보증인원이 너무 많거나 반대로 소규모 홀은 너무 작다는 불만이 많은데, 이곳은 120명~200명대로 유연하게 계약된 사례 확인",
+      "정가 대비 절반 가까이 낮아진 견적 사례(1,100만/9.5만→500만/8.5만, 200명 기준)"
+    ],
+    cons:["구체적인 홀 인테리어·주차 관련 후기는 제한적"],
+    links:[
+      {title:"로얄호텔서울(명동) 계약 후기!!", url:"https://cafe.naver.com/makemywedding/666952"},
+      {title:"명동 로얄호텔 서울 웨딩홀계약 후기 !!!", url:"https://cafe.naver.com/makemywedding/654850"},
+    ],
+  },
+  "H스퀘어": {
+    depth:"full", addr:"성동구 마조로 22-2 · 한양대학교 캠퍼스(동문회관) 내",
+    features:["한양대 동문 혜택","캠퍼스 내 주차","1층 은행"],
+    pros:[
+      "한양대 캠퍼스 내부라 주차가 충분히 수용 가능, 신랑·신부 직계가족용 웨딩 지정 주차공간 별도 존재",
+      "서울 중심부라 입지·교통이 괜찮은 편",
+      "1층에 은행이 있어 하객 현금 인출(축의금 등)이 편리",
+      "한양대 동문이면 동문 혜택으로 계약 가능"
+    ],
+    cons:["엘리베이터가 2개뿐 — 하객이 몰리는 시간대엔 대기가 있을 수 있음(계단 이용도 가능)"],
+    links:[{title:"성동구 왕십리 H 스퀘어 웨딩홀 계약 후기", url:"https://cafe.naver.com/directwedding/6240949"}],
+  },
+  "합정 웨딩시그니처": {
+    depth:"full", addr:"마포구 합정동 · 합정역 2번 출구 도보 5분",
+    features:["단독홀 건물","2층 트리니티홀(200명)/4층 아너스홀(180명)","방문증 자유관람"],
+    pros:[
+      "상가 건물이 아닌 단독홀 건물이라 \"결혼하는 분위기가 확실히 난다\"는 평이 반복됨",
+      "방문증을 목에 걸고 자유롭게 둘러볼 수 있게 해주는 응대 방식 — 직원들이 다들 친절하다는 후기",
+      "신부 입장 시 샹들리에가 발걸음에 맞춰 하나씩 켜지는 연출 호평",
+      "합정역 2번 출구 도보 5분으로 교통 편리"
+    ],
+    cons:["2층(200명)과 4층(180명) 체감 크기 차이가 크지 않다는 의견도 있어 보증인원에 맞는 홀 선택 시 직접 비교 필요"],
+    links:[
+      {title:"웨딩시그니처(합정) 웨딩홀 상담+ 계약 후기 (계약O)", url:"https://cafe.naver.com/directwedding/9221332"},
+      {title:"합정 웨딩시그니처 웨딩홀 후기[견적 공유]", url:"https://cafe.naver.com/poohstory/340595"},
+    ],
+  },
+  "더뉴컨벤션": {
+    depth:"full", addr:"강서구 · 5호선 발산역 인접, 단독 건물",
+    features:["층당 1홀 전용 연회장","제니스홀(밝은)/더뉴홀(어두운)","숲속웨딩 분위기"],
+    pros:[
+      "발산역 인접, 건물 전체가 더뉴컨벤션 소유의 단독 건물",
+      "모든 홀이 한 층에 하나씩, 연회장도 홀마다 전용으로 배정돼 다른 팀 손님과 전혀 안 섞임",
+      "\"숲속웨딩 분위기\"로 소개되는 후기 — 그리너리 콘셉트 선호자에게 맞음",
+      "더뉴홀(2층, 어두운홀)은 층고 높고 샹들리에 화려, 신부 입장 시 엘리베이터를 타고 내려오는 독특한 퍼포먼스 연출 가능",
+      "당일계약 시 할인폭이 커서 대관료가 절반 이하로 내려간 실사례(1,500만→680만, 필수사항 300만→70만)"
+    ],
+    cons:["엘리베이터 입장 퍼포먼스는 부담스럽다는 반응도 있어 취향에 따라 갈림","필수사항(웨딩리셉션·전문사회자·부케 등) 70만원이 별도로 붙는 구조"],
+    links:[{title:"서울 강서구 더뉴컨벤션 웨딩홀 상담 후기", url:"https://cafe.naver.com/directwedding/6269198"}],
+  },
+  "남산예술원": {
+    depth:"full", addr:"중구 남산 인근 · 야외 예식장(용산 인접)",
+    features:["야외 웨딩","캐노피로 우천 대비","정찰제","본식스냅 필수 포함","주차 150대"],
+    pros:[
+      "숲속·정원 느낌의 야외 결혼식, 상담이 꼼꼼하고 친절하다는 후기 다수",
+      "야외 공간이지만 캐노피 설치로 악천후에도 대비 가능하다는 점이 선택 이유로 자주 언급됨",
+      "하객석 의자가 투명 재질로 시야 방해가 적음",
+      "주차 150대 가능"
+    ],
+    cons:["정찰제라 할인이 거의 없음","본식스냅(140만원)이 필수 포함이라 스냅업체를 따로 고를 수 없음","예약 전화가 매우 어렵다는 후기(연결 자체가 힘듦)"],
+    links:[{title:"서울야외웨딩홀 남산예술원 투어 후기", url:"https://cafe.naver.com/llchyll/2475959"}],
+  },
+  "노원 비엔티(BNT)": {
+    depth:"full", addr:"노원구 섬밭로 258 · 건영백화점 6층, 하계역 6번출구 도보 3~5분",
+    features:["밥엔티(음식 평 좋음)","답례품 교환 제도","주차 600대"],
+    pros:[
+      "식사 평이 좋아 \"밥엔티\"로 불림",
+      "보증인원의 20%까지 답례품 교환 가능한 제도 운영",
+      "하계역 6번출구에서 도보 3~5분, 주차 600대까지 가능",
+      "건영백화점 외관이 오래돼 \"최고의 단점\"으로 불리지만, 반대로 멀리서도 눈에 잘 띄어 하객이 헤매지 않는다는 긍정적 해석도 있음"
+    ],
+    cons:["층고가 낮아 홀이 작아 보인다는 견적 후기","연회장이 같은 층이라 로비가 혼잡할 수 있음","외부 포토부스 반입 불가(자체 포토부스만 이용)","엘리베이터 4대(양옆 2대씩) — 주말 혼잡도는 미확인"],
+    links:[
+      {title:"노원 하계역 비엔티(BNT) 컨벤션 웨딩홀 투어 후기", url:"https://cafe.naver.com/directwedding/6229073"},
+      {title:"(7월6일) 노원 BNT컨벤션 당일계약 후기", url:"https://cafe.naver.com/directwedding/6681299"},
+    ],
+  },
+  "신도림 웨딩시티": {
+    depth:"full", addr:"구로구 새말로 97 · 신도림테크노마트 8층(웨스턴베니비스와 동일 건물), 신도림역 인접",
+    features:["3개 홀(8층 스타티스홀/아모르홀, 11층 그랜드볼룸)","역사 내 직결","S자 버진로드"],
+    pros:[
+      "신도림역과 역사 내로 바로 연결돼 눈·비·추위 걱정이 없다는 후기",
+      "스타티스홀은 S자 버진로드 + 조명이 은하수처럼 이어지는 연출로 호평",
+      "층고는 높지 않지만 샹들리에가 화려해 답답하지 않다는 평",
+      "로비가 넓고 대기 의자가 많아 어르신·아이 동반 하객에게도 편함",
+      "대형스크린 식전영상 + 예식 라이브캠 로비 송출"
+    ],
+    cons:["주차장은 지하 7층~지하 3층까지 이용 — 층수가 깊어 이동 거리가 길 수 있음","보증인원을 낮추고 싶은 경우 그랜드볼룸홀(11층, 대형)은 애초에 제외하고 8층 홀 위주로 봐야 함"],
+    links:[
+      {title:"신도림 웨딩시티 홀투어 후기(계약X)", url:"https://cafe.naver.com/directwedding/9215907"},
+      {title:"신도림 웨딩시티 스타티스홀 26년 하반기 견적 방문상담 후기(계약O)", url:"https://cafe.naver.com/directwedding/9226207"},
+    ],
+  },
+  "엘타워": {
+    depth:"full", addr:"서초구 강남대로 213 · 양재역 출구 바로 앞",
+    features:["호텔급 인테리어","꽃장식 풍부","6층/7층 견적 차이"],
+    pros:[
+      "양재역 출구로 나오면 바로 건물이 있어 위치 강점이 크다는 후기",
+      "일반 컨벤션보다 비싸지만 \"호텔보다 더 맘에 든 예식장\"이라는 평가",
+      "꽃장식이 풍부하고 고급스럽다는 후기 다수, 음식도 맛있다는 평",
+      "일요일 15시 등 비선호 시간대는 정가보다 절반 가까이 낮아진 견적 사례(660만/13만→330만/8만)"
+    ],
+    cons:["같은 건물 안에서도 6층과 7층 견적이 다르므로 층별로 비교 필요","일요일 오후 등 비선호 시간대는 하객 참석률을 걱정하는 후기도 있음"],
+    links:[
+      {title:"양재 엘타워 웨딩홀 상담 및 계약 후기입니당", url:"https://cafe.naver.com/directwedding/9243840"},
+      {title:"양재역 엘타워 견적 후기", url:"https://cafe.naver.com/makemywedding/662757"},
+    ],
+  },
+  "규수당": {
+    depth:"full", addr:"영등포구 문래동 · 문래역 도보 3분(셔틀 있음)",
+    features:["그리너리+핑크톤 장식","다양한 입장 연출","주차 1,400대","현장계약 혜택 큼"],
+    pros:[
+      "그리너리 느낌에 핑크톤 꽃 장식이 조화로워 \"가성비인데 생각보다 훨씬 괜찮다\"는 후기 반복",
+      "신부대기실이 넓고 화사하며, 계단 입장·문 입장·리프트+계단 입장까지 연출 옵션이 다양함",
+      "문래역~영등포역 사이 위치, 셔틀버스 운행, 주차 1,400대로 매우 넉넉",
+      "현장(당일)계약 혜택이 커서 첫 투어에서 계약하는 사례가 많음(정가 680만/7만→당일계약 300만대/5만대)"
+    ],
+    cons:["인기가 많아 상담 예약 자체가 쉽지 않다는 후기(\"상담 예약도 쉽지 않더라구요\")","현장계약 혜택이 크다 보니 상담 자리에서 결정을 서두르게 되는 압박감을 느꼈다는 후기도 있음"],
+    links:[
+      {title:"영등포 문래 규수당 단독홀 투어 후기 (계약X)", url:"https://cafe.naver.com/directwedding/9104091"},
+    ],
+  },
+  "여의도 FKI플라자": {
+    depth:"full", addr:"영등포구 여의도동",
+    features:["동시예식(대형)","플라워 업그레이드 옵션","영상중계"],
+    pros:[
+      "실제 견적 사례: 정가 대관 500만/식대 85,000원 → 할인가 대관 250만(-50%)/식대 76,500원(-10%)",
+      "주차·식사·위치 모두 하객 프렌들리하다는 후기, 식장 10곳 투어 후 최종 선택했다는 신뢰도 있는 후기",
+      "부모님 추천으로 방문했는데 견적 대비 만족도가 높았다는 사례"
+    ],
+    cons:["예약 경쟁이 치열해 원하는 날짜 잡기가 힘들다는 후기","동시예식 구조라 식사 인원 계산이 복잡하다는 의견","컨벤션 특유의 느낌이 있어 호텔·하우스웨딩 느낌을 원하면 아쉬울 수 있음"],
+    links:[{title:"여의도 웨딩홀 'FKI플라자' 계약 후기(계약O)", url:"https://cafe.naver.com/makemywedding/643966"}],
+  },
+  "빌라드지디 논현": {
+    depth:"full", addr:"강남구 논현동",
+    features:["정원풍 인테리어","하우스웨딩"],
+    pros:["실제 견적 사례: 대관 300만/식대 8만(27년 5월 오후) — 다른 강남권 홀보다 대관료가 비교적 낮은 편","블로그·카페 여러 곳에서 하우스웨딩 비용·홀구성·주차 정보를 다루는 후기가 존재"],
+    cons:["구체적인 장단점 원문 후기는 확보하지 못함 — 직접 투어로 확인 권장"],
+    links:[{title:"강남 빌라드지디 논현 웨딩홀 후기 | 하우스웨딩 비용·홀구성·주차 총정리", url:"https://cafe.naver.com/cafemakecafebest/41769"}],
+  },
+  "구로 명품웨딩프로포즈": {
+    depth:"full", addr:"구로구 · 구로역 인근",
+    features:["가성비 라인","단독홀"],
+    pros:["당일계약 시 정가 대비 할인폭이 커서(500만원대→100만원대) 실제 계약가가 매우 낮아짐","여러 카페에 홀투어 후기가 반복적으로 올라올 만큼 구로권 가성비 후보로 꾸준히 언급됨"],
+    cons:["예식장이 다소 올드한 느낌, 층고 낮음, 건물 주변이 혼잡하다는 후기"],
+    links:[{title:"구로 명품웨딩프로포즈 웨딩홀 계약후기(견적O)", url:"https://cafe.naver.com/llchyll/2457818"}],
+  },
+  "위례 밀리토피아호텔": {
+    depth:"full", addr:"위례신도시 · 국군복지단 운영 호텔",
+    features:["군 할인 대상","층 단독 사용","2층/3층 뷔페 vs 그랜드볼룸 착석식"],
+    pros:[
+      "군 할인 대상이면 대관료·식대가 절반 가까이 낮아진 실사례 확인(550만→250만, 7.7만→5.0만)",
+      "층 자체를 단독으로 사용해 동선이 복잡하지 않다는 후기",
+      "아이리스홀은 핑크톤의 \"공주님이 된 것 같은\" 분위기로 호평, 신부대기실에 핑거푸드·냉장고 물 구비",
+      "2층·3층은 뷔페 좌석식, 그랜드볼룸은 자리에서 서빙받는 방식으로 스타일 선택 가능"
+    ],
+    cons:["일반(비군인) 할인 폭은 확인되지 않음 — 자격 여부 먼저 확인 필요"],
+    links:[{title:"오랜 노하우와 따뜻함으로 위례 밀리토피아 웨딩홀투어 part2 계약후기", url:"https://cafe.naver.com/directwedding/9158151"}],
+  },
+  "더리버사이드호텔": {
+    depth:"full", addr:"서초구 잠원동 6-1(강남대로107길 6)",
+    features:["2027년 6월까지만 영업(재개발 확정)","한강뷰"],
+    pros:["한강변 위치, 콘서트홀 240석/노벨라홀·몽블랑홀 운영, 예식시간 1시간 30분 간격(11:00~18:30)"],
+    cons:["2027년 6월 영업 종료 후 재개발 착공, 2031년 가을 특급호텔로 재개장 예정 — 이 날짜 이후엔 예식 불가","공식 판매기준 최소 보증 100명, 식대 90,000~130,000원으로 일반 견적은 비싼 편"],
+    links:[
+      {title:"[공지] 더 리버사이드 호텔, 재개발 계획 안내", url:"https://www.riversidehotel.co.kr/bbs/board.php?bo_table=notice&wr_id=114"},
+      {title:"웨딩홀 더리버사이드호텔(아이웨딩)", url:"https://www.iwedding.co.kr/enterprise/info/1041902003"},
+    ],
+  },
+  "루클라비 더 화이트": {
+    depth:"full", addr:"강남구 논현로 742",
+    features:["실제 견적서 확보","당일계약 시 250만원 상당 서비스 무료"],
+    pros:["지인이 직접 받은 견적서 원본 보유 — 웨딩홀 탭 상단의 \"지인 실견적\" 표에서 3개 날짜 비교 가능","당일계약 시 본식스냅·DVD·플라워샤워·포토테이블 무료 제공(250만원 상당)"],
+    cons:["강남 논현동이라 군자·휘경·의왕 동선과는 거리가 있음"],
+    links:[{title:"루클라비 더 화이트 (LUKLAVI THE WHITE) 인스타그램", url:"https://www.instagram.com/lu_klavi_thewhite/"}],
+  },
+  "서울동부지법 동백홀": {
+    depth:"full", addr:"광진구 구의동 · 서울동부지방법원 내",
+    features:["관공서 예식장","보증 250~400명","공무원 담당자 응대"],
+    pros:[
+      "대관료·식대가 조사한 서울 홀 중 최저 수준",
+      "서울동부지방법원 담당 공무원이 상주하며 상담·설명을 진행, 친절하다는 후기",
+      "카페에 여러 건의 실제 계약 후기가 있을 만큼 인지도가 있는 가성비 법원 예식장"
+    ],
+    cons:["보증인원 최소 250명부터 시작 — 소규모 예식엔 불리","평소 강당으로 사용하는 공간을 예식장으로 쓰는 구조라 일반 웨딩홀과는 분위기가 다름","관공서 시설이라 꽃장식·연출에 제약이 있을 수 있음(직접 확인 필요)"],
+    links:[
+      {title:"법원예식장 계약했어요! 서울동부지방법원 동백홀 계약 후기", url:"https://cafe.naver.com/hyunheewedding/63132"},
+      {title:"26.04.12 동부지방법원 동백홀에서 결혼했어요 후기", url:cafeSearchUrl("동부지방법원 동백홀 결혼 후기")},
+    ],
+  },
+};
+
+HALL_DETAIL["로얄호텔서울"] = {
+  depth:"full", addr:"중구 명동 인근",
+  features:["양식 3코스/한식 1코스","보증 120~200명 유연"],
+  pros:[
+    "다른 호텔보다 가격 메리트가 있다는 후기(친구 견적을 듣고 킵해뒀다는 사례)",
+    "보증인원이 120명~200명대로 유연하게 계약된 사례 확인",
+    "정가 대비 절반 가까이 낮아진 견적 사례(1,100만/9.5만→500만/8.5만, 200명 기준)"
+  ],
+  cons:["구체적인 홀 인테리어·주차 관련 후기는 제한적"],
+  links:[
+    {title:"로얄호텔서울(명동) 계약 후기!!", url:"https://cafe.naver.com/makemywedding/666952"},
+  ],
+};
+
+
+// ---- 2차 보강: 카페 외 소스(웨딩북·아이웨딩·스마트웨딩·다이렉트웨딩 등) 기반 39개 홀 추가 ----
+HALL_DETAIL["더컨벤션 영등포"] = {
+  "depth": "full",
+  "addr": "서울 영등포구 국회대로38길 2",
+  "features": [
+    "신규 오픈, 단독 건물",
+    "분리예식 80분 간격",
+    "영등포구청역 4번출구 도보 3분"
+  ],
+  "pros": [
+    "모던하고 스타일리시한 인테리어로 젊은 층 선호",
+    "시그니처 메뉴(양갈비, 수제푸딩, 멘보샤) 뷔페 품질 좋다는 평"
+  ],
+  "cons": [
+    "대관료 1,100만원선으로 영등포권 중에서는 비싼 편",
+    "정가 기준, 실제 할인가는 상담 필요"
+  ],
+  "links": [
+    {
+      "title": "스마트웨딩 가격정보",
+      "url": "https://smartwedding-besthall.com/theconvention_Yeongdeungpo"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("더컨벤션 영등포")
+    }
+  ]
+};
+
+HALL_DETAIL["더베네치아 잠실"] = {
+  "depth": "full",
+  "addr": "서울 송파구 올림픽로35다길 42 (루터회관)",
+  "features": [
+    "단독홀",
+    "신부대기실→홀 직결 동선",
+    "2,8호선 잠실역 도보 1분"
+  ],
+  "pros": [
+    "잠실역 초역세권으로 하객 이동 매우 편리",
+    "단독홀이라 동시예식 걱정 없음"
+  ],
+  "cons": [
+    "교회/회관 건물 특성상 화려한 연출은 제한적일 수 있음"
+  ],
+  "links": [
+    {
+      "title": "웨딩북",
+      "url": "https://www.weddingbook.com"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("더베네치아 잠실")
+    }
+  ]
+};
+
+HALL_DETAIL["아르베 강남"] = {
+  "depth": "full",
+  "addr": "서울 강남구 봉은사로 302 (SK리더스뷰 1F)",
+  "features": [
+    "2024년 9월 그랜드오픈 신상 웨딩홀",
+    "숲속 분위기 로맨틱 인테리어",
+    "2시간 예식간격"
+  ],
+  "pros": [
+    "신상홀이라 시설 깨끗함",
+    "여유로운 2시간 예식 간격"
+  ],
+  "cons": [
+    "강남권 시세로 대관료 980만원대, 저렴한 편은 아님"
+  ],
+  "links": [
+    {
+      "title": "웨딩북",
+      "url": "https://www.weddingbook.com"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("아르베 강남")
+    }
+  ]
+};
+
+HALL_DETAIL["더베뉴지 강서"] = {
+  "depth": "full",
+  "addr": "서울 강서구 강서로 388 (그랜드마트)",
+  "features": [
+    "4개 홀 구성(마리아칼라스·베뉴지홀·아트홀·네이처홀)",
+    "발산역 3번출구 도보 1분",
+    "주차 1,200대"
+  ],
+  "pros": [
+    "강서 최대 규모급, 주차 걱정 없음",
+    "홀별 가격 차등(600만~1,000만원)이라 예산에 맞춰 선택 가능"
+  ],
+  "cons": [
+    "홀마다 급이 달라 어떤 홀인지에 따라 만족도 차이 큼"
+  ],
+  "links": [
+    {
+      "title": "다이렉트 결혼준비",
+      "url": "https://www.directwedding.co.kr"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("더베뉴지 강서")
+    }
+  ]
+};
+
+HALL_DETAIL["웨스턴베니비스 영등포"] = {
+  "depth": "full",
+  "addr": "서울 영등포구 국회대로 558",
+  "features": [
+    "2021년 8월 그랜드오픈, 웨딩전용 단독건물",
+    "단독홀, 동시예식 없음",
+    "영등포구청역 도보 2~3분"
+  ],
+  "pros": [
+    "단독 건물이라 프라이빗한 예식 가능"
+  ],
+  "cons": [
+    "대관료 1,430만원, 식대 132,000원으로 영등포권 중 고가"
+  ],
+  "links": [
+    {
+      "title": "웨딩북",
+      "url": "https://www.weddingbook.com"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("웨스턴베니비스 영등포")
+    }
+  ]
+};
+
+HALL_DETAIL["웨스턴베니비스 신도림"] = {
+  "depth": "full",
+  "addr": "서울 구로구 새말로 97 신도림테크노마트 7F",
+  "features": [
+    "3개 홀(그레이스·다이너스티·아스타)",
+    "신도림역 2번출구 도보 1분, 테크노마트 직결"
+  ],
+  "pros": [
+    "뷔페 맛으로 유명, 접근성 최상",
+    "같은 브랜드 영등포점보다 절반 가격대"
+  ],
+  "cons": [
+    "테크노마트 상권 특성상 주말 혼잡"
+  ],
+  "links": [
+    {
+      "title": "웨딩북",
+      "url": "https://www.weddingbook.com"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("웨스턴베니비스 신도림")
+    }
+  ]
+};
+
+HALL_DETAIL["더베르지 영등포"] = {
+  "depth": "full",
+  "addr": "서울 영등포구 국회대로 612 (코레일유통사옥)",
+  "features": [
+    "2025년 9월 신규오픈, 온실화원 컨셉",
+    "자연채광+생화 플랜팅",
+    "영등포구청역 도보 10분, 셔틀버스 2대"
+  ],
+  "pros": [
+    "온실 컨셉이 독특, 자연광 좋다는 평"
+  ],
+  "cons": [
+    "대관료(600만) 자체는 저렴하지만 꽃장식 연출료 1,200만원이 필수로 붙어 실질 부담은 1,800만원선",
+    "셔틀버스 필요할 만큼 도보 접근성은 애매"
+  ],
+  "links": [
+    {
+      "title": "요즘웨딩",
+      "url": "https://yozmwedding.co.kr"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("더베르지 영등포")
+    }
+  ]
+};
+
+HALL_DETAIL["세인트메리엘 강남역"] = {
+  "depth": "full",
+  "addr": "서울 강남구 논현로79길 72 (올림피아센터빌딩)",
+  "features": [
+    "2개 홀(메리엘홀-밝은톤, 세인트홀-어두운톤)",
+    "강남역 도보 5~7분, 셔틀버스 운행",
+    "신부대기실·연회장 분리 동선"
+  ],
+  "pros": [
+    "밝은홀/어두운홀 선택 가능"
+  ],
+  "cons": [
+    "강남역 도보 5~7분+셔틀 필요, 완전 역세권은 아님"
+  ],
+  "links": [
+    {
+      "title": "스마트웨딩",
+      "url": "https://smartwedding-besthall.com"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("세인트메리엘 강남역")
+    }
+  ]
+};
+
+HALL_DETAIL["월드컵컨벤션 상암"] = {
+  "depth": "full",
+  "addr": "서울 마포구 월드컵로 240",
+  "features": [
+    "월드컵경기장 인근 신상 웨딩홀",
+    "모던 베이지톤+크리스탈 샹들리에",
+    "월드컵경기장역 1번출구 도보 1분"
+  ],
+  "pros": [
+    "역세권, 신상이라 시설 깨끗"
+  ],
+  "cons": [
+    "상암 지역 특성상 하객 접근성은 위치에 따라 갈림"
+  ],
+  "links": [
+    {
+      "title": "스마트웨딩",
+      "url": "https://smartwedding-besthall.com"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("월드컵컨벤션 상암")
+    }
+  ]
+};
+
+HALL_DETAIL["PJ호텔 을지로"] = {
+  "depth": "full",
+  "addr": "서울 중구 마른내로 71",
+  "features": [
+    "2개 홀(뮤즈-하우스웨딩 스타일, 헤스티아-컨벤션 스타일)",
+    "을지로3·4가/충무로역 환승 가능",
+    "혼주 시설(폐백실·라운지·물품보관함) 쾌적"
+  ],
+  "pros": [
+    "3개 지하철 노선 환승역, 혼주 편의시설 우수"
+  ],
+  "cons": [
+    "구도심 호텔 특유의 올드함이 있을 수 있음"
+  ],
+  "links": [
+    {
+      "title": "다이렉트 결혼준비",
+      "url": "https://www.directwedding.co.kr"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("PJ호텔 을지로")
+    }
+  ]
+};
+
+HALL_DETAIL["케이터틀 신촌"] = {
+  "depth": "full",
+  "addr": "서울 마포구 신촌(라페네홀/컨벤션홀)",
+  "features": [
+    "2호선 신촌역 도보 6분"
+  ],
+  "pros": [
+    "신촌 상권, 젊은 하객층 접근성 좋음"
+  ],
+  "cons": [
+    "역까지 도보 6분, 완전 역세권은 아님"
+  ],
+  "links": [
+    {
+      "title": "웨딩북",
+      "url": "https://www.weddingbook.com"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("케이터틀 신촌")
+    }
+  ]
+};
+
+HALL_DETAIL["라루체 명동"] = {
+  "depth": "full",
+  "addr": "서울 중구 퇴계로18길 46",
+  "features": [
+    "3개 홀(그레이스·아이리스·루아르), 하우스웨딩 스타일",
+    "퇴장 시 천장 개방 연출(그레이스·아이리스홀)",
+    "4호선 명동역 도보 2분, 주차 500대(2시간 무료)"
+  ],
+  "pros": [
+    "천장 개방 연출이 독특, '밥루체'로 불릴 만큼 뷔페 평가 좋음",
+    "명동역 초역세권"
+  ],
+  "cons": [
+    "내부가 다소 올드하다는 후기 있음(2024년 후기 기준)",
+    "홀사용료 1,500만원(3개홀 동일) + 식대 107,000원으로 저렴한 편은 아님"
+  ],
+  "links": [
+    {
+      "title": "다이렉트 결혼준비",
+      "url": "https://www.directwedding.co.kr/weddinghall/hall0210"
+    },
+    {
+      "title": "베리굿웨딩 상세정보",
+      "url": "http://verygoodwedding.co.kr/mobile/hall/hall_detail.asp?wIdx=479"
+    }
+  ]
+};
+
+HALL_DETAIL["더링크호텔서울 구로"] = {
+  "depth": "full",
+  "addr": "서울 구로구 경인로 610 (코리아빌딩)",
+  "features": [
+    "국내 최초 메리어트 프리미엄 브랜드 웨딩홀",
+    "5개 층 각기 다른 컨셉의 5개 단독홀",
+    "2시간 간격 여유로운 예식",
+    "구로역 도보 10분, 자체 주차 800대+"
+  ],
+  "pros": [
+    "호텔급 시설과 서비스, 여유로운 예식 간격",
+    "실제 계약 후기에서 분위기·응대 모두 만족도 높음"
+  ],
+  "cons": [
+    "대관료 2,800만원·식대 17만원으로 이 목록에서 가장 비싼 축, 호텔 프리미엄 가격",
+    "최소 보증 300명부터"
+  ],
+  "links": [
+    {
+      "title": "웨딩노트",
+      "url": "https://www.weddingnote.co.kr/halls/seoul/deoringkeu-hotel-seoul"
+    },
+    {
+      "title": "다이렉트 결혼준비",
+      "url": "https://www.directwedding.co.kr/weddinghall/hall0126"
+    }
+  ]
+};
+
+HALL_DETAIL["루벨 강동"] = {
+  "depth": "full",
+  "addr": "서울 강동구 천호대로 1077 이스트센트럴타워 35~36층",
+  "features": [
+    "5호선 강동역 1번출구 연결, 35층 고층",
+    "밝은 단독홀, 모던 인테리어+핑크 플라워",
+    "최소 보증 150명, 최대 500명"
+  ],
+  "pros": [
+    "최소 보증 150명으로 소규모 하객도 가능(다른 홀 대비 낮음)",
+    "롯데타워·한강 파노라마뷰",
+    "실제 계약 후기: 비수기 저녁 150명으로 부담 없이 계약"
+  ],
+  "cons": [
+    "대관료·식대는 홈페이지에서 실시간 조회 가능하나 표시가는 정가, 실제 할인가는 방문상담 필요"
+  ],
+  "links": [
+    {
+      "title": "다이렉트 결혼준비",
+      "url": "https://www.directwedding.co.kr/weddinghall/hall0190"
+    },
+    {
+      "title": "스마트웨딩",
+      "url": "https://smartwedding-besthall.com/Luvel"
+    }
+  ]
+};
+
+HALL_DETAIL["지타워 구로"] = {
+  "depth": "full",
+  "addr": "서울 구로구 디지털로26길 38, 지타워몰 2F",
+  "features": [
+    "2021년 오픈, 호텔식 컨벤션형",
+    "7m 천고, 30m 버진로드, 20m 미디어월",
+    "주차 1,400대, 뷔페 170여가지"
+  ],
+  "pros": [
+    "정가 1,200만원이지만 2025년 11월 일요일 기준 650만원 할인가 확인",
+    "대형 컨벤션급 시설, 주차 매우 넉넉"
+  ],
+  "cons": [
+    "할인가는 날짜·요일에 따라 크게 달라짐, 확정 전 재확인 필요"
+  ],
+  "links": [
+    {
+      "title": "초이스홀스",
+      "url": "https://www.google.com/search?q=지타워+웨딩홀+초이스홀스"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("지타워 구로")
+    }
+  ]
+};
+
+HALL_DETAIL["그레이스파티 관악"] = {
+  "depth": "full",
+  "addr": "서울 관악구 남부순환로 1440",
+  "features": [
+    "9m 천고, 25m 버진로드",
+    "프라이빗 단독홀",
+    "2호선 신림역 도보 15분"
+  ],
+  "pros": [
+    "단독홀 프라이버시"
+  ],
+  "cons": [
+    "신림역에서 도보 15분으로 역세권이라 보긴 어려움"
+  ],
+  "links": [
+    {
+      "title": "웨딩북",
+      "url": "https://www.weddingbook.com"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("그레이스파티 관악")
+    }
+  ]
+};
+
+HALL_DETAIL["포레스트원 성북"] = {
+  "depth": "full",
+  "addr": "서울 성북구 동소문로 47",
+  "features": [
+    "2024년 8월 리뉴얼 오픈",
+    "단독홀 800석, 그리너리 컨셉 가든웨딩",
+    "한성대입구역 7번출구 도보 5분"
+  ],
+  "pros": [
+    "식대 58,000원으로 이 목록 중 가장 저렴한 축",
+    "그리너리 컨셉으로 채광 좋다는 평"
+  ],
+  "cons": [
+    "동북권이라 서남권 하객에게는 다소 멀 수 있음"
+  ],
+  "links": [
+    {
+      "title": "웨딩북",
+      "url": "https://www.weddingbook.com"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("포레스트원 성북")
+    }
+  ]
+};
+
+HALL_DETAIL["디노체 왕십리"] = {
+  "depth": "full",
+  "addr": "서울 성동구 왕십리",
+  "features": [
+    "10m 천고, 어두운 톤",
+    "2개 분리 연회장",
+    "왕십리역 도보 1분, 2025년 뷔페 리뉴얼"
+  ],
+  "pros": [
+    "왕십리역 초역세권(도보 1분)",
+    "2025년 뷔페 리뉴얼로 최신 상태"
+  ],
+  "cons": [
+    "어두운 톤 선호 여부에 따라 호불호"
+  ],
+  "links": [
+    {
+      "title": "웨딩북",
+      "url": "https://www.weddingbook.com"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("디노체 왕십리")
+    }
+  ]
+};
+
+HALL_DETAIL["웨딩여율리 여의도"] = {
+  "depth": "full",
+  "addr": "서울 영등포구 여의도",
+  "features": [
+    "단독홀, 어두운 톤, 20m 버진로드",
+    "'밥율리'로 불릴 만큼 뷔페 유명",
+    "5,9호선 여의도역 도보 3분"
+  ],
+  "pros": [
+    "뷔페 맛 평판 좋음, 역세권"
+  ],
+  "cons": [
+    "어두운 톤 전용, 밝은 홀 선호시 비추천"
+  ],
+  "links": [
+    {
+      "title": "웨딩북",
+      "url": "https://www.weddingbook.com"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("웨딩여율리 여의도")
+    }
+  ]
+};
+
+HALL_DETAIL["엘로라인가든 송파"] = {
+  "depth": "full",
+  "addr": "서울 송파구 장지",
+  "features": [
+    "1층 단독홀, 유러피안 보타닉 정원 감성",
+    "8호선 장지역 도보 4분",
+    "주차 1,200대"
+  ],
+  "pros": [
+    "정원 감성 인테리어, 주차 매우 넉넉",
+    "식대 79,000원으로 합리적"
+  ],
+  "cons": [
+    "장지동 위치상 강남/도심 하객에게는 다소 외곽"
+  ],
+  "links": [
+    {
+      "title": "웨딩북",
+      "url": "https://www.weddingbook.com"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("엘로라인가든 송파")
+    }
+  ]
+};
+
+HALL_DETAIL["라비니움 천호"] = {
+  "depth": "full",
+  "addr": "서울 강동구 천호",
+  "features": [
+    "2024년 10월 오픈 신상홀",
+    "리츄얼홀+블룸홀, 층별 단독홀",
+    "5,8호선 천호역 도보 1분"
+  ],
+  "pros": [
+    "천호역 초역세권(도보 1분)",
+    "신상홀이라 시설 최신"
+  ],
+  "cons": [
+    "오픈 초기라 실제 이용 후기가 아직 적음"
+  ],
+  "links": [
+    {
+      "title": "요즘웨딩",
+      "url": "https://yozmwedding.co.kr"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("라비니움 천호")
+    }
+  ]
+};
+
+HALL_DETAIL["스타시티아트홀 건대"] = {
+  "depth": "full",
+  "addr": "서울 광진구 건대",
+  "features": [
+    "12m 천고, 23m 버진로드",
+    "앤틱 분위기",
+    "건대입구역 3번출구 도보 2분"
+  ],
+  "pros": [
+    "앤틱 인테리어 특유의 분위기, 높은 천고"
+  ],
+  "cons": [
+    "오래된 홀 특유의 올드함 있을 수 있음"
+  ],
+  "links": [
+    {
+      "title": "스마트웨딩",
+      "url": "https://smartwedding-besthall.com"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("스타시티아트홀 건대")
+    }
+  ]
+};
+
+HALL_DETAIL["까사그랑데 건대"] = {
+  "depth": "full",
+  "addr": "서울 광진구 건대",
+  "features": [
+    "2023년 10월 오픈 신상홀",
+    "높은 층고, 트렌디한 인테리어",
+    "건대입구역 5번출구 도보 1분"
+  ],
+  "pros": [
+    "건대입구역 도보 1분 초역세권",
+    "트렌디한 신상 인테리어"
+  ],
+  "cons": [
+    "대관료 1,430만원대로 저렴한 편은 아님"
+  ],
+  "links": [
+    {
+      "title": "웨딩북",
+      "url": "https://www.weddingbook.com"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("까사그랑데 건대")
+    }
+  ]
+};
+
+HALL_DETAIL["레노스블랑쉬 왕십리"] = {
+  "depth": "full",
+  "addr": "서울 성동구 왕십리",
+  "features": [
+    "최소 보증 200명, 최대 1,120명 대형홀",
+    "2호선 왕십리역 도보 3분"
+  ],
+  "pros": [
+    "대형 하객 수용 가능(최대 1,120명)",
+    "왕십리역 도보 3분"
+  ],
+  "cons": [
+    "식대가 55,000원/95,000원 두 등급으로 조사돼 어느 쪽이 기본인지 방문상담 확인 필요"
+  ],
+  "links": [
+    {
+      "title": "웨딩북",
+      "url": "https://www.weddingbook.com"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("레노스블랑쉬 왕십리")
+    }
+  ]
+};
+
+HALL_DETAIL["브라이튼하우스(과천)"] = {
+  "depth": "full",
+  "addr": "경기 과천시 죽바위로 37-24 (이름은 '강남점'이지만 실제 위치는 과천)",
+  "features": [
+    "2025년 7월 그랜드오픈",
+    "유리온실 채광, 하루 3팀만 3시간 간격",
+    "소규모 180명 미만 웨딩"
+  ],
+  "pros": [
+    "소규모 웨딩에 특화, 유리온실 채광 우수"
+  ],
+  "cons": [
+    "이름과 달리 실제 위치는 강남이 아닌 경기 과천 — 하객 이동 계획 시 반드시 확인 필요",
+    "180명 미만 소규모용이라 200명 목표에는 안 맞을 수 있음"
+  ],
+  "links": [
+    {
+      "title": "아이웨딩",
+      "url": "https://www.iwedding.co.kr"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("브라이튼하우스 과천")
+    }
+  ]
+};
+
+HALL_DETAIL["라브르에드니아 종합운동장"] = {
+  "depth": "full",
+  "addr": "서울 송파구, 2호선 종합운동장역 인근",
+  "features": [
+    "2027년 상반기 오픈 예정",
+    "단독홀, 양식 코스 요리(150분 분리)"
+  ],
+  "pros": [
+    "종합운동장역 접근성, 양식 코스라는 차별점"
+  ],
+  "cons": [
+    "2027년 상반기 오픈 예정 — 아직 실물 확인 불가, 현재는 계획 단계",
+    "대관료 1,200만원 + 필수 꽃 연출료 500만원으로 실질 1,700만원"
+  ],
+  "links": [
+    {
+      "title": "아이웨딩",
+      "url": "https://www.iwedding.co.kr"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("라브르에드니아")
+    }
+  ]
+};
+
+HALL_DETAIL["메종드아나하 선릉"] = {
+  "depth": "full",
+  "addr": "서울 강남구 언주로 517 신라스테이 B1F",
+  "features": [
+    "더컨벤션 계열, 2024년 9월 리뉴얼",
+    "단독홀, 어두운 톤, 신부대기실 채광 우수",
+    "선릉역 도보 10분, 셔틀버스 운행"
+  ],
+  "pros": [
+    "더컨벤션 계열 운영 노하우, 신부대기실 채광 호평"
+  ],
+  "cons": [
+    "대관료 1,550만원+식대 15만원으로 이 목록에서 상위권 고가",
+    "선릉역 도보 10분+셔틀, 완전 역세권 아님"
+  ],
+  "links": [
+    {
+      "title": "다이렉트 결혼준비",
+      "url": "https://www.directwedding.co.kr"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("메종드아나하")
+    }
+  ]
+};
+
+HALL_DETAIL["KDW 강동"] = {
+  "depth": "full",
+  "addr": "서울 강동구 천호대로 1102",
+  "features": [
+    "마이더스홀(밝은톤)·블랙스톤홀(어두운톤) 2개홀",
+    "주말 건물 단독사용, 위생등급 AAA",
+    "5호선 강동역 도보 2분"
+  ],
+  "pros": [
+    "대관료 90만원으로 이 목록 중 가장 저렴, 강동역 도보 2분",
+    "밝은홀/어두운홀 선택 가능"
+  ],
+  "cons": [
+    "대관료가 매우 낮은 대신 다른 항목(꽃장식 등)이 별도 추가될 가능성 — 총액 재확인 필요"
+  ],
+  "links": [
+    {
+      "title": "웨딩북",
+      "url": "https://www.weddingbook.com"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("KDW 강동")
+    }
+  ]
+};
+
+HALL_DETAIL["라온제나 강남구청"] = {
+  "depth": "full",
+  "addr": "서울 강남구 학동로47길 5",
+  "features": [
+    "실내 플로렌스홀 + 야외 아뜰리에(루프탑)",
+    "신부대기실 자연광 우수",
+    "7호선 강남구청역 도보 3분, 주차 400~450대"
+  ],
+  "pros": [
+    "루프탑 야외 예식 옵션 보유, 강남권에서 드문 케이스",
+    "주차 넉넉"
+  ],
+  "cons": [
+    "홀 선택(플로렌스/아뜰리에)에 따라 가격이 770만~1,100만원으로 갈림"
+  ],
+  "links": [
+    {
+      "title": "스마트웨딩",
+      "url": "https://smartwedding-besthall.com"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("라온제나 강남구청")
+    }
+  ]
+};
+
+HALL_DETAIL["로프트가든344 오목교"] = {
+  "depth": "full",
+  "addr": "서울 양천구 오목로 344",
+  "features": [
+    "단독홀, 2층 높이 천고",
+    "붉은 벽돌 인테리어, 자연채광",
+    "5호선 오목교역 도보 1분, 주차 300~800대"
+  ],
+  "pros": [
+    "오목교역 초역세권(도보 1분)",
+    "인더스트리얼+자연채광 조합 인테리어"
+  ],
+  "cons": [
+    "양천구 위치상 동쪽 하객(휘경동/의왕)에게는 이동 거리 있음"
+  ],
+  "links": [
+    {
+      "title": "스마트웨딩",
+      "url": "https://smartwedding-besthall.com"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("로프트가든344")
+    }
+  ]
+};
+
+HALL_DETAIL["아펠가모 반포"] = {
+  "depth": "full",
+  "addr": "서울 서초구 반포대로 235 (반포 효성빌딩 LL층)",
+  "features": [
+    "단독홀, 밝은 분위기, 착석 550석",
+    "최소 보증 300명부터",
+    "3호선 고속터미널역 도보 4~5분"
+  ],
+  "pros": [
+    "아펠가모 브랜드 표준화된 운영, 고속터미널역 접근성"
+  ],
+  "cons": [
+    "최소 보증 300명부터라 200명 목표 하객수와는 맞지 않을 수 있음(초과 인원분 정산 필요)"
+  ],
+  "links": [
+    {
+      "title": "요즘웨딩",
+      "url": "https://yozmwedding.co.kr/venue/?bmode=view&idx=18611440"
+    },
+    {
+      "title": "웨딩노트",
+      "url": "https://www.weddingnote.co.kr/halls/seoul/apelgamo-banpo"
+    }
+  ]
+};
+
+HALL_DETAIL["루이비스 송파문정"] = {
+  "depth": "full",
+  "addr": "서울 송파구 문정동 645-2 B1층",
+  "features": [
+    "1,300대 주차 가능",
+    "부대시설(혼주 VIP룸 등) 잘 갖춰짐",
+    "문정역 3번출구 도보 9분"
+  ],
+  "pros": [
+    "주차 매우 넉넉(1,300대)",
+    "혼주 VIP룸 별도 마련"
+  ],
+  "cons": [
+    "문정역까지 도보 9분, 초역세권은 아님"
+  ],
+  "links": [
+    {
+      "title": "스마트웨딩",
+      "url": "https://smartwedding-besthall.com/vwedding"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("루이비스 송파문정")
+    }
+  ]
+};
+
+HALL_DETAIL["JK아트컨벤션 문래"] = {
+  "depth": "thin",
+  "addr": "서울 영등포구 문래",
+  "features": [
+    "2호선 문래역 도보 5분",
+    "Grand/Atrium/Amberluce 3개 홀, 11m 천정고"
+  ],
+  "pros": [
+    "3개 홀 규모, 11m 높은 천정고"
+  ],
+  "cons": [
+    "가격이 대관료+식대 합산 '총액 3,150만원~'으로만 공개돼 있어 항목별 분해가 안 됨 — 계산기 반영 보류, 방문상담으로 세부 확인 필요"
+  ],
+  "links": [
+    {
+      "title": "웨딩북",
+      "url": "https://www.weddingbook.com"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("JK아트컨벤션")
+    }
+  ]
+};
+
+HALL_DETAIL["아펠가모 광화문"] = {
+  "depth": "thin",
+  "addr": "서울 종로구 종로1길 50 더케이트윈타워 A동 LL층",
+  "features": [
+    "180석 웨딩홀 / 500석 피로연장"
+  ],
+  "pros": [
+    "광화문 도심 접근성"
+  ],
+  "cons": [
+    "대관료·식대 모두 공개된 자료를 찾지 못함 — 확인 안됨, 직접 문의 필요"
+  ],
+  "links": [
+    {
+      "title": "아펠가모 공식",
+      "url": "https://www.apelgamo.com"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("아펠가모 광화문")
+    }
+  ]
+};
+
+HALL_DETAIL["더파티움 여의도"] = {
+  "depth": "thin",
+  "addr": "서울 영등포구 여의도",
+  "features": [
+    "9호선 국회의사당역 도보 5분",
+    "최소보증 200~300명, 최대 700명"
+  ],
+  "pros": [
+    "최대 700명까지 수용 가능한 대형홀"
+  ],
+  "cons": [
+    "대관료는 확인 안됨(식대만 95,000원/121,000원 한식 확인)"
+  ],
+  "links": [
+    {
+      "title": "다이렉트 결혼준비",
+      "url": "https://www.directwedding.co.kr"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("더파티움 여의도")
+    }
+  ]
+};
+
+HALL_DETAIL["위더스 영등포"] = {
+  "depth": "thin",
+  "addr": "서울 영등포구 영중로 55",
+  "features": [
+    "1,5호선 영등포역/영등포시장역 도보권",
+    "6,7,8,9층 각 단독홀(아모르홀 등)",
+    "2024년 8월 리뉴얼"
+  ],
+  "pros": [
+    "실제 이용 후기(2026.3 블로그): 작년 계약 시 8만원에 살짝 못 미치는 식대로 계약했다는 사례 있음",
+    "연회장이 넓어 2,000명 동시 수용 가능한 규모"
+  ],
+  "cons": [
+    "정가 기준 총액 3,260만원(대관+식대 합산)으로만 공개, 항목별 분해 어려움 — 계산기 반영 보류",
+    "주차가 협소해 불편하다는 후기 다수(진입로도 좁음)"
+  ],
+  "links": [
+    {
+      "title": "웨딩북",
+      "url": "https://www.weddingbook.com"
+    },
+    {
+      "title": "아이웨딩",
+      "url": "https://www.iwedding.co.kr/enterprise/info/1439199903"
+    }
+  ]
+};
+
+HALL_DETAIL["에스가든 강남"] = {
+  "depth": "thin",
+  "addr": "서울 서초구 태봉로 114 (2024년 10월 오픈, 실제로는 서초/양재권)",
+  "features": [
+    "신상 웨딩홀, 컨벤션형",
+    "주차 800~850대"
+  ],
+  "pros": [
+    "신상홀, 주차 매우 넉넉"
+  ],
+  "cons": [
+    "이름은 '강남'이지만 실제 위치는 서초구 양재 인근 — 확인 필요",
+    "대관료 확인 안됨(식대만 120,000원 확인)"
+  ],
+  "links": [
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("에스가든 강남")
+    }
+  ]
+};
+
+HALL_DETAIL["마렌지나인"] = {
+  "depth": "thin",
+  "addr": "서울 중구 을지로 264, 9층",
+  "features": [
+    "2025년 신상 오픈",
+    "단독홀, 프라이빗 테라스"
+  ],
+  "pros": [
+    "신상홀, 프라이빗 테라스 보유"
+  ],
+  "cons": [
+    "대관료 확인 안됨(식대만 88,000~90,000원 확인)"
+  ],
+  "links": [
+    {
+      "title": "아이웨딩",
+      "url": "https://www.iwedding.co.kr"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("마렌지나인")
+    }
+  ]
+};
+
+HALL_DETAIL["더화이트베일 서초"] = {
+  "depth": "thin",
+  "addr": "서울 서초구 (공식 홈페이지: thewhiteveil.co.kr)",
+  "features": [
+    "클래식 스타일"
+  ],
+  "pros": [
+    "실제 후기에 '강남에 위치하고 있음에도 믿기 어려운 가격', '당일계약 혜택 좋았다'는 언급 있음(가격 구체 수치는 비공개)"
+  ],
+  "cons": [
+    "대관료·식대 모두 공개 자료를 찾지 못함 — 확인 안됨, 직접 문의 필요"
+  ],
+  "links": [
+    {
+      "title": "공식 홈페이지",
+      "url": "http://thewhiteveil.co.kr/"
+    },
+    {
+      "title": "다이렉트 결혼준비 카페 검색",
+      "url": cafeSearchUrl("더화이트베일")
+    }
+  ]
+};
+
+</script>
+<script>
+/* ── 비밀번호 (바꾸려면 이 한 줄만 수정) ── */
+const PASSWORD = "0511";
+
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const fmt=n=>Math.round(n).toLocaleString();
+
+/* gate */
+function unlock(){
+  if($("#pw").value.trim()!==PASSWORD){ $("#err").textContent="비밀번호가 맞지 않아요."; return; }
+  sessionStorage.setItem("ok","1"); show();
+}
+function show(){ $("#gate").style.display="none"; $("#app").style.display="block"; $("#bar").style.display="block"; }
+$("#go").onclick=unlock;
+$("#pw").addEventListener("keydown",e=>{ if(e.key==="Enter") unlock(); });
+if(sessionStorage.getItem("ok")==="1") show();
+
+/* tabs */
+$("#nav").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  $$("#nav button").forEach(x=>x.classList.toggle("on",x===b));
+  $$(".page").forEach(p=>p.classList.toggle("on",p.id==="p-"+b.dataset.p));
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+
+/* ── state ── */
+let hFilt="all", hSort="total", hSel=null;
+let sCat="studio", sOrd="asc", sQ="";
+let sSel=null; /* {cat, idx, planner} */
+const vSel=new Set();
+
+const guar=()=>{const v=parseInt($("#guar").value||"200",10);return isNaN(v)?200:Math.max(1,v);};
+const hallTotal=h=>h[3]+h[4]*guar()/10000;
+
+/* ── halls ── */
+function renderHalls(){
+  let rows=HALLS.map((h,i)=>({h,i,t:hallTotal(h)}));
+  if(hFilt==="east") rows=rows.filter(r=>r.h[8]===1);
+  if(hFilt==="weekend") rows=rows.filter(r=>r.h[9]===1);
+  if(hFilt==="budget") rows=rows.filter(r=>r.t<=1900);
+  const k = hSort==="meal"?(r=>r.h[4]) : hSort==="rent"?(r=>r.h[3]) : (r=>r.t);
+  rows.sort((a,b)=>k(a)-k(b));
+  $("#hallTable tbody").innerHTML = rows.map(r=>{
+    const h=r.h, kc = h[6]==="할인가"?"g":h[6]==="정찰"?"r":"n";
+    const kt = h[6]==="정찰"?"정찰제":h[6];
+    const tc = r.t<=1900?"lo":r.t>=2800?"hi":"";
+    return `<tr data-i="${r.i}" class="${hSel===r.i?"sel":""}"><td class="nm">${h[0]}</td><td>${h[1]}</td><td>${h[2]}</td>
+      <td class="num">${h[3]}만</td><td class="num">${h[4].toLocaleString()}</td>
+      <td><span class="tag ${kc}">${kt}</span></td><td class="num tot ${tc}">${fmt(r.t)}만</td><td><span class="tag n">${h[7]}</span></td></tr>`;
+  }).join("") || `<tr><td colspan="8" style="text-align:center;color:var(--faint);padding:24px">조건에 맞는 홀이 없어요.</td></tr>`;
+  $$("#hallTable tbody tr[data-i]").forEach(tr=>tr.onclick=()=>{
+    const i=+tr.dataset.i; hSel=(hSel===i?null:i); renderHalls(); renderTotal();
+  });
+  renderHallDetail();
+}
+function renderHallDetail(){
+  const box=$("#hallDetail");
+  if(hSel===null){ box.style.display="none"; return; }
+  const h=HALLS[hSel];
+  const d=HALL_DETAIL[h[0]];
+  if(!d){ box.style.display="none"; return; }
+  box.style.display="block";
+  const depthTag = d.depth==="full" ? `<span class="tag g">후기 다수 확인</span>` : `<span class="tag n">가격 위주 확인</span>`;
+  box.innerHTML = `
+    <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px">
+      <span style="font-family:var(--serif);font-weight:700;font-size:17px">${h[0]}</span>
+      ${depthTag}
+    </div>
+    <p style="font-size:13px;color:var(--sub);margin:0 0 12px"><strong>${d.addr||"주소 미확인"}</strong></p>
+    ${d.features&&d.features.length? `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px">${d.features.map(f=>`<span class="tag n">${f}</span>`).join("")}</div>` : ""}
+    <div class="notes c2">
+      <div class="note-block" style="border-top:none;padding-top:0">
+        <div class="lb" style="color:var(--good)">장점 · 특징</div>
+        <ul>${(d.pros||[]).map(p=>`<li>${p}</li>`).join("") || "<li>확인된 내용 없음</li>"}</ul>
+      </div>
+      <div class="note-block" style="border-top:none;padding-top:0">
+        <div class="lb" style="color:var(--warn)">단점 · 확인 필요</div>
+        <ul>${(d.cons||[]).map(c=>`<li>${c}</li>`).join("") || "<li>확인된 내용 없음</li>"}</ul>
+      </div>
+    </div>
+    <div style="margin-top:6px">
+      <div class="lb" style="font-size:11px;color:var(--faint);margin-bottom:6px">원문 링크</div>
+      ${(d.links||[]).map(l=>`<div style="font-size:12.5px;margin:3px 0"><a href="${l.url}" target="_blank" rel="noopener" style="color:var(--accent-ink);text-decoration:underline">${l.title} ↗</a></div>`).join("")}
+    </div>
+  `;
+}
+$("#hallCtl").addEventListener("click",e=>{
+  const b=e.target.closest(".chip"); if(!b) return;
+  if(b.dataset.f){ hFilt=b.dataset.f; $$("#hallCtl [data-f]").forEach(x=>x.classList.toggle("on",x===b)); }
+  if(b.dataset.s){ hSort=b.dataset.s; $$("#hallCtl [data-s]").forEach(x=>x.classList.toggle("on",x===b)); }
+  renderHalls();
+});
+$("#guar").addEventListener("input",()=>{renderHalls();renderTotal();});
+
+/* ── luklavi ── */
+if($("#luklaviTable")){
+  $("#luklaviTable tbody").innerHTML = LUKLAVI.rows.map(r=>{
+    const [when,rentBase,rentOff,mealBase,mealOff,total]=r;
+    return `<tr><td class="nm">${when}</td>
+      <td class="num">${rentBase}만 → <b>${rentOff}만</b></td>
+      <td class="num">${mealBase.toLocaleString()} → <b>${mealOff.toLocaleString()}</b></td>
+      <td class="num tot lo">${total.toLocaleString()}만</td></tr>`;
+  }).join("");
+}
+
+/* ── sdm (4-planner comparison) ── */
+const PLANNERS = ["베리굿","다이렉트","제이웨딩","신부야"];
+function sdmMin(entry){
+  let m=Infinity;
+  for(const p of PLANNERS){ const d=entry.planners[p]; if(d && d.min!=null) m=Math.min(m, d.min); }
+  return m===Infinity? null : m;
+}
+function renderSdm(){
+  const data = SDM_DB[sCat];
+  let rows = data.map((e,i)=>({e,i,min:sdmMin(e)})).filter(r=>r.min!==null);
+  if(sQ) rows = rows.filter(r=>r.e.name.toLowerCase().includes(sQ.toLowerCase()));
+  rows.sort((a,b)=>(sOrd==="asc"?1:-1)*(a.min-b.min));
+  $("#sdmTable tbody").innerHTML = rows.map(r=>{
+    const e=r.e;
+    const cells = PLANNERS.map(p=>{
+      const d = e.planners[p];
+      if(!d) return `<td class="num" style="color:var(--faint)">–</td>`;
+      const isMin = d.min===r.min;
+      const label = (d.min===d.max || d.max==null) ? `${d.min}` : `${d.min}~${d.max}`;
+      const sel = sSel && sSel.cat===sCat && sSel.idx===r.i && sSel.planner===p;
+      return `<td class="num sdmcell" data-i="${r.i}" data-p="${p}" style="cursor:pointer;${isMin?'color:var(--good);font-weight:700;':''}${sel?'background:#f1e4d5;':''}">${label}만</td>`;
+    }).join("");
+    return `<tr><td class="nm">${e.name}</td>${cells}<td class="num tot lo">${r.min}만</td></tr>`;
+  }).join("") || `<tr><td colspan="6" style="text-align:center;color:var(--faint);padding:24px">검색 결과가 없어요.</td></tr>`;
+
+  $$(".sdmcell").forEach(td=>td.onclick=(ev)=>{
+    ev.stopPropagation();
+    const i=+td.dataset.i, p=td.dataset.p;
+    if(sSel && sSel.cat===sCat && sSel.idx===i && sSel.planner===p) sSel=null;
+    else sSel={cat:sCat, idx:i, planner:p};
+    renderSdm(); renderSdmDetail(); renderTotal();
+  });
+  renderSdmDetail();
+}
+function renderSdmDetail(){
+  const box=$("#sdmDetail");
+  if(!sSel){ box.style.display="none"; return; }
+  const e = SDM_DB[sSel.cat][sSel.idx];
+  const d = e.planners[sSel.planner];
+  if(!d){ box.style.display="none"; return; }
+  box.style.display="block";
+  const addonLabel={staff:"헬퍼비",outdoor:"야외",night:"저녁",fit:"피팅비",design:"디자이너지정",first:"원본",extra:"기타",hair:"헤어변형",early:"얼리스타트"};
+  let addonHtml = "";
+  if(d.addons){
+    addonHtml = "<div style='margin-top:8px;display:flex;flex-wrap:wrap;gap:8px'>" +
+      Object.entries(d.addons).map(([k,v])=>{
+        const label = addonLabel[k]||k;
+        const val = (v[0]===v[1]||v[1]==null) ? `${v[0]}만` : `${v[0]}~${v[1]}만`;
+        return `<span class="tag n">${label} +${val}</span>`;
+      }).join("") + "</div>";
+  }
+  box.innerHTML = `<div style="font-family:var(--serif);font-weight:700;font-size:14px;margin-bottom:6px">${e.name} · ${sSel.planner}</div>
+    <div style="font-size:13px;color:var(--sub)">기본가 ${d.text!=null?d.text:d.min}만원${d.note?('<br>'+String(d.note).replace(/\\n/g,'<br>')):''}</div>
+    ${addonHtml}`;
+}
+$("#sdmCtl").addEventListener("click",e=>{
+  const b=e.target.closest(".chip"); if(!b) return;
+  if(b.dataset.c){ sCat=b.dataset.c; $$("#sdmCtl [data-c]").forEach(x=>x.classList.toggle("on",x===b)); }
+  if(b.dataset.o){ sOrd=b.dataset.o; $$("#sdmCtl [data-o]").forEach(x=>x.classList.toggle("on",x===b)); }
+  renderSdm();
+});
+$("#sdmQ").addEventListener("input",e=>{sQ=e.target.value;renderSdm();});
+
+/* ── vendors ── */
+function renderVend(){
+  $("#vendList").innerHTML = VENDORS.map(cat=>{
+    const detailRows = cat.vendors.length
+      ? cat.vendors.map(v=>`<div class="row"><div class="rtop"><span class="rname">${v.name}</span><span class="rprice">${v.price}</span></div>
+          <div class="rnote">${v.note}</div><div class="rsrc">출처 · ${v.src}</div></div>`).join("")
+      : `<div class="empty">확인된 실제 업체 사례 없음 — 일반 시세 참고용</div>`;
+    const tip = cat.tip ? `<div class="vtip">${cat.tip}</div>` : "";
+    return `<div class="vgroup">
+      <label class="vhead">
+        <input type="checkbox" data-k="${cat.key}" ${vSel.has(cat.key)?"checked":""}>
+        <div class="vmain">
+          <div class="vtop"><span class="vname">${cat.label}</span><span class="vprice">${cat.amount===0?"0":cat.amount+"만"}</span></div>
+          <div class="vsummary">${cat.summary}</div>
+        </div>
+      </label>
+      <div class="vdetail">${detailRows}${tip}</div>
+    </div>`;
+  }).join("");
+  $$("#vendList input").forEach(cb=>cb.onchange=(ev)=>{
+    ev.stopPropagation();
+    cb.checked?vSel.add(cb.dataset.k):vSel.delete(cb.dataset.k); renderTotal();
+  });
+}
+
+/* ── timeline ── */
+if($("#timelineTable")){
+  $("#timelineTable tbody").innerHTML = TIMELINE_REF.map(r=>
+    `<tr><td class="nm">${r[0]}</td><td>${r[1]}</td><td><span class="tag n">${r[2]}</span></td><td style="white-space:normal;color:var(--sub);font-size:12.5px">${r[3]||"—"}</td></tr>`
+  ).join("");
+}
+
+/* ── total ── */
+function renderTotal(){
+  const parts=[], bd=[];
+  let total=0;
+  if(hSel!==null){ const h=HALLS[hSel], t=hallTotal(h);
+    total+=t; parts.push(`<b>${h[0]}</b> ${h[2]}`); bd.push(`<span>웨딩홀 <b>${fmt(t)}만</b></span>`); }
+  if(sSel){
+    const e = SDM_DB[sSel.cat][sSel.idx]; const d = e.planners[sSel.planner];
+    if(d && d.min!=null){ total+=d.min; parts.push(`${sSel.cat} ${e.name}(${sSel.planner})`); bd.push(`<span>스드메 <b>${fmt(d.min)}만</b></span>`); }
+  }
+  let vTot=0, vC=0;
+  VENDORS.forEach(v=>{ if(vSel.has(v.key)){ vTot+=v.amount; vC++; } });
+  if(vC){ total+=vTot; parts.push(`부대 ${vC}개`); bd.push(`<span>부대업체 <b>${fmt(vTot)}만</b></span>`); }
+  $("#who").innerHTML = parts.length? parts.join(" <span style='color:var(--line-strong)'>|</span> ") : "웨딩홀 · 스드메 · 부대업체를 골라보세요.";
+  $("#amt").innerHTML = fmt(total)+"<small>만원</small>";
+  if(hSel!==null) bd.push(`<span style="color:var(--sub)">+ 필수옵션·부가세·봉사료 별도</span>`);
+  $("#bd").innerHTML = bd.join("");
+}
+$("#reset").onclick=()=>{ hSel=null; sSel=null; vSel.clear();
+  renderHalls(); renderSdm(); renderVend(); renderTotal(); };
+
+/* 미확인 후보 + 참가가 공식통계 */
+if($("#unknownHalls") && typeof UNKNOWN_HALLS!=="undefined"){
+  $("#unknownHalls").innerHTML = `<div class="lb" style="font-size:11px;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">미확인 후보 ${UNKNOWN_HALLS.length}곳 — 이번 조사로 추가 확인된 사실</div>` +
+    UNKNOWN_HALLS.map(h=>`
+      <div style="margin-bottom:14px">
+        <div style="font-weight:700;font-family:var(--serif);font-size:14.5px">${h.name}</div>
+        <div style="font-size:12.5px;color:var(--sub);margin:2px 0 6px">${h.addr}</div>
+        <ul style="margin:4px 0;padding-left:18px;font-size:13px;color:var(--sub);line-height:1.7">${h.facts.map(f=>`<li>${f}</li>`).join("")}</ul>
+        <div class="callout warn" style="margin:6px 0">${h.caveat}</div>
+        <div style="font-size:11.5px;color:var(--faint)">출처 · ${h.src}</div>
+      </div>`).join("");
+}
+if($("#priceGoKr") && typeof PRICE_GO_KR!=="undefined"){
+  $("#priceGoKr").innerHTML = `
+    <div class="lb">한국소비자원 참가격(price.go.kr) 공식 통계 — 협상 기준선</div>
+    <div class="scroll" style="max-height:none;margin:8px 0"><table>
+      <thead><tr><th>구분</th><th>총 계약금액</th><th>세부</th></tr></thead>
+      <tbody>${PRICE_GO_KR.rows.map(r=>`<tr><td class="nm">${r[0]}</td><td class="num tot">${r[1]}</td><td style="white-space:normal;font-size:12px;color:var(--sub)">${r[2]}</td></tr>`).join("")}
+      ${PRICE_GO_KR.medians.map(r=>`<tr><td class="nm">${r[0]}</td><td class="num tot">${r[1]}</td><td style="white-space:normal;font-size:12px;color:var(--sub)">${r[2]}</td></tr>`).join("")}</tbody>
+    </table></div>
+    <p style="font-size:12.5px;color:var(--sub);margin-top:6px">${PRICE_GO_KR.note} (${PRICE_GO_KR.updated})</p>
+  `;
+}
+
+renderHalls(); renderSdm(); renderVend(); renderTotal();
+</script>
+</body>
+</html>
