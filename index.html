@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>결혼 준비 — 실견적 기록부</title>
+<title>결혼 준비 — 실견적·전체비 기록부</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
@@ -171,9 +171,8 @@ footer{margin-top:60px;padding:24px 0 0;border-top:1px solid var(--line);font-si
 <div class="wrap" id="app" style="display:none">
 <header>
   <div class="eyebrow">Our Wedding · Field Notes</div>
-  <h1>서울 웨딩홀 · 스드메 · 부대업체<br>실견적 기록부</h1>
-  <p class="lead">네이버 카페 7곳의 실계약 후기, 웨딩북·아이웨딩·스마트웨딩·다이렉트웨딩 등 공식 웨딩 정보 사이트 정가, 지인이 직접 받은 견적서, 그리고 4개 플래너의 실제 가격표를 한 곳에 모았습니다.
-     고르면 하단에서 총액이 자동으로 계산됩니다.</p>
+  <h1>서울 웨딩홀 · 스드메 · 결혼 전체비<br>실견적 기록부</h1>
+  <p class="lead">네이버 카페 실계약 후기, 블로그/SNS 후기, 웨딩 플랫폼 정가, 지인 견적서, 4개 플래너 스드메 가격표를 한데 모았습니다. 예식 직접비는 물론 상견례·예단·신혼집·혼수·신혼여행까지 한 화면에서 구조를 보되, 출처 강도는 끝까지 분리해 표시합니다.</p>
   <div class="factstrip">
     <div class="f"><span class="k">하객 동선</span><span class="v">군자·휘경동·의왕</span></div>
     <div class="f"><span class="k">예식</span><span class="v">토·일 15시 이전</span></div>
@@ -184,16 +183,58 @@ footer{margin-top:60px;padding:24px 0 0;border-top:1px solid var(--line);font-si
 </header>
 
 <nav><div class="inner" id="nav">
-  <button class="on" data-p="hall">웨딩홀</button>
+  <button class="on" data-p="map">전체 비용지도</button>
+  <button data-p="hall">웨딩홀</button>
   <button data-p="timing">요일·시간</button>
   <button data-p="sdm">스드메</button>
   <button data-p="vendor">부대업체</button>
+  <button data-p="family">가족·전통비</button>
+  <button data-p="whole">신혼집·여행</button>
   <button data-p="timeline">준비 타임라인</button>
   <button data-p="check">체크리스트</button>
 </div></nav>
 
+<!-- ══ 전체 비용지도 ══ -->
+<div class="page on" id="p-map">
+<section>
+  <div class="sechead"><span class="n">0</span><h2>결혼 전체비 지도</h2></div>
+  <p class="secsub">이 사이트는 이제 홀 비교표만이 아니라, 결혼 준비에서 실제로 돈이 새는 모든 축을 한 번에 보이도록 확장했습니다. 강한 1차 자료와 약한 공개 웹 가이드는 끝까지 구분합니다.</p>
+  <div class="callout"><b>원칙</b> · 실계약 후기(A)와 플랫폼 정가(C)를 같은 무게로 섞지 않습니다. 숫자가 있어도 근거가 약하면 약하다고 표시하고, 미확인은 비워둡니다.</div>
+  <div class="notes c2" id="costMap"></div>
+</section>
+
+<section>
+  <div class="sechead"><span class="n">0-1</span><h2>출처 강도 등급</h2></div>
+  <p class="secsub">이 등급이 앞으로 모든 수치 해석의 기준입니다.</p>
+  <div class="notes c2" id="sourceGrades"></div>
+</section>
+
+<section>
+  <div class="sechead"><span class="n">0-2</span><h2>채널별 역할 분담</h2></div>
+  <p class="secsub">어디서 처음 발견하고, 어디서 최종 확인할지 경로를 고정해 둡니다.</p>
+  <div class="notes c2">
+    <div class="note-block">
+      <div class="lb">원천 실후기</div>
+      <p><strong>네이버 카페 · 네이버 블로그</strong>가 여전히 가장 중요합니다. 숫자가 계약서/상담 캡처와 붙어 있거나, 최소한 날짜·시간대·보증인원 맥락이 살아 있기 때문입니다.</p>
+    </div>
+    <div class="note-block">
+      <div class="lb">발견 채널</div>
+      <p><strong>Instagram · Threads</strong>는 업체 발견, 공식 계정 추적, 릴스/화보 흐름 파악에 강합니다. 실후기 원천이라기보다 계정 네트워크 탐색 채널로 쓰는 게 맞습니다.</p>
+    </div>
+    <div class="note-block">
+      <div class="lb">집계 플랫폼</div>
+      <p><strong>웨딩북 · 아이웨딩 · 웨딕</strong>은 정가와 범위를 빨리 훑기 좋습니다. 대신 입점/프로모션 편향이 있으므로 최종판단 전에 꼭 원문 후기나 공식 자료로 되짚습니다.</p>
+    </div>
+    <div class="note-block">
+      <div class="lb">공식 보정</div>
+      <p><strong>공식 홈페이지 · 공식 인스타 · 네이버 플레이스</strong>는 주소, 교통, 주차, 홀 구조, 기본 구성 확인에 씁니다. 할인가보다 정가/조건 보정용에 가깝습니다.</p>
+    </div>
+  </div>
+</section>
+</div>
+
 <!-- ══ 웨딩홀 ══ -->
-<div class="page on" id="p-hall">
+<div class="page" id="p-hall">
 <section>
   <div class="sechead"><span class="n">Ⅰ</span><h2>웨딩홀 실견적 67곳</h2></div>
   <p class="secsub">행을 눌러 선택하세요. 총액 = 대관료 + (식대 × 보증인원). 필수옵션·부가세·봉사료는 별도입니다.</p>
@@ -354,6 +395,60 @@ footer{margin-top:60px;padding:24px 0 0;border-top:1px solid var(--line);font-si
 </section>
 </div>
 
+<!-- ══ 가족·전통비 ══ -->
+<div class="page" id="p-family">
+<section>
+  <div class="sechead"><span class="n">Ⅴ</span><h2>가족·전통·사전준비 비용</h2></div>
+  <p class="secsub">예식장 계약서엔 안 적히지만, 실제 총액을 크게 흔드는 축입니다. 아래 범위는 공개 웹 가이드·후기 기준 참고값이라 실후기 원천보다 약합니다.</p>
+  <div class="callout warn" id="familyNote"></div>
+  <div class="scroll" style="max-height:none">
+    <table id="familyTable">
+      <thead><tr><th>항목</th><th class="num">최소</th><th class="num">표준</th><th class="num">상단</th><th>필수성</th><th>출처등급</th><th>메모</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><span class="n">Ⅴ-1</span><h2>3가지 시나리오</h2></div>
+  <p class="secsub">양가 관습 강도에 따라 같은 카테고리라도 총액이 크게 달라집니다.</p>
+  <div class="notes c2" id="familyScenarios"></div>
+</section>
+
+<section>
+  <div class="sechead"><span class="n">Ⅴ-2</span><h2>해석 포인트</h2></div>
+  <div class="notes" id="familyTips"></div>
+</section>
+</div>
+
+<!-- ══ 신혼집·여행 ══ -->
+<div class="page" id="p-whole">
+<section>
+  <div class="sechead"><span class="n">Ⅵ</span><h2>신혼집 · 혼수 · 신혼여행</h2></div>
+  <p class="secsub">이 축은 예식 직접비와 지불 시점, 계약 구조, 부담 주체가 달라서 별도 페이지로 분리합니다. 본식 총액과 합쳐 보되, 같은 성격의 돈처럼 다루지는 않습니다.</p>
+  <div class="notes c2">
+    <div class="note-block"><div class="lb">왜 따로 보나</div><p><strong>신혼집</strong>은 자산/보증금 성격이 강하고, <strong>혼수</strong>는 생활재 선택의 영역이며, <strong>신혼여행</strong>은 환율·거리·기간 영향을 크게 받습니다. 예식장 견적표와 같은 방식으로 비교하면 오판하기 쉽습니다.</p></div>
+    <div class="note-block"><div class="lb">어떻게 기록하나</div><p>신혼집 자체, 생활세팅(가전·가구·설치), 여행, 관리·누수비용을 분리 기록합니다. 특히 부동산 취득비와 소비성 예식비를 섞지 않는 것이 중요합니다.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><span class="n">Ⅵ-1</span><h2>신혼집 · 혼수 참고</h2></div>
+  <div class="notes" id="wholeHome"></div>
+</section>
+
+<section>
+  <div class="sechead"><span class="n">Ⅵ-2</span><h2>신혼여행 예산 밴드</h2></div>
+  <p class="secsub">실계약가 테이블이 아니라, 여행지/거리별 예산 감각을 잡기 위한 공개 웹 밴드입니다.</p>
+  <div class="notes" id="wholeHoneymoon"></div>
+</section>
+
+<section>
+  <div class="sechead"><span class="n">Ⅵ-3</span><h2>관리 · 누수 비용</h2></div>
+  <div class="notes" id="wholeLeakage"></div>
+</section>
+</div>
+
 <!-- ══ 타임라인 ══ -->
 <div class="page" id="p-timeline">
 <section>
@@ -409,6 +504,7 @@ footer{margin-top:60px;padding:24px 0 0;border-top:1px solid var(--line);font-si
 
 <footer>
   <p><strong>출처</strong> · 웨딩홀·부대업체: 네이버 카페 7곳 실계약·견적 후기(메이크마이웨딩·웨딩킹·다이렉트 결혼준비·요즘웨딩·혀니웨딩·웨딩크라우드·결혼이야기) + 공식 웨딩정보 사이트(웨딩북·아이웨딩·스마트웨딩·다이렉트웨딩·웨딩노트) 정가 정보 + 네이버 블로그 실계약 후기 + 지인 카카오톡 대화 및 견적서 원본, 2024~2026<br>
+  가족·전통비·신혼집·신혼여행 페이지: 공개 웹 가이드/후기/기사/플랫폼 구조 분석을 바탕으로 한 참고용 범위 정리. 실계약 원문보다 근거가 약한 값은 등급(B~D)으로 분리 표기<br>
   스드메 4플래너 비교표: 개인 보유 자료(작성자 @wedding.log_, 출처 한국소비자원 참가격 2025.4분기 + 오딩). <strong>무단배포·재가공 금지 명시 자료라 개인 열람 용도로만 사용하며, 이 링크는 외부에 공유하지 않습니다.</strong><br>
   체크리스트: 예식장 체크 list · 웨딩홀 계약서 함정조항 체크리스트(개인 정리 자료)</p>
   <p style="margin-top:9px">웨딩홀 견적은 날짜·시간·계약 시점·잔여타임 여부에 따라 매번 달라집니다. 협상 기준선이지 보장 가격이 아닙니다.
@@ -716,6 +812,181 @@ const TIMELINE_REF = [
   ["본식 DVD(어반필름)", "2027.5.30", "DVD", "가격 미확인"],
   ["아이폰스냅(퍼스트러브)", "2027.5.30", "아이폰스냅", "10만원대~22만원"],
 ];
+
+
+/* 결혼 전체비 확장 지도 — 기존 예식 직접비를 넘어 빠진 항목을 보이기 위한 구조 */
+const SOURCE_GRADES = [
+  {
+    grade:"A", label:"실후기 원천", badge:"g",
+    desc:"네이버 카페 계약후기, 직접 견적서, 지인 원본, 실제 상담 캡처처럼 1차 자료가 확인된 경우.",
+    use:"최종 판단에 가장 먼저 반영"
+  },
+  {
+    grade:"B", label:"개인 후기", badge:"n",
+    desc:"네이버 블로그·SNS 내돈내산 후기처럼 개인 경험이지만 원문이 남아 있는 경우.",
+    use:"실후기 보강용, 과장 여부 재확인 필요"
+  },
+  {
+    grade:"C", label:"집계 플랫폼", badge:"n",
+    desc:"웨딩북·아이웨딩·웨딕·숨고처럼 후보 발굴과 범위 파악에 유용한 집계형 정보.",
+    use:"정가/플랫폼가 참고용"
+  },
+  {
+    grade:"D", label:"공식 정보", badge:"r",
+    desc:"공식 홈페이지, 가격표, 프로모션, 공지, 보도자료 등 업체/기관이 직접 공개한 정보.",
+    use:"기본 조건 확인용"
+  },
+  {
+    grade:"E", label:"미확인", badge:"n",
+    desc:"숫자는 들었지만 원문 근거가 약하거나 최신성 확인이 끝나지 않은 상태.",
+    use:"비워두거나 미확인으로 표시"
+  },
+];
+
+const COST_MAP = [
+  {
+    title:"예식 직접비",
+    status:"강함",
+    note:"현재 사이트의 핵심 축. 웨딩홀 67곳, 스드메 4플래너 DB, 부대업체 실사례가 이미 반영됨.",
+    items:[
+      ["웨딩홀", "강함", "67곳 실견적 + 일부 정가/정찰제"],
+      ["스드메", "강함", "134개 스튜디오/드레스/메이크업 DB"],
+      ["본식 촬영/영상/사회/헬퍼", "중간", "실제 업체명과 범위는 있음, 추가금 체계는 더 보강 필요"],
+      ["혼주 준비", "중간", "혼주 메이크업·한복·예복 사례 존재"],
+      ["청첩장/식전자료/답례", "약함", "청첩장 위주, 커뮤니케이션 묶음은 보강 필요"],
+    ],
+  },
+  {
+    title:"가족·전통·사전준비 비용",
+    status:"보강중",
+    note:"상견례·예단·함·부모님 의류/메이크업/교통비는 예식 직접비와 별도로 봐야 함.",
+    items:[
+      ["상견례", "신규 반영", "식사 + 인사선물 + 방문선물"],
+      ["예단", "신규 반영", "생략 가능성·현금/현물 분리 필요"],
+      ["함", "신규 반영", "예복·예물 통합 여부까지 같이 봐야 함"],
+      ["부모님 의류/메이크업", "신규 반영", "구매 vs 대여 차이 큼"],
+      ["교통/숙박/코사지", "신규 반영", "가족 거주지와 하객 동선에 따라 편차 큼"],
+    ],
+  },
+  {
+    title:"신혼집·혼수·신혼여행",
+    status:"구조 반영",
+    note:"예식비보다 자산·계약·생활비 성격이 강해 별도 축으로 분리해야 함.",
+    items:[
+      ["신혼집", "구조 반영", "전세/매매/월세, 중개수수료, 이사비"],
+      ["혼수", "구조 반영", "가전·가구·침구·생활용품·설치비"],
+      ["신혼집 인테리어", "구조 반영", "도배·청소·커튼·필름·수리"],
+      ["신혼여행", "구조 반영", "여행지·기간·환율에 따라 차이 큼"],
+    ],
+  },
+  {
+    title:"관리·누수 비용",
+    status:"구조 반영",
+    note:"신부관리, 네일, 박람회, 교통비, 변경수수료처럼 나중에 새는 비용을 한 칸으로 묶음.",
+    items:[
+      ["피부/네일/왁싱/시술", "구조 반영", "본식 직전 집중 지출"],
+      ["플래너/박람회/투어 이동", "구조 반영", "작게 보이지만 누적됨"],
+      ["취소/변경 수수료", "구조 반영", "특약 확인 필요"],
+      ["비상 버퍼", "구조 반영", "예상 밖 추가금 방어용"],
+    ],
+  },
+];
+
+const FAMILY_COSTS = {
+  note:"아래 숫자는 공개 웹 가이드·후기에서 재정리한 참고 범위입니다. 카페 실계약 원문처럼 강한 1차 자료가 아니라서, 최종 계약 기준이 아니라 양가 협의용 기준선으로 봐야 합니다.",
+  rows:[
+    ["상견례", "40만", "50만", "100만", "거의 필수", "B/C", "식사 30~40만 + 선물 5~20만. 선물 필수 여부는 가정마다 다름."],
+    ["예단", "300만", "700만", "2,000만", "생략 가능", "B/C/D", "현금 예단 중심. 최근엔 생략 또는 축소 추세가 확인됨."],
+    ["함", "500만", "1,000만", "1,500만+", "거의 필수", "B/C", "신랑 예복·신발·소품 중심. 예물과 통합되는 경우가 늘어남."],
+    ["부모님 의류", "50만", "200만", "400만", "필수", "B/C", "대여면 크게 줄고, 구매면 급증. 한복/정장 분리해서 봐야 함."],
+    ["부모님 메이크업·헤어", "0~20만", "50만", "100만", "선택", "B", "신부 메이크업팀에 포함되면 낮아지고, 별도 예약하면 인원수만큼 붙음."],
+    ["코사지·장식", "1만", "5만", "15만", "거의 필수", "B/C", "작은 항목이지만 빠지기 쉬워 별도 기록 필요."],
+    ["교통·숙박", "0", "50만", "200만", "조건부", "B", "양가 거리·차량 여부에 따라 편차가 가장 큼."],
+  ],
+  scenarios:[
+    ["최소", "940만", "상견례 40 + 예단 300 + 함 500 + 부모님 의류 대여 50 + 기타 50"],
+    ["표준", "2,100만", "상견례 50 + 예단 700 + 함 1,000 + 부모님 의류 200 + 메이크업/기타 150"],
+    ["전통", "3,800만", "상견례 100 + 예단 1,500 + 함 1,500 + 부모님 의류 400 + 기타 300"],
+  ],
+  tips:[
+    "예단은 최근 생략 또는 현금 축소가 늘어 가장 조정 여지가 큼.",
+    "함은 신랑 예복·예물과 섞여 보이는 경우가 많아, 같은 돈을 중복 계산하지 않게 분리 기록해야 함.",
+    "부모님 의류는 '구매'와 '대여' 차이가 커서 처음부터 의사결정을 분리해 물어보는 게 좋음.",
+  ],
+};
+
+const WHOLE_WEDDING_COSTS = {
+  note:"신혼집·혼수·신혼여행은 예식 직접비와 성격이 다릅니다. 아래는 구조와 실사례/공개 예산 밴드를 함께 둔 참고 페이지입니다.",
+  home:[
+    {
+      label:"신혼집 자체",
+      amount:"별도 축",
+      grade:"A/E",
+      detail:"전세/매매/월세 보증금은 소비성 예식비가 아니라 자산 성격이 강하므로 본식 총액과 섞지 않음. 대신 중개수수료·이사비·청소비는 별도 비용으로 기록.",
+      source:"구조 원칙"
+    },
+    {
+      label:"혼수 가전·가구 실사례",
+      amount:"약 1,497만",
+      grade:"B",
+      detail:"2025년 10월 본식 기준 네이버 블로그 실사례. 가전·가구·신혼집 인테리어 총액이며 부동산 취득비는 제외되어 있음.",
+      source:"네이버 블로그 실사례"
+    },
+    {
+      label:"가전 5종 축소 구매 실사례",
+      amount:"약 447만",
+      grade:"B",
+      detail:"TV·에어컨·냉장고·세탁기/건조기 등 필수 가전 5종만 추려 500만원 미만으로 마감한 사례가 확인됨.",
+      source:"네이버 블로그 실사례"
+    },
+  ],
+  honeymoon:[
+    {
+      label:"국내/근거리",
+      amount:"200만~450만",
+      grade:"C/B",
+      detail:"제주, 세부/보홀, 일본(오키나와·홋카이도)처럼 비교적 짧은 노선은 수백만원대 예산 밴드로 자주 제시됨.",
+      source:"2025 여행 기사·후기형 콘텐츠"
+    },
+    {
+      label:"중장거리 휴양",
+      amount:"800만 안팎",
+      grade:"C/B",
+      detail:"칸쿤처럼 장거리 휴양지는 2인 기준 800만원 안팎 예산 밴드가 자주 언급됨.",
+      source:"2025 여행 기사·후기형 콘텐츠"
+    },
+    {
+      label:"장거리 프리미엄",
+      amount:"1,000만+",
+      grade:"C/B",
+      detail:"유럽 투어·몰디브는 1,000만원 이상으로 소개되는 경우가 많음. 환율과 시즌 영향이 큼.",
+      source:"2025 여행 기사·후기형 콘텐츠"
+    },
+  ],
+  leakage:[
+    {
+      label:"신부관리·시술",
+      amount:"수십만~수백만",
+      grade:"B/C",
+      detail:"네일/페디/눈썹왁싱/보톡스/윤곽/피부관리는 누적되기 쉬움. 개인 실사례로 59만원 내외 사례와 더 큰 패키지형 사례가 모두 보임.",
+      source:"네이버 블로그·기사형 콘텐츠"
+    },
+    {
+      label:"박람회·투어 이동/퀵/배송",
+      amount:"소액 반복",
+      grade:"B",
+      detail:"퀵비, 방문 교통비, 박람회 이동, 샘플 배송비처럼 표에 안 적히는 누수비용이 누적됨.",
+      source:"개인 후기"
+    },
+    {
+      label:"변경/수정 수수료",
+      amount:"항목별 상이",
+      grade:"E",
+      detail:"청첩장 수정, 일정 변경, 취소 수수료는 계약서 특약으로 방어해야 하며 아직 구조 데이터가 약함.",
+      source:"미확인"
+    },
+  ],
+};
 
 </script>
 <script>
@@ -2438,6 +2709,69 @@ function renderTotal(){
 $("#reset").onclick=()=>{ hSel=null; sSel=null; vSel.clear();
   renderHalls(); renderSdm(); renderVend(); renderTotal(); };
 
+function gradeBadge(g){
+  const key = String(g||'').trim();
+  const first = key[0]||'E';
+  const tone = first==='A' ? 'g' : first==='D' ? 'r' : 'n';
+  return '<span class="tag '+tone+'">'+key+'</span>';
+}
+
+function renderCostMap(){
+  if($("#costMap") && typeof COST_MAP!=="undefined"){
+    $("#costMap").innerHTML = COST_MAP.map(sec=>
+      '<div class="note-block">'+
+        '<div class="lb">'+sec.title+' · '+sec.status+'</div>'+
+        '<p>'+sec.note+'</p>'+
+        '<ul>'+sec.items.map(it=>'<li><strong>'+it[0]+'</strong> · '+it[1]+' · '+it[2]+'</li>').join('')+'</ul>'+
+      '</div>'
+    ).join('');
+  }
+  if($("#sourceGrades") && typeof SOURCE_GRADES!=="undefined"){
+    $("#sourceGrades").innerHTML = SOURCE_GRADES.map(g=>
+      '<div class="note-block">'+
+        '<div class="lb">'+gradeBadge(g.grade)+' '+g.label+'</div>'+
+        '<p>'+g.desc+'</p>'+
+        '<p><strong>용도</strong> · '+g.use+'</p>'+
+      '</div>'
+    ).join('');
+  }
+}
+
+function renderFamily(){
+  if($("#familyNote") && typeof FAMILY_COSTS!=="undefined") $("#familyNote").textContent = FAMILY_COSTS.note;
+  if($("#familyTable") && typeof FAMILY_COSTS!=="undefined"){
+    $("#familyTable tbody").innerHTML = FAMILY_COSTS.rows.map(r=>
+      '<tr><td class="nm">'+r[0]+'</td><td class="num">'+r[1]+'</td><td class="num tot">'+r[2]+'</td><td class="num">'+r[3]+'</td><td>'+r[4]+'</td><td>'+gradeBadge(r[5])+'</td><td style="white-space:normal;color:var(--sub);font-size:12.5px">'+r[6]+'</td></tr>'
+    ).join('');
+  }
+  if($("#familyScenarios") && typeof FAMILY_COSTS!=="undefined"){
+    $("#familyScenarios").innerHTML = FAMILY_COSTS.scenarios.map(s=>
+      '<div class="note-block"><div class="lb">'+s[0]+' 시나리오</div><p><strong>'+s[1]+'</strong></p><p>'+s[2]+'</p></div>'
+    ).join('');
+  }
+  if($("#familyTips") && typeof FAMILY_COSTS!=="undefined"){
+    $("#familyTips").innerHTML = FAMILY_COSTS.tips.map(t=>'<div class="note-block"><p>'+t+'</p></div>').join('');
+  }
+}
+
+function renderWholeWedding(){
+  const renderRows = (id, rows)=>{
+    if(!$(id) || !rows) return;
+    $(id).innerHTML = rows.map(r=>
+      '<div class="note-block">'+
+        '<div class="vtop"><span class="vname">'+r.label+'</span><span class="vprice">'+r.amount+'</span></div>'+
+        '<div class="vsummary">'+r.detail+'</div>'+
+        '<div class="rsrc" style="margin-top:6px">출처등급 · '+gradeBadge(r.grade)+' <span style="margin-left:6px">'+r.source+'</span></div>'+
+      '</div>'
+    ).join('');
+  };
+  if(typeof WHOLE_WEDDING_COSTS!=="undefined"){
+    renderRows('#wholeHome', WHOLE_WEDDING_COSTS.home);
+    renderRows('#wholeHoneymoon', WHOLE_WEDDING_COSTS.honeymoon);
+    renderRows('#wholeLeakage', WHOLE_WEDDING_COSTS.leakage);
+  }
+}
+
 /* 미확인 후보 + 참가가 공식통계 */
 if($("#unknownHalls") && typeof UNKNOWN_HALLS!=="undefined"){
   $("#unknownHalls").innerHTML = `<div class="lb" style="font-size:11px;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">미확인 후보 ${UNKNOWN_HALLS.length}곳 — 이번 조사로 추가 확인된 사실</div>` +
@@ -2462,6 +2796,7 @@ if($("#priceGoKr") && typeof PRICE_GO_KR!=="undefined"){
   `;
 }
 
+renderCostMap(); renderFamily(); renderWholeWedding();
 renderHalls(); renderSdm(); renderVend(); renderTotal();
 </script>
 </body>
