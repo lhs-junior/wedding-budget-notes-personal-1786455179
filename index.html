@@ -101,6 +101,7 @@ tbody tr{cursor:pointer;transition:background .12s}
 tbody tr:hover{background:var(--bg-deep)}
 tbody tr.sel{background:#f1e4d5}
 td.num{text-align:right;font-variant-numeric:tabular-nums}
+.lp{display:block;font-size:10px;color:var(--faint);text-decoration:line-through;font-weight:400}
 td.nm{font-weight:600;white-space:normal;min-width:126px}
 .tot{font-weight:700}.lo{color:var(--good)}.hi{color:var(--warn)}
 .tag{display:inline-block;font-size:10.5px;padding:2px 7px;border-radius:2px;background:var(--bg-deep);color:var(--sub);font-weight:600}
@@ -614,6 +615,42 @@ const HALLS = [
   ["프레지던트호텔 웨딩홀","중구 시청","정가 기준",150,46000,100,"정가","공식·요즘웨딩·신부야",0,0],
   ["KU컨벤션웨딩홀","광진 건대","정가 기준(비동문)",900,85000,170,"정가","아이웨딩·웨딕raw·투어후기(2026)",1,1],
 ];
+
+/* 정가(공시가) vs 실제 확인된 할인 사례 — 메이크마이웨딩(멕마웨) 등 카페 원문에서
+   직접 확인한 정가와, 실제로 숫자가 공개된 할인 사례를 나란히 기록합니다.
+   대부분의 글은 최종 계약가(할인가)를 '운영진 공개'로 비공개 처리하므로,
+   여기 있는 예시는 '공개된 사례' 기준이며 사례마다 차이가 클 수 있습니다.
+   키 형식: '홀이름||요일시간(when 필드)' */
+const LIST_PRICE_EVIDENCE = {
+  "노원 비엔티(BNT)||27/11": {lr:600, lm:70000, note:"대관료+생화장식 합산 정가", src:"멕마웨 2026.07 노원비엔티&테라리움 견적공유(계약전)"},
+  "구로 명품웨딩프로포즈||당일계약": {lr:360, lm:58000, note:"2023.12 계약후기(2024/11 예식) 정가 기준, 최근(2026.04) 견적은 정가 500만원대 중반/65,000원으로 더 높음", src:"멕마웨 2023.12 명품웨딩프로포즈(계약X)"},
+  "제이오스티엘||이벤트가": {lr:350, lm:58000, note:"", src:"멕마웨 2026년 제이오스티엘 계약후기"},
+  "위례 밀리토피아호텔||군 할인": {lr:551, lm:77000, note:"아이리스홀·현역군인 할인 사례", src:"멕마웨 2026.01 밀리토피아 아이리스홀 계약후기"},
+  "신도림 웨딩시티||26/8 오후": {lr:345, lm:53500, note:"", src:"멕마웨 2026.01 신도림 웨딩시티 계약후기"},
+  "여의도 FKI플라자||일 12시": {lr:600, lm:80000, note:"", src:"멕마웨 2026.04 여의도 FKI플라자 계약후기"},
+  "빌라드지디 논현||27/5 오후": {lr:750, lm:95000, note:"", src:"멕마웨 2026.03 빌라드지디 논현 계약후기"},
+  "엘타워||일 15:00": {lr:1100, lm:130000, note:"그레이스홀 기준, 엘타워는 홀별(그레이스/오르체 등) 가격차가 큼", src:"멕마웨 2026.06 엘타워 그레이스홀 계약후기"},
+  "규수당||당일현장계약": {lr:680, lm:70000, note:"", src:"멕마웨 2026.07 규수당 계약후기"},
+  "로얄호텔서울||토 11:30": {lr:1100, lm:105000, note:"부대비용(대관료+플라워 등) 포함 일체가", src:"멕마웨 2026 로얄호텔서울 계약후기"},
+  "DMC타워웨딩||27/3 오후": {lr:900, lm:88000, note:"그랜드볼룸홀 기준(DMC는 펠리체·그랜드볼룸·라피네 3개홀, 가격이 다름)", src:"멕마웨 2026.06 DMC타워 그랜드볼룸홀 계약후기"},
+  "여의도웨딩컨벤션||26/8 오후": {lr:900, lm:82000, note:"일요일 200명 기준(2025.09)", src:"멕마웨 2025.09 여의도웨딩컨벤션 견적공유"},
+  "빌라드지디 안양||당일계약": {lr:1800, lm:95000, note:"", src:"멕마웨 2026.04 빌라드지디 안양 계약후기"},
+  "명동 로얄호텔||일 15시": {lr:1100, lm:100000, note:"부대비용(대관료+플라워) 포함가, 코스 시작가 기준", src:"멕마웨 2026.04 명동 로얄호텔 소규모웨딩 계약후기"},
+  "더컨벤션 반포||27/3~4": {lr:750, lm:75000, note:"", src:"멕마웨 2024.11 더컨벤션 반포 견적공유"},
+  "더컨벤션 잠실||토 잔여타임": {lr:1100, lm:110000, note:"", src:"멕마웨 2026.07 더컨벤션 잠실 견적공유"},
+  "DMC타워웨딩||27/8 점심": {lr:1700, lm:93000, note:"펠리체홀 기준(DMC는 펠리체·그랜드볼룸·라피네 3개홀, 가격이 다름)", src:"멕마웨 2026.06 DMC웨딩타워 펠리체홀 견적후기"},
+  "아만티호텔||—": {lr:850, lm:88000, note:"", src:"멕마웨 2025.10 아만티호텔 견적정보공유"},
+  "더채플앳청담||26/12 오후": {lr:1100, lm:110000, note:"", src:"멕마웨 2025.10 더채플앳청담 계약후기"},
+  "루이비스 중구||토 12:10": {lr:850, lm:85000, note:"", src:"멕마웨 2025.04 루이비스 중구 견적"},
+  "합정 웨딩시그니처||27/8": {lr:950, lm:89000, note:"", src:"멕마웨 2026.02 합정 웨딩시그니처 계약후기(트리니티홀)"},
+  "루이비스 강서||27/8 오후": {lr:1200, lm:88000, note:"", src:"멕마웨 2025.09 루이비스 강서점 견적공유"},
+  "더뉴컨벤션||13:20": {lr:1100, lm:92000, note:"더뉴홀 기준", src:"멕마웨 2026.06 더뉴컨벤션(더뉴홀) 계약후기"},
+  "여의도웨딩컨벤션||토 점심": {lr:900, lm:82000, note:"토요일 300명 기준(2025.09)", src:"멕마웨 2025.09 여의도웨딩컨벤션 견적공유"},
+  "서울웨딩타워||27/9 오후": {lr:1050, lm:110000, note:"확인된 최근 할인 사례 없음(대부분 비공개)", src:"멕마웨 2026년 서울웨딩타워 정가 기준"},
+  "더컨벤션 송파문정||토 12:10": {lr:1100, lm:120000, note:"그랜드볼룸홀 기준", src:"멕마웨 3주전 더컨벤션 송파문정 당일계약후기"},
+  "라움||—": {lr:1200, lm:110000, note:"", src:"멕마웨 2025.08 하우스오브더라움 상담후기"},
+  "지타워 구로||25/11 일 할인가": {lr:1500, lm:95000, note:"꽃장식 포함가 기준", src:"멕마웨 2025.02 구로 지타워 견적후기"},
+};
 
 /* 실제 견적서 원본 — 루클라비 더 화이트 (강남 논현동, 200명 보증, 지인 실상담) */
 const LUKLAVI = {
@@ -2931,8 +2968,11 @@ function renderHalls(){
     const h=r.h, kc = h[6]==="할인가"?"g":h[6]==="정찰"?"r":"n";
     const kt = h[6]==="정찰"?"정찰제":h[6];
     const tc = r.t<=1900?"lo":r.t>=2800?"hi":"";
+    const ev = LIST_PRICE_EVIDENCE[h[0]+"||"+h[2]];
+    const rentCell = ev ? `<span class="lp">정가 ${ev.lr}만</span>${h[3]}만` : `${h[3]}만`;
+    const mealCell = ev ? `<span class="lp">정가 ${ev.lm.toLocaleString()}</span>${h[4].toLocaleString()}` : `${h[4].toLocaleString()}`;
     return `<tr data-i="${r.i}" class="${hSel===r.i?"sel":""}"><td class="nm">${h[0]}</td><td>${h[1]}</td><td>${h[2]}</td>
-      <td class="num">${h[3]}만</td><td class="num">${h[4].toLocaleString()}</td>
+      <td class="num">${rentCell}</td><td class="num">${mealCell}</td>
       <td><span class="tag ${kc}">${kt}</span></td><td class="num tot ${tc}">${fmt(r.t)}만</td><td><span class="tag n">${h[7]}</span></td></tr>`;
   }).join("") || `<tr><td colspan="8" style="text-align:center;color:var(--faint);padding:24px">조건에 맞는 홀이 없어요.</td></tr>`;
   $$("#hallTable tbody tr[data-i]").forEach(tr=>tr.onclick=()=>{
@@ -2945,15 +2985,35 @@ function renderHallDetail(){
   if(hSel===null){ box.style.display="none"; return; }
   const h=HALLS[hSel];
   const d=HALL_DETAIL[h[0]];
-  if(!d){ box.style.display="none"; return; }
+  const ev=LIST_PRICE_EVIDENCE[h[0]+"||"+h[2]];
+  if(!d && !ev){ box.style.display="none"; return; }
   box.style.display="block";
-  const depthTag = d.depth==="full" ? `<span class="tag g">후기 다수 확인</span>` : `<span class="tag n">가격 위주 확인</span>`;
+  const depthTag = d ? (d.depth==="full" ? `<span class="tag g">후기 다수 확인</span>` : `<span class="tag n">가격 위주 확인</span>`) : "";
+  const priceBlock = ev ? `
+    <div style="margin:0 0 14px;padding:10px 12px;background:var(--bg-deep);border-radius:8px;font-size:12.5px;line-height:1.55">
+      <div class="lb" style="font-size:11px;color:var(--accent);margin-bottom:4px">정가 vs 확인된 할인 사례</div>
+      정가 대관료 ${ev.lr}만원 / 식대 ${ev.lm.toLocaleString()}원 &rarr; 표에 표시된 가격 대관료 ${h[3]}만원 / 식대 ${h[4].toLocaleString()}원
+      ${ev.note? `<div style="color:var(--sub);margin-top:4px">${ev.note}</div>` : ""}
+      <div style="color:var(--faint);margin-top:4px">출처 · ${ev.src}</div>
+      <div style="color:var(--faint);margin-top:4px">대부분의 원문 게시글은 최종 계약가(할인가)를 "운영진 공개"로 처리해 개별적으로 공개하지 않으므로, 이 사례 하나만으로 모든 계약이 같은 할인율을 받는다고 단정하지 마세요.</div>
+    </div>` : "";
+  if(!d){
+    box.innerHTML = `
+      <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px">
+        <span style="font-family:var(--serif);font-weight:700;font-size:17px">${h[0]}</span>
+      </div>
+      ${priceBlock}
+      <p style="font-size:12.5px;color:var(--faint);margin:0">이 홀은 가격 정보 이외의 후기/장단점은 이번 라운드에서 정리되지 않았습니다.</p>
+    `;
+    return;
+  }
   box.innerHTML = `
     <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px">
       <span style="font-family:var(--serif);font-weight:700;font-size:17px">${h[0]}</span>
       ${depthTag}
     </div>
     <p style="font-size:13px;color:var(--sub);margin:0 0 12px"><strong>${d.addr||"주소 미확인"}</strong></p>
+    ${priceBlock}
     ${d.features&&d.features.length? `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px">${d.features.map(f=>`<span class="tag n">${f}</span>`).join("")}</div>` : ""}
     <div class="notes c2">
       <div class="note-block" style="border-top:none;padding-top:0">
