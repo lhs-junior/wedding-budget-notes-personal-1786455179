@@ -252,7 +252,7 @@ footer{margin-top:60px;padding:24px 0 0;border-top:1px solid var(--line);font-si
   </div>
   <div class="scroll">
     <table id="hallTable">
-      <thead><tr><th>웨딩홀</th><th>지역</th><th>요일·시간</th><th class="num">대관</th><th class="num">식대</th><th>구분</th><th class="num">총액</th><th>출처</th></tr></thead>
+      <thead><tr><th>웨딩홀</th><th>지역</th><th>요일·시간</th><th class="num">대관</th><th class="num">식대</th><th>구분</th><th class="num">총액</th><th>출처</th><th>사진</th></tr></thead>
       <tbody></tbody>
       <caption><span class="tag g">할인가</span> 실제 견적·계약가 · <span class="tag n">정가</span> 할인 전 · <span class="tag r">정찰제</span> 할인 없음<br>
         후기의 원래 보증인원과 입력값이 다를 수 있어 비교용 기준선으로만 쓰세요.</caption>
@@ -2955,6 +2955,8 @@ const vSel=new Set();
 
 const guar=()=>{const v=parseInt($("#guar").value||"200",10);return isNaN(v)?200:Math.max(1,v);};
 const hallTotal=h=>h[3]+h[4]*guar()/10000;
+const MAP_QUERY_OVERRIDE={"라움":"하우스 오브 더 라움","H스퀘어":"H스퀘어 성동 왕십리 웨딩홀"};
+const hallMapUrl=h=>"https://map.naver.com/p/search/"+encodeURIComponent(MAP_QUERY_OVERRIDE[h[0]]||(h[0].replace(/\([^)]*\)/g,"").trim()+" 웨딩홀"));
 
 /* ── halls ── */
 function renderHalls(){
@@ -2973,8 +2975,9 @@ function renderHalls(){
     const mealCell = ev ? `<span class="lp">정가 ${ev.lm.toLocaleString()}</span>${h[4].toLocaleString()}` : `${h[4].toLocaleString()}`;
     return `<tr data-i="${r.i}" class="${hSel===r.i?"sel":""}"><td class="nm">${h[0]}</td><td>${h[1]}</td><td>${h[2]}</td>
       <td class="num">${rentCell}</td><td class="num">${mealCell}</td>
-      <td><span class="tag ${kc}">${kt}</span></td><td class="num tot ${tc}">${fmt(r.t)}만</td><td><span class="tag n">${h[7]}</span></td></tr>`;
-  }).join("") || `<tr><td colspan="8" style="text-align:center;color:var(--faint);padding:24px">조건에 맞는 홀이 없어요.</td></tr>`;
+      <td><span class="tag ${kc}">${kt}</span></td><td class="num tot ${tc}">${fmt(r.t)}만</td><td><span class="tag n">${h[7]}</span></td>
+      <td><a href="${hallMapUrl(h)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="color:var(--accent-ink);text-decoration:underline;font-size:12px;white-space:nowrap">사진 ↗</a></td></tr>`;
+  }).join("") || `<tr><td colspan="9" style="text-align:center;color:var(--faint);padding:24px">조건에 맞는 홀이 없어요.</td></tr>`;
   $$("#hallTable tbody tr[data-i]").forEach(tr=>tr.onclick=()=>{
     const i=+tr.dataset.i; hSel=(hSel===i?null:i); renderHalls(); renderTotal();
   });
@@ -2989,6 +2992,7 @@ function renderHallDetail(){
   if(!d && !ev){ box.style.display="none"; return; }
   box.style.display="block";
   const depthTag = d ? (d.depth==="full" ? `<span class="tag g">후기 다수 확인</span>` : `<span class="tag n">가격 위주 확인</span>`) : "";
+  const mapLink = `<a href="${hallMapUrl(h)}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;font-size:12.5px;padding:5px 10px;border:1px solid var(--line-strong);border-radius:20px;color:var(--accent-ink);text-decoration:none;background:var(--surface)">🖼️ 실제 사진·리뷰 바로보기 ↗</a>`;
   const priceBlock = ev ? `
     <div style="margin:0 0 14px;padding:10px 12px;background:var(--bg-deep);border-radius:8px;font-size:12.5px;line-height:1.55">
       <div class="lb" style="font-size:11px;color:var(--accent);margin-bottom:4px">정가 vs 확인된 할인 사례</div>
@@ -3001,9 +3005,10 @@ function renderHallDetail(){
     box.innerHTML = `
       <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px">
         <span style="font-family:var(--serif);font-weight:700;font-size:17px">${h[0]}</span>
+        ${mapLink}
       </div>
       ${priceBlock}
-      <p style="font-size:12.5px;color:var(--faint);margin:0">이 홀은 가격 정보 이외의 후기/장단점은 이번 라운드에서 정리되지 않았습니다.</p>
+      <p style="font-size:12.5px;color:var(--faint);margin:0">이 홀은 가격 정보 이외의 후기/장단점은 이번 라운드에서 정리되지 않았습니다. 위 버튼을 누르면 실제 사진과 리뷰량을 바로 확인할 수 있습니다.</p>
     `;
     return;
   }
@@ -3011,6 +3016,7 @@ function renderHallDetail(){
     <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px">
       <span style="font-family:var(--serif);font-weight:700;font-size:17px">${h[0]}</span>
       ${depthTag}
+      ${mapLink}
     </div>
     <p style="font-size:13px;color:var(--sub);margin:0 0 12px"><strong>${d.addr||"주소 미확인"}</strong></p>
     ${priceBlock}
@@ -3252,7 +3258,10 @@ if($("#verifiedHallCandidates") && typeof HALL_VERDICTS!=="undefined"){
           '<div class="note-block" style="border-top:none;padding-top:0"><div class="lb" style="color:var(--good)">볼 점</div><ul>' + h.pros.map(p=>'<li>'+p+'</li>').join('') + '</ul></div>' +
           '<div class="note-block" style="border-top:none;padding-top:0"><div class="lb" style="color:var(--warn)">걸리는 점</div><ul>' + h.cons.map(c=>'<li>'+c+'</li>').join('') + '</ul></div>' +
         '</div>' +
-        '<div style="margin-top:4px">' + h.links.map(l=>'<div style="font-size:12.5px;margin:3px 0"><a href="'+l.url+'" target="_blank" rel="noopener" style="color:var(--accent-ink);text-decoration:underline">'+l.title+' ↗</a></div>').join('') + '</div>' +
+        '<div style="margin-top:4px">' +
+          '<div style="font-size:12.5px;margin:3px 0"><a href="https://map.naver.com/p/search/'+encodeURIComponent(h.name+" 웨딩홀")+'" target="_blank" rel="noopener" style="color:var(--accent-ink);text-decoration:underline;font-weight:600">🖼️ 사진·리뷰 바로보기 ↗</a></div>' +
+          h.links.map(l=>'<div style="font-size:12.5px;margin:3px 0"><a href="'+l.url+'" target="_blank" rel="noopener" style="color:var(--accent-ink);text-decoration:underline">'+l.title+' ↗</a></div>').join('') +
+        '</div>' +
       '</div>';
     }).join('');
 }
@@ -3266,6 +3275,7 @@ if($("#unknownHalls") && typeof UNKNOWN_HALLS!=="undefined"){
         <div style="font-size:12.5px;color:var(--sub);margin:2px 0 6px">${h.addr}</div>
         <ul style="margin:4px 0;padding-left:18px;font-size:13px;color:var(--sub);line-height:1.7">${h.facts.map(f=>`<li>${f}</li>`).join("")}</ul>
         <div class="callout warn" style="margin:6px 0">${h.caveat}</div>
+        <div style="font-size:12.5px;margin:4px 0"><a href="https://map.naver.com/p/search/${encodeURIComponent(h.name+" 웨딩홀")}" target="_blank" rel="noopener" style="color:var(--accent-ink);text-decoration:underline;font-weight:600">🖼️ 사진·리뷰 바로보기 ↗</a></div>
         <div style="font-size:11.5px;color:var(--faint)">출처 · ${h.src}</div>
       </div>`).join("");
 }
