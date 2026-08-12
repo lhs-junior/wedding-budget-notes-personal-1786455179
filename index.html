@@ -236,8 +236,8 @@ footer{margin-top:60px;padding:24px 0 0;border-top:1px solid var(--line);font-si
 <!-- ══ 웨딩홀 ══ -->
 <div class="page" id="p-hall">
 <section>
-  <div class="sechead"><span class="n">Ⅰ</span><h2>웨딩홀 실견적 67곳</h2></div>
-  <p class="secsub">행을 눌러 선택하세요. 총액 = 대관료 + (식대 × 보증인원). 필수옵션·부가세·봉사료는 별도입니다.</p>
+  <div class="sechead"><span class="n">Ⅰ</span><h2>웨딩홀 비교 73곳</h2></div>
+  <p class="secsub">실견적·계약가와 검증 가능한 정가 후보를 함께 둡니다. 행을 누르면 상세 메모가 열립니다. 총액 = 대관료 + (식대 × 보증인원). 필수옵션·부가세·봉사료는 별도입니다.</p>
   <div class="controls" id="hallCtl">
     <button class="chip on" data-f="all">전체</button>
     <button class="chip" data-f="east">동쪽 생활권</button>
@@ -258,6 +258,7 @@ footer{margin-top:60px;padding:24px 0 0;border-top:1px solid var(--line);font-si
     </table>
   </div>
   <div id="hallDetail" style="display:none;border:1px solid var(--line-strong);background:var(--surface);padding:18px 20px;margin:14px 0"></div>
+  <div id="verifiedHallCandidates" class="note-block" style="border-top:1px solid var(--line-strong);margin-top:6px;padding-top:14px"></div>
   <div id="unknownHalls"></div>
   <div id="priceGoKr" class="note-block" style="border-top:1px solid var(--line-strong);margin-top:6px;padding-top:14px"></div>
 </section>
@@ -599,7 +600,13 @@ const HALLS = [
   ["라온제나 강남구청", "강남 학동로", "정가 기준", 770, 70000, 200, "정가", "스마트웨딩·웨딩북", 0, 0],
   ["로프트가든344 오목교", "양천 오목교", "정가 기준", 850, 72000, 200, "정가", "스마트웨딩·웨딩북", 0, 0],
   ["아펠가모 반포", "서초 반포", "정가 기준", 1100, 110000, 300, "정가", "요즘웨딩·웨딩노트", 0, 0],
-  ["루이비스 송파문정", "송파 문정", "정가 기준", 950, 87000, 200, "정가", "스마트웨딩", 1, 1]
+  ["루이비스 송파문정", "송파 문정", "정가 기준", 950, 87000, 200, "정가", "스마트웨딩", 1, 1],
+  ["웨딩스퀘어 강변","광진 강변","정가 기준",750,75000,250,"정가","다이렉트웨딩·스마트웨딩",1,0],
+  ["웨딩스퀘어 성북점","성북 길음","정가 기준",660,66000,200,"정가","스마트웨딩·요즘웨딩",1,0],
+  ["이룸웨딩컨벤션","마포 공덕","정가 기준",900,80000,250,"정가","다이렉트웨딩",0,0],
+  ["웨딩그룹위더스 영등포","영등포","정가 기준",1300,96000,250,"정가","스마트웨딩·아이웨딩",0,0],
+  ["오펠리스웨딩홀","중구 시청","정가 기준",900,75000,200,"정가","요즘웨딩·베리굿웨딩",0,1],
+  ["벨라루체웨딩홀 서울점","동대문 회기","정가 기준",880,88000,200,"정가","다이렉트웨딩",1,1],
 ];
 
 /* 실제 견적서 원본 — 루클라비 더 화이트 (강남 논현동, 200명 보증, 지인 실상담) */
@@ -631,17 +638,17 @@ const PRICE_GO_KR = {
   url: "https://www.price.go.kr/tprice/portal/wedding/areaStatistic.do",
 };
 
-/* 미확인 후보 2곳 — 이번에 추가로 찾은 사실 */
+/* 미확인 후보 2곳 — 최신성 또는 현재 운영 상태를 끝까지 확인하지 못한 사실 */
 const UNKNOWN_HALLS = [
   {
-    name: "강변 웨딩스퀘어", addr: "광진구 광나루로56길 85 · 강변테크노마트 3~4층, 강변역 1·2번출구 도보 2~3분",
+    name: "어린이회관 려움웨딩", addr: "광진구 광나루로 441 · 어린이대공원역 2번출구권",
     facts: [
-      "주차 2,500대(2시간 무료, 이후 30분당 1,000원)",
-      "4개 홀(그레이스·아모르·베니르·루시드) 모두 대관료 750~800만원, 식대 75,000~80,000원 선으로 확인(공식 사이트·참가격 언급 기준)",
-      "3층(베니르·루시드)/4층(아모르·그레이스)로 나뉘며, 아모르홀은 원형테이블의 어두운홀, 그레이스홀은 버진로드가 반사재질이라 화려한 편",
+      "구조화된 오래된 자료에는 피로연 3~4만원, 보증 100~150명, 좌석 200~250석, 주차 1,000대 표기가 남아 있음",
+      "하지만 확인된 최신 공개자료에서는 현재 식대·예식간격·실시간 예약 가능 월 같은 핵심 값이 충분히 고정되지 않음",
+      "생활권과 접근성은 좋아 보여도, 지금 단계에서는 옛 숫자를 그대로 믿고 비교표에 올리기 어렵다",
     ],
-    caveat: "이 숫자는 공식 사이트·참가격 인용 기준이며, 실제 계약자가 직접 공개한 최종 할인가는 카페 7곳에서 확인되지 않았습니다. 위치(강변역 직결 + 동서울터미널 인접 + 주차 2,500대)는 하객 동선 조건에 가장 잘 맞는 후보라 직접 상담을 권장합니다.",
-    src: "공식 홈페이지(weddingsquare.co.kr) · price.go.kr 참가격",
+    caveat: "어린이회관 려움웨딩은 현재 운영 자체는 보이지만, 핵심 가격/보증/주차 숫자가 최신 공개 원문으로 충분히 고정되지 않았습니다. 전화 또는 현장 상담 전까지는 후보 메모 수준으로만 취급합니다.",
+    src: "itwed 오래된 구조화 정보 · 인스타그램 · 어린이회관 안내 페이지",
   },
   {
     name: "하나 그랜드홀", addr: "명동(하나금융그룹 사옥) · 여의도 · 청라 등 지역 확대 중",
@@ -654,6 +661,97 @@ const UNKNOWN_HALLS = [
     caveat: "이 정보는 2023년 기준입니다. 2026~2027년 현재도 같은 자격·방식인지는 확인되지 않았습니다 — 하나원큐 앱에서 최신 공고를 직접 확인해야 합니다.",
     src: "하나금융그룹 공식 발표(2023) · 블로그",
   },
+];
+
+const HALL_VERDICTS = [
+  {
+    name: "웨딩스퀘어 성북점", fit: "borderline", badge: "예산 적합권", area: "성북 길음 · 길음역 10번출구 도보 2분",
+    meal: "66,000원", guarantee: "최소 200명 신호 / 220석", parking: "150대 · 무료 2시간", timing: "70분 간격",
+    summary: "이번 라운드에서 가장 예산에 가까운 새 후보. 식대는 목표 범위 안이지만, 주차와 엘리베이터 동선은 강점이라기보다 혼합 평가입니다.",
+    pros: ["식대 6.6만으로 현재 목표 범위 안", "길음역 2분이라 대중교통 접근성 좋음"],
+    cons: ["주차 150대라 차량 하객 비중이 높으면 아쉬울 수 있음", "후기상 깊은 지하층 주차 후 엘리베이터 갈아타기 불편 언급"],
+    links: [
+      { title: "스마트웨딩", url: "https://smartwedding-besthall.com/WeddingSquareSeongbuk" },
+      { title: "요즘웨딩", url: "https://yozmwedding.co.kr/venue?bmode=view&idx=151869999" }
+    ]
+  },
+  {
+    name: "웨딩스퀘어 강변", fit: "borderline", badge: "동선 최강권", area: "광진 강변 · 강변역 B1 직결 · 동서울터미널 인접",
+    meal: "75,000~80,000원", guarantee: "최소 250명~300명 신호", parking: "2,500대 · 무료 2시간", timing: "80분 간격",
+    summary: "군자·휘경동·전국 하객 이동성과 주차는 이번 검증 후보 중 최상급. 대신 식대와 최소보증이 사용자의 현재 목표보다 약간 무겁습니다.",
+    pros: ["강변역 직결 + 동서울터미널 인접", "주차 2,500대로 자차 하객 대응이 매우 강함"],
+    cons: ["식대가 7만원 상단을 살짝 넘음", "점심 피크 시간대에는 200명 규모에서 보증 인원 이슈 가능성"],
+    links: [
+      { title: "다이렉트웨딩", url: "https://www.directwedding.co.kr/weddinghall/hall0397" },
+      { title: "공식 홈페이지", url: "https://weddingsquare.co.kr/" }
+    ]
+  },
+  {
+    name: "오펠리스웨딩홀", fit: "borderline", badge: "중심 접근권", area: "중구 시청 · 시청역 3분 · 서울역 도보권",
+    meal: "75,000원", guarantee: "200명(12:20·13:40는 250명)", parking: "500대 · 하객 3시간 무료", timing: "11:00 / 12:20 / 13:40 / 15:00 ...",
+    summary: "시청역·서울역 축 접근성, 3시 이전 시간대 명확성, 500대 주차는 좋습니다. 다만 점심 핵심 타임 일부가 250명 보증이라 200명 예식엔 약간 빡빡합니다.",
+    pros: ["시청역 3분, 서울역 도보권", "3시 이전 시간대가 공개돼 있음"],
+    cons: ["주력 홀이 170석이라 200명 체감은 타이트할 수 있음", "12:20, 13:40는 250명 보증 신호"],
+    links: [
+      { title: "요즘웨딩", url: "https://yozmwedding.co.kr/venue?bmode=view&idx=152818618" },
+      { title: "베리굿웨딩", url: "http://www.verygoodwedding.co.kr/mobile/hall/hall_detail.asp?wIdx=482" }
+    ]
+  },
+  {
+    name: "프레스센터플라자", fit: "borderline", badge: "시간 명확권", area: "중구 시청 · 시청역 4번출구 도보 1분",
+    meal: "65,000~80,000원", guarantee: "최소 300명", parking: "230대 · 무료 3시간", timing: "12시 / 16시 하루 2팀",
+    summary: "12시 예식이 공식으로 명확하고 식대 하한도 맞습니다. 하지만 최소 보증 300명이 현재 목표 200명 안팎과 가장 크게 충돌합니다.",
+    pros: ["12시 예식이 공식으로 명확", "서울 중심과 지방 하객 이동에 유리"],
+    cons: ["최소보증 300명이 가장 큰 걸림돌", "연회장 이용 구조까지 포함해 실제 총규모가 큼"],
+    links: [
+      { title: "공식 홈페이지", url: "https://www.plazawedding.co.kr/info1/weddinghall.do" },
+      { title: "다이렉트웨딩", url: "https://www.directwedding.co.kr/weddinghall/hall0501" }
+    ]
+  },
+  {
+    name: "이룸웨딩컨벤션", fit: "borderline", badge: "공덕 접근권", area: "마포 공덕 · 공덕역 2분",
+    meal: "68,000~80,000원 공개값 충돌", guarantee: "최소 250명", parking: "300~500대 공개값 충돌", timing: "90분 간격",
+    summary: "공덕역 2분, 단독홀, 90분 간격, 로비와 엘리베이터 동선은 강점입니다. 대신 식대와 최소보증이 현재 목표보다 약간 무겁고 주차 대수 공개값이 충돌합니다.",
+    pros: ["공덕역 초근접", "단독홀 + 90분 간격 + 로비/엘리베이터 6대 신호"],
+    cons: ["식대 공개값이 6.8만~8만으로 갈림", "주차 300 vs 500 표기가 충돌"],
+    links: [
+      { title: "다이렉트웨딩", url: "https://www.directwedding.co.kr/weddinghall/hall0408" },
+      { title: "공식 가이드", url: "https://www.iruumwedding.co.kr/guide/wedding.php" }
+    ]
+  },
+  {
+    name: "벨라루체웨딩홀 서울점", fit: "borderline", badge: "구 웨딩헤너스", area: "동대문 회기 · 회기역 도보 4분",
+    meal: "88,000원", guarantee: "최소 200명", parking: "500대(본관 150 + 외부 350) · 무료 2시간", timing: "90분 간격",
+    summary: "예전 웨딩헤너스 이름으로 잡혔던 후보는 현재 벨라루체웨딩홀 서울점으로 운영됩니다. 접근성은 좋지만 식대가 현재 목표를 분명히 넘습니다.",
+    pros: ["회기역 앞이라 휘경동 가족축 접근성 좋음", "최소 보증 200명은 숫자상 맞음"],
+    cons: ["식대 8.8만으로 예산 초과", "하객은 야외주차장 사용이라 비 오는 날 불편 가능"],
+    links: [
+      { title: "다이렉트웨딩", url: "https://www.directwedding.co.kr/weddinghall/hall0219" },
+      { title: "공식 홈페이지", url: "https://www.bellaluceseoul.co.kr/" }
+    ]
+  },
+  {
+    name: "웨딩그룹위더스 영등포", fit: "bad", badge: "예산 탈락권", area: "영등포 · 영등포시장역 1~2분",
+    meal: "86,000~96,000원", guarantee: "최소 250명", parking: "600대 · 무료 2시간", timing: "70분 간격",
+    summary: "역 접근은 강하지만 식대와 최소보증이 둘 다 현재 목표를 넘습니다. 대형 수용 구조라 주차 대기와 연회장 혼잡 리스크도 같이 보입니다.",
+    pros: ["역 접근성과 전용 웨딩빌딩 구조"],
+    cons: ["식대가 현재 목표를 확실히 초과", "최소보증 250명"],
+    links: [
+      { title: "스마트웨딩", url: "https://smartwedding-besthall.com/withus" },
+      { title: "아이웨딩", url: "https://www.iwedding.co.kr/enterprise/info/1439199903" }
+    ]
+  },
+  {
+    name: "HW컨벤션센터", fit: "bad", badge: "고가 탈락권", area: "종로 부암 · 경복궁역 셔틀",
+    meal: "89,000~133,000원", guarantee: "최소 200명", parking: "500~600대", timing: "2시간 또는 3시간 간격",
+    summary: "주차와 공간은 강하지만 식대가 이번 검증군 중 가장 비쌉니다. 역 직결형도 아니라 현재 우선순위에는 맞지 않습니다.",
+    pros: ["주차와 공간 여유, 식사 평 강함"],
+    cons: ["식대가 가장 비쌈", "역세권 체감이 약함"],
+    links: [
+      { title: "공식 홈페이지", url: "https://www.hwcc.co.kr/" },
+      { title: "다이렉트웨딩", url: "https://www.directwedding.co.kr/weddinghall/hall0010" }
+    ]
+  }
 ];
 
 /* ══════════════════════════════════════════════════════════════
@@ -847,9 +945,9 @@ const COST_MAP = [
   {
     title:"예식 직접비",
     status:"강함",
-    note:"현재 사이트의 핵심 축. 웨딩홀 67곳, 스드메 4플래너 DB, 부대업체 실사례가 이미 반영됨.",
+    note:"현재 사이트의 핵심 축. 웨딩홀 비교 73곳, 스드메 4플래너 DB, 부대업체 실사례가 이미 반영됨.",
     items:[
-      ["웨딩홀", "강함", "67곳 실견적 + 일부 정가/정찰제"],
+      ["웨딩홀", "강함", "73곳 비교표 + 분리 검증 후보 메모"],
       ["스드메", "강함", "134개 스튜디오/드레스/메이크업 DB"],
       ["본식 촬영/영상/사회/헬퍼", "중간", "실제 업체명과 범위는 있음, 추가금 체계는 더 보강 필요"],
       ["혼주 준비", "중간", "혼주 메이크업·한복·예복 사례 존재"],
@@ -2487,6 +2585,124 @@ HALL_DETAIL["더화이트베일 서초"] = {
   ]
 };
 
+
+HALL_DETAIL["웨딩스퀘어 강변"] = {
+  depth: "thin",
+  addr: "광진구 광나루로56길 85 · 강변테크노마트 3~4F · 강변역 B1 직결",
+  features: ["강변역 직결", "동서울터미널 인접", "주차 2,500대", "4개 홀"],
+  pros: [
+    "강변역과 테크노마트 지하로 바로 연결돼 하객 이동성이 강함",
+    "동서울터미널 인접이라 지방 하객 동선이 매우 좋음",
+    "주차 2,500대, 하객 2시간 무료로 자차 하객 대응력이 큼"
+  ],
+  cons: [
+    "식대가 75,000~80,000원대로 현재 목표 상단을 살짝 넘음",
+    "플랫폼별 최소보증이 250명 또는 300명으로 보여 200명 예식엔 다소 무거움",
+    "토요일 11시~14시 피크 시간대는 보증조건이 더 빡빡할 수 있음"
+  ],
+  links: [
+    { title: "다이렉트웨딩", url: "https://www.directwedding.co.kr/weddinghall/hall0397" },
+    { title: "공식 홈페이지", url: "https://weddingsquare.co.kr/" }
+  ]
+};
+
+HALL_DETAIL["웨딩스퀘어 성북점"] = {
+  depth: "thin",
+  addr: "성북구 동소문로 284 · 길음역 10번출구 도보 2분",
+  features: ["길음역 2분", "뷔페 66,000원", "70분 간격", "220석 신호"],
+  pros: [
+    "이번 라운드 추가 후보 중 식대가 가장 예산에 가까움",
+    "길음역 2분이라 대중교통 접근성이 좋음",
+    "보증 200명 신호와 220석 정보가 있어 200명 안팎 예식과의 숫자 궁합이 나쁘지 않음"
+  ],
+  cons: [
+    "주차 150대로 차량 하객 비중이 높으면 강점이라 보기 어려움",
+    "후기상 지하 깊은 층 주차 후 엘리베이터 갈아타기 불편 언급이 있음"
+  ],
+  links: [
+    { title: "스마트웨딩", url: "https://smartwedding-besthall.com/WeddingSquareSeongbuk" },
+    { title: "요즘웨딩", url: "https://yozmwedding.co.kr/venue?bmode=view&idx=151869999" }
+  ]
+};
+
+HALL_DETAIL["이룸웨딩컨벤션"] = {
+  depth: "thin",
+  addr: "마포구 마포대로 78 · 경찰공제회 자람빌딩 5F · 공덕역 2분",
+  features: ["공덕역 2분", "단독홀", "90분 간격", "엘리베이터 6대"],
+  pros: [
+    "공덕역 초근접이라 서울 안팎 하객 이동성이 좋음",
+    "단독홀, 90분 간격, 넓은 로비와 엘리베이터 6대 신호로 동선 평이 좋음",
+    "2023년 리뉴얼 이후 시설 만족 후기가 보임"
+  ],
+  cons: [
+    "식대 공개값이 68,000~80,000원으로 갈려 보수적으로는 예산 상단을 넘길 수 있음",
+    "최소보증 250명이라 200명 안팎 예식엔 약간 높음",
+    "주차 대수가 300 vs 500으로 공개 자료가 충돌함"
+  ],
+  links: [
+    { title: "다이렉트웨딩", url: "https://www.directwedding.co.kr/weddinghall/hall0408" },
+    { title: "공식 가이드", url: "https://www.iruumwedding.co.kr/guide/wedding.php" }
+  ]
+};
+
+HALL_DETAIL["웨딩그룹위더스 영등포"] = {
+  depth: "thin",
+  addr: "영등포구 영중로 55 · 영등포시장역 4번출구 도보 1~2분",
+  features: ["전용 웨딩빌딩", "4개 홀", "주차 600대", "70분 간격"],
+  pros: [
+    "역 접근성이 매우 좋고 전용 웨딩빌딩이라 찾기 쉬움",
+    "홀 컨디션과 접근성 자체는 좋아 보인다는 후기 다수"
+  ],
+  cons: [
+    "식대 86,000~96,000원으로 현재 목표를 확실히 초과",
+    "최소보증 250명",
+    "대형 수용 구조라 주차 대기와 연회장 혼잡 가능성 언급이 있음"
+  ],
+  links: [
+    { title: "스마트웨딩", url: "https://smartwedding-besthall.com/withus" },
+    { title: "아이웨딩", url: "https://www.iwedding.co.kr/enterprise/info/1439199903" }
+  ]
+};
+
+HALL_DETAIL["오펠리스웨딩홀"] = {
+  depth: "thin",
+  addr: "중구 세종대로9길 41 퍼시픽타워 20층 · 시청역 3분 · 서울역 도보권",
+  features: ["단독홀", "주차 500대", "3시간 무료", "1시간20분 간격"],
+  pros: [
+    "시청역 3분, 서울역 도보권으로 전국 하객 접근성이 좋음",
+    "11:00 / 12:20 / 13:40 / 15:00 등 3시 이전 시간대가 명확하게 공개됨",
+    "주차 500대, 하객 3시간 무료"
+  ],
+  cons: [
+    "라비제홀 170석이라 200명 체감은 다소 타이트할 수 있음",
+    "12:20, 13:40 타임은 250명 보증 신호",
+    "식대 75,000원으로 현재 목표 상단을 약간 넘음"
+  ],
+  links: [
+    { title: "베리굿웨딩", url: "http://www.verygoodwedding.co.kr/mobile/hall/hall_detail.asp?wIdx=482" },
+    { title: "요즘웨딩", url: "https://yozmwedding.co.kr/venue?bmode=view&idx=152818618" }
+  ]
+};
+
+HALL_DETAIL["벨라루체웨딩홀 서울점"] = {
+  depth: "thin",
+  addr: "동대문구 망우로 61 · 회기역 도보 4분 · 구 웨딩헤너스",
+  features: ["구 웨딩헤너스", "90분 간격", "3개 홀", "주차 500대 표기"],
+  pros: [
+    "회기역 앞이라 휘경동 가족축 접근성이 좋음",
+    "최소보증 200명으로 숫자상 200명 안팎 예식과는 맞물림"
+  ],
+  cons: [
+    "현재 공개 식대는 88,000원으로 예산을 분명히 넘음",
+    "하객은 야외주차장을 많이 쓰게 되어 비 오는 날 불편 가능",
+    "예전 웨딩헤너스 이름 그대로가 아니라 리브랜딩된 현재 이름으로 봐야 함"
+  ],
+  links: [
+    { title: "다이렉트웨딩", url: "https://www.directwedding.co.kr/weddinghall/hall0219" },
+    { title: "공식 홈페이지", url: "https://www.bellaluceseoul.co.kr/" }
+  ]
+};
+
 </script>
 <script>
 /* ── 비밀번호 (바꾸려면 이 한 줄만 수정) ── */
@@ -2770,6 +2986,34 @@ function renderWholeWedding(){
     renderRows('#wholeHoneymoon', WHOLE_WEDDING_COSTS.honeymoon);
     renderRows('#wholeLeakage', WHOLE_WEDDING_COSTS.leakage);
   }
+}
+
+
+if($("#verifiedHallCandidates") && typeof HALL_VERDICTS!=="undefined"){
+  const fitBadgeI1 = f => f==="good" ? '<span class="tag g">조건권</span>' : f==="bad" ? '<span class="tag r">탈락권</span>' : '<span class="tag n">경계권</span>';
+  $("#verifiedHallCandidates").innerHTML = '<div class="lb" style="font-size:11px;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px">분리 검증 완료 후보 ' + HALL_VERDICTS.length + '곳 — 이번 라운드에서 직접 다시 걸러낸 메모</div>' +
+    HALL_VERDICTS.map(h=>{
+      const key = h.name.replace(/"/g,'&quot;');
+      return '<div style="margin-bottom:16px">' +
+        '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">' +
+          '<span style="font-weight:700;font-family:var(--serif);font-size:14.5px">' + h.name + '</span>' +
+          fitBadgeI1(h.fit) + '<span class="tag n">' + h.badge + '</span>' +
+        '</div>' +
+        '<div style="font-size:12.5px;color:var(--sub);margin:2px 0 6px">' + h.area + '</div>' +
+        '<div style="display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px">' +
+          '<span class="tag n">식대 ' + h.meal + '</span>' +
+          '<span class="tag n">보증/좌석 ' + h.guarantee + '</span>' +
+          '<span class="tag n">주차 ' + h.parking + '</span>' +
+          '<span class="tag n">간격/시간 ' + h.timing + '</span>' +
+        '</div>' +
+        '<p style="font-size:13px;color:var(--sub);margin:0 0 8px">' + h.summary + '</p>' +
+        '<div class="notes c2">' +
+          '<div class="note-block" style="border-top:none;padding-top:0"><div class="lb" style="color:var(--good)">볼 점</div><ul>' + h.pros.map(p=>'<li>'+p+'</li>').join('') + '</ul></div>' +
+          '<div class="note-block" style="border-top:none;padding-top:0"><div class="lb" style="color:var(--warn)">걸리는 점</div><ul>' + h.cons.map(c=>'<li>'+c+'</li>').join('') + '</ul></div>' +
+        '</div>' +
+        '<div style="margin-top:4px">' + h.links.map(l=>'<div style="font-size:12.5px;margin:3px 0"><a href="'+l.url+'" target="_blank" rel="noopener" style="color:var(--accent-ink);text-decoration:underline">'+l.title+' ↗</a></div>').join('') + '</div>' +
+      '</div>';
+    }).join('');
 }
 
 /* 미확인 후보 + 참가가 공식통계 */
