@@ -721,6 +721,117 @@ const HALLS = [
    대부분의 글은 최종 계약가(할인가)를 '운영진 공개'로 비공개 처리하므로,
    여기 있는 예시는 '공개된 사례' 기준이며 사례마다 차이가 클 수 있습니다.
    키 형식: '홀이름||요일시간(when 필드)' */
+const CAFE_QUOTES = {
+  "노원 비엔티(BNT)": {rent:null, meal:58000, guarantee:null, title:"& 테라리움 견적공유", source:"makemywedding"},
+  "구로 명품웨딩프로포즈": {rent:1000000, meal:null, guarantee:null, title:"영등포 쪽 웨딩홀 추천 부탁드립니다! ♀️", source:"makemywedding"},
+  "제이오스티엘": {rent:2000000, meal:null, guarantee:150, title:"웨딩홀로 최종 선택!!!!(feat.이소희과장님 감사합니다)", source:"makemywedding"},
+  "위례 밀리토피아호텔": {rent:2850000, meal:null, guarantee:null, title:"26년 9월 5일 아이리스홀 계약 후기", source:"makemywedding"},
+  "신도림 웨딩시티": {rent:2650000, meal:51500, guarantee:170, title:"26년 8월 오후시간대 견적 공유", source:"makemywedding"},
+  "빌라드지디 논현": {rent:3000000, meal:80000, guarantee:200, title:"27년 5월 오후시간대 견적 공유", source:"makemywedding"},
+  "루클라비 더 화이트": {rent:6500000, meal:83000, guarantee:200, title:"27년 3월 오후시간대 견적 공유", source:"makemywedding"},
+  "테라리움": {rent:null, meal:58000, guarantee:null, title:"노원 비엔티 & 견적공유", source:"makemywedding"},
+  "서울웨딩타워": {rent:8800000, meal:82000, guarantee:null, title:"그레이스파티 신림 홀 계약후기(27년 5월 견적⭕)", source:"makemywedding"},
+  "세인트메리엘 강남역": {rent:7700000, meal:null, guarantee:null, title:"[정보공유] 도보 6분 <> 견적 공유(계약 ❌)", source:"makemywedding"},
+  "PJ호텔 을지로": {rent:5500000, meal:68000, guarantee:null, title:"헤스티아홀 계약 후기", source:"makemywedding"},
+  "지타워 구로": {rent:14000000, meal:null, guarantee:null, title:"컨벤션 견적(계약O)", source:"makemywedding"},
+  "브라이튼하우스(과천)": {rent:2500000, meal:89000, guarantee:null, title:"강남 계약 후기(26년 4월)", source:"makemywedding"},
+  "라브르에드니아 종합운동장": {rent:12500000, meal:null, guarantee:null, title:"26년 10월 계약 후기입니다!", source:"makemywedding"},
+  "국방컨벤션": {rent:2400000, meal:null, guarantee:null, title:"27년 5월 계약후기", source:"makemywedding"},
+  "더채플앳대치": {rent:6600000, meal:null, guarantee:230, title:"27년 1월 오후시간대 견적 공유", source:"makemywedding"},
+  "노블발렌티 삼성": {rent:8700000, meal:87000, guarantee:250, title:"27년 8월 오후시간대 견적 공유", source:"makemywedding"},
+  "KBS 신관 웨딩홀": {rent:null, meal:42900, guarantee:null, title:"전반적 정보 및 후기", source:"makemywedding"},
+  "아벤티움": {rent:null, meal:62000, guarantee:null, title:"(정보 공유성) 충정로역 27년 2월 견적 공유", source:"makemywedding"},
+  "스페이스536": {rent:4400000, meal:78000, guarantee:null, title:"서울 야외결혼식 베뉴, 계약했어요", source:"makemywedding"},
+  "루체리아웨딩컨벤션": {rent:7000000, meal:null, guarantee:null, title:"베뉴 추천 받습니다!", source:"makemywedding"},
+  "시그니엘 서울 웨딩": {rent:11000000, meal:null, guarantee:150, title:"(정보성) 반얀트리 크리스탈볼룸 계약후기 (27년도 상반기 예식) (그랜드 하얏트 남산룸 외 비교) (계약 O)", source:"makemywedding"}
+};
+
+const IWEDDING_PRICE = {
+  "구로 명품웨딩프로포즈": {rent:7500000, meal:75000, guarMin:150, guarMax:1000, flower:null, type:"분리", interval:70},
+  "제이오스티엘": {rent:3500000, meal:58000, guarMin:150, guarMax:850, flower:null, type:"분리", interval:60},
+  "신도림 웨딩시티": {rent:8000000, meal:63000, guarMin:220, guarMax:2200, flower:null, type:"분리", interval:80},
+  "빌라드지디 논현": {rent:11000000, meal:105000, guarMin:200, guarMax:300, flower:6000000, type:"동시", interval:180},
+  "엘타워": {rent:6600000, meal:130000, guarMin:250, guarMax:800, flower:8200000, type:"동시", interval:180},
+  "규수당": {rent:7500000, meal:72000, guarMin:200, guarMax:1000, flower:null, type:"분리", interval:70},
+  "로얄호텔서울": {rent:11000000, meal:95000, guarMin:200, guarMax:500, flower:null, type:"동시", interval:180},
+  "DMC타워웨딩": {rent:17000000, meal:93000, guarMin:150, guarMax:950, flower:null, type:"분리", interval:90},
+  "더리버사이드호텔": {rent:14000000, meal:90000, guarMin:100, guarMax:820, flower:null, type:"분리", interval:90},
+  "여의도웨딩컨벤션": {rent:9000000, meal:89000, guarMin:300, guarMax:1150, flower:null, type:"분리", interval:70},
+  "빌라드지디 안양": {rent:18000000, meal:95000, guarMin:200, guarMax:780, flower:null, type:"분리", interval:70},
+  "더컨벤션 반포": {rent:12000000, meal:120000, guarMin:250, guarMax:650, flower:null, type:"분리", interval:90},
+  "루클라비 더 화이트": {rent:16000000, meal:130000, guarMin:250, guarMax:600, flower:null, type:"분리", interval:90},
+  "벨라루체": {rent:8800000, meal:88000, guarMin:200, guarMax:550, flower:null, type:"분리", interval:90},
+  "남산예술원": {rent:8000000, meal:66000, guarMin:300, guarMax:700, flower:null, type:"분리", interval:120},
+  "상록아트홀": {rent:10500000, meal:105000, guarMin:250, guarMax:500, flower:null, type:"분리", interval:80},
+  "라움": {rent:15000000, meal:130000, guarMin:200, guarMax:400, flower:null, type:"분리", interval:120},
+  "루벨 강동": {rent:10000000, meal:107700, guarMin:300, guarMax:400, flower:null, type:"분리", interval:90},
+  "노원": {rent:3700000, meal:75000, guarMin:30, guarMax:300, flower:null, type:"분리", interval:150},
+  "위례": {rent:1300000, meal:55000, guarMin:40, guarMax:100, flower:null, type:"동시", interval:150},
+  "FKI플라자": {rent:7000000, meal:70000, guarMin:300, guarMax:600, flower:4800000, type:"동시", interval:240},
+  "라비니움": {rent:13000000, meal:110000, guarMin:300, guarMax:500, flower:null, type:"분리", interval:90},
+  "스타시티아트홀": {rent:9500000, meal:95000, guarMin:250, guarMax:700, flower:null, type:"분리", interval:80},
+  "까사그랑데": {rent:16500000, meal:143000, guarMin:250, guarMax:800, flower:null, type:"분리", interval:90},
+  "레노스블랑쉬": {rent:3300000, meal:55000, guarMin:200, guarMax:1120, flower:null, type:"분리", interval:60},
+  "KDW": {rent:9000000, meal:99000, guarMin:220, guarMax:1300, flower:null, type:"분리", interval:80},
+  "라온제나": {rent:7000000, meal:70000, guarMin:250, guarMax:600, flower:null, type:"분리", interval:90},
+  "로프트가든344": {rent:9000000, meal:80000, guarMin:250, guarMax:500, flower:null, type:"분리", interval:90},
+  "웨딩스퀘어 강변": {rent:7500000, meal:75000, guarMin:250, guarMax:700, flower:null, type:"분리", interval:80},
+  "이룸웨딩컨벤션": {rent:9000000, meal:40000, guarMin:250, guarMax:800, flower:null, type:"분리", interval:90},
+  "웨딩그룹위더스 영등포": {rent:13000000, meal:96000, guarMin:250, guarMax:2100, flower:null, type:"분리", interval:70},
+  "벨라루체웨딩홀 서울점": {rent:8800000, meal:88000, guarMin:200, guarMax:550, flower:null, type:"분리", interval:90},
+  "네오트로": {rent:300000, meal:47000, guarMin:150, guarMax:400, flower:null, type:"분리", interval:120},
+  "KU컨벤션웨딩홀": {rent:9000000, meal:85000, guarMin:250, guarMax:1000, flower:null, type:"분리", interval:80},
+  "더채플앳대치": {rent:17820000, meal:132000, guarMin:200, guarMax:400, flower:null, type:"분리", interval:120},
+  "노블발렌티 삼성": {rent:13000000, meal:100000, guarMin:300, guarMax:500, flower:null, type:"분리", interval:120},
+  "아펠가모 광화문": {rent:11000000, meal:110000, guarMin:300, guarMax:550, flower:null, type:"분리", interval:90},
+  "엘블레스": {rent:11000000, meal:100000, guarMin:300, guarMax:550, flower:null, type:"분리", interval:90},
+  "HW컨벤션": {rent:21000000, meal:93000, guarMin:200, guarMax:800, flower:null, type:"동시", interval:180},
+  "그랜드힐컨벤션": {rent:18000000, meal:105000, guarMin:250, guarMax:600, flower:null, type:"동시", interval:180},
+  "노보텔 앰배서더 서울강남": {rent:7000000, meal:100000, guarMin:300, guarMax:500, flower:9000000, type:"동시", interval:180},
+  "롯데호텔월드": {rent:null, meal:130000, guarMin:100, guarMax:580, flower:11000000, type:"동시", interval:300},
+  "그래머시": {rent:null, meal:74000, guarMin:300, guarMax:1000, flower:6100000, type:"동시", interval:300},
+  "연세대학교": {rent:320000, meal:53000, guarMin:200, guarMax:1000, flower:3000000, type:"분리", interval:120},
+  "로얄파크컨벤션": {rent:16000000, meal:139000, guarMin:300, guarMax:500, flower:null, type:"분리", interval:90},
+  "온즈드롬": {rent:16000000, meal:108000, guarMin:150, guarMax:300, flower:null, type:"동시", interval:360},
+  "코엑스": {rent:null, meal:77000, guarMin:150, guarMax:460, flower:6000000, type:"동시", interval:360},
+  "JW메리어트동대문스퀘어서울": {rent:5000000, meal:140000, guarMin:150, guarMax:480, flower:16000000, type:"동시", interval:360},
+  "롯데월드": {rent:2900000, meal:70000, guarMin:100, guarMax:500, flower:null, type:"분리", interval:180},
+  "빌라드지디": {rent:18000000, meal:95000, guarMin:200, guarMax:780, flower:null, type:"분리", interval:70},
+  "크레스트72": {rent:16500000, meal:77000, guarMin:150, guarMax:400, flower:16500000, type:"분리", interval:360},
+  "아펠가모 선릉점": {rent:11000000, meal:110000, guarMin:300, guarMax:500, flower:null, type:"분리", interval:90},
+  "엘컨벤션": {rent:6600000, meal:66000, guarMin:200, guarMax:600, flower:3000000, type:"동시", interval:180},
+  "L65호텔웨딩컨벤션": {rent:11000000, meal:119000, guarMin:250, guarMax:500, flower:7700000, type:"분리", interval:90},
+  "헤이스가든": {rent:8800000, meal:99000, guarMin:150, guarMax:250, flower:5500000, type:"분리", interval:360},
+  "호텔파크하비오": {rent:12000000, meal:120000, guarMin:200, guarMax:500, flower:null, type:null, interval:null},
+  "소노펠리체컨벤션": {rent:10000000, meal:95000, guarMin:350, guarMax:700, flower:null, type:"분리", interval:120},
+  "성균관컨벤션웨딩홀": {rent:2100000, meal:75000, guarMin:200, guarMax:500, flower:null, type:"분리", interval:90},
+  "마리아쥬스퀘어": {rent:11000000, meal:89000, guarMin:300, guarMax:800, flower:null, type:"분리", interval:120},
+  "슈슈몽드": {rent:5800000, meal:88000, guarMin:30, guarMax:150, flower:5500000, type:"분리", interval:300},
+  "아모르하우스": {rent:2000000, meal:41800, guarMin:100, guarMax:200, flower:3200000, type:"분리", interval:300},
+  "마레보인웨이브": {rent:12000000, meal:187000, guarMin:300, guarMax:500, flower:12500000, type:"동시", interval:180},
+  "베뉴비안": {rent:2500000, meal:60000, guarMin:80, guarMax:750, flower:null, type:"분리", interval:60},
+  "삼정호텔": {rent:15000000, meal:90000, guarMin:30, guarMax:300, flower:null, type:"동시", interval:360},
+  "틸티드 한남": {rent:5500000, meal:98000, guarMin:120, guarMax:300, flower:9800000, type:"분리", interval:360},
+  "조선팰리스": {rent:6600000, meal:200000, guarMin:50, guarMax:240, flower:25000000, type:"동시", interval:180},
+  "더채플앳논현": {rent:13000000, meal:130000, guarMin:300, guarMax:500, flower:null, type:"분리", interval:90},
+  "RnL": {rent:2290000, meal:59000, guarMin:50, guarMax:200, flower:980000, type:"분리", interval:180},
+  "세종대왕기념관 웨딩홀": {rent:4060000, meal:57000, guarMin:200, guarMax:500, flower:null, type:"분리", interval:90},
+  "더베일리하우스 삼성점": {rent:11000000, meal:110000, guarMin:300, guarMax:400, flower:null, type:"분리", interval:90},
+  "그랜드인터컨티넨탈서울파르나스": {rent:5000000, meal:180000, guarMin:10, guarMax:940, flower:24000000, type:"동시", interval:180},
+  "더베뉴지": {rent:11000000, meal:73000, guarMin:150, guarMax:1200, flower:4000000, type:"분리", interval:80},
+  "웨스턴베니비스 영등포": {rent:14300000, meal:132000, guarMin:300, guarMax:550, flower:null, type:"분리", interval:90},
+  "웨스턴베니비스 신도림": {rent:7500000, meal:75000, guarMin:250, guarMax:700, flower:null, type:"분리", interval:70},
+  "아펠가모 반포": {rent:11000000, meal:110000, guarMin:300, guarMax:550, flower:null, type:"분리", interval:90},
+  "루이비스 송파": {rent:9500000, meal:87000, guarMin:300, guarMax:650, flower:null, type:"분리", interval:80},
+  "웨딩스퀘어": {rent:7500000, meal:75000, guarMin:250, guarMax:700, flower:null, type:"분리", interval:80},
+  "시그니엘": {rent:6500000, meal:200000, guarMin:150, guarMax:200, flower:28000000, type:"분리", interval:300},
+  "노블발렌티": {rent:13000000, meal:100000, guarMin:300, guarMax:500, flower:null, type:"분리", interval:90},
+  "앰배서더서울풀만": {rent:8800000, meal:150000, guarMin:100, guarMax:500, flower:16000000, type:"동시", interval:180},
+  "반얀트리클럽앤스파서울": {rent:11000000, meal:150000, guarMin:100, guarMax:200, flower:20000000, type:"동시", interval:300},
+  "엘로라인가든": {rent:8500000, meal:85000, guarMin:150, guarMax:400, flower:null, type:"분리", interval:90}
+};
+
+
 const WEDDIC_EVIDENCE = {
   "더라빌": {"rMin": 6000000, "rMax": 8000000, "mMin": 89000, "mMax": 140000, "gMin": 300, "gMax": 810, "interval": "정보 준비중", "addr": "서울특별시 강남구 삼성동 73 더라빌 아트센터", "type": "웨딩홀"},
   "국회 예식장": {"rMin": 200000, "rMax": 300000, "mMin": 45000, "mMax": 77000, "gMin": null, "gMax": null, "interval": "정보 준비중", "addr": "서울특별시 영등포구 의사당대로 1", "type": "야외"},
@@ -3301,6 +3412,8 @@ function renderHallDetail(){
   const d=HALL_DETAIL[h[0]];
   const ev=LIST_PRICE_EVIDENCE[h[0]+"||"+h[2]];
   const wev=(typeof WEDDIC_EVIDENCE!=="undefined")?WEDDIC_EVIDENCE[h[0]]:null;
+  const iwp=(typeof IWEDDING_PRICE!=="undefined")?IWEDDING_PRICE[h[0]]:null;
+  const cq=(typeof CAFE_QUOTES!=="undefined")?CAFE_QUOTES[h[0]]:null;
   if(!d && !ev && !wev){ box.style.display="none"; return; }
   box.style.display="block";
   const depthTag = d ? (d.depth==="full" ? `<span class="tag g">후기 다수 확인</span>` : `<span class="tag n">가격 위주 확인</span>`) : "";
@@ -3324,6 +3437,21 @@ function renderHallDetail(){
       ${wev.addr? `<div style="color:var(--sub);margin-top:4px">${wev.addr}</div>` : ""}
       <div style="color:var(--faint);margin-top:4px">웨딕이 집계한 범위값이라 특정 요일·시간의 실계약가가 아니며, 카페 상담·계약 원문으로 다시 검증하기 전까지는 범위 파악용으로만 사용하세요.</div>
     </div>` : "";
+  const fmtWon2 = v => (v===null||v===undefined) ? "확인 안됨" : (v.toLocaleString()+"원");
+  const fmtMan2 = v => (v===null||v===undefined) ? "확인 안됨" : (Math.round(v/10000).toLocaleString()+"만원");
+  const iweddingBlock = iwp ? `
+    <div style="margin:0 0 14px;padding:10px 12px;background:var(--bg-deep);border-radius:8px;font-size:12.5px;line-height:1.55">
+      <div class="lb" style="font-size:11px;color:#2563eb;margin-bottom:4px">아이웨딩 공식 정가</div>
+      대관료 ${fmtMan2(iwp.rent)} &middot; 식대 ${fmtWon2(iwp.meal)}<br>
+      보증인원 ${iwp.guarMin||'?'}명 ~ ${iwp.guarMax||'?'}명${iwp.interval? " &middot; "+iwp.interval+"분 간격" : ""}${iwp.flower? " &middot; 꽃장식 "+fmtMan2(iwp.flower) : ""}
+      <div style="color:var(--faint);margin-top:4px">아이웨딩 공식 등록 정가입니다. 실제 상담 시 요일/시간/보증인원에 따라 할인이 적용됩니다.</div>
+    </div>` : "";
+  const cafeBlock = cq ? `
+    <div style="margin:0 0 14px;padding:10px 12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:12.5px;line-height:1.55">
+      <div class="lb" style="font-size:11px;color:#16a34a;margin-bottom:4px">카페 실견적 (멕마웨)</div>
+      ${cq.rent? "대관료 "+(cq.rent/10000).toLocaleString()+"만원" : ""}${cq.rent&&cq.meal?" &middot; ":""}${cq.meal? "식대 "+cq.meal.toLocaleString()+"원" : ""}${cq.guarantee? " &middot; 보증 "+cq.guarantee+"명" : ""}
+      <div style="color:var(--faint);margin-top:4px">출처: ${cq.title||"멕마웨 카페 게시글"}</div>
+    </div>` : "";
   if(!d){
     box.innerHTML = `
       <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px">
@@ -3332,6 +3460,8 @@ function renderHallDetail(){
       </div>
       ${priceBlock}
       ${weddicBlock}
+      ${iweddingBlock}
+      ${cafeBlock}
       <p style="font-size:12.5px;color:var(--faint);margin:0">이 홀은 가격 정보 이외의 후기/장단점은 이번 라운드에서 정리되지 않았습니다. 위 버튼을 누르면 실제 사진과 리뷰량을 바로 확인할 수 있습니다.</p>
     `;
     return;
@@ -3345,6 +3475,8 @@ function renderHallDetail(){
     <p style="font-size:13px;color:var(--sub);margin:0 0 12px"><strong>${d.addr||"주소 미확인"}</strong></p>
     ${priceBlock}
     ${weddicBlock}
+    ${iweddingBlock}
+    ${cafeBlock}
     ${d.features&&d.features.length? `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px">${d.features.map(f=>`<span class="tag n">${f}</span>`).join("")}</div>` : ""}
     <div class="notes c2">
       <div class="note-block" style="border-top:none;padding-top:0">
