@@ -3846,85 +3846,83 @@ function showCompare() {
   if (compareSet.size < 2) { alert('2곳 이상 선택하세요'); return; }
   const modal = document.getElementById('compareModal');
   const tbody = document.getElementById('compareTable');
-  
   const names = [...compareSet];
   const data = names.map(name => {
     const h = HALLS.find(x => x[0] === name);
     const cq = (typeof CAFE_QUOTES !== 'undefined') ? CAFE_QUOTES[name] : null;
     const iwp = (typeof IWEDDING_PRICE !== 'undefined') ? IWEDDING_PRICE[name] : null;
     const wev = (typeof WEDDIC_EVIDENCE !== 'undefined') ? WEDDIC_EVIDENCE[name] : null;
+    // h[3]=대관(만원), h[4]=식대(원), h[5]=보증인원
     return {name, h, cq, iwp, wev};
   });
-  
   let html = '<table><thead><tr><th>항목</th>';
-  data.forEach(d => html += '<th>'+d.name.replace(/\s/g,'<br>')+'</th>');
+  data.forEach(d => html += '<th style="font-size:12px">'+d.name+'</th>');
   html += '</tr></thead><tbody>';
-  
-  // 식대 row
+  // 식대
   html += '<tr><td>식대</td>';
   const meals = data.map(d => {
     if (d.cq && d.cq.meal) return {v:d.cq.meal, s:'카페'};
-    if (d.h && d.h[2]) return {v:d.h[2], s:'사이트'};
-    if (d.iwp && d.iwp.meal) return {v:parseInt(d.iwp.meal.replace(/[^0-9]/g,'')), s:'정가'};
-    if (d.wev) return {v:d.wev.mMin, s:'웨딕'};
+    if (d.h && d.h[4] && typeof d.h[4]==='number') return {v:d.h[4], s:'수집'};
+    if (d.iwp && d.iwp.meal) return {v:d.iwp.meal, s:'정가'};
+    if (d.wev && d.wev.mMin) return {v:d.wev.mMin, s:'웨딕'};
     return null;
   });
-  const minMeal = Math.min(...meals.filter(m=>m).map(m=>m.v));
+  const validMeals = meals.filter(m=>m&&m.v>0);
+  const minMeal = validMeals.length ? Math.min(...validMeals.map(m=>m.v)) : 0;
   meals.forEach(m => {
-    if (!m) html += '<td>-</td>';
-    else html += '<td'+(m.v===minMeal?' class="best"':'')+'>'+(m.v/10000).toFixed(1)+'만<span class="source-tag">'+m.s+'</span></td>';
+    if (!m||!m.v) html += '<td style="color:#94a3b8">-</td>';
+    else html += '<td'+(m.v===minMeal?' class="best"':'')+'>'+(m.v>=10000?(m.v/10000).toFixed(1)+'만':m.v)+'원<span class="source-tag">'+m.s+'</span></td>';
   });
   html += '</tr>';
-  
-  // 대관료 row
+  // 대관료
   html += '<tr><td>대관료</td>';
   const rents = data.map(d => {
     if (d.cq && d.cq.rent) return {v:d.cq.rent, s:'카페'};
-    if (d.h && d.h[1]) return {v:d.h[1], s:'사이트'};
-    if (d.iwp && d.iwp.rent) return {v:parseInt(d.iwp.rent.replace(/[^0-9]/g,'')), s:'정가'};
-    if (d.wev) return {v:d.wev.rMin, s:'웨딕'};
+    if (d.h && d.h[3] && typeof d.h[3]==='number') return {v:d.h[3]*10000, s:'수집'};
+    if (d.iwp && d.iwp.rent) return {v:d.iwp.rent, s:'정가'};
+    if (d.wev && d.wev.rMin) return {v:d.wev.rMin, s:'웨딕'};
     return null;
   });
-  const minRent = Math.min(...rents.filter(r=>r).map(r=>r.v));
+  const validRents = rents.filter(r=>r&&r.v>0);
+  const minRent = validRents.length ? Math.min(...validRents.map(r=>r.v)) : 0;
   rents.forEach(r => {
-    if (!r) html += '<td>-</td>';
+    if (!r||!r.v) html += '<td style="color:#94a3b8">-</td>';
     else html += '<td'+(r.v===minRent?' class="best"':'')+'>'+(r.v/10000).toFixed(0)+'만<span class="source-tag">'+r.s+'</span></td>';
   });
   html += '</tr>';
-  
-  // 보증인원 row
+  // 보증인원
   html += '<tr><td>보증인원</td>';
   data.forEach(d => {
     let g = null;
     if (d.cq && d.cq.guarantee) g = d.cq.guarantee;
-    else if (d.iwp && d.iwp.guarantee) g = d.iwp.guarantee;
-    else if (d.wev) g = d.wev.gMin;
-    html += '<td>'+(g ? g+'명' : '-')+'</td>';
+    else if (d.h && d.h[5] && typeof d.h[5]==='number') g = d.h[5];
+    else if (d.iwp && d.iwp.guarMin) g = d.iwp.guarMin;
+    else if (d.wev && d.wev.gMin) g = d.wev.gMin;
+    html += '<td>'+(g ? g+'명' : '<span style="color:#94a3b8">-</span>')+'</td>';
   });
   html += '</tr>';
-  
-  // 지역 row
-  html += '<tr><td>지역</td>';
+  // 지역
+  html += '<tr><td>위치</td>';
   data.forEach(d => {
-    html += '<td>'+(d.h ? (d.h[4]?'강동':'강서') : '-')+'</td>';
+    html += '<td>'+(d.h ? d.h[1] : '-')+'</td>';
   });
   html += '</tr>';
-  
-  // 총비용 추정 row (200명 기준)
-  html += '<tr style="border-top:2px solid #334155"><td><b>총비용 추정</b><span class="source-tag">200명 기준</span></td>';
+  // 총비용 추정 (200명 기준)
+  html += '<tr style="border-top:2px solid #334155;background:#f8fafc"><td><b>총비용 추정</b><span class="source-tag">200명 기준</span></td>';
   const totals = data.map((d,i) => {
     const m = meals[i], r = rents[i];
     if (!m && !r) return null;
-    return (m ? m.v * 200 : 0) + (r ? r.v : 0);
+    return (m && m.v ? m.v * 200 : 0) + (r && r.v ? r.v : 0);
   });
-  const minTotal = Math.min(...totals.filter(t=>t).map(t=>t));
+  const validTotals = totals.filter(t=>t&&t>0);
+  const minTotal = validTotals.length ? Math.min(...validTotals) : 0;
   totals.forEach(t => {
-    if (!t) html += '<td>-</td>';
+    if (!t) html += '<td style="color:#94a3b8">-</td>';
     else html += '<td'+(t===minTotal?' class="best"':'')+'><b>'+(t/10000).toFixed(0)+'만</b></td>';
   });
   html += '</tr>';
-  
   html += '</tbody></table>';
+  html += '<p style="font-size:11px;color:#94a3b8;margin-top:12px">* 가장 저렴한 항목이 초록색으로 표시됩니다. 데이터 출처가 다를 수 있으니 참고용으로만 활용하세요.</p>';
   tbody.innerHTML = html;
   modal.classList.add('active');
 }
