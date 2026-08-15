@@ -154,6 +154,34 @@ details li{margin:.4em 0}
 
 footer{margin-top:60px;padding:24px 0 0;border-top:1px solid var(--line);font-size:11.5px;color:var(--faint);line-height:1.8}
 .note{font-size:12.5px;color:var(--sub);margin-top:10px}
+
+/* Mobile comparison bar */
+.compare-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:2px solid #2563eb;padding:10px 16px;z-index:999;display:none;box-shadow:0 -4px 12px rgba(0,0,0,.12)}
+.compare-bar.active{display:block}
+.compare-bar .items{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.compare-bar .ci{background:#eff6ff;border:1px solid #bfdbfe;border-radius:6px;padding:6px 10px;font-size:12px;white-space:nowrap;position:relative;min-width:fit-content}
+.compare-bar .ci .x{position:absolute;top:-6px;right:-6px;width:18px;height:18px;background:#ef4444;color:#fff;border-radius:50%;font-size:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none}
+.compare-bar .act{display:flex;gap:8px;margin-top:8px}
+.compare-bar .act button{flex:1;padding:8px;border-radius:6px;font-size:13px;font-weight:600;border:none;cursor:pointer}
+.compare-bar .act .compare-btn{background:#2563eb;color:#fff}
+.compare-bar .act .clear-btn{background:#f1f5f9;color:#64748b}
+/* Compare modal */
+.compare-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;display:none;overflow-y:auto;padding:16px}
+.compare-modal.active{display:flex;align-items:flex-start;justify-content:center}
+.compare-modal .inner{background:#fff;border-radius:12px;width:100%;max-width:700px;margin:auto;padding:20px}
+.compare-modal h3{margin:0 0 16px;font-size:18px}
+.compare-modal .close-modal{float:right;background:none;border:none;font-size:24px;cursor:pointer;color:#64748b}
+.compare-modal table{width:100%;border-collapse:collapse;font-size:13px}
+.compare-modal th,.compare-modal td{padding:8px 6px;text-align:center;border-bottom:1px solid #e2e8f0}
+.compare-modal th{background:#f8fafc;font-weight:600;position:sticky;top:0}
+.compare-modal td:first-child,.compare-modal th:first-child{text-align:left;font-weight:600}
+.compare-modal .best{background:#dcfce7;font-weight:700}
+.compare-modal .source-tag{font-size:10px;color:#94a3b8;display:block}
+/* Checkbox for compare */
+.hall-compare-cb{width:16px;height:16px;accent-color:#2563eb;cursor:pointer;vertical-align:middle;margin-right:4px}
+/* Fair helper badge */
+.fair-badge{display:inline-block;background:#fef3c7;color:#92400e;font-size:10px;padding:2px 6px;border-radius:4px;margin-left:4px;font-weight:600}
+
 </style>
 </head>
 <body>
@@ -3395,7 +3423,7 @@ function renderHalls(){
     const ev = LIST_PRICE_EVIDENCE[h[0]+"||"+h[2]];
     const rentCell = ev ? `<span class="lp">정가 ${ev.lr}만</span>${h[3]}만` : `${h[3]}만`;
     const mealCell = ev ? `<span class="lp">정가 ${ev.lm.toLocaleString()}</span>${h[4].toLocaleString()}` : `${h[4].toLocaleString()}`;
-    return `<tr data-i="${r.i}" class="${hSel===r.i?"sel":""}"><td class="nm">${h[0]}</td><td>${h[1]}</td><td>${h[2]}</td>
+    return `<tr data-i="${r.i}" class="${hSel===r.i?"sel":""}"><td class="nm"><input type="checkbox" class="hall-compare-cb" data-hall="${h[0]}" onclick="toggleCompare('${h[0].replace(/'/g,"\\'")}')"> ${h[0]}</td><td>${h[1]}</td><td>${h[2]}</td>
       <td class="num">${rentCell}</td><td class="num">${mealCell}</td>
       <td><span class="tag ${kc}">${kt}</span></td><td class="num tot ${tc}">${fmt(r.t)}만</td><td><span class="tag n">${h[7]}</span></td>
       <td><a href="${hallMapUrl(h)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="color:var(--accent-ink);text-decoration:underline;font-size:12px;white-space:nowrap">사진 ↗</a></td></tr>`;
@@ -3751,5 +3779,156 @@ if($("#priceGoKr") && typeof PRICE_GO_KR!=="undefined"){
 renderCostMap(); renderFamily(); renderWholeWedding();
 renderHalls(); renderSdm(); renderVend(); renderTotal();
 </script>
+
+<!-- Compare bar -->
+<div class="compare-bar" id="compareBar">
+  <div class="items" id="compareItems"></div>
+  <div class="act">
+    <button class="clear-btn" onclick="clearCompare()">초기화</button>
+    <button class="compare-btn" onclick="showCompare()">비교하기 (<span id="compareCnt">0</span>)</button>
+  </div>
+</div>
+
+<!-- Compare modal -->
+<div class="compare-modal" id="compareModal">
+  <div class="inner">
+    <button class="close-modal" onclick="closeCompare()">&times;</button>
+    <h3>웨딩홀 비교</h3>
+    <div id="compareTable"></div>
+  </div>
+</div>
+
+<script>
+const compareSet = new Set();
+
+function toggleCompare(name, el) {
+  if (compareSet.has(name)) {
+    compareSet.delete(name);
+    if (el) el.checked = false;
+  } else {
+    if (compareSet.size >= 5) { alert('최대 5곳까지 비교 가능합니다'); if(el) el.checked=false; return; }
+    compareSet.add(name);
+  }
+  updateCompareBar();
+}
+
+function updateCompareBar() {
+  const bar = document.getElementById('compareBar');
+  const items = document.getElementById('compareItems');
+  const cnt = document.getElementById('compareCnt');
+  if (compareSet.size === 0) { bar.classList.remove('active'); return; }
+  bar.classList.add('active');
+  cnt.textContent = compareSet.size;
+  items.innerHTML = '';
+  compareSet.forEach(name => {
+    const d = document.createElement('div');
+    d.className = 'ci';
+    d.innerHTML = name + '<button class="x" onclick="toggleCompare(\''+name.replace(/'/g,"\\'")+'\')">&times;</button>';
+    items.appendChild(d);
+  });
+  // Sync checkboxes
+  document.querySelectorAll('.hall-compare-cb').forEach(cb => {
+    cb.checked = compareSet.has(cb.dataset.hall);
+  });
+}
+
+function clearCompare() {
+  compareSet.clear();
+  updateCompareBar();
+  document.querySelectorAll('.hall-compare-cb').forEach(cb => cb.checked = false);
+}
+
+function closeCompare() {
+  document.getElementById('compareModal').classList.remove('active');
+}
+
+function showCompare() {
+  if (compareSet.size < 2) { alert('2곳 이상 선택하세요'); return; }
+  const modal = document.getElementById('compareModal');
+  const tbody = document.getElementById('compareTable');
+  
+  const names = [...compareSet];
+  const data = names.map(name => {
+    const h = HALLS.find(x => x[0] === name);
+    const cq = (typeof CAFE_QUOTES !== 'undefined') ? CAFE_QUOTES[name] : null;
+    const iwp = (typeof IWEDDING_PRICE !== 'undefined') ? IWEDDING_PRICE[name] : null;
+    const wev = (typeof WEDDIC_EVIDENCE !== 'undefined') ? WEDDIC_EVIDENCE[name] : null;
+    return {name, h, cq, iwp, wev};
+  });
+  
+  let html = '<table><thead><tr><th>항목</th>';
+  data.forEach(d => html += '<th>'+d.name.replace(/\s/g,'<br>')+'</th>');
+  html += '</tr></thead><tbody>';
+  
+  // 식대 row
+  html += '<tr><td>식대</td>';
+  const meals = data.map(d => {
+    if (d.cq && d.cq.meal) return {v:d.cq.meal, s:'카페'};
+    if (d.h && d.h[2]) return {v:d.h[2], s:'사이트'};
+    if (d.iwp && d.iwp.meal) return {v:parseInt(d.iwp.meal.replace(/[^0-9]/g,'')), s:'정가'};
+    if (d.wev) return {v:d.wev.mMin, s:'웨딕'};
+    return null;
+  });
+  const minMeal = Math.min(...meals.filter(m=>m).map(m=>m.v));
+  meals.forEach(m => {
+    if (!m) html += '<td>-</td>';
+    else html += '<td'+(m.v===minMeal?' class="best"':'')+'>'+(m.v/10000).toFixed(1)+'만<span class="source-tag">'+m.s+'</span></td>';
+  });
+  html += '</tr>';
+  
+  // 대관료 row
+  html += '<tr><td>대관료</td>';
+  const rents = data.map(d => {
+    if (d.cq && d.cq.rent) return {v:d.cq.rent, s:'카페'};
+    if (d.h && d.h[1]) return {v:d.h[1], s:'사이트'};
+    if (d.iwp && d.iwp.rent) return {v:parseInt(d.iwp.rent.replace(/[^0-9]/g,'')), s:'정가'};
+    if (d.wev) return {v:d.wev.rMin, s:'웨딕'};
+    return null;
+  });
+  const minRent = Math.min(...rents.filter(r=>r).map(r=>r.v));
+  rents.forEach(r => {
+    if (!r) html += '<td>-</td>';
+    else html += '<td'+(r.v===minRent?' class="best"':'')+'>'+(r.v/10000).toFixed(0)+'만<span class="source-tag">'+r.s+'</span></td>';
+  });
+  html += '</tr>';
+  
+  // 보증인원 row
+  html += '<tr><td>보증인원</td>';
+  data.forEach(d => {
+    let g = null;
+    if (d.cq && d.cq.guarantee) g = d.cq.guarantee;
+    else if (d.iwp && d.iwp.guarantee) g = d.iwp.guarantee;
+    else if (d.wev) g = d.wev.gMin;
+    html += '<td>'+(g ? g+'명' : '-')+'</td>';
+  });
+  html += '</tr>';
+  
+  // 지역 row
+  html += '<tr><td>지역</td>';
+  data.forEach(d => {
+    html += '<td>'+(d.h ? (d.h[4]?'강동':'강서') : '-')+'</td>';
+  });
+  html += '</tr>';
+  
+  // 총비용 추정 row (200명 기준)
+  html += '<tr style="border-top:2px solid #334155"><td><b>총비용 추정</b><span class="source-tag">200명 기준</span></td>';
+  const totals = data.map((d,i) => {
+    const m = meals[i], r = rents[i];
+    if (!m && !r) return null;
+    return (m ? m.v * 200 : 0) + (r ? r.v : 0);
+  });
+  const minTotal = Math.min(...totals.filter(t=>t).map(t=>t));
+  totals.forEach(t => {
+    if (!t) html += '<td>-</td>';
+    else html += '<td'+(t===minTotal?' class="best"':'')+'><b>'+(t/10000).toFixed(0)+'만</b></td>';
+  });
+  html += '</tr>';
+  
+  html += '</tbody></table>';
+  tbody.innerHTML = html;
+  modal.classList.add('active');
+}
+</script>
+
 </body>
 </html>
