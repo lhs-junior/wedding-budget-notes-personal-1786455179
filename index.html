@@ -750,28 +750,24 @@ const HALLS = [
    여기 있는 예시는 '공개된 사례' 기준이며 사례마다 차이가 클 수 있습니다.
    키 형식: '홀이름||요일시간(when 필드)' */
 const CAFE_QUOTES = {
-  "노원 비엔티(BNT)": {rent:null, meal:58000, guarantee:null, title:"& 테라리움 견적공유", source:"makemywedding"},
-  "구로 명품웨딩프로포즈": {rent:1000000, meal:null, guarantee:null, title:"영등포 쪽 웨딩홀 추천 부탁드립니다! ♀️", source:"makemywedding"},
-  "제이오스티엘": {rent:2000000, meal:null, guarantee:150, title:"웨딩홀로 최종 선택!!!!(feat.이소희과장님 감사합니다)", source:"makemywedding"},
-  "위례 밀리토피아호텔": {rent:2850000, meal:null, guarantee:null, title:"26년 9월 5일 아이리스홀 계약 후기", source:"makemywedding"},
-  "신도림 웨딩시티": {rent:2650000, meal:51500, guarantee:170, title:"26년 8월 오후시간대 견적 공유", source:"makemywedding"},
-  "빌라드지디 논현": {rent:3000000, meal:80000, guarantee:200, title:"27년 5월 오후시간대 견적 공유", source:"makemywedding"},
-  "루클라비 더 화이트": {rent:6500000, meal:83000, guarantee:200, title:"27년 3월 오후시간대 견적 공유", source:"makemywedding"},
-  "테라리움": {rent:null, meal:58000, guarantee:null, title:"노원 비엔티 & 견적공유", source:"makemywedding"},
-  "서울웨딩타워": {rent:8800000, meal:82000, guarantee:null, title:"그레이스파티 신림 홀 계약후기(27년 5월 견적⭕)", source:"makemywedding"},
-  "세인트메리엘 강남역": {rent:7700000, meal:null, guarantee:null, title:"[정보공유] 도보 6분 <> 견적 공유(계약 ❌)", source:"makemywedding"},
-  "PJ호텔 을지로": {rent:5500000, meal:68000, guarantee:null, title:"헤스티아홀 계약 후기", source:"makemywedding"},
-  "지타워 구로": {rent:14000000, meal:null, guarantee:null, title:"컨벤션 견적(계약O)", source:"makemywedding"},
-  "브라이튼하우스(과천)": {rent:2500000, meal:89000, guarantee:null, title:"강남 계약 후기(26년 4월)", source:"makemywedding"},
-  "라브르에드니아 종합운동장": {rent:12500000, meal:null, guarantee:null, title:"26년 10월 계약 후기입니다!", source:"makemywedding"},
-  "국방컨벤션": {rent:2400000, meal:null, guarantee:null, title:"27년 5월 계약후기", source:"makemywedding"},
-  "더채플앳대치": {rent:6600000, meal:null, guarantee:230, title:"27년 1월 오후시간대 견적 공유", source:"makemywedding"},
-  "노블발렌티 삼성": {rent:8700000, meal:87000, guarantee:250, title:"27년 8월 오후시간대 견적 공유", source:"makemywedding"},
-  "KBS 신관 웨딩홀": {rent:null, meal:42900, guarantee:null, title:"전반적 정보 및 후기", source:"makemywedding"},
-  "아벤티움": {rent:null, meal:62000, guarantee:null, title:"(정보 공유성) 충정로역 27년 2월 견적 공유", source:"makemywedding"},
-  "스페이스536": {rent:4400000, meal:78000, guarantee:null, title:"서울 야외결혼식 베뉴, 계약했어요", source:"makemywedding"},
-  "루체리아웨딩컨벤션": {rent:7000000, meal:null, guarantee:null, title:"베뉴 추천 받습니다!", source:"makemywedding"},
-  "시그니엘 서울 웨딩": {rent:11000000, meal:null, guarantee:150, title:"(정보성) 반얀트리 크리스탈볼룸 계약후기 (27년도 상반기 예식) (그랜드 하얏트 남산룸 외 비교) (계약 O)", source:"makemywedding"}
+  "구로 명품웨딩프로포즈": [{rent:2000000,meal:null,guarantee:150,title:"웨딩홀 후기(계약x)",cafe:"yzm"},{rent:1000000,meal:null,guarantee:null,title:"제이오스티엘 웨딩홀 식대 가격 공유",cafe:"yzm"},{rent:2000000,meal:null,guarantee:null,title:"명품프로포즈웨딩 웨딩홀 식대 가격 공유",cafe:"yzm"}],
+  "제이오스티엘": [{rent:2000000,meal:49000,guarantee:null,title:"부모님이 더 마음에 들어하셨던 웨딩홀 계약 후기",cafe:"mmw"},{rent:1600000,meal:null,guarantee:150,title:"27년 3월 견적 공유 (계약X)",cafe:"mmw"}],
+  "위례 밀리토피아호텔": [{rent:5020000,meal:null,guarantee:null,title:"그랜드볼룸 26년 5월 견적공유 (계약X)",cafe:"mmw"},{rent:null,meal:66000,guarantee:null,title:"성남 그랜드볼룸홀(계약O)",cafe:"mmw"}],
+  "신도림 웨딩시티": [{rent:2000000,meal:40000,guarantee:150,title:"제이오스티엘 웨딩홀로 최종 선택!!!!(feat.이소희과장님 감사합니다)",cafe:"mmw"},{rent:null,meal:90000,guarantee:null,title:"서울 웨딩홀 추천 부탁드려요!",cafe:"mmw"}],
+  "여의도 FKI플라자": [{rent:2500000,meal:76500,guarantee:null,title:"웨딩홀 ‘’ 계약 후기(계약O)",cafe:"mmw"}],
+  "빌라드지디 논현": [{rent:3000000,meal:80000,guarantee:200,title:"27년 5월 오후시간대 견적 공유",cafe:"mmw"},{rent:null,meal:82000,guarantee:null,title:"투어 후기 (계약 X)",cafe:"yzm"}],
+  "엘타워": [{rent:10000000,meal:94000,guarantee:300,title:"양재 웨딩홀 투어 후기",cafe:"yzm"}],
+  "규수당": [{rent:2000000,meal:40000,guarantee:150,title:"제이오스티엘 웨딩홀로 최종 선택!!!!(feat.이소희과장님 감사합니다)",cafe:"mmw"},{rent:null,meal:80000,guarantee:null,title:"영등포/여의도/강서쪽 웨딩홀 어디가 좋을까요..?!",cafe:"mmw"}],
+  "로얄호텔서울": [{rent:7500000,meal:null,guarantee:null,title:"2027.10 견적공유",cafe:"mmw"},{rent:null,meal:80000,guarantee:null,title:"(정보성) 27년 5월 토요일 견적 공유 (계약X)",cafe:"mmw"}],
+  "DMC타워웨딩": [{rent:6400000,meal:64000,guarantee:200,title:"27년 6월 오전시간대 견적 공유",cafe:"mmw"},{rent:5500000,meal:64000,guarantee:200,title:"27년 8월 점심시간대 견적 공유",cafe:"mmw"}],
+  "더리버사이드호텔": [{rent:8300000,meal:83000,guarantee:null,title:"신사역 노벨라홀 견적 후기",cafe:"yzm"}],
+  "빌라드지디 안양": [{rent:8000000,meal:null,guarantee:200,title:"빌라 디 지디 안양",cafe:"yzm"},{rent:18000000,meal:95000,guarantee:null,title:"크리스탈캐슬홀 투어 후기",cafe:"yzm"}],
+  "명동 로얄호텔": [{rent:7500000,meal:null,guarantee:null,title:"서울 2027.10 견적공유",cafe:"mmw"}],
+  "더컨벤션 반포": [{rent:5600000,meal:68000,guarantee:200,title:"27년 1월 오후시간대 견적 공유",cafe:"mmw"},{rent:6400000,meal:71000,guarantee:null,title:"상담후기(26년 하반기, 계약x)",cafe:"yzm"},{rent:11000000,meal:110000,guarantee:null,title:"잠실 상담 후기입니다!",cafe:"yzm"}],
+  "더컨벤션 잠실": [{rent:9500000,meal:87000,guarantee:null,title:"루이비스컨벤션 송파문정, 상담후기(계약X)",cafe:"yzm"}],
+  "루클라비 더 화이트": [{rent:6500000,meal:87000,guarantee:250,title:"27년 3월 점심시간대 견적 공유",cafe:"mmw"},{rent:6500000,meal:83000,guarantee:200,title:"27년 3월 오후시간대 견적 공유",cafe:"mmw"}],
+  "더채플앳청담": [{rent:6590000,meal:78100,guarantee:200,title:"26년 12월 오후시간대 견적 공유",cafe:"mmw"},{rent:9460000,meal:99000,guarantee:null,title:"더앳대치 계약 후기(27년하반기)",cafe:"mmw"}],
+  "루이비스 중구": [{rent:9500000,meal:87000,guarantee:null,title:"컨벤션 송파문정, 상담후기(계약X)",cafe:"yzm"},{rent:2800000,meal:58000,guarantee:null,title:"상담 후기 (계약X)",cafe:"yzm"},{rent:9800000,meal:70000,guarantee:null,title:"27년 상반기 을지로 PJ호텔웨딩홀 상담 후기 (계약X)",cafe:"yzm"}]
 };
 
 const IWEDDING_PRICE = {
@@ -3474,12 +3470,20 @@ function renderHallDetail(){
       보증인원 ${iwp.guarMin||'?'}명 ~ ${iwp.guarMax||'?'}명${iwp.interval? " &middot; "+iwp.interval+"분 간격" : ""}${iwp.flower? " &middot; 꽃장식 "+fmtMan2(iwp.flower) : ""}
       <div style="color:var(--faint);margin-top:4px">아이웨딩 공식 등록 정가입니다. 실제 상담 시 요일/시간/보증인원에 따라 할인이 적용됩니다.</div>
     </div>` : "";
-  const cafeBlock = cq ? `
-    <div style="margin:0 0 14px;padding:10px 12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:12.5px;line-height:1.55">
-      <div class="lb" style="font-size:11px;color:#16a34a;margin-bottom:4px">카페 실견적 (멕마웨)</div>
-      ${cq.rent? "대관료 "+(cq.rent/10000).toLocaleString()+"만원" : ""}${cq.rent&&cq.meal?" &middot; ":""}${cq.meal? "식대 "+cq.meal.toLocaleString()+"원" : ""}${cq.guarantee? " &middot; 보증 "+cq.guarantee+"명" : ""}
-      <div style="color:var(--faint);margin-top:4px">출처: ${cq.title||"멕마웨 카페 게시글"}</div>
-    </div>` : "";
+  const cafeBlock = cq ? (()=>{
+    const arr = Array.isArray(cq) ? cq : [cq];
+    const rents = arr.filter(q=>q.rent).map(q=>q.rent);
+    const meals = arr.filter(q=>q.meal).map(q=>q.meal);
+    const guars = arr.filter(q=>q.guarantee).map(q=>q.guarantee);
+    const rStr = rents.length ? (rents.length>1 ? Math.min(...rents)/10000+"~"+Math.max(...rents)/10000+"만" : rents[0]/10000+"만") : "";
+    const mStr = meals.length ? (meals.length>1 ? Math.min(...meals).toLocaleString()+"~"+Math.max(...meals).toLocaleString()+"원" : meals[0].toLocaleString()+"원") : "";
+    const gStr = guars.length ? (guars.length>1 ? Math.min(...guars)+"~"+Math.max(...guars)+"명" : guars[0]+"명") : "";
+    return `<div style="margin:0 0 14px;padding:10px 12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:12.5px;line-height:1.55">
+      <div class="lb" style="font-size:11px;color:#16a34a;margin-bottom:4px">카페 실견적 (${arr.length}건 표본)</div>
+      ${rStr? "대관료 "+rStr : ""}${rStr&&mStr?" &middot; ":""}${mStr? "식대 "+mStr : ""}${gStr? " &middot; 보증 "+gStr : ""}
+      <div style="color:var(--faint);margin-top:4px;font-size:11px">${arr.length}건 카페 후기 기반 | 날짜·시간대별로 다를 수 있음</div>
+    </div>`;
+  })() : "";
   if(!d){
     box.innerHTML = `
       <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px">
