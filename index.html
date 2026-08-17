@@ -2,589 +2,367 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>결혼 준비 — 실견적·전체비 기록부</title>
+<title>결혼 준비 기록부</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700;900&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
 <style>
-:root{
-  --bg:#fff;--surface:#fff;--ink:#111;--sub:#666;--faint:#aaa;--muted:#ddd;
-  --line:#eee;--accent:#222;--point:#e85d3a;--good:#1a8a5c;--good-bg:#edfaf3;
-  --warn:#cf8a00;--warn-bg:#fef8ec;--red:#d43;--red-bg:#fef2f1;
-  --sans:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif;
-  --serif:"Noto Serif KR",Georgia,serif;
-  --r:8px;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth}
-::selection{background:rgba(232,93,58,.12)}
-::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:#ddd;border-radius:2px}
-body{background:var(--bg);color:var(--ink);font:400 14px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
-.wrap{max-width:1000px;margin:0 auto;padding:0 24px 120px}
-a{color:var(--point);text-decoration:none}a:hover{text-decoration:underline}
-hr.rule{border:none;border-top:1px solid var(--line)}
+*{box-sizing:border-box;margin:0}
+:root{--c:#e8573a;--g:#16a34a;--r:#dc2626;--bg:#f7f7f7;--border:#e5e5e5}
+html{scroll-behavior:smooth;font-family:"Pretendard Variable",Pretendard,-apple-system,system-ui,sans-serif}
+body{background:var(--bg);color:#111;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+::selection{background:rgba(232,87,58,.12)}
 
-/* Gate */
+/* ── Gate ── */
 #gate{position:fixed;inset:0;z-index:100;background:#fff;display:flex;align-items:center;justify-content:center}
-#gate .box{text-align:center;max-width:300px;width:100%}
-#gate .mark{font:400 11px/1 var(--sans);letter-spacing:.15em;color:var(--faint);text-transform:uppercase;margin-bottom:40px}
-#gate h2{font:700 22px/1.3 var(--serif);margin:0 0 6px}
-#gate p{font-size:13px;color:var(--sub);margin:0 0 30px}
-#gate input{width:100%;padding:12px 0;border:none;border-bottom:1.5px solid var(--line);background:none;font:400 20px/1 var(--sans);text-align:center;letter-spacing:.3em;color:var(--ink)}
-#gate input:focus{outline:none;border-color:var(--ink)}
-#gate button{width:100%;margin-top:24px;padding:14px;border:1.5px solid var(--ink);background:var(--ink);color:#fff;font:600 13px/1 var(--sans);cursor:pointer;border-radius:4px;transition:.15s}
-#gate button:hover{background:#fff;color:var(--ink)}
-#gate .err{color:var(--red);font-size:12px;margin-top:14px;min-height:16px}
+#gate .box{text-align:center;width:280px}
+#gate .mark{font-size:11px;color:#aaa;letter-spacing:.12em;text-transform:uppercase;margin-bottom:36px}
+#gate h2{font:700 20px/1.3 "Noto Serif KR",serif;margin:0 0 6px}
+#gate p{font-size:13px;color:#888;margin:0 0 28px}
+#gate input{width:100%;padding:12px 0;border:none;border-bottom:1.5px solid #ddd;background:none;font-size:20px;text-align:center;letter-spacing:.3em;color:#111}
+#gate input:focus{outline:none;border-color:#111}
+#gate input::placeholder{color:#ddd}
+#gate button{width:100%;margin-top:22px;padding:13px;border:none;background:#111;color:#fff;font:600 13px/1 inherit;border-radius:4px;cursor:pointer;transition:.12s}
+#gate button:hover{opacity:.85}
+#gate .err{color:var(--r);font-size:12px;margin-top:12px;min-height:16px}
 
-/* Header - minimal white */
-header{padding:32px 0 0;margin:0;background:#fff}
-.eyebrow{display:none}
-h1{font:700 22px/1.3 var(--serif);margin:0 0 6px;letter-spacing:-.01em}
-h1 br{display:none}
-.lead{display:none}
-.factstrip{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 0;padding:12px 0;border:none;border-bottom:1px solid var(--line)}
-.factstrip .f{padding:0;flex:none;min-width:auto;background:none;border:none;display:flex;align-items:baseline;gap:4px}
-.factstrip .k{display:inline;font:400 11px/1 var(--sans);color:var(--faint);text-transform:none;margin:0;letter-spacing:0}
-.factstrip .v{font:600 14px/1 var(--sans);color:var(--ink)}
+/* ── Layout ── */
+#app{display:none}
+.topbar{background:#fff;border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.topbar h1{font:700 17px/1.2 "Noto Serif KR",serif;white-space:nowrap}
+.topbar .conds{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}
+.topbar .cond{font-size:12px;color:#666;background:var(--bg);padding:3px 10px;border-radius:12px}
+.topbar .cond b{color:#111;font-weight:600}
 
-/* Nav - simple underline tabs */
-nav{position:sticky;top:0;z-index:30;background:#fff;margin:0;padding:0;border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap}
+/* ── Nav ── */
+nav{background:#fff;border-bottom:1px solid var(--border);padding:0 24px;overflow-x:auto;white-space:nowrap;position:sticky;top:0;z-index:30}
 nav::-webkit-scrollbar{height:0}
-nav .inner{max-width:1000px;margin:0 auto;display:flex;gap:0}
-nav button{border:none;background:none;color:var(--faint);padding:14px 16px 12px;font:500 13px/1 var(--sans);cursor:pointer;border-bottom:2px solid transparent;transition:.12s;white-space:nowrap}
-nav button:hover{color:var(--ink)}
-nav button.on{color:var(--ink);border-bottom-color:var(--point)}
+nav .inner{display:flex;gap:0;max-width:1100px;margin:0 auto}
+nav button{border:none;background:none;color:#999;padding:12px 14px;font:500 13px/1 inherit;cursor:pointer;border-bottom:2px solid transparent;transition:.1s;white-space:nowrap}
+nav button:hover{color:#555}
+nav button.on{color:#111;border-bottom-color:var(--c)}
 
-/* Pages */
-.page{display:none;padding-top:32px}
-.page.on{display:block;animation:fadeIn .25s ease}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+/* ── Content ── */
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px 120px}
+.page{display:none;padding-top:28px}
+.page.on{display:block}
 
-/* Sections - generous spacing */
-section{margin-bottom:48px}
-.sechead{margin:0 0 4px}
-.sechead .n{display:none}
-.sechead h2{font:700 17px/1.3 var(--sans);margin:0;letter-spacing:-.01em}
-.secsub{display:none}
+/* Section */
+.sec-title{font:600 15px/1.3 inherit;margin:0 0 14px}
+.sec-desc{font-size:13px;color:#888;margin:-10px 0 14px}
 
-/* Cards */
-.notes{display:grid;gap:10px}
-@media(min-width:700px){.notes.c2{grid-template-columns:1fr 1fr;gap:10px}}
-.note-block{padding:16px 18px;border-top:none;background:#fafafa;border-radius:var(--r);border:none}
-.note-block .lb{font:600 11px/1 var(--sans);letter-spacing:.03em;text-transform:uppercase;color:var(--point);margin-bottom:6px}
-.note-block p{margin:.3em 0;font-size:13px;color:var(--sub);line-height:1.6}
-.note-block p strong{color:var(--ink);font-weight:600}
-.note-block ul{margin:.3em 0;padding-left:16px;font-size:13px;color:var(--sub)}
-.note-block li{margin:.25em 0}
-.note-block li strong{color:var(--ink)}
+/* ── Cards ── */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;max-height:min(78vh,860px);overflow-y:auto;padding:2px}
+.card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px 16px;cursor:pointer;transition:border-color .1s,box-shadow .1s;display:flex;flex-direction:column}
+.card:hover{border-color:#ccc;box-shadow:0 1px 6px rgba(0,0,0,.04)}
+.card.sel{border-color:var(--c);box-shadow:0 0 0 1px var(--c)}
+.card-name{font-weight:600;font-size:14px;line-height:1.3;margin-bottom:2px}
+.card-sub{font-size:11px;color:#999;margin-bottom:10px}
+.card-row{display:flex;justify-content:space-between;font-size:12px;color:#888;padding:1px 0}
+.card-row b{color:#333;font-weight:500}
+.card-price{font:800 22px/1 inherit;margin:10px 0 6px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.card-price small{font-size:11px;font-weight:400;color:#aaa;margin-left:1px}
+.card-price.lo{color:var(--g)}
+.card-price.hi{color:var(--r)}
+.card-tags{display:flex;gap:4px;flex-wrap:wrap}
+.tag{font:500 9px/1 inherit;padding:3px 7px;border-radius:3px;letter-spacing:.01em}
+.tag.g{background:#ecfdf5;color:var(--g)}.tag.r{background:#fef2f2;color:var(--r)}.tag.n{background:#f5f5f5;color:#888}
 
-/* Callout */
-.callout{background:#fafafa;padding:12px 16px;font-size:13px;margin:12px 0;color:var(--sub);line-height:1.6;border-radius:var(--r)}
-.callout b{color:var(--ink);font-weight:600}
-.callout.warn{background:var(--red-bg)}
+/* ── Filters ── */
+.toolbar{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;align-items:center}
+.chip{border:1px solid var(--border);background:#fff;color:#888;border-radius:20px;padding:6px 13px;font:500 12px/1 inherit;cursor:pointer;transition:.1s}
+.chip:hover{border-color:#aaa;color:#555}
+.chip.on{background:#111;color:#fff;border-color:#111}
+.divider{width:1px;height:14px;background:#ddd;margin:0 4px}
+.inl{display:flex;align-items:center;gap:5px;font-size:12px;color:#888}
+.inl input[type=number]{width:56px;padding:5px 7px;border:1px solid var(--border);border-radius:16px;font:400 12px/1 inherit;text-align:right;background:#fff}
+.inl input:focus{outline:none;border-color:#999}
+.search{flex:1;min-width:120px;padding:7px 14px;border:1px solid var(--border);border-radius:20px;font:400 12px/1 inherit;background:#fff}
+.search:focus{outline:none;border-color:#999}
+.search::placeholder{color:#ccc}
 
-/* Controls */
-.controls{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;align-items:center}
-.chip{border:1px solid var(--line);background:#fff;color:var(--sub);border-radius:20px;padding:6px 14px;font:500 12px/1 var(--sans);cursor:pointer;transition:.12s}
-.chip:hover{border-color:var(--ink);color:var(--ink)}
-.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
-.divider{width:1px;height:14px;background:var(--line);margin:0 6px}
-.inl{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--sub)}
-.inl input[type=number]{width:60px;padding:6px 8px;border:1px solid var(--line);border-radius:20px;font:400 13px/1 var(--sans);text-align:right;background:#fff}
-.inl input[type=number]:focus{outline:none;border-color:var(--ink)}
-.search{flex:1;min-width:140px;padding:8px 14px;border:1px solid var(--line);border-radius:20px;font:400 13px/1 var(--sans);background:#fff;color:var(--ink)}
-.search:focus{outline:none;border-color:var(--ink)}
-.search::placeholder{color:var(--muted)}
-
-/* Tables - clean horizontal rules only */
-.scroll{overflow:auto;max-height:min(72vh,780px);background:#fff;border-radius:var(--r);border:1px solid var(--line)}
-table{width:100%;border-collapse:collapse;font-size:13px;min-width:600px}
-th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
-th{background:#fafafa;font:600 10px/1 var(--sans);letter-spacing:.04em;color:var(--sub);text-transform:uppercase;position:sticky;top:0;z-index:2}
-tbody tr:last-child td{border-bottom:none}
+/* ── Tables (for SDM, timing, etc.) ── */
+.scroll{overflow:auto;max-height:min(72vh,700px);background:#fff;border:1px solid var(--border);border-radius:8px}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:500px}
+th,td{padding:9px 11px;text-align:left;border-bottom:1px solid #f0f0f0;white-space:nowrap}
+th{background:#fafafa;font:600 10px/1 inherit;letter-spacing:.04em;color:#999;text-transform:uppercase;position:sticky;top:0;z-index:2}
 tbody tr{cursor:pointer;transition:background .08s}
-tbody tr:hover{background:#f5f5f5}
-tbody tr.sel{background:#fff3ef}
+tbody tr:hover{background:#fafafa}
+tbody tr.sel{background:#fff5f2}
+tbody tr:last-child td{border-bottom:none}
 td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:500}
-.lp{display:block;font-size:10px;color:var(--faint);text-decoration:line-through}
-td.nm{font-weight:600;white-space:normal;min-width:120px}
-.tot{font-weight:700;font-size:15px}
-.lo{color:var(--good)}
-.hi{color:var(--red)}
-.tag{display:inline-block;font:500 10px/1 var(--sans);padding:3px 7px;border-radius:3px}
-.tag.g{background:var(--good-bg);color:var(--good)}
-.tag.r{background:var(--red-bg);color:var(--red)}
-.tag.n{background:#f5f5f5;color:var(--sub)}
-caption{caption-side:bottom;text-align:left;padding:12px 4px;font-size:11px;color:var(--faint)}
+td.nm{font-weight:600;white-space:normal;min-width:100px}
+.lp{display:block;font-size:9px;color:#ccc;text-decoration:line-through}
+.tot{font-weight:700;font-size:14px}
+.lo{color:var(--g)}.hi{color:var(--r)}
+caption{caption-side:bottom;text-align:left;padding:10px 4px;font-size:11px;color:#aaa}
+.sdmcell{cursor:pointer}
 
-/* Vendor/SDM */
-.vlist{border-top:1px solid var(--line)}
-.vgroup{border-bottom:1px solid var(--line)}
-.vhead{display:flex;align-items:flex-start;gap:12px;padding:14px 0;cursor:pointer}
-.vhead input{margin-top:3px;width:16px;height:16px;accent-color:var(--point);flex:none}
+/* ── Info blocks ── */
+.notes{display:grid;gap:8px}
+@media(min-width:700px){.notes.c2{grid-template-columns:1fr 1fr;gap:8px}}
+.note-block{background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px 16px}
+.note-block .lb{font:600 10px/1 inherit;letter-spacing:.04em;text-transform:uppercase;color:var(--c);margin-bottom:6px}
+.note-block p{font-size:13px;color:#666;line-height:1.6;margin:.3em 0}
+.note-block p strong{color:#111;font-weight:600}
+.note-block ul{padding-left:16px;font-size:13px;color:#666;margin:.3em 0}
+.note-block li{margin:.25em 0}
+.note-block li strong{color:#111}
+.callout{background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px 16px;font-size:13px;color:#666;line-height:1.6;margin:12px 0}
+.callout b{color:#111;font-weight:600}
+.callout.warn{border-color:#fecaca}
+
+/* ── Detail panels ── */
+.vlist{margin-top:16px}
+.vgroup{border-bottom:1px solid var(--border);margin-bottom:6px;background:#fff;border:1px solid var(--border);border-radius:8px;padding:0 16px}
+.vhead{display:flex;align-items:flex-start;gap:10px;padding:12px 0;cursor:pointer}
+.vhead input{margin-top:3px;width:15px;height:15px;accent-color:var(--c)}
 .vhead .vmain{flex:1;min-width:0}
 .vhead .vtop{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
-.vname{font:600 14px/1.3 var(--sans)}
-.vprice{margin-left:auto;font:700 15px/1 var(--sans);font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--point)}
-.vsummary{font-size:12.5px;color:var(--sub);margin-top:4px;line-height:1.6}
-.vdetail{padding:0 0 14px 28px}
-.vdetail .row{padding:10px 0;border-top:1px dashed var(--line)}
+.vname{font:600 14px/1.3 inherit}
+.vprice{margin-left:auto;font:700 14px/1 inherit;font-variant-numeric:tabular-nums;color:var(--c)}
+.vsummary{font-size:12px;color:#888;margin-top:3px;line-height:1.55}
+.vdetail{padding:0 0 12px 25px}
+.vdetail .row{padding:8px 0;border-top:1px dashed #eee}
 .vdetail .row:first-child{border-top:none}
 .vdetail .rtop{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
-.vdetail .rname{font-weight:600;font-size:13px}
-.vdetail .rprice{margin-left:auto;font:600 13px/1 var(--sans);color:var(--point);font-variant-numeric:tabular-nums}
-.vdetail .rnote{font-size:12px;color:var(--sub);margin-top:3px;line-height:1.6}
-.vdetail .rsrc{font-size:10px;color:var(--faint);margin-top:2px}
-.vdetail .empty{font-size:12px;color:var(--faint);font-style:italic}
-.vtip{font-size:12px;color:var(--point);margin-top:8px;background:#fff5f2;padding:8px 12px;border-radius:6px}
+.vdetail .rname{font-weight:600;font-size:12px}
+.vdetail .rprice{margin-left:auto;font:600 12px/1 inherit;color:var(--c);font-variant-numeric:tabular-nums}
+.vdetail .rnote{font-size:11px;color:#888;margin-top:2px;line-height:1.55}
+.vdetail .rsrc{font-size:10px;color:#bbb;margin-top:2px}
+.vdetail .empty{font-size:11px;color:#bbb;font-style:italic}
+.vtip{font-size:11px;color:var(--c);margin-top:6px;background:#fff5f2;padding:8px 12px;border-radius:6px}
 
-/* Bottom bar */
-.bar{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:0 24px 14px;pointer-events:none}
-.bar .inner{max-width:1000px;margin:0 auto;background:#fff;border:1px solid var(--line);padding:12px 20px;border-radius:10px;box-shadow:0 -2px 20px rgba(0,0,0,.06);pointer-events:auto}
-.bar .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.bar .who{font-size:12px;color:var(--sub);flex:1;min-width:160px}
-.bar .who b{color:var(--ink)}
-.bar .amt{font:700 28px/1 var(--sans);letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--point)}
-.bar .amt small{font:400 11px/1 var(--sans);color:var(--faint);margin-left:2px}
-.bd{display:flex;gap:10px;flex-wrap:wrap;margin-top:3px;font-size:11px;color:var(--faint)}
-.bd b{color:var(--sub)}
-.reset{border:1px solid var(--line);background:none;color:var(--sub);border-radius:20px;padding:5px 12px;font:500 11px/1 var(--sans);cursor:pointer;transition:.12s}
-.reset:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
-
-/* Accordion */
-details{border-top:1px solid var(--line);padding:12px 0}
-details:last-of-type{border-bottom:1px solid var(--line)}
-summary{cursor:pointer;font:600 14px/1.3 var(--sans);list-style:none;display:flex;align-items:center;gap:8px}
-summary:hover{color:var(--point)}
+details{background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:6px}
+summary{cursor:pointer;font:600 13px/1.3 inherit;list-style:none;display:flex;align-items:center;gap:8px}
+summary:hover{color:var(--c)}
 summary::-webkit-details-marker{display:none}
-summary::before{content:"+";font:400 16px/1 var(--sans);color:var(--faint);width:16px}
-details[open] summary::before{content:"\2212"}
-details ul{margin:10px 0 2px;padding-left:20px;font-size:13px;color:var(--sub);line-height:1.7}
+summary::before{content:"+";color:#bbb;font-size:14px;width:14px}
+details[open] summary::before{content:"\2212";color:var(--c)}
+details ul{margin:10px 0 2px;padding-left:18px;font-size:13px;color:#666;line-height:1.7}
 details li{margin:.3em 0}
 
-footer{margin-top:48px;padding:20px 0;border-top:1px solid var(--line);font-size:11px;color:var(--faint)}
-.note{font-size:12px;color:var(--sub);margin-top:8px}
+/* ── Bottom bar ── */
+#bar{display:none}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:0 24px 12px;pointer-events:none}
+.bar .inner{max-width:1100px;margin:0 auto;background:#fff;border:1px solid var(--border);padding:12px 18px;border-radius:10px;box-shadow:0 -1px 12px rgba(0,0,0,.04);pointer-events:auto}
+.bar .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.bar .who{font-size:11px;color:#999;flex:1;min-width:150px}
+.bar .who b{color:#333}
+.bar .amt{font:800 26px/1 inherit;letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--c)}
+.bar .amt small{font-size:11px;font-weight:400;color:#bbb;margin-left:1px}
+.bd{display:flex;gap:8px;flex-wrap:wrap;margin-top:2px;font-size:10px;color:#bbb}
+.bd b{color:#888}
+.reset{border:1px solid var(--border);background:none;color:#999;border-radius:16px;padding:5px 12px;font:500 11px/1 inherit;cursor:pointer;transition:.1s}
+.reset:hover{background:#111;color:#fff;border-color:#111}
 
 /* Compare */
-.compare-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);padding:10px 16px;z-index:999;display:none;box-shadow:0 -2px 12px rgba(0,0,0,.06)}
+.compare-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--border);padding:10px 16px;z-index:999;display:none;box-shadow:0 -2px 8px rgba(0,0,0,.04)}
 .compare-bar.active{display:block}
-.compare-bar .items{display:flex;gap:6px;overflow-x:auto}
-.compare-bar .ci{background:#f5f5f5;border:1px solid var(--line);border-radius:20px;padding:5px 10px;font-size:11px;white-space:nowrap;position:relative}
-.compare-bar .ci .x{position:absolute;top:-4px;right:-4px;width:16px;height:16px;background:var(--red);color:#fff;border-radius:50%;font-size:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none}
-.compare-bar .act{display:flex;gap:6px;margin-top:6px}
-.compare-bar .act button{flex:1;padding:8px;border-radius:20px;font:600 12px/1 var(--sans);border:none;cursor:pointer}
-.compare-bar .act .compare-btn{background:var(--ink);color:#fff}
-.compare-bar .act .clear-btn{background:#f5f5f5;color:var(--sub)}
-.compare-modal{position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:1000;display:none;overflow-y:auto;padding:24px}
+.compare-bar .items{display:flex;gap:5px;overflow-x:auto}
+.compare-bar .ci{background:#f5f5f5;border:1px solid var(--border);border-radius:16px;padding:4px 10px;font-size:10px;white-space:nowrap;position:relative}
+.compare-bar .ci .x{position:absolute;top:-4px;right:-4px;width:14px;height:14px;background:var(--r);color:#fff;border-radius:50%;font-size:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none}
+.compare-bar .act{display:flex;gap:5px;margin-top:5px}
+.compare-bar .act button{flex:1;padding:7px;border-radius:16px;font:600 11px/1 inherit;border:none;cursor:pointer}
+.compare-bar .act .compare-btn{background:#111;color:#fff}
+.compare-bar .act .clear-btn{background:#f5f5f5;color:#888}
+.compare-modal{position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:1000;display:none;overflow-y:auto;padding:20px}
 .compare-modal.active{display:flex;align-items:flex-start;justify-content:center}
-.compare-modal .inner{background:#fff;border-radius:12px;width:100%;max-width:700px;margin:auto;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,.1)}
-.compare-modal h3{margin:0 0 16px;font:700 17px/1.3 var(--sans)}
-.compare-modal .close-modal{float:right;background:none;border:none;font-size:22px;cursor:pointer;color:var(--sub)}
-.compare-modal table{width:100%;border-collapse:collapse;font-size:13px}
-.compare-modal th,.compare-modal td{padding:8px 6px;text-align:center;border-bottom:1px solid var(--line)}
+.compare-modal .inner{background:#fff;border-radius:12px;width:100%;max-width:680px;margin:auto;padding:24px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.compare-modal h3{margin:0 0 14px;font:600 16px/1.3 inherit}
+.compare-modal .close-modal{float:right;background:none;border:none;font-size:20px;cursor:pointer;color:#999}
+.compare-modal table{width:100%;border-collapse:collapse;font-size:12px}
+.compare-modal th,.compare-modal td{padding:7px 5px;text-align:center;border-bottom:1px solid #f0f0f0}
 .compare-modal th{background:#fafafa;font-weight:600;position:sticky;top:0}
 .compare-modal td:first-child,.compare-modal th:first-child{text-align:left;font-weight:600}
-.compare-modal .best{background:var(--good-bg);font-weight:700;color:var(--good)}
-.compare-modal .source-tag{font-size:10px;color:var(--faint);display:block}
-.hall-compare-cb{width:15px;height:15px;accent-color:var(--point);cursor:pointer;vertical-align:middle;margin-right:3px}
-.fair-badge{display:inline-block;background:var(--warn-bg);color:var(--warn);font:600 10px/1 var(--sans);padding:2px 6px;border-radius:3px;margin-left:4px}
+.compare-modal .best{background:#ecfdf5;font-weight:700;color:var(--g)}
+.compare-modal .source-tag{font-size:9px;color:#bbb;display:block}
+.hall-compare-cb{width:14px;height:14px;accent-color:var(--c);cursor:pointer;vertical-align:middle;margin-right:3px}
+.fair-badge{display:inline-block;background:#fef3c7;color:#a16207;font:600 9px/1 inherit;padding:2px 5px;border-radius:3px;margin-left:3px}
 
-@media(max-width:700px){
-  h1{font-size:18px}
-  .factstrip{gap:10px}.factstrip .v{font-size:13px}
-  nav button{padding:12px 12px;font-size:12px}
-  .bar .amt{font-size:24px}
+/* Responsive */
+@media(max-width:640px){
+  .topbar{padding:12px 16px}.topbar h1{font-size:15px}
+  .topbar .conds{margin-left:0;width:100%}
+  .card-grid{grid-template-columns:1fr 1fr;gap:6px}
+  .card{padding:12px 14px}
+  .card-price{font-size:19px}
+  nav button{padding:10px 10px;font-size:12px}
+  .bar .amt{font-size:22px}
   .bar .inner{border-radius:0;border-left:none;border-right:none}
-  .scroll{border-radius:0;margin:0 -24px;border-left:none;border-right:none}
+  .wrap{padding:0 16px 120px}
 }
+@media(max-width:400px){.card-grid{grid-template-columns:1fr}}
 @media print{#gate,nav,.bar,.compare-bar{display:none!important}.page{display:block!important;page-break-before:always}}
 
-/* Hall Card Grid */
-.hall-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;max-height:min(75vh,820px);overflow-y:auto;padding:2px}
-.hcard{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;cursor:pointer;transition:all .12s;display:flex;flex-direction:column;gap:4px}
-.hcard:hover{border-color:#ccc;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.hcard.sel{border-color:var(--point);background:#fff8f6;box-shadow:0 0 0 1px var(--point)}
-.hcard-head{display:flex;align-items:flex-start;justify-content:space-between;gap:6px}
-.hcard-head strong{font:600 14px/1.3 var(--sans);flex:1}
+/* Hall Cards */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;max-height:min(78vh,860px);overflow-y:auto;padding:2px}
+.hcard{background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px 16px;cursor:pointer;transition:border-color .1s,box-shadow .1s;display:flex;flex-direction:column}
+.hcard:hover{border-color:#ccc;box-shadow:0 1px 6px rgba(0,0,0,.04)}
+.hcard.sel{border-color:var(--c);box-shadow:0 0 0 1px var(--c)}
+.hcard-head{display:flex;align-items:flex-start;justify-content:space-between;gap:4px}
+.hcard-head strong{font:600 14px/1.3 inherit;flex:1}
 .hcard-head .hall-compare-cb{margin-top:2px}
-.hcard-loc{font-size:12px;color:var(--sub);margin-bottom:6px}
-.hcard-row{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;padding:2px 0}
-.hcard-label{color:var(--faint);font-size:11px}
-.hcard-val{font-weight:500;font-variant-numeric:tabular-nums}
-.hcard-total{font:800 24px/1 var(--sans);margin:8px 0 4px;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
-.hcard-total small{font-size:12px;font-weight:400;color:var(--sub);margin-left:1px}
-.hcard-total.lo{color:var(--good)}
-.hcard-total.hi{color:var(--red)}
+.hcard-loc{font-size:11px;color:#999;margin-bottom:8px}
+.hcard-row{display:flex;justify-content:space-between;font-size:12px;padding:1px 0;color:#888}
+.hcard-row b,.hcard-val{font-weight:500;color:#444;font-variant-numeric:tabular-nums}
+.hcard-label{color:#bbb;font-size:11px}
+.hcard-total{font:800 22px/1 inherit;margin:8px 0 6px;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.hcard-total small{font-size:11px;font-weight:400;color:#aaa;margin-left:1px}
+.hcard-total.lo{color:var(--g)}
+.hcard-total.hi{color:var(--r)}
 .hcard-foot{display:flex;gap:4px;flex-wrap:wrap}
+
 </style>
 </head>
 <body>
 
 <div id="gate">
-  <div class="box">
-    <div class="mark">Private · 개인 열람용</div>
-    <h2>결혼 준비 실견적 기록부</h2>
-    <p>비밀번호를 입력해주세요</p>
-    <input id="pw" type="password" placeholder="••••" autocomplete="off">
-    <button id="go">입장하기</button>
-    <div class="err" id="err"></div>
-  </div>
+<div class="box">
+<div class="mark">Private</div>
+<h2>결혼 준비 기록부</h2>
+<p>비밀번호를 입력해주세요</p>
+<input id="pw" type="password" placeholder="••••" autocomplete="off">
+<button id="go">입장</button>
+<div class="err" id="err"></div>
+</div>
 </div>
 
-<div class="wrap" id="app" style="display:none">
-<header>
-  <div class="eyebrow">Our Wedding · Field Notes</div>
-  <h1>서울 웨딩홀 · 스드메 · 결혼 전체비<br>실견적 기록부</h1>
-  <p class="lead">네이버 카페 실계약 후기, 블로그/SNS 후기, 웨딩 플랫폼 정가, 지인 견적서, 4개 플래너 스드메 가격표를 한데 모았습니다. 예식 직접비는 물론 상견례·예단·신혼집·혼수·신혼여행까지 한 화면에서 구조를 보되, 출처 강도는 끝까지 분리해 표시합니다.</p>
-  <div class="factstrip">
-    <div class="f"><span class="k">하객 동선</span><span class="v">군자·휘경동·의왕</span></div>
-    <div class="f"><span class="k">예식</span><span class="v">토·일 15시 이전</span></div>
-    <div class="f"><span class="k">보증</span><span class="v">200명</span></div>
-    <div class="f"><span class="k">식대</span><span class="v">5~7만원대</span></div>
-    <div class="f"><span class="k">대관</span><span class="v">최소</span></div>
-  </div>
-</header>
+<div id="app" style="display:none">
+
+<div class="topbar">
+<h1>결혼 준비 기록부</h1>
+<div class="conds">
+<span class="cond"><b>200</b>명</span>
+<span class="cond">식대 <b>5~7만</b></span>
+<span class="cond">토·일 <b>15시전</b></span>
+<span class="cond">대관 <b>최소</b></span>
+</div>
+</div>
 
 <nav><div class="inner" id="nav">
-  <button class="on" data-p="map">전체 비용지도</button>
-  <button data-p="hall">웨딩홀</button>
-  <button data-p="timing">요일·시간</button>
-  <button data-p="sdm">스드메</button>
-  <button data-p="vendor">부대업체</button>
-  <button data-p="family">가족·전통비</button>
-  <button data-p="whole">신혼집·여행</button>
-  <button data-p="timeline">준비 타임라인</button>
-  <button data-p="check">체크리스트</button>
+<button class="on" data-p="hall">웨딩홀</button>
+<button data-p="sdm">스드메</button>
+<button data-p="vendor">부대업체</button>
+<button data-p="map">전체 비용</button>
+<button data-p="timing">요일·시간</button>
+<button data-p="family">가족비</button>
+<button data-p="whole">신혼집</button>
+<button data-p="timeline">타임라인</button>
+<button data-p="check">체크</button>
 </div></nav>
 
-<!-- ══ 전체 비용지도 ══ -->
-<div class="page on" id="p-map">
-<section>
-  <div class="sechead"><span class="n">0</span><h2>결혼 전체비 지도</h2></div>
-  <p class="secsub">이 사이트는 이제 홀 비교표만이 아니라, 결혼 준비에서 실제로 돈이 새는 모든 축을 한 번에 보이도록 확장했습니다. 강한 1차 자료와 약한 공개 웹 가이드는 끝까지 구분합니다.</p>
-  <div class="callout"><b>원칙</b> · 실계약 후기(A)와 플랫폼 정가(C)를 같은 무게로 섞지 않습니다. 숫자가 있어도 근거가 약하면 약하다고 표시하고, 미확인은 비워둡니다.</div>
-  <div class="notes c2" id="costMap"></div>
-</section>
+<div class="wrap">
 
-<section>
-  <div class="sechead"><span class="n">0-1</span><h2>출처 강도 등급</h2></div>
-  <p class="secsub">이 등급이 앞으로 모든 수치 해석의 기준입니다.</p>
-  <div class="notes c2" id="sourceGrades"></div>
-</section>
-
-<section>
-  <div class="sechead"><span class="n">0-2</span><h2>채널별 역할 분담</h2></div>
-  <p class="secsub">어디서 처음 발견하고, 어디서 최종 확인할지 경로를 고정해 둡니다.</p>
-  <div class="notes c2">
-    <div class="note-block">
-      <div class="lb">원천 실후기</div>
-      <p><strong>네이버 카페 · 네이버 블로그</strong>가 여전히 가장 중요합니다. 숫자가 계약서/상담 캡처와 붙어 있거나, 최소한 날짜·시간대·보증인원 맥락이 살아 있기 때문입니다.</p>
-    </div>
-    <div class="note-block">
-      <div class="lb">발견 채널</div>
-      <p><strong>Instagram · Threads</strong>는 업체 발견, 공식 계정 추적, 릴스/화보 흐름 파악에 강합니다. 실후기 원천이라기보다 계정 네트워크 탐색 채널로 쓰는 게 맞습니다.</p>
-    </div>
-    <div class="note-block">
-      <div class="lb">집계 플랫폼</div>
-      <p><strong>웨딩북 · 아이웨딩 · 웨딕</strong>은 정가와 범위를 빨리 훑기 좋습니다. 대신 입점/프로모션 편향이 있으므로 최종판단 전에 꼭 원문 후기나 공식 자료로 되짚습니다.</p>
-    </div>
-    <div class="note-block">
-      <div class="lb">공식 보정</div>
-      <p><strong>공식 홈페이지 · 공식 인스타 · 네이버 플레이스</strong>는 주소, 교통, 주차, 홀 구조, 기본 구성 확인에 씁니다. 할인가보다 정가/조건 보정용에 가깝습니다.</p>
-    </div>
-  </div>
-</section>
+<!-- ═══ 웨딩홀 (기본 탭) ═══ -->
+<div class="page on" id="p-hall">
+<div class="toolbar" id="hallCtl">
+<button class="chip on" data-f="">전체</button>
+<button class="chip" data-f="east">동쪽</button>
+<button class="chip" data-f="weekend">주말</button>
+<button class="chip" data-f="budget">1,900만↓</button>
+<div class="divider"></div>
+<button class="chip on" data-s="total">총액 ↑</button>
+<button class="chip" data-s="meal">식대 ↑</button>
+<button class="chip" data-s="rent">대관 ↑</button>
+<div class="divider"></div>
+<div class="inl">보증 <input type="number" id="guar" value="200" min="1" max="500">명</div>
+</div>
+<div id="hallGrid" class="card-grid"></div>
+<div id="hallDetail"></div>
+<div id="priceGoKr" style="margin-top:24px"></div>
+<div id="verifiedHallCandidates"></div>
 </div>
 
-<!-- ══ 웨딩홀 ══ -->
-<div class="page" id="p-hall">
-<section>
-  <div class="sechead"><span class="n">Ⅰ</span><h2>웨딩홀 비교 181곳</h2><p style="font-size:12px;color:#64748b;margin:4px 0 0">200명 기준 총비용 저렴한 순 정렬 (대관+식대×200)</p></div>
-  <p class="secsub">실견적·계약가와 검증 가능한 정가 후보를 함께 둡니다. 행을 누르면 상세 메모가 열립니다. 총액 = 대관료 + (식대 × 보증인원). 필수옵션·부가세·봉사료는 별도입니다.</p>
-  <div class="controls" id="hallCtl">
-    <button class="chip on" data-f="all">전체</button>
-    <button class="chip" data-f="east">동쪽 생활권</button>
-    <button class="chip" data-f="weekend">토·일 15시 이전</button>
-    <button class="chip" data-f="budget">1,900만 이하</button>
-    <span class="divider"></span>
-    <button class="chip on" data-s="total">총액 ↑</button>
-    <button class="chip" data-s="meal">식대 ↑</button>
-    <button class="chip" data-s="rent">대관 ↑</button>
-    <span class="inl" style="margin-left:auto">보증 <input id="guar" type="number" value="200" min="50" max="500" step="10">명</span>
-  </div>
-  <div id="hallGrid" class="hall-grid"></div>
-  <div style="font-size:11px;color:var(--faint);margin-top:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-    <span class="tag g">할인가</span> 실계약가
-    <span class="tag n">정가</span> 할인 전
-    <span class="tag r">정찰제</span> 할인 없음
-  </div>
-  <div id="hallDetail" style="display:none;border:1px solid var(--line-strong);background:var(--surface);padding:18px 20px;margin:14px 0"></div>
-  <div id="verifiedHallCandidates" class="note-block" style="border-top:1px solid var(--line-strong);margin-top:6px;padding-top:14px"></div>
-  <div id="unknownHalls"></div>
-  <div id="priceGoKr" class="note-block" style="border-top:1px solid var(--line-strong);margin-top:6px;padding-top:14px"></div>
-</section>
-
-<section>
-  <div class="sechead"><span class="n">Ⅱ</span><h2>지인 실견적 2건 — 카페 후기와 출처가 다른 자료</h2></div>
-  <p class="secsub">지인이 직접 받은 견적서·상담 결과입니다. 서초·강남권이라 우리 조건(동쪽 생활권)과는 별도지만, 신뢰도 높은 1차 자료라 함께 기록합니다.</p>
-  <div class="notes c2">
-    <div class="note-block">
-      <div class="lb">더리버사이드호텔 · 서초 잠원동</div>
-      <p><strong>2027년 6월 재개발 공사 시작, 잠원동 부지 폐업이 확정된 호텔</strong>입니다(2030년 특급호텔로 재개장 예정). 지인이 200명 보증으로 상무·회장 인맥을 통해 받은 견적은 <strong>초가 2,270만원 → 최종 2,000~2,100만원</strong>(식대 77,000원 포함, 홀비+기타 500만원대).</p>
-      <p>일반 공식 판매기준(iwedding)은 <strong>식대 90,000~130,000원, 최소 보증 100명</strong>으로 나옵니다. 지인 채널이 없으면 일반 견적은 이 가격대만 나올 것 같습니다.</p>
-    </div>
-    <div class="note-block">
-      <div class="lb">루클라비 더 화이트 · 강남 논현동</div>
-      <p>지인이 실제 상담받은 <strong>견적서 원본</strong>입니다. 아래 표에서 3개 날짜를 비교해보세요. 200명 보증 기준이고, 날짜별로 대관료가 750만~800만원대인 걸 직접 확인할 수 있어요. 강남 논현동이라 우리 조건과는 별도입니다.</p>
-    </div>
-  </div>
-  <div class="scroll" style="max-height:none;margin-top:11px">
-    <table id="luklaviTable"><thead><tr><th>날짜·시간</th><th class="num">대관(정가→할인)</th><th class="num">식대(정가→할인)</th><th class="num">총액(200명)</th></tr></thead><tbody></tbody>
-      <caption>가격 모든 항목 <strong>당일계약 할인 적용가</strong>입니다(대관 -200만/-100만, 식대 -5,000/-2,000원). 부가세 10% 포함, 봉사료 없음.<br>
-      당일계약 시 본식스냅 110만·DVD 60만·플라워샤워 30만·포토테이블 50만 = <strong>250만원 상당 서비스가 무료로 따라옴</strong>. 이것이 앞서 체크리스트의 오늘 계약하시면 무료 서비스 질문을 던졌을 때 실제 나온 예시입니다.</caption>
-    </table>
-  </div>
-</section>
-
-<section>
-  <div class="sechead"><span class="n">Ⅲ</span><h2>보증인원 낮출 수 있는 곳</h2></div>
-  <p class="secsub">실제 하객이 200명보다 적으면 총액이 크게 달라집니다.</p>
-  <div class="notes">
-    <div class="note-block"><p><strong>120명 · 레노스블랑쉬</strong>(왕십리) — 비성수기 한정(원래 150명)</p></div>
-    <div class="note-block"><p><strong>100명 · 엘로라인가든</strong>(송파 장지) — 12:30 예식에도 가능</p></div>
-    <div class="note-block"><p><strong>150명 · 제이오스티엘</strong>(구로) — 8월 비수기가 더 저렴</p></div>
-    <div class="note-block"><p><strong>150명 · 명동 라루체</strong> 아이리스홀 — 잔여타임 = 대관 무료 + 꽃 할인 사례</p></div>
-    <div class="note-block"><p><strong>170명 · 신도림 웨딩시티</strong> — 식대 51,500원 · 대관 265만</p></div>
-    <div class="note-block"><p><strong>50~100명 · 플로렌스</strong>(오목교·보라매) — 100명 총액 1,000만원 미만</p></div>
-  </div>
-</section>
-</div>
-
-<!-- ══ 요일·시간 ══ -->
-<div class="page" id="p-timing">
-<section>
-  <div class="sechead"><span class="n">Ⅰ</span><h2>요일·시간대만 바꿨을 때 차액</h2></div>
-  <p class="secsub">같은 홀에서 실제로 확인된 차이입니다. 토요일 12~13시(골든타임)는 할인이 거의 없습니다.</p>
-  <div class="scroll" style="max-height:none">
-    <table>
-      <thead><tr><th>홀</th><th>비싼 조건</th><th>싼 조건</th><th class="num">차이</th></tr></thead>
-      <tbody>
-        <tr><td class="nm">동대문 메리어트</td><td>토요일 · 대관 1,800만 / 14만</td><td class="lo">일요일 · 대관 250만 / 12.6만</td><td class="num tot">대관 −1,550만</td></tr>
-        <tr><td class="nm">더컨벤션 잠실</td><td>정가 · 1,100만 / 11만</td><td class="lo">토 잔여타임 · 530만 / 6.2만</td><td class="num tot">−1,530만</td></tr>
-        <tr><td class="nm">엘타워 양재</td><td>정가 · 660만 / 13만</td><td class="lo">일 15:00 · 330만 / 8만</td><td class="num tot">−1,580만*</td></tr>
-        <tr><td class="nm">여의도웨딩컨벤션</td><td>토 점심 · 760만 / 7.9만</td><td class="lo">오후 · 450만 / 6.9만</td><td class="num tot">−510만</td></tr>
-        <tr><td class="nm">서울웨딩타워</td><td>27/9 오전 · 950만 / 9.5만</td><td class="lo">27/9 오후 · 800만 / 8.2만</td><td class="num tot">−475만</td></tr>
-        <tr><td class="nm">DMC타워웨딩</td><td>27/6 오전 · 640만 / 6.4만</td><td class="lo">27/3 오후 · 420만 / 5.7만</td><td class="num tot">−360만</td></tr>
-        <tr><td class="nm">상록아트홀</td><td>토 12:30 성수기</td><td class="hi">할인 전무</td><td class="num">0</td></tr>
-      </tbody>
-      <caption>*250명 기준 환산. 상록아트홀 후기 원문: 성수기 토요일 점심 타임은 할인이 전무합니다. 대신 시간을 조금 바꾸거나 일요일로 바꾸면 갑자기 견적이 확 좋아집니다.</caption>
-    </table>
-  </div>
-  <div class="notes c2" style="margin-top:16px">
-    <div class="note-block"><div class="lb">우리 조건 안 최적</div>
-      <p><strong>토요일 14:00~15:00</strong> — 토요일 프리미엄은 유지하고 골든타임 할증만 빠지는 구간. 홀 타임표상 13:20 / 14:40 슬롯.</p>
-      <p><strong>일요일 12:00~15:00</strong> — 할인폭 최대. 대관료가 절반 이하로 내려간 사례 다수.</p></div>
-    <div class="note-block"><div class="lb">감안할 점</div>
-      <p>엘타워 일요일 15:00 계약자 후기 원문: <strong>오후 3시이다보니 비선호시간대라 하객분들이 예상만큼 오실까 싶어요</strong></p>
-      <p>친구가 전국구·양가 본가가 의왕·휘경동이라 일요일 오후는 지방 하객 당일 왕복이 부담될 수 있습니다.</p></div>
-  </div>
-</section>
-</div>
-
-<!-- ══ 스드메 ══ -->
+<!-- ═══ 스드메 ═══ -->
 <div class="page" id="p-sdm">
-<section>
-  <div class="sechead"><span class="n">Ⅰ</span><h2>스드메 4개 플래너 실가격표</h2></div>
-  <p class="secsub">보유한 「스드메 견적 자동산출」 자료 기준입니다. 베리굿·다이렉트·제이웨딩·신부야 4개 플래너가 같은 업체를 얼마에 파는지 나란히 비교합니다. 셀을 누르면 하단 총액에 반영됩니다.</p>
-  <div class="controls" id="sdmCtl">
-    <button class="chip on" data-c="studio">스튜디오</button>
-    <button class="chip" data-c="dress">드레스</button>
-    <button class="chip" data-c="makeup">메이크업</button>
-    <span class="divider"></span>
-    <button class="chip on" data-o="asc">최저가 ↑</button>
-    <button class="chip" data-o="desc">최저가 ↓</button>
-    <input class="search" id="sdmQ" placeholder="업체명 검색">
-  </div>
-  <div class="scroll">
-    <table id="sdmTable">
-      <thead><tr><th>업체명</th><th class="num">베리굿</th><th class="num">다이렉트</th><th class="num">제이웨딩</th><th class="num">신부야</th><th class="num">최저가</th></tr></thead>
-      <tbody></tbody>
-      <caption>숫자는 기본가(만원) 최저~최대 범위이며 <strong>추가금은 제외</strong>입니다 — 원본·수정본, 앨범 페이지 추가, 헬퍼비, 헤어변형, 피팅비, 담당자 직급 지정, 얼리스타트, 2부 드레스, 혼주 비용 등.
-        셀을 클릭하면 아래 상세 패널에 해당 플래너의 추가금 안내가 표시됩니다.</caption>
-    </table>
-  </div>
-  <div id="sdmDetail" class="note" style="display:none;border:1px solid var(--line-strong);padding:14px 16px;margin-top:10px;background:var(--surface)"></div>
-
-  <div class="notes c2" style="margin-top:20px">
-    <div class="note-block"><div class="lb">스튜디오를 넣으면 표가 깨진다</div>
-      <p>스튜디오 진행 시 <strong>추가금만 100만원 가까이</strong> 붙습니다 — 원본 수정본 <strong>+44만</strong>, 헬퍼비 <strong>+25만</strong>, 헤어변형 <strong>+35만</strong>.</p>
-      <p>야외 스냅이 싸다도 사실이 아니고 오히려 추가금이 더 많습니다. 대안은 <strong>스튜디오 생략 + 일반 사진관(50만원대 이하)</strong> 또는 커플 스냅 대체.</p>
-    </div>
-    <div class="note-block"><div class="lb">드메에서 하나만 고르라면 메이크업</div>
-      <ul>
-        <li><strong>드레스</strong>: 투어 대신 지정하면 지정 혜택(2부 무료·블랙라벨 업그레이드) + 피팅비 절약</li>
-        <li><strong>메이크업</strong>: 샵을 한 단계 낮추고 직급을 지정하는 게 더 쌀 수 있음</li>
-      </ul>
-      <p>가성비 조회는 한국소비자원 <strong>참가격</strong>(price.go.kr).</p>
-    </div>
-  </div>
-  <div class="callout warn"><b>⚠️ 지인이 오픈채팅방에서 직접 들은 피드백: "다이렉트 플래너는 하지 않는 걸 추천".</b> 포인트로 저렴하게 하는 곳이라 오히려 <b>시작 가격이 비싸게</b> 잡히는 구조라고 합니다. 차라리 워크인이 낫다는 의견이 많았고, 스드메 외에는 거의 도와주지 않는다는 평이에요. <b>실제 계약은 다른 플래너와 반드시 비교해보세요.</b></div>
-</section>
-
-<section>
-  <div class="sechead"><span class="n">Ⅱ</span><h2>준비 타임라인 참고</h2></div>
-  <div class="notes c2">
-    <div class="note-block">
-      <div class="lb">스튜디오 촬영 일정은 여유있게</div>
-      <p><strong>원본은 몇 주</strong> 안에 받지만 <strong>보정본과 액자는 짧게는 3개월, 길게는 5개월</strong>까지 걸립니다. 예식날 몇 달 전에는 최종 보정본이 있어야 청첩장·식전영상을 만들 수 있어서, 촬영을 너무 빠듯하게 잡으면 <strong>원본만 받아 사설 업체에 돈 주고 청첩장을 만들어야 하는 상황</strong>이 생길 수 있어요. 리허설 촬영 = 스튜디오 촬영이라는 것도 참고하세요.</p>
-    </div>
-    <div class="note-block">
-      <div class="lb">베리굿웨딩 진행순서도 (참고용)</div>
-      <p>상담(6~14개월 전) → 드레스샵투어(촬영 2~4개월 전) → 촬영가봉(촬영 2~4주 전) → 웨딩촬영(리허설 촬영) → 사진셀렉(촬영 1~2달 후) → 본식가봉(결혼식 1달 전) → 결혼식</p>
-      <p>샵에 따라 헬퍼비 25~45만, 야외 +5만, 결혼식날 애프터드레스 +5만(안 하면 피팅비 5.5만 발생), 헤어/메이크업 염색·컷·펌 별도 부과, 이른 시작(5~7시) 추가금이 붙는다는 점도 미리 물어보세요.</p>
-    </div>
-  </div>
-</section>
+<div class="toolbar" id="sdmCtl">
+<button class="chip on" data-c="studio">스튜디오</button>
+<button class="chip" data-c="dress">드레스</button>
+<button class="chip" data-c="makeup">메이크업</button>
+<div class="divider"></div>
+<button class="chip on" data-o="asc">최저가 ↑</button>
+<button class="chip" data-o="desc">최저가 ↓</button>
+<div class="divider"></div>
+<input class="search" id="sdmQ" type="text" placeholder="업체명 검색">
+</div>
+<div class="scroll">
+<table id="sdmTable"><thead><tr><th>업체명</th><th class="num">베리굿</th><th class="num">다이렉트</th><th class="num">제이웨딩</th><th class="num">신부야</th><th class="num">최저가</th></tr></thead><tbody></tbody></table>
+</div>
+<div id="sdmDetail"></div>
 </div>
 
-<!-- ══ 부대업체 ══ -->
+<!-- ═══ 부대업체 ═══ -->
 <div class="page" id="p-vendor">
-<section>
-  <div class="sechead"><span class="n">Ⅰ</span><h2>부대업체 — 실제 계약 후기 기준</h2></div>
-  <p class="secsub">카페·블로그 실계약 후기에서 확인된 업체명·가격을 그대로 옮겼습니다. 체크하면 하단 총액에 합산됩니다.</p>
-  <div class="vlist" id="vendList"></div>
-  <p class="note">※ 원판은 대부분 <b>홀 필수 항목</b>입니다. 홀 견적서에 이미 포함됐는지 먼저 확인하세요.</p>
-</section>
+<div id="vendList" class="vlist"></div>
 </div>
 
-<!-- ══ 가족·전통비 ══ -->
+<!-- ═══ 전체 비용 ═══ -->
+<div class="page" id="p-map">
+<h2 class="sec-title">비용 구조</h2>
+<div class="notes c2" id="costMap"></div>
+
+<h2 class="sec-title" style="margin-top:32px">출처 등급</h2>
+<div class="notes c2" id="sourceGrades"></div>
+</div>
+
+<!-- ═══ 요일·시간 ═══ -->
+<div class="page" id="p-timing">
+<h2 class="sec-title">요일·시간대별 가격 차이</h2>
+<div class="scroll"><table id="luklaviTable"><thead><tr><th>구분</th><th>핵심 요약</th></tr></thead><tbody></tbody></table></div>
+<div class="notes c2" style="margin-top:20px" id="unknownHalls"></div>
+</div>
+
+<!-- ═══ 가족비 ═══ -->
 <div class="page" id="p-family">
-<section>
-  <div class="sechead"><span class="n">Ⅴ</span><h2>가족·전통·사전준비 비용</h2></div>
-  <p class="secsub">예식장 계약서엔 안 적히지만, 실제 총액을 크게 흔드는 축입니다. 아래 범위는 공개 웹 가이드·후기 기준 참고값이라 실후기 원천보다 약합니다.</p>
-  <div class="callout warn" id="familyNote"></div>
-  <div class="scroll" style="max-height:none">
-    <table id="familyTable">
-      <thead><tr><th>항목</th><th class="num">최소</th><th class="num">표준</th><th class="num">상단</th><th>필수성</th><th>출처등급</th><th>메모</th></tr></thead>
-      <tbody></tbody>
-    </table>
-  </div>
-</section>
-
-<section>
-  <div class="sechead"><span class="n">Ⅴ-1</span><h2>3가지 시나리오</h2></div>
-  <p class="secsub">양가 관습 강도에 따라 같은 카테고리라도 총액이 크게 달라집니다.</p>
-  <div class="notes c2" id="familyScenarios"></div>
-</section>
-
-<section>
-  <div class="sechead"><span class="n">Ⅴ-2</span><h2>해석 포인트</h2></div>
-  <div class="notes" id="familyTips"></div>
-</section>
+<h2 class="sec-title">가족·전통 비용</h2>
+<p class="sec-desc" id="familyNote"></p>
+<div class="scroll"><table id="familyTable"><thead><tr><th>항목</th><th class="num">최소</th><th class="num">중간</th><th class="num">최대</th><th>필수여부</th><th>등급</th><th>비고</th></tr></thead><tbody></tbody></table></div>
+<div id="familyTips"></div>
+<div id="familyScenarios" style="margin-top:20px"></div>
 </div>
 
-<!-- ══ 신혼집·여행 ══ -->
+<!-- ═══ 신혼집 ═══ -->
 <div class="page" id="p-whole">
-<section>
-  <div class="sechead"><span class="n">Ⅵ</span><h2>신혼집 · 혼수 · 신혼여행</h2></div>
-  <p class="secsub">이 축은 예식 직접비와 지불 시점, 계약 구조, 부담 주체가 달라서 별도 페이지로 분리합니다. 본식 총액과 합쳐 보되, 같은 성격의 돈처럼 다루지는 않습니다.</p>
-  <div class="notes c2">
-    <div class="note-block"><div class="lb">왜 따로 보나</div><p><strong>신혼집</strong>은 자산/보증금 성격이 강하고, <strong>혼수</strong>는 생활재 선택의 영역이며, <strong>신혼여행</strong>은 환율·거리·기간 영향을 크게 받습니다. 예식장 견적표와 같은 방식으로 비교하면 오판하기 쉽습니다.</p></div>
-    <div class="note-block"><div class="lb">어떻게 기록하나</div><p>신혼집 자체, 생활세팅(가전·가구·설치), 여행, 관리·누수비용을 분리 기록합니다. 특히 부동산 취득비와 소비성 예식비를 섞지 않는 것이 중요합니다.</p></div>
-  </div>
-</section>
-
-<section>
-  <div class="sechead"><span class="n">Ⅵ-1</span><h2>신혼집 · 혼수 참고</h2></div>
-  <div class="notes" id="wholeHome"></div>
-</section>
-
-<section>
-  <div class="sechead"><span class="n">Ⅵ-2</span><h2>신혼여행 예산 밴드</h2></div>
-  <p class="secsub">실계약가 테이블이 아니라, 여행지/거리별 예산 감각을 잡기 위한 공개 웹 밴드입니다.</p>
-  <div class="notes" id="wholeHoneymoon"></div>
-</section>
-
-<section>
-  <div class="sechead"><span class="n">Ⅵ-3</span><h2>관리 · 누수 비용</h2></div>
-  <div class="notes" id="wholeLeakage"></div>
-</section>
+<h2 class="sec-title">신혼집·혼수·여행</h2>
 </div>
 
-<!-- ══ 타임라인 ══ -->
+<!-- ═══ 타임라인 ═══ -->
 <div class="page" id="p-timeline">
-<section>
-  <div class="sechead"><span class="n">Ⅰ</span><h2>지인의 준비 타임라인 — 실제 업체명 조사</h2></div>
-  <p class="secsub">친구의 개인 준비표에 있던 업체명을 실제로 검색해 확인한 결과입니다. 이 사람의 취향에 맞춘 선택일 뿐 추천 목록은 아니지만, 서로 다른 카테고리를 실제로 어떻게 조합하는지 참고할 수 있습니다.</p>
-  <div class="scroll" style="max-height:none">
-    <table id="timelineTable">
-      <thead><tr><th>단계(업체)</th><th>시기</th><th>카테고리</th><th>확인된 정보</th></tr></thead>
-      <tbody></tbody>
-    </table>
-  </div>
-</section>
+<h2 class="sec-title">준비 타임라인</h2>
+<div class="scroll"><table id="timelineTable"><thead><tr><th>시기</th><th>할 일</th><th>비고</th></tr></thead><tbody></tbody></table></div>
 </div>
 
-<!-- ══ 체크리스트 ══ -->
+<!-- ═══ 체크 ═══ -->
 <div class="page" id="p-check">
-<section>
-  <div class="sechead"><span class="n">Ⅰ</span><h2>상담·계약 체크리스트</h2></div>
-  <p class="secsub">견적 받을 때 그대로 읽으세요.</p>
-  <details open><summary>견적서에 반드시 한 장으로 받을 것</summary><ul>
-    <li><strong>최종 납부액</strong>: 식대·대관·꽃·연출·음료·주류·폐백·혼구·스크린·부가세·봉사료 전부 한 장에</li>
-    <li>식대가 <strong>세금 포함 단가</strong>인지, 음료·주류 포함인지, 미성년/유아식·도시락 단가까지</li>
-    <li>보증인원 <strong>신랑·신부 합산 기준</strong>인지 (따로 계산하면 손해)</li>
-    <li>보증인원 <strong>최종 하향 가능일</strong>, 당일 추가 인원 단가, 노쇼·잔여식권 처리</li>
-    <li>대관료 0원 함정: 필수 꽃 업그레이드·연출·음향·폐백실·혼구·주차비로 대체 청구되는지</li>
-  </ul></details>
-  <details><summary>주차·동선</summary><ul>
-    <li>하객 무료 시간, 혼주 종일주차 대수, <strong>동시 주차 가능 대수</strong></li>
-    <li>만차 시 대체 주차장 위치·요금·부담 주체, 셔틀 간격</li>
-    <li>주차장 <strong>진입로 폭</strong> (아펠가모 잠실·더파티움 여의도·웨딩여율리가 여기서 갈림)</li>
-    <li>주차장 → 홀 동선 환승 횟수 (루이비스 중구는 1층 경유 필수)</li>
-  </ul></details>
-  <details><summary>외부 업체 반입 — 부대업체 직접 고를 때 핵심</summary><ul>
-    <li>본식 스냅·DVD·사회자를 <strong>외부 업체로 할 수 있나요? 반입비·패널티는?</strong></li>
-    <li>지정 업체만 가능할 때 → <strong>스냅 원본을 추가금 없이 받나요?</strong> 별도 구매면 얼마?</li>
-    <li>첫 타임 <strong>원판 촬영</strong>이 가능한가요? 예식 전후 원판은?</li>
-    <li>혼주 헤어메이크업이 홀 연계면 <strong>추가금·소요시간·가발 추가 기준</strong>을 미리 전화 확인</li>
-  </ul></details>
-  <details><summary>협상에 쓸 문장</summary><ul>
-    <li>잔여 타임 할인이 되나요? / <strong>일요일이나 오후 시간대</strong>는 견적이 어떻게 달라지나요?</li>
-    <li>오늘 계약하면 추가 혜택이 더 있나요? → 꽃 업그레이드·폐백 서비스·보증인원 조정 중 하나는 나옵니다</li>
-    <li>다른 곳은 최소 보증이 조금 낮았는데, 맞춰주실 수 있을까요? (공격적으로 말하지 않기)</li>
-    <li>마지막에 한 번 더: 대관료나 식대 조금만 조정 가능할까요? → <strong>식대 2천원 = 200명이면 40만원</strong></li>
-  </ul></details>
-  <details><summary>계약서 특약에 문장으로 넣을 것</summary><ul>
-    <li>보증인원은 <strong>신랑·신부 합산 기준</strong>이라고 명시</li>
-    <li>부가세·봉사료 포함 여부와 <strong>카드/현금 가격 차이</strong> 명시</li>
-    <li>무료 주차시간(하객/혼주)·외부주차장 거리·셔틀 명시</li>
-    <li>계약 취소·날짜 변경의 <strong>시점별 위약금</strong>과 업체 사정 취소 시 보상 명시</li>
-    <li>서비스, 무료 업그레이드, 보증인원 조정 가능은 <strong>특약란에 문장으로</strong></li>
-  </ul></details>
-</section>
-
-<footer>
-  <p><strong>출처</strong> · 웨딩홀·부대업체: 네이버 카페 7곳 실계약·견적 후기(메이크마이웨딩·웨딩킹·다이렉트 결혼준비·요즘웨딩·혀니웨딩·웨딩크라우드·결혼이야기) + 공식 웨딩정보 사이트(웨딩북·아이웨딩·스마트웨딩·다이렉트웨딩·웨딩노트) 정가 정보 + 네이버 블로그 실계약 후기 + 지인 카카오톡 대화 및 견적서 원본, 2024~2026<br>
-  가족·전통비·신혼집·신혼여행 페이지: 공개 웹 가이드/후기/기사/플랫폼 구조 분석을 바탕으로 한 참고용 범위 정리. 실계약 원문보다 근거가 약한 값은 등급(B~D)으로 분리 표기<br>
-  스드메 4플래너 비교표: 개인 보유 자료(작성자 @wedding.log_, 출처 한국소비자원 참가격 2025.4분기 + 오딩). <strong>무단배포·재가공 금지 명시 자료라 개인 열람 용도로만 사용하며, 이 링크는 외부에 공유하지 않습니다.</strong><br>
-  체크리스트: 예식장 체크 list · 웨딩홀 계약서 함정조항 체크리스트(개인 정리 자료)</p>
-  <p style="margin-top:9px">웨딩홀 견적은 날짜·시간·계약 시점·잔여타임 여부에 따라 매번 달라집니다. 협상 기준선이지 보장 가격이 아닙니다.
-  다이렉트 결혼준비 후기 335건 중 257건(77%)은 카페 포인트를 받고 작성된 글이라 긍정 편향이 있습니다.</p>
-</footer>
+<h2 class="sec-title">체크리스트</h2>
 </div>
 
-<div class="bar" id="bar" style="display:none"><div class="inner">
-  <div class="row">
-    <div class="who" id="who">웨딩홀 · 스드메 · 부대업체를 골라보세요.</div>
-    <button class="reset" id="reset">초기화</button>
-    <div class="amt" id="amt">0<small>만원</small></div>
-  </div>
-  <div class="bd" id="bd"></div>
-</div></div>
+</div><!-- .wrap -->
+</div><!-- #app -->
+
+<div class="bar" id="bar" style="display:none">
+<div class="inner">
+<div class="row">
+<div class="who" id="who">웨딩홀 · 스드메 · 부대업체를 골라보세요.</div>
+<div class="amt" id="amt">0<small>만원</small></div>
+<button class="reset" id="reset">초기화</button>
+</div>
+<div class="bd" id="bd"></div>
+</div>
+</div>
+
+<div class="compare-bar" id="compareBar">
+<div class="items" id="compareItems"></div>
+<span id="compareCnt" style="display:none">0</span>
+<div class="act"><button class="compare-btn" onclick="showCompare()">비교</button><button class="clear-btn" onclick="clearCompare()">초기화</button></div>
+</div>
+<div class="compare-modal" id="compareModal">
+<div class="inner"><button class="close-modal" onclick="closeCompare()">&times;</button><h3>웨딩홀 비교</h3><div id="compareTable"></div></div>
+</div>
 
 <script>
 /* ── 우리 결혼식 견적 데이터 ────────────────────────────────────────
@@ -3476,6 +3254,7 @@ function show(){ $("#gate").style.display="none"; $("#app").style.display="block
 $("#go").onclick=unlock;
 $("#pw").addEventListener("keydown",e=>{ if(e.key==="Enter") unlock(); });
 if(sessionStorage.getItem("ok")==="1") show();
+renderHalls(); renderTotal();
 
 /* tabs */
 $("#nav").addEventListener("click",e=>{
@@ -4038,6 +3817,5 @@ function showCompare() {
   modal.classList.add('active');
 }
 </script>
-
 </body>
 </html>
