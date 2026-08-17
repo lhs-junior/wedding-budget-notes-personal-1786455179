@@ -3479,7 +3479,7 @@ function unlock(){
   if($("#pw").value.trim()!==PASSWORD){ $("#err").textContent="비밀번호가 맞지 않아요."; return; }
   sessionStorage.setItem("ok","1"); show();
 }
-function show(){ $("#gate").style.display="none"; $("#app").style.display="block"; $("#bar").style.display="block"; }
+function show(){ $("#gate").style.display="none"; $("#app").style.display="block"; $("#bar").style.display="block"; setTimeout(function(){try{renderHalls();}catch(e){}try{renderCostMap();}catch(e){}try{renderSdm();}catch(e){}try{renderVend();}catch(e){}try{renderFamily();}catch(e){}try{renderWholeWedding();}catch(e){}try{renderTotal();}catch(e){}},50); }
 $("#go").onclick=unlock;
 $("#pw").addEventListener("keydown",e=>{ if(e.key==="Enter") unlock(); });
 if(sessionStorage.getItem("ok")==="1") show();
