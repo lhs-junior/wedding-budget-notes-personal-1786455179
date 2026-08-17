@@ -276,9 +276,21 @@ details li{margin:.3em 0}
 <div class="inl">보증 <input type="number" id="guar" value="200" min="1" max="500">명</div>
 </div>
 <div id="hallGrid" class="card-grid"></div>
-<div id="hallDetail"></div>
-<div id="priceGoKr" style="margin-top:24px"></div>
-<div id="verifiedHallCandidates"></div>
+<div id="hallDetail" style="margin-top:16px"></div>
+<details style="margin-top:24px;background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px 16px">
+<summary style="font:600 13px/1.3 inherit;cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px">
+<span style="color:#bbb;font-size:14px;width:14px">+</span>
+참가격 기준선 (price.go.kr) — 협상 시 인용할 공식 통계
+</summary>
+<div id="priceGoKr" style="margin-top:12px"></div>
+</details>
+<details style="margin-top:12px;background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px 16px">
+<summary style="font:600 13px/1.3 inherit;cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px">
+<span style="color:#bbb;font-size:14px;width:14px">+</span>
+직접 검증한 후보 14곳 — 조건에 맞는 홀을 하나씩 확인한 메모
+</summary>
+<div id="verifiedHallCandidates" style="margin-top:12px"></div>
+</details>
 </div>
 
 <!-- ═══ 스드메 ═══ -->
