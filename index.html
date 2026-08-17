@@ -4094,6 +4094,19 @@ function calcAddons() {
 
 
 (function(){var v=document.getElementById('p-verify');if(!v)return;var w=document.querySelector('.wrap');if(v.parentElement!==w)w.appendChild(v);})();
+
+/* Fix page nesting - move all .page divs to be direct children of .wrap */
+(function(){
+  var wrap = document.querySelector('.wrap');
+  if(!wrap) return;
+  var pages = document.querySelectorAll('.page');
+  pages.forEach(function(pg){
+    if(pg.parentElement !== wrap){
+      wrap.appendChild(pg);
+    }
+  });
+})();
+
 </script>
 
 </body>
