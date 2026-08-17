@@ -269,12 +269,14 @@ details li{margin:.3em 0}
 <button class="chip" data-f="weekend">주말</button>
 <button class="chip" data-f="budget">1,900만↓</button>
 <div class="divider"></div>
-<button class="chip on" data-s="total">총액 ↑</button>
+<button class="chip" data-s="total">총액 ↑</button>
 <button class="chip" data-s="meal">식대 ↑</button>
 <button class="chip" data-s="rent">대관 ↑</button>
+<button class="chip on" data-s="tier">인기순</button>
 <div class="divider"></div>
 <div class="inl">보증 <input type="number" id="guar" value="200" min="1" max="500">명</div>
 </div>
+<div style="display:flex;gap:8px;margin-bottom:10px;font-size:11px;color:#999;flex-wrap:wrap"><span style="display:inline-flex;align-items:center;gap:3px"><span style="width:8px;height:8px;border-radius:2px;background:#3b82f6"></span>B인기</span><span style="display:inline-flex;align-items:center;gap:3px"><span style="width:8px;height:8px;border-radius:2px;background:#10b981"></span>C대중</span><span style="display:inline-flex;align-items:center;gap:3px"><span style="width:8px;height:8px;border-radius:2px;background:#f59e0b"></span>A프리미엄</span><span style="display:inline-flex;align-items:center;gap:3px"><span style="width:8px;height:8px;border-radius:2px;background:#6b7280"></span>D가성비</span><span style="display:inline-flex;align-items:center;gap:3px"><span style="width:8px;height:8px;border-radius:2px;background:#8b5cf6"></span>S럭셔리</span></div>
 <div id="hallGrid" class="card-grid"></div>
 <div id="hallDetail" style="margin-top:16px"></div>
 <details style="margin-top:24px;background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px 16px">
@@ -3492,7 +3494,7 @@ $("#nav").addEventListener("click",e=>{
 });
 
 /* ── state ── */
-let hFilt="all", hSort="total", hSel=null;
+let hFilt="all", hSort="tier", hSel=null;
 let sCat="studio", sOrd="asc", sQ="";
 let sSel=null; /* {cat, idx, planner} */
 const vSel=new Set();
@@ -3504,33 +3506,27 @@ const hallMapUrl=h=>"https://map.naver.com/p/search/"+encodeURIComponent(MAP_QUE
 
 /* ── halls ── */
 function renderHalls(){
-  var rows=HALLS.map(function(h,i){return{h:h,i:i,t:hallTotal(h)};});
-  if(hFilt==="east") rows=rows.filter(function(r){return r.h[8]===1;});
-  if(hFilt==="weekend") rows=rows.filter(function(r){return r.h[9]===1;});
-  if(hFilt==="budget") rows=rows.filter(function(r){return r.t<=1900;});
-  var k=hSort==="meal"?function(r){return r.h[4];}:hSort==="rent"?function(r){return r.h[3];}:function(r){return r.t;};
+  var rows=HALLS.map(function(h,i){var t=hallTotal(h);var g=guar();var pp=h[4]+(h[3]*10000/g);
+    var tier,clr,ord;
+    if(pp>=200000){tier='S';clr='#8b5cf6';ord=5;}
+    else if(pp>=100000){tier='A';clr='#f59e0b';ord=3;}
+    else if(pp>=80000){tier='B';clr='#3b82f6';ord=1;}
+    else if(pp>=60000){tier='C';clr='#10b981';ord=2;}
+    else{tier='D';clr='#6b7280';ord=4;}
+    return{h:h,i:i,t:t,tier:tier,clr:clr,ord:ord};});
+  if(hFilt==="east")rows=rows.filter(function(r){return r.h[8]===1;});
+  if(hFilt==="weekend")rows=rows.filter(function(r){return r.h[9]===1;});
+  if(hFilt==="budget")rows=rows.filter(function(r){return r.t<=1900;});
+  var k;if(hSort==="meal")k=function(r){return r.h[4];};
+  else if(hSort==="rent")k=function(r){return r.h[3];};
+  else if(hSort==="tier")k=function(r){return r.ord*100000+r.t;};
+  else k=function(r){return r.t;};
   rows.sort(function(a,b){return k(a)-k(b);});
-  var grid=document.getElementById("hallGrid");
-  if(!grid)return;
-  grid.innerHTML=rows.map(function(r){
-    var h=r.h,kc=h[6]==="할인가"?"g":h[6]==="정찰"?"r":"n";
-    var kt=h[6]==="정찰"?"정찰제":h[6];
-    var tc=r.t<=1900?"lo":r.t>=2800?"hi":"";
-    var mealTxt=h[4]>=10000?(h[4]/10000).toFixed(1)+"만":h[4].toLocaleString();
-    return '<div class="hcard'+(hSel===r.i?' sel':'')+'" data-i="'+r.i+'">'
-      +'<div class="hcard-head"><strong>'+h[0]+'</strong></div>'
-      +'<div class="hcard-loc">'+h[1]+'</div>'
-      +'<div class="hcard-row"><span class="hcard-label">식대</span><b>'+mealTxt+'원</b></div>'
-      +'<div class="hcard-row"><span class="hcard-label">대관</span><b>'+h[3]+'만</b></div>'
-      +'<div class="hcard-price '+tc+'">'+fmt(r.t)+'<small>만</small></div>'
-      +'<div class="hcard-tags"><span class="tag '+kc+'">'+kt+'</span><a href="'+hallMapUrl(h)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="hcard-photo">사진 ↗</a></div>'
-      +'</div>';
+  var grid=document.getElementById("hallGrid");if(!grid)return;
+  grid.innerHTML=rows.map(function(r){var h=r.h,kc=h[6]==="할인가"?"g":h[6]==="정찰"?"r":"n",kt=h[6]==="정찰"?"정찰제":h[6],tc=r.t<=1900?"lo":r.t>=2800?"hi":"",ml=h[4]>=10000?(h[4]/10000).toFixed(1)+"만":h[4].toLocaleString();
+    return '<div class="hcard'+(hSel===r.i?' sel':'')+'" data-i="'+r.i+'"><div class="hcard-head"><strong>'+h[0]+'</strong><span style="font:700 10px/1 inherit;padding:2px 6px;border-radius:3px;background:'+r.clr+';color:#fff">'+r.tier+'</span></div><div class="hcard-loc">'+h[1]+'</div><div class="hcard-row"><span class="hcard-label">식대</span><b>'+ml+'원</b></div><div class="hcard-row"><span class="hcard-label">대관</span><b>'+h[3]+'만</b></div><div class="hcard-price '+tc+'">'+fmt(r.t)+'<small>만</small></div><div class="hcard-tags"><span class="tag '+kc+'">'+kt+'</span><a href="'+hallMapUrl(h)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="hcard-photo">사진↗</a></div></div>';
   }).join("")||'<div style="text-align:center;color:#aaa;padding:40px;grid-column:1/-1">조건에 맞는 홀이 없어요.</div>';
-  document.querySelectorAll("#hallGrid .hcard[data-i]").forEach(function(card){card.onclick=function(){
-    var i=+card.dataset.i;hSel=(hSel===i?null:i);renderHalls();renderTotal();
-  };});
-  renderHallDetail();
-}
+  document.querySelectorAll("#hallGrid .hcard[data-i]").forEach(function(c){c.onclick=function(){var i=+c.dataset.i;hSel=(hSel===i?null:i);renderHalls();renderTotal();};});renderHallDetail();}
 function renderHallDetail(){
   const box=$("#hallDetail");
   if(hSel===null){ box.style.display="none"; return; }
