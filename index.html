@@ -216,6 +216,9 @@ details li{margin:.3em 0}
 .hcard-total.hi{color:var(--r)}
 .hcard-foot{display:flex;gap:4px;flex-wrap:wrap}
 
+
+.hcard-photo{margin-left:auto;font-size:11px;color:var(--c);font-weight:500;text-decoration:none;padding:2px 6px;border:1px solid var(--border);border-radius:4px;transition:.1s}
+.hcard-photo:hover{background:var(--c);color:#fff;border-color:var(--c);text-decoration:none}
 </style>
 </head>
 <body>
@@ -3303,7 +3306,7 @@ function renderHalls(){
       +'<div class="hcard-row"><span class="hcard-label">식대</span><b>'+mealTxt+'원</b></div>'
       +'<div class="hcard-row"><span class="hcard-label">대관</span><b>'+h[3]+'만</b></div>'
       +'<div class="hcard-price '+tc+'">'+fmt(r.t)+'<small>만</small></div>'
-      +'<div class="hcard-tags"><span class="tag '+kc+'">'+kt+'</span></div>'
+      +'<div class="hcard-tags"><span class="tag '+kc+'">'+kt+'</span><a href="'+hallMapUrl(h)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="hcard-photo">사진 ↗</a></div>'
       +'</div>';
   }).join("")||'<div style="text-align:center;color:#aaa;padding:40px;grid-column:1/-1">조건에 맞는 홀이 없어요.</div>';
   document.querySelectorAll("#hallGrid .hcard[data-i]").forEach(function(card){card.onclick=function(){
