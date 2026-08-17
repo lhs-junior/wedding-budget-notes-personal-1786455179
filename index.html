@@ -256,6 +256,7 @@ details li{margin:.3em 0}
 <button data-p="whole">신혼집</button>
 <button data-p="timeline">타임라인</button>
 <button data-p="check">체크</button>
+<button data-p="verify" style="color:var(--c)">견적검증</button>
 </div></nav>
 
 <div class="wrap">
@@ -411,6 +412,142 @@ details li{margin:.3em 0}
 <div class="page" id="p-check">
 <h2 class="sec-title">체크리스트</h2>
 </div>
+
+<!-- ═══ 견적검증 ═══ -->
+<div class="page" id="p-verify">
+<h2 class="sec-title">견적 검증기</h2>
+<p style="font-size:13px;color:#888;margin:-8px 0 20px">플래너가 부르는 가격을 입력하면 참가격(정부 공식) 기준으로 판정합니다.</p>
+
+<div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:16px">
+
+<div style="margin-bottom:16px">
+<label style="font:600 12px/1 inherit;color:#888;display:block;margin-bottom:6px">플래너 유형</label>
+<div style="display:flex;gap:6px">
+<button class="chip on" onclick="setVerifyType(this,'non')" data-vt="non">비동행</button>
+<button class="chip" onclick="setVerifyType(this,'acc')" data-vt="acc">동행</button>
+<button class="chip" onclick="setVerifyType(this,'self')" data-vt="self">플래너 없음</button>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px">
+<div>
+<label style="font:600 11px/1 inherit;color:#888;display:block;margin-bottom:4px">스튜디오 (만원)</label>
+<input type="number" id="vStudio" placeholder="0" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:6px;font:600 16px/1 inherit;text-align:center" oninput="verifyQuote()">
+</div>
+<div>
+<label style="font:600 11px/1 inherit;color:#888;display:block;margin-bottom:4px">드레스 (만원)</label>
+<input type="number" id="vDress" placeholder="0" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:6px;font:600 16px/1 inherit;text-align:center" oninput="verifyQuote()">
+</div>
+<div>
+<label style="font:600 11px/1 inherit;color:#888;display:block;margin-bottom:4px">메이크업 (만원)</label>
+<input type="number" id="vMakeup" placeholder="0" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:6px;font:600 16px/1 inherit;text-align:center" oninput="verifyQuote()">
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+<div>
+<label style="font:600 11px/1 inherit;color:#888;display:block;margin-bottom:4px">패키지 총액 (만원) <span style="font-weight:400;color:#bbb">· 또는 위에 개별 입력</span></label>
+<input type="number" id="vTotal" placeholder="0" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:6px;font:600 16px/1 inherit;text-align:center" oninput="verifyQuote()">
+</div>
+<div>
+<label style="font:600 11px/1 inherit;color:#888;display:block;margin-bottom:4px">지역</label>
+<select id="vRegion" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:6px;font:500 14px/1 inherit;background:#fff" onchange="verifyQuote()">
+<option value="metro">수도권</option>
+<option value="gangnam">서울(강남)</option>
+<option value="gyeonggi">경기도</option>
+<option value="national">전국 평균</option>
+</select>
+</div>
+</div>
+
+<!-- Result -->
+<div id="verifyResult" style="display:none">
+<div style="border-top:1px solid var(--border);padding-top:16px;margin-top:4px">
+<div id="verifyVerdict" style="font:800 20px/1.2 inherit;margin-bottom:12px"></div>
+<div id="verifyBar" style="height:8px;background:#f0f0f0;border-radius:4px;overflow:hidden;margin-bottom:8px;position:relative">
+<div id="verifyFill" style="height:100%;border-radius:4px;transition:width .3s,background .3s"></div>
+<div id="verifyMarker" style="position:absolute;top:-4px;width:2px;height:16px;background:#111;border-radius:1px;transition:left .3s"></div>
+</div>
+<div style="display:flex;justify-content:space-between;font-size:10px;color:#bbb;margin-bottom:12px">
+<span>하위25%</span><span>중간값</span><span>상위25%</span>
+</div>
+<div id="verifyDetails" style="font-size:13px;color:#666;line-height:1.7"></div>
+</div>
+</div>
+</div>
+
+<!-- 추가금 체크리스트 -->
+<div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:16px">
+<div style="font:700 14px/1.3 inherit;margin-bottom:4px">숨은 추가금 계산기</div>
+<p style="font-size:12px;color:#888;margin:0 0 14px">"기본 150만" 뒤에 붙는 진짜 비용. 해당하는 항목 체크하세요.</p>
+
+<div id="addonList" style="display:grid;gap:6px">
+<label style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:#fafafa;border-radius:6px;font-size:13px;cursor:pointer">
+<input type="checkbox" class="addon-cb" data-amt="25" onchange="calcAddons()" style="accent-color:var(--c)"> 촬영 헬퍼비 <b style="margin-left:auto">25만</b></label>
+<label style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:#fafafa;border-radius:6px;font-size:13px;cursor:pointer">
+<input type="checkbox" class="addon-cb" data-amt="30" onchange="calcAddons()" style="accent-color:var(--c)"> 본식 헬퍼비 <b style="margin-left:auto">30만</b></label>
+<label style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:#fafafa;border-radius:6px;font-size:13px;cursor:pointer">
+<input type="checkbox" class="addon-cb" data-amt="44" onchange="calcAddons()" style="accent-color:var(--c)"> 원본+수정본 <b style="margin-left:auto">44만</b></label>
+<label style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:#fafafa;border-radius:6px;font-size:13px;cursor:pointer">
+<input type="checkbox" class="addon-cb" data-amt="11" onchange="calcAddons()" style="accent-color:var(--c)"> 드레스 피팅비 <b style="margin-left:auto">11만</b></label>
+<label style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:#fafafa;border-radius:6px;font-size:13px;cursor:pointer">
+<input type="checkbox" class="addon-cb" data-amt="11" onchange="calcAddons()" style="accent-color:var(--c)"> 얼리스타터 <b style="margin-left:auto">11만</b></label>
+<label style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:#fafafa;border-radius:6px;font-size:13px;cursor:pointer">
+<input type="checkbox" class="addon-cb" data-amt="15" onchange="calcAddons()" style="accent-color:var(--c)"> 헤어피스 <b style="margin-left:auto">15만</b></label>
+<label style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:#fafafa;border-radius:6px;font-size:13px;cursor:pointer">
+<input type="checkbox" class="addon-cb" data-amt="20" onchange="calcAddons()" style="accent-color:var(--c)"> 원장/부원장 지정 <b style="margin-left:auto">20만</b></label>
+<label style="display:flex;align-items:center;gap:8px;padding:8px 10px;background:#fafafa;border-radius:6px;font-size:13px;cursor:pointer">
+<input type="checkbox" class="addon-cb" data-amt="50" onchange="calcAddons()" style="accent-color:var(--c)"> 드레스 업그레이드 <b style="margin-left:auto">50만</b></label>
+</div>
+
+<div id="addonResult" style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);display:none">
+<div style="display:flex;justify-content:space-between;align-items:baseline">
+<span style="font-size:13px;color:#888">추가금 합계</span>
+<span id="addonTotal" style="font:800 22px/1 inherit;color:var(--c)">0만</span>
+</div>
+<div id="addonFinal" style="font-size:12px;color:#888;margin-top:6px"></div>
+</div>
+</div>
+
+<!-- 호구 방지 체크리스트 -->
+<div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:20px">
+<div style="font:700 14px/1.3 inherit;margin-bottom:14px">플래너 미팅 전 체크리스트</div>
+
+<div style="font:600 12px/1 inherit;color:var(--c);margin-bottom:8px">반드시 확인</div>
+<div style="font-size:13px;color:#444;line-height:1.8;margin-bottom:14px">
+<div>&#9744; 패키지 기본가에 <b>뭐가 포함</b>인지 (원본수정, 헬퍼, 피팅 포함 여부)</div>
+<div>&#9744; <b>추가금 항목 전체 리스트</b>를 서면으로 받기</div>
+<div>&#9744; <b>최종 예상 총액</b>을 추가금 포함해서 달라고 하기</div>
+<div>&#9744; 계약서에 <b>위약금/환불 조건</b> 확인</div>
+<div>&#9744; 업체 변경 시 <b>변경 수수료</b> 유무</div>
+</div>
+
+<div style="font:600 12px/1 inherit;color:#dc2626;margin-bottom:8px">바가지 신호</div>
+<div style="font-size:13px;color:#444;line-height:1.8;margin-bottom:14px">
+<div>&#9888; "오늘만 이 가격" → 거의 항상 다음에도 같은 가격</div>
+<div>&#9888; 추가금 항목을 물어봤는데 <b>얼버무리면</b> → 나중에 폭탄</div>
+<div>&#9888; 패키지 기본가만 강조하고 <b>최종 총액을 안 알려주면</b> → 추가금이 큼</div>
+<div>&#9888; "이 업체가 제일 인기" → <b>제휴 수수료가 높은 업체</b>일 수 있음</div>
+<div>&#9888; 계약 후 <b>업체 변경 불가</b> → 제휴 묶어놓는 구조</div>
+</div>
+
+<div style="font:600 12px/1 inherit;color:#16a34a;margin-bottom:8px">협상 카드</div>
+<div style="font-size:13px;color:#444;line-height:1.8">
+<div>&#10004; "참가격 기준 수도권 중간값이 350만인데, 이 견적은 어디 수준인가요?"</div>
+<div>&#10004; "비동행으로 하면 같은 업체 구성에서 얼마인가요?"</div>
+<div>&#10004; "헬퍼비, 원본수정 포함된 최종 총액으로 비교하고 싶습니다"</div>
+<div>&#10004; "다른 플래너에서 같은 구성으로 X만원 견적 받았는데요"</div>
+</div>
+</div>
+
+</div>
+
+
+
+
+
+
+
 
 </div><!-- .wrap -->
 </div><!-- #app -->
@@ -3867,6 +4004,88 @@ function showCompare() {
   modal.classList.add('active');
 }
 
+
+/* ═══ 견적 검증기 ═══ */
+var vType = 'non';
+var PRICE_REF = {
+  metro:    {lo:259, mid:350, hi:450},
+  gangnam:  {lo:307, mid:360, hi:490},
+  gyeonggi: {lo:230, mid:260, hi:275},
+  national: {lo:250, mid:300, hi:357}
+};
+
+function setVerifyType(btn, type) {
+  vType = type;
+  document.querySelectorAll('[data-vt]').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+  verifyQuote();
+}
+
+function verifyQuote() {
+  var s = parseInt(document.getElementById('vStudio').value) || 0;
+  var d = parseInt(document.getElementById('vDress').value) || 0;
+  var m = parseInt(document.getElementById('vMakeup').value) || 0;
+  var total = parseInt(document.getElementById('vTotal').value) || 0;
+  if (s+d+m > 0) total = s+d+m;
+  if (total === 0) { document.getElementById('verifyResult').style.display='none'; return; }
+  
+  // Add estimated add-ons (avg 70만)
+  var estTotal = total + 70;
+  if (vType === 'self') estTotal = total + 30;
+  
+  var region = document.getElementById('vRegion').value;
+  var ref = PRICE_REF[region];
+  
+  var pct = (estTotal - ref.lo) / (ref.hi - ref.lo) * 100;
+  pct = Math.max(0, Math.min(100, pct));
+  
+  var verdict, color;
+  if (estTotal <= ref.lo) { verdict = '매우 합리적'; color = '#16a34a'; }
+  else if (estTotal <= ref.mid) { verdict = '적정 수준'; color = '#16a34a'; }
+  else if (estTotal <= ref.hi) { verdict = '평균 이상 (확인 필요)'; color = '#d97706'; }
+  else { verdict = '높은 수준 (재협상 권장)'; color = '#dc2626'; }
+  
+  document.getElementById('verifyResult').style.display = 'block';
+  document.getElementById('verifyVerdict').innerHTML = '<span style="color:'+color+'">'+verdict+'</span> <span style="font-size:14px;font-weight:500;color:#888">· 예상 최종 '+estTotal+'만원</span>';
+  document.getElementById('verifyFill').style.width = pct+'%';
+  document.getElementById('verifyFill').style.background = color;
+  document.getElementById('verifyMarker').style.left = pct+'%';
+  
+  var details = '<div>기본 견적 <b>'+total+'만</b> + 추가금 예상 <b>'+(estTotal-total)+'만</b> = 예상 총액 <b>'+estTotal+'만</b></div>';
+  details += '<div style="margin-top:4px;color:#aaa;font-size:11px">'+region_name(region)+' 기준: 하위25% '+ref.lo+'만 · 중간값 '+ref.mid+'만 · 상위25% '+ref.hi+'만 (출처: 참가격)</div>';
+  
+  if (vType === 'acc' && total < 250) {
+    details += '<div style="margin-top:6px;color:#d97706;font-size:12px">⚠ 동행 플래너인데 '+total+'만원은 낮은 편. 추가금이 많이 붙을 수 있으니 최종 총액을 반드시 확인하세요.</div>';
+  }
+  if (vType === 'non' && total > 300) {
+    details += '<div style="margin-top:6px;color:#d97706;font-size:12px">⚠ 비동행인데 '+total+'만원은 높은 편. 동행 가격대입니다. 포함 항목을 다시 확인하세요.</div>';
+  }
+  
+  document.getElementById('verifyDetails').innerHTML = details;
+}
+
+function region_name(r) {
+  return {metro:'수도권',gangnam:'서울(강남)',gyeonggi:'경기도',national:'전국'}[r]||r;
+}
+
+function calcAddons() {
+  var total = 0;
+  document.querySelectorAll('.addon-cb').forEach(function(cb) {
+    if (cb.checked) total += parseInt(cb.dataset.amt);
+  });
+  document.getElementById('addonResult').style.display = total > 0 ? 'block' : 'none';
+  document.getElementById('addonTotal').textContent = total + '만';
+  
+  var baseQuote = parseInt(document.getElementById('vTotal').value) || parseInt(document.getElementById('vStudio').value||0) + parseInt(document.getElementById('vDress').value||0) + parseInt(document.getElementById('vMakeup').value||0);
+  if (baseQuote > 0) {
+    document.getElementById('addonFinal').innerHTML = '기본 '+baseQuote+'만 + 추가금 '+total+'만 = <b>실제 총 '+(baseQuote+total)+'만</b>';
+  } else {
+    document.getElementById('addonFinal').innerHTML = '위에서 기본 견적을 입력하면 총액이 계산됩니다';
+  }
+}
+
+
+(function(){var v=document.getElementById('p-verify');if(!v)return;var w=document.querySelector('.wrap');if(v.parentElement!==w)w.appendChild(v);})();
 </script>
 
 </body>
