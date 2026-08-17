@@ -3269,8 +3269,8 @@ setTimeout(function(){renderHalls();renderTotal();},10);
 /* tabs */
 $("#nav").addEventListener("click",e=>{
   const b=e.target.closest("button"); if(!b) return;
-  $("#nav button").forEach(x=>x.classList.toggle("on",x===b));
-  $(".page").forEach(p=>p.classList.toggle("on",p.id==="p-"+b.dataset.p));
+  $$("#nav button").forEach(x=>x.classList.toggle("on",x===b));
+  $$(".page").forEach(p=>p.classList.toggle("on",p.id==="p-"+b.dataset.p));
   window.scrollTo({top:0,behavior:"smooth"});
 });
 
@@ -3413,8 +3413,8 @@ function renderHallDetail(){
 }
 $("#hallCtl").addEventListener("click",e=>{
   const b=e.target.closest(".chip"); if(!b) return;
-  if(b.dataset.f){ hFilt=b.dataset.f; $("#hallCtl [data-f]").forEach(x=>x.classList.toggle("on",x===b)); }
-  if(b.dataset.s){ hSort=b.dataset.s; $("#hallCtl [data-s]").forEach(x=>x.classList.toggle("on",x===b)); }
+  if(b.dataset.f){ hFilt=b.dataset.f; $$("#hallCtl [data-f]").forEach(x=>x.classList.toggle("on",x===b)); }
+  if(b.dataset.s){ hSort=b.dataset.s; $$("#hallCtl [data-s]").forEach(x=>x.classList.toggle("on",x===b)); }
   renderHalls();
 });
 $("#guar").addEventListener("input",()=>{renderHalls();renderTotal();});
@@ -3455,7 +3455,7 @@ function renderSdm(){
     return `<tr><td class="nm">${e.name}</td>${cells}<td class="num tot lo">${r.min}만</td></tr>`;
   }).join("") || `<tr><td colspan="6" style="text-align:center;color:var(--faint);padding:24px">검색 결과가 없어요.</td></tr>`;
 
-  $(".sdmcell").forEach(td=>td.onclick=(ev)=>{
+  $$(".sdmcell").forEach(td=>td.onclick=(ev)=>{
     ev.stopPropagation();
     const i=+td.dataset.i, p=td.dataset.p;
     if(sSel && sSel.cat===sCat && sSel.idx===i && sSel.planner===p) sSel=null;
@@ -3487,8 +3487,8 @@ function renderSdmDetail(){
 }
 $("#sdmCtl").addEventListener("click",e=>{
   const b=e.target.closest(".chip"); if(!b) return;
-  if(b.dataset.c){ sCat=b.dataset.c; $("#sdmCtl [data-c]").forEach(x=>x.classList.toggle("on",x===b)); }
-  if(b.dataset.o){ sOrd=b.dataset.o; $("#sdmCtl [data-o]").forEach(x=>x.classList.toggle("on",x===b)); }
+  if(b.dataset.c){ sCat=b.dataset.c; $$("#sdmCtl [data-c]").forEach(x=>x.classList.toggle("on",x===b)); }
+  if(b.dataset.o){ sOrd=b.dataset.o; $$("#sdmCtl [data-o]").forEach(x=>x.classList.toggle("on",x===b)); }
   renderSdm();
 });
 $("#sdmQ").addEventListener("input",e=>{sQ=e.target.value;renderSdm();});
@@ -3512,7 +3512,7 @@ function renderVend(){
       <div class="vdetail">${detailRows}${tip}</div>
     </div>`;
   }).join("");
-  $("#vendList input").forEach(cb=>cb.onchange=(ev)=>{
+  $$("#vendList input").forEach(cb=>cb.onchange=(ev)=>{
     ev.stopPropagation();
     cb.checked?vSel.add(cb.dataset.k):vSel.delete(cb.dataset.k); renderTotal();
   });
