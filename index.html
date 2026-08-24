@@ -251,6 +251,34 @@ details li{margin:.3em 0}
 .hcard-tags{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
 .hcard-photo{margin-left:auto;font-size:11px;color:var(--c);font-weight:500;text-decoration:none;padding:2px 6px;border:1px solid var(--border);border-radius:4px;transition:.1s}
 .hcard-photo:hover{background:var(--c);color:#fff;border-color:var(--c);text-decoration:none}
+
+#hallModal *{box-sizing:border-box}
+.hm-gallery{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;height:100%;-webkit-overflow-scrolling:touch}
+.hm-gallery::-webkit-scrollbar{display:none}
+.hm-gallery img{min-width:100%;height:100%;object-fit:cover;scroll-snap-align:start;flex-shrink:0}
+.hm-gallery .hm-placeholder{min-width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f5f5f5,#e5e5e5);color:#bbb;font-size:14px}
+.hm-dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:5px}
+.hm-dots span{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4)}
+.hm-dots span.on{background:#fff}
+.hm-spec{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:14px 0}
+.hm-spec-item{background:#f7f7f7;padding:10px;border-radius:6px}
+.hm-spec-label{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:.03em}
+.hm-spec-val{font:600 15px/1.3 inherit;margin-top:2px}
+.hm-section{border-top:1px solid #eee;padding-top:14px;margin-top:14px}
+.hm-section-title{font:600 13px/1 inherit;margin-bottom:8px}
+.hm-quote{background:#f7f7f7;border-radius:6px;padding:10px 12px;margin-bottom:6px;font-size:13px}
+.hm-quote-meta{font-size:11px;color:#aaa;margin-bottom:4px}
+.hm-quote-data{display:flex;gap:12px;flex-wrap:wrap}
+.hm-quote-data b{color:#111}
+.hm-pro{color:#16a34a;font-size:13px;line-height:1.7}
+.hm-con{color:#dc2626;font-size:13px;line-height:1.7}
+.hm-cross{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px}
+.hm-cross-item{background:#f7f7f7;padding:8px 10px;border-radius:5px}
+.hm-cross-label{font-size:10px;color:#aaa}
+.hm-cross-val{font:500 13px/1.3 inherit;margin-top:2px}
+.hm-cta{display:block;width:100%;text-align:center;padding:12px;background:#111;color:#fff;border-radius:8px;font:600 13px/1 inherit;text-decoration:none;margin-top:16px;border:none;cursor:pointer}
+.hm-cta:hover{background:#333;text-decoration:none}
+
 </style>
 </head>
 <body>
@@ -4252,35 +4280,138 @@ function calcAddons() {
 })();
 
 
-function openHallModal(idx){var h=HALLS[idx];if(!h)return;var modal=document.getElementById('hallModal'),photos=document.getElementById('hallModalPhotos'),body=document.getElementById('hallModalBody');
-var imgD=HALL_IMAGES[h[0]]||'';if(!imgD){var hk=Object.keys(HALL_IMAGES);for(var i=0;i<hk.length;i++){if(h[0].indexOf(hk[i])>=0||hk[i].indexOf(h[0])>=0){imgD=HALL_IMAGES[hk[i]];break;}}}
-if(typeof imgD==='string'&&imgD.startsWith('data:')){photos.innerHTML='<img src="'+imgD+'" style="width:100%;height:100%;object-fit:cover"><button onclick="closeHallModal()" style="position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;border:none;background:rgba(0,0,0,.5);color:#fff;font-size:18px;cursor:pointer">&times;</button>';}
-else{photos.innerHTML='<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f0f0f0;color:#999;font-size:13px"><a href="'+hallMapUrl(h)+'" target="_blank" style="color:#888">네이버 지도에서 사진 보기 ↗</a></div><button onclick="closeHallModal()" style="position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;border:none;background:rgba(0,0,0,.3);color:#fff;font-size:18px;cursor:pointer">&times;</button>';}
-var t=hallTotal(h),tc=t<=1900?'color:#16a34a':t>=2800?'color:#dc2626':'',ml=h[4]>=10000?(h[4]/10000).toFixed(1)+'만':h[4].toLocaleString(),kc=h[6]==='할인가'?'g':h[6]==='정찰'?'r':'n',kt=h[6]==='정찰'?'정찰제':h[6];
-var html='<h3 style="font:700 20px/1.3 inherit;margin:0 0 4px">'+h[0]+'</h3><div style="font-size:13px;color:#999;margin-bottom:16px">'+h[1]+'</div>';
-html+='<div style="font:800 32px/1 inherit;'+tc+';margin-bottom:16px">'+fmt(t)+'<small style="font-size:14px;font-weight:400;color:#aaa;margin-left:2px">만원 (200명 기준)</small></div>';
-html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px">';
-html+='<div style="background:#f9f9f9;padding:10px 12px;border-radius:6px"><div style="font-size:11px;color:#999">식대</div><div style="font:600 15px/1.3 inherit">'+ml+'원</div></div>';
-html+='<div style="background:#f9f9f9;padding:10px 12px;border-radius:6px"><div style="font-size:11px;color:#999">대관료</div><div style="font:600 15px/1.3 inherit">'+h[3]+'만원</div></div>';
-html+='<div style="background:#f9f9f9;padding:10px 12px;border-radius:6px"><div style="font-size:11px;color:#999">보증인원</div><div style="font:600 15px/1.3 inherit">'+(h[5]||'확인필요')+'명</div></div>';
-html+='<div style="background:#f9f9f9;padding:10px 12px;border-radius:6px"><div style="font-size:11px;color:#999">요일·시간</div><div style="font:600 15px/1.3 inherit">'+(h[2]||'—')+'</div></div></div>';
-html+='<div style="display:flex;gap:6px;margin-bottom:16px"><span class="tag '+kc+'">'+kt+'</span><span class="tag n">'+h[7]+'</span></div>';
-if(typeof HALL_DETAIL!=="undefined"&&HALL_DETAIL[h[0]]){var det=HALL_DETAIL[h[0]];
-if(det.note){html+='<div style="border-top:1px solid #eee;padding-top:14px;margin-bottom:14px"><div style="font:600 14px/1.3 inherit;margin-bottom:8px">상세 정보</div><div style="font-size:13px;color:#666;line-height:1.7">'+det.note+'</div></div>';}
-if(det.pros&&det.pros.length){html+='<div style="margin-bottom:10px"><div style="font:600 12px/1 inherit;color:#16a34a;margin-bottom:6px">볼 점</div><div style="font-size:13px;color:#444;line-height:1.7">'+det.pros.map(function(p){return'• '+p;}).join('<br>')+'</div></div>';}
-if(det.cons&&det.cons.length){html+='<div style="margin-bottom:10px"><div style="font:600 12px/1 inherit;color:#dc2626;margin-bottom:6px">걸리는 점</div><div style="font-size:13px;color:#444;line-height:1.7">'+det.cons.map(function(c){return'• '+c;}).join('<br>')+'</div></div>';}}
-if(typeof CAFE_QUOTES!=="undefined"&&CAFE_QUOTES[h[0]]){var cq=CAFE_QUOTES[h[0]];
-html+='<div style="border-top:1px solid #eee;padding-top:14px;margin-bottom:14px"><div style="font:600 14px/1.3 inherit;margin-bottom:8px">실계약 후기 가격</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:13px">';
-if(cq.meal)html+='<div style="background:#ecfdf5;padding:8px;border-radius:4px">식대 <b>'+cq.meal.toLocaleString()+'원</b></div>';
-if(cq.rent)html+='<div style="background:#ecfdf5;padding:8px;border-radius:4px">대관 <b>'+(cq.rent/10000).toFixed(0)+'만원</b></div>';
-if(cq.guarantee)html+='<div style="background:#f5f5f5;padding:8px;border-radius:4px">보증 <b>'+cq.guarantee+'명</b></div>';
-html+='</div>';if(cq.source)html+='<div style="font-size:11px;color:#aaa;margin-top:6px">출처: '+cq.source+'</div>';html+='</div>';}
-html+='<div style="border-top:1px solid #eee;padding-top:14px"><a href="'+hallMapUrl(h)+'" target="_blank" style="display:block;text-align:center;padding:10px;background:#111;color:#fff;border-radius:6px;font:600 13px/1 inherit;text-decoration:none">네이버 지도 ↗</a></div>';
-body.innerHTML=html;modal.style.display='block';document.body.style.overflow='hidden';}
-function closeHallModal(){document.getElementById('hallModal').style.display='none';document.body.style.overflow='';}
+
+
+
+function openHallModal(idx){
+  var h=HALLS[idx]; if(!h) return;
+  var name=h[0], area=h[1], when=h[2]||'—', rent=h[3], meal=h[4], guar2=h[5], kind=h[6], src=h[7];
+  var t=hallTotal(h);
+  var modal=document.getElementById('hallModal');
+  var photos=document.getElementById('hm-photos');
+  var body=document.getElementById('hm-body');
+
+  // === PHOTOS ===
+  var imgD=HALL_IMAGES[name]||'';
+  if(!imgD){var hk=Object.keys(HALL_IMAGES);for(var i=0;i<hk.length;i++){if(name.indexOf(hk[i])>=0||hk[i].indexOf(name)>=0){imgD=HALL_IMAGES[hk[i]];break;}}}
+  var imgSrc=typeof imgD==='string'&&imgD.startsWith('data:')?imgD:null;
+  if(imgSrc){
+    photos.innerHTML='<div class="hm-gallery"><img src="'+imgSrc+'" alt="'+name+'"></div>';
+  } else {
+    photos.innerHTML='<div class="hm-gallery"><a class="hm-placeholder" href="'+hallMapUrl(h)+'" target="_blank" style="text-decoration:none;color:#999">사진 보기 ↗</a></div>';
+  }
+
+  // === BODY ===
+  var tc=t<=1900?'color:#16a34a':t>=2800?'color:#dc2626':'';
+  var pp=meal+(rent*10000/guar());
+  var tier,clr;
+  if(pp>=200000){tier='S';clr='#8b5cf6';}
+  else if(pp>=100000){tier='A';clr='#f59e0b';}
+  else if(pp>=80000){tier='B';clr='#3b82f6';}
+  else if(pp>=60000){tier='C';clr='#10b981';}
+  else{tier='D';clr='#6b7280';}
+  var ml=meal>=10000?(meal/10000).toFixed(1)+'만':meal.toLocaleString();
+  var kc=kind==='할인가'?'g':kind==='정찰'?'r':'n';
+  var kt=kind==='정찰'?'정찰제':kind;
+
+  var html='';
+  // Header
+  html+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">';
+  html+='<h3 style="font:700 19px/1.3 inherit;margin:0;flex:1">'+name+'</h3>';
+  html+='<span style="font:700 10px/1 inherit;padding:3px 7px;border-radius:4px;background:'+clr+';color:#fff">'+tier+'</span></div>';
+  html+='<div style="font-size:12px;color:#999;margin-bottom:14px">'+area+'</div>';
+
+  // Big price
+  html+='<div style="font:800 30px/1 inherit;'+tc+';margin-bottom:4px">'+fmt(t)+'<small style="font-size:13px;font-weight:400;color:#aaa;margin-left:2px">만원</small></div>';
+  html+='<div style="font-size:11px;color:#bbb;margin-bottom:14px">보증 '+guar()+'명 기준 · <span class="tag '+kc+'" style="font-size:9px">'+kt+'</span> · '+src+'</div>';
+
+  // Specs
+  html+='<div class="hm-spec">';
+  html+='<div class="hm-spec-item"><div class="hm-spec-label">식대 (1인)</div><div class="hm-spec-val">'+ml+'원</div></div>';
+  html+='<div class="hm-spec-item"><div class="hm-spec-label">대관료</div><div class="hm-spec-val">'+rent+'만원</div></div>';
+  html+='<div class="hm-spec-item"><div class="hm-spec-label">보증인원</div><div class="hm-spec-val">'+(guar2||'확인필요')+'명</div></div>';
+  html+='<div class="hm-spec-item"><div class="hm-spec-label">요일·시간</div><div class="hm-spec-val">'+when+'</div></div>';
+  html+='</div>';
+
+  // Cafe quotes (실계약 가격 이력)
+  var cq=(typeof CAFE_QUOTES!=='undefined')?CAFE_QUOTES[name]:null;
+  if(cq&&cq.length){
+    html+='<div class="hm-section"><div class="hm-section-title">실계약 후기 가격</div>';
+    cq.forEach(function(q){
+      html+='<div class="hm-quote"><div class="hm-quote-meta">'+(q.cafe||'카페')+' · '+(q.title||'')+'</div><div class="hm-quote-data">';
+      if(q.meal) html+='<span>식대 <b>'+q.meal.toLocaleString()+'원</b></span>';
+      if(q.rent) html+='<span>대관 <b>'+(q.rent/10000).toFixed(0)+'만</b></span>';
+      if(q.guarantee) html+='<span>보증 <b>'+q.guarantee+'명</b></span>';
+      html+='</div></div>';
+    });
+    html+='</div>';
+  }
+
+  // Detail (볼 점 / 걸리는 점)
+  var det=(typeof HALL_DETAIL!=='undefined')?HALL_DETAIL[name]:null;
+  if(det){
+    if(det.pros&&det.pros.length){
+      html+='<div class="hm-section"><div class="hm-section-title" style="color:#16a34a">볼 점</div>';
+      html+='<div class="hm-pro">'+det.pros.map(function(p){return '• '+p;}).join('<br>')+'</div></div>';
+    }
+    if(det.cons&&det.cons.length){
+      html+='<div class="hm-section"><div class="hm-section-title" style="color:#dc2626">걸리는 점</div>';
+      html+='<div class="hm-con">'+det.cons.map(function(c){return '• '+c;}).join('<br>')+'</div></div>';
+    }
+    if(det.note){
+      html+='<div class="hm-section"><div class="hm-section-title">메모</div>';
+      html+='<div style="font-size:13px;color:#666;line-height:1.7">'+det.note+'</div></div>';
+    }
+  }
+
+  // Cross-reference prices
+  var iw=(typeof IWEDDING_PRICE!=='undefined')?IWEDDING_PRICE[name]:null;
+  var we=(typeof WEDDIC_EVIDENCE!=='undefined')?WEDDIC_EVIDENCE[name]:null;
+  if(iw||we){
+    html+='<div class="hm-section"><div class="hm-section-title">플랫폼 정가 비교</div><div class="hm-cross">';
+    if(iw){
+      html+='<div class="hm-cross-item"><div class="hm-cross-label">아이웨딩</div><div class="hm-cross-val">';
+      if(iw.meal)html+='식대 '+iw.meal.toLocaleString()+'원';
+      if(iw.rent)html+='<br>대관 '+(iw.rent/10000).toFixed(0)+'만';
+      html+='</div></div>';
+    }
+    if(we){
+      html+='<div class="hm-cross-item"><div class="hm-cross-label">웨딕</div><div class="hm-cross-val">';
+      if(we.mMin)html+='식대 '+we.mMin.toLocaleString()+'~'+we.mMax.toLocaleString()+'원';
+      if(we.rMin)html+='<br>대관 '+(we.rMin/10000).toFixed(0)+'~'+(we.rMax/10000).toFixed(0)+'만';
+      html+='</div></div>';
+    }
+    html+='</div></div>';
+  }
+
+  // CTA
+  html+='<a class="hm-cta" href="'+hallMapUrl(h)+'" target="_blank" rel="noopener">네이버 지도에서 보기 ↗</a>';
+
+  body.innerHTML=html;
+  modal.style.display='block';
+  document.body.style.overflow='hidden';
+  // Scroll modal to top
+  modal.scrollTop=0;
+}
+
+function closeHallModal(){
+  document.getElementById('hallModal').style.display='none';
+  document.body.style.overflow='';
+}
+
+// ESC key closes modal
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeHallModal();});
 
 </script>
 
-<div id="hallModal" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.5);overflow-y:auto;padding:16px" onclick="if(event.target===this)closeHallModal()"><div style="background:#fff;border-radius:12px;max-width:600px;width:100%;margin:40px auto;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.15)"><div id="hallModalPhotos" style="position:relative;height:280px;background:#eee;overflow:hidden"></div><div id="hallModalBody" style="padding:20px"></div></div></div>
+
+
+<div id="hallModal" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.55);overflow-y:auto;-webkit-overflow-scrolling:touch" onclick="if(event.target===this)closeHallModal()">
+<div id="hallModalInner" style="background:#fff;border-radius:14px;max-width:520px;width:calc(100% - 32px);margin:32px auto;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.2);position:relative">
+<button onclick="closeHallModal()" style="position:absolute;top:10px;right:10px;z-index:10;width:30px;height:30px;border-radius:50%;border:none;background:rgba(0,0,0,.45);color:#fff;font-size:16px;cursor:pointer;backdrop-filter:blur(4px)">&times;</button>
+<div id="hm-photos" style="height:260px;background:#eee;position:relative;overflow:hidden"></div>
+<div id="hm-body" style="padding:18px 20px 20px"></div>
+</div>
+</div>
 </body>
 </html>
