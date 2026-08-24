@@ -230,9 +230,9 @@ details li{margin:.3em 0}
 .hcard{background:#fff;border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:box-shadow .15s;display:flex;flex-direction:column;overflow:hidden;padding:0}
 .hcard:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
 .hcard.sel{border-color:var(--c);box-shadow:0 0 0 2px var(--c)}
-.hcard-gallery{position:relative;width:100%;height:200px;overflow:hidden;background:#f0f0f0}
-.hcard-gallery img{width:100%;height:100%;object-fit:cover;display:none}
-.hcard-gallery img:first-child{display:block}
+.hcard-gallery{position:relative;width:100%;height:200px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;display:flex;-webkit-overflow-scrolling:touch;background:#f0f0f0}
+.hcard-gallery img{min-width:100%;height:200px;object-fit:cover;scroll-snap-align:start;flex-shrink:0}
+
 .hcard-gallery .hcard-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f5f5f5,#e8e8e8);color:#ccc;font-size:40px}
 .hcard-gallery .hcard-more{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.6);color:#fff;font:500 11px/1 inherit;padding:4px 8px;border-radius:4px;pointer-events:none}
 .hcard-body{padding:14px 16px;flex:1;display:flex;flex-direction:column}
@@ -329,6 +329,7 @@ details li{margin:.3em 0}
 <button class="chip" data-s="total">총액 ↑</button>
 <button class="chip" data-s="meal">식대 ↑</button>
 <button class="chip" data-s="rent">대관 ↑</button>
+<button class="chip" data-s="review">후기순</button>
 <button class="chip on" data-s="tier">인기순</button>
 <div class="divider"></div>
 <div class="inl">보증 <input type="number" id="guar" value="200" min="1" max="500">명</div>
@@ -777,6 +778,8 @@ details li{margin:.3em 0}
 
 <script src="images.js"></script>
 <script>
+var REVIEW_COUNTS = {"SW컨벤션센터":{"cafe":44,"blog":44,"total":88},"아펠가모 잠실":{"cafe":78,"blog":78,"total":156},"서울웨딩타워":{"cafe":65,"blog":65,"total":130},"더컨벤션 잠실":{"cafe":51,"blog":51,"total":102},"노블발렌티 대치":{"cafe":77,"blog":77,"total":154},"셀럽앤어셈":{"cafe":68,"blog":68,"total":136},"더베네치아 잠실":{"cafe":51,"blog":51,"total":102},"보타닉파크 마곡":{"cafe":52,"blog":52,"total":104},"스타시티아트홀":{"cafe":49,"blog":49,"total":98},"더링크호텔":{"cafe":49,"blog":49,"total":98},"그랜드컨벤션":{"cafe":58,"blog":58,"total":116},"웨딩스퀘어 강변":{"cafe":60,"blog":60,"total":120},"루이비스 중구":{"cafe":60,"blog":60,"total":120},"국방컨벤션":{"cafe":66,"blog":66,"total":132},"네오트로":{"cafe":51,"blog":51,"total":102},"BNT웨딩홀":{"cafe":61,"blog":61,"total":122},"남산예술원":{"cafe":67,"blog":67,"total":134},"프레지던트호텔":{"cafe":64,"blog":64,"total":128},"한교총MW컨벤션":{"cafe":37,"blog":37,"total":74},"더컨벤션 영등포":{"cafe":59,"blog":59,"total":118},"H스퀘어":{"cafe":0,"blog":0,"total":0},"보테가마지오":{"cafe":0,"blog":0,"total":0},"웨드유웨딩":{"cafe":0,"blog":0,"total":0},"아벤티움":{"cafe":0,"blog":0,"total":0},"핸더스":{"cafe":0,"blog":0,"total":0},"서울올림픽파크텔":{"cafe":0,"blog":0,"total":0},"라움":{"cafe":0,"blog":0,"total":0},"KU컨벤션":{"cafe":0,"blog":0,"total":0},"벨라루체":{"cafe":0,"blog":0,"total":0},"레노스블랑쉬":{"cafe":0,"blog":0,"total":0},"라비니움":{"cafe":0,"blog":0,"total":0},"디노체":{"cafe":0,"blog":0,"total":0},"규수당":{"cafe":0,"blog":0,"total":0},"루이비스컨벤션 송파":{"cafe":0,"blog":0,"total":0},"세인트메리엘":{"cafe":0,"blog":0,"total":0},"브라이드밸리":{"cafe":0,"blog":0,"total":0},"AT포레":{"cafe":0,"blog":0,"total":0},"라온제나":{"cafe":0,"blog":0,"total":0},"더휴웨딩홀":{"cafe":0,"blog":0,"total":0},"호텔파크하비오":{"cafe":0,"blog":0,"total":0},"까사그랑데":{"cafe":0,"blog":0,"total":0},"웨딩시그니처":{"cafe":0,"blog":0,"total":0},"라루체":{"cafe":0,"blog":0,"total":0},"서울행정법원":{"cafe":0,"blog":0,"total":0},"공군회관":{"cafe":0,"blog":0,"total":0},"해군호텔":{"cafe":0,"blog":0,"total":0},"국회예식장":{"cafe":0,"blog":0,"total":0},"밀리토피아호텔":{"cafe":0,"blog":0,"total":0},"JK아트컨벤션":{"cafe":0,"blog":0,"total":0},"DMC타워":{"cafe":0,"blog":0,"total":0}};
+
 // HALL_IMAGES loaded from images.js
 
 
@@ -4282,25 +4285,13 @@ function calcAddons() {
 
 
 function openHallModal(idx){
-  var h=HALLS[idx]; if(!h) return;
-  var name=h[0], area=h[1], when=h[2]||'—', rent=h[3], meal=h[4], guar2=h[5], kind=h[6], src=h[7];
+  try{
+  var h=HALLS[idx];if(!h)return;
+  var name=h[0],area=h[1],when=h[2]||'—',rent=h[3],meal=h[4],guar2=h[5],kind=h[6],src=h[7];
   var t=hallTotal(h);
   var modal=document.getElementById('hallModal');
   var photos=document.getElementById('hm-photos');
   var body=document.getElementById('hm-body');
-
-  // === PHOTOS ===
-  var imgD=HALL_IMAGES[name]||'';
-  if(!imgD){var hk=Object.keys(HALL_IMAGES);for(var i=0;i<hk.length;i++){if(name.indexOf(hk[i])>=0||hk[i].indexOf(name)>=0){imgD=HALL_IMAGES[hk[i]];break;}}}
-  var imgSrc=typeof imgD==='string'&&imgD.startsWith('data:')?imgD:null;
-  if(imgSrc){
-    photos.innerHTML='<div class="hm-gallery"><img src="'+imgSrc+'" alt="'+name+'"></div>';
-  } else {
-    photos.innerHTML='<div class="hm-gallery"><a class="hm-placeholder" href="'+hallMapUrl(h)+'" target="_blank" style="text-decoration:none;color:#999">사진 보기 ↗</a></div>';
-  }
-
-  // === BODY ===
-  var tc=t<=1900?'color:#16a34a':t>=2800?'color:#dc2626':'';
   var pp=meal+(rent*10000/guar());
   var tier,clr;
   if(pp>=200000){tier='S';clr='#8b5cf6';}
@@ -4311,87 +4302,40 @@ function openHallModal(idx){
   var ml=meal>=10000?(meal/10000).toFixed(1)+'만':meal.toLocaleString();
   var kc=kind==='할인가'?'g':kind==='정찰'?'r':'n';
   var kt=kind==='정찰'?'정찰제':kind;
-
+  var tc=t<=1900?'color:#16a34a':t>=2800?'color:#dc2626':'';
+  var imgD=HALL_IMAGES[name]||'';
+  if(!imgD){var hk=Object.keys(HALL_IMAGES);for(var i=0;i<hk.length;i++){if(name.indexOf(hk[i])>=0||hk[i].indexOf(name)>=0){imgD=HALL_IMAGES[hk[i]];break;}}}
+  var imgArr=Array.isArray(imgD)?imgD:(typeof imgD==='string'&&imgD.length>10)?[imgD]:[];
+  if(imgArr.length>0){photos.innerHTML='<div class="hm-gallery">'+imgArr.map(function(u){return '<img src="'+u+'" alt="">';}).join('')+'</div>';}
+  else{photos.innerHTML='<div class="hm-gallery"><a class="hm-placeholder" href="'+hallMapUrl(h)+'" target="_blank" style="text-decoration:none;color:#999">사진 보기 ↗</a></div>';}
+  photos.innerHTML+='<button onclick="closeHallModal()" style="position:absolute;top:10px;right:10px;z-index:10;width:30px;height:30px;border-radius:50%;border:none;background:rgba(0,0,0,.45);color:#fff;font-size:16px;cursor:pointer">&times;</button>';
   var html='';
-  // Header
-  html+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">';
-  html+='<h3 style="font:700 19px/1.3 inherit;margin:0;flex:1">'+name+'</h3>';
-  html+='<span style="font:700 10px/1 inherit;padding:3px 7px;border-radius:4px;background:'+clr+';color:#fff">'+tier+'</span></div>';
+  html+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:2px"><h3 style="font:700 19px/1.3 inherit;margin:0;flex:1">'+name+'</h3><span style="font:700 10px/1 inherit;padding:3px 7px;border-radius:4px;background:'+clr+';color:#fff">'+tier+'</span></div>';
   html+='<div style="font-size:12px;color:#999;margin-bottom:14px">'+area+'</div>';
-
-  // Big price
   html+='<div style="font:800 30px/1 inherit;'+tc+';margin-bottom:4px">'+fmt(t)+'<small style="font-size:13px;font-weight:400;color:#aaa;margin-left:2px">만원</small></div>';
   html+='<div style="font-size:11px;color:#bbb;margin-bottom:14px">보증 '+guar()+'명 기준 · <span class="tag '+kc+'" style="font-size:9px">'+kt+'</span> · '+src+'</div>';
-
-  // Specs
-  html+='<div class="hm-spec">';
-  html+='<div class="hm-spec-item"><div class="hm-spec-label">식대 (1인)</div><div class="hm-spec-val">'+ml+'원</div></div>';
-  html+='<div class="hm-spec-item"><div class="hm-spec-label">대관료</div><div class="hm-spec-val">'+rent+'만원</div></div>';
-  html+='<div class="hm-spec-item"><div class="hm-spec-label">보증인원</div><div class="hm-spec-val">'+(guar2||'확인필요')+'명</div></div>';
-  html+='<div class="hm-spec-item"><div class="hm-spec-label">요일·시간</div><div class="hm-spec-val">'+when+'</div></div>';
-  html+='</div>';
-
-  // Cafe quotes (실계약 가격 이력)
-  var cq=(typeof CAFE_QUOTES!=='undefined')?CAFE_QUOTES[name]:null;
-  if(cq&&cq.length){
-    html+='<div class="hm-section"><div class="hm-section-title">실계약 후기 가격</div>';
-    cq.forEach(function(q){
-      html+='<div class="hm-quote"><div class="hm-quote-meta">'+(q.cafe||'카페')+' · '+(q.title||'')+'</div><div class="hm-quote-data">';
-      if(q.meal) html+='<span>식대 <b>'+q.meal.toLocaleString()+'원</b></span>';
-      if(q.rent) html+='<span>대관 <b>'+(q.rent/10000).toFixed(0)+'만</b></span>';
-      if(q.guarantee) html+='<span>보증 <b>'+q.guarantee+'명</b></span>';
-      html+='</div></div>';
-    });
-    html+='</div>';
-  }
-
-  // Detail (볼 점 / 걸리는 점)
-  var det=(typeof HALL_DETAIL!=='undefined')?HALL_DETAIL[name]:null;
-  if(det){
-    if(det.pros&&det.pros.length){
-      html+='<div class="hm-section"><div class="hm-section-title" style="color:#16a34a">볼 점</div>';
-      html+='<div class="hm-pro">'+det.pros.map(function(p){return '• '+p;}).join('<br>')+'</div></div>';
-    }
-    if(det.cons&&det.cons.length){
-      html+='<div class="hm-section"><div class="hm-section-title" style="color:#dc2626">걸리는 점</div>';
-      html+='<div class="hm-con">'+det.cons.map(function(c){return '• '+c;}).join('<br>')+'</div></div>';
-    }
-    if(det.note){
-      html+='<div class="hm-section"><div class="hm-section-title">메모</div>';
-      html+='<div style="font-size:13px;color:#666;line-height:1.7">'+det.note+'</div></div>';
-    }
-  }
-
-  // Cross-reference prices
-  var iw=(typeof IWEDDING_PRICE!=='undefined')?IWEDDING_PRICE[name]:null;
+  html+='<div class="hm-spec"><div class="hm-spec-item"><div class="hm-spec-label">식대</div><div class="hm-spec-val">'+ml+'원</div></div><div class="hm-spec-item"><div class="hm-spec-label">대관료</div><div class="hm-spec-val">'+rent+'만원</div></div><div class="hm-spec-item"><div class="hm-spec-label">보증인원</div><div class="hm-spec-val">'+(guar2||'확인필요')+'명</div></div><div class="hm-spec-item"><div class="hm-spec-label">요일·시간</div><div class="hm-spec-val">'+when+'</div></div></div>';
+  try{var cq=(typeof CAFE_QUOTES!=='undefined')?CAFE_QUOTES[name]:null;
+  if(cq&&cq.length){html+='<div class="hm-section"><div class="hm-section-title">실계약 후기 가격</div>';
+  cq.forEach(function(q){html+='<div class="hm-quote"><div class="hm-quote-meta">'+(q.cafe||'')+'</div><div class="hm-quote-data">';
+  if(q.meal)html+='<span>식대 <b>'+(q.meal?q.meal.toLocaleString():'?')+'원</b></span>';
+  if(q.rent&&q.rent>0)html+='<span>대관 <b>'+(q.rent/10000).toFixed(0)+'만</b></span>';
+  if(q.guarantee)html+='<span>보증 <b>'+q.guarantee+'명</b></span>';
+  html+='</div></div>';});html+='</div>';}}catch(e1){}
+  try{var det=(typeof HALL_DETAIL!=='undefined')?HALL_DETAIL[name]:null;
+  if(det){if(det.pros&&det.pros.length){html+='<div class="hm-section"><div class="hm-section-title" style="color:#16a34a">볼 점</div><div class="hm-pro">'+det.pros.map(function(p){return '• '+p;}).join('<br>')+'</div></div>';}
+  if(det.cons&&det.cons.length){html+='<div class="hm-section"><div class="hm-section-title" style="color:#dc2626">걸리는 점</div><div class="hm-con">'+det.cons.map(function(c){return '• '+c;}).join('<br>')+'</div></div>';}
+  if(det.note){html+='<div class="hm-section"><div class="hm-section-title">메모</div><div style="font-size:13px;color:#666;line-height:1.7">'+det.note+'</div></div>';}}}catch(e2){}
+  try{var iw=(typeof IWEDDING_PRICE!=='undefined')?IWEDDING_PRICE[name]:null;
   var we=(typeof WEDDIC_EVIDENCE!=='undefined')?WEDDIC_EVIDENCE[name]:null;
-  if(iw||we){
-    html+='<div class="hm-section"><div class="hm-section-title">플랫폼 정가 비교</div><div class="hm-cross">';
-    if(iw){
-      html+='<div class="hm-cross-item"><div class="hm-cross-label">아이웨딩</div><div class="hm-cross-val">';
-      if(iw.meal)html+='식대 '+iw.meal.toLocaleString()+'원';
-      if(iw.rent)html+='<br>대관 '+(iw.rent/10000).toFixed(0)+'만';
-      html+='</div></div>';
-    }
-    if(we){
-      html+='<div class="hm-cross-item"><div class="hm-cross-label">웨딕</div><div class="hm-cross-val">';
-      if(we.mMin)html+='식대 '+we.mMin.toLocaleString()+'~'+we.mMax.toLocaleString()+'원';
-      if(we.rMin)html+='<br>대관 '+(we.rMin/10000).toFixed(0)+'~'+(we.rMax/10000).toFixed(0)+'만';
-      html+='</div></div>';
-    }
-    html+='</div></div>';
-  }
-
-  // CTA
-  html+='<a class="hm-cta" href="'+hallMapUrl(h)+'" target="_blank" rel="noopener">네이버 지도에서 보기 ↗</a>';
-
-  body.innerHTML=html;
-  modal.style.display='block';
-  document.body.style.overflow='hidden';
-  // Scroll modal to top
-  modal.scrollTop=0;
+  if(iw||we){html+='<div class="hm-section"><div class="hm-section-title">플랫폼 정가</div><div class="hm-cross">';
+  if(iw){html+='<div class="hm-cross-item"><div class="hm-cross-label">아이웨딩</div><div class="hm-cross-val">';if(iw.meal)html+='식대 '+iw.meal.toLocaleString()+'원';if(iw.rent&&iw.rent>0)html+='<br>대관 '+(iw.rent/10000).toFixed(0)+'만';html+='</div></div>';}
+  if(we){html+='<div class="hm-cross-item"><div class="hm-cross-label">웨딕</div><div class="hm-cross-val">';if(we.mMin)html+='식대 '+we.mMin.toLocaleString()+'~'+we.mMax.toLocaleString()+'원';if(we.rMin&&we.rMin>0)html+='<br>대관 '+(we.rMin/10000).toFixed(0)+'~'+(we.rMax/10000).toFixed(0)+'만';html+='</div></div>';}
+  html+='</div></div>';}}catch(e3){}
+  html+='<a class="hm-cta" href="'+hallMapUrl(h)+'" target="_blank">네이버 지도에서 보기 ↗</a>';
+  body.innerHTML=html;modal.style.display='block';document.body.style.overflow='hidden';modal.scrollTop=0;
+  }catch(e){console.error('Modal error:',e);document.getElementById('hallModal').style.display='block';}
 }
-
 function closeHallModal(){
   document.getElementById('hallModal').style.display='none';
   document.body.style.overflow='';
@@ -4423,7 +4367,8 @@ window.guar=function(){var el=document.getElementById("guar");var v=parseInt(el?
 window.hallTotal=function(h){return h[3]+h[4]*guar()/10000;};
 window.hallMapUrl=function(h){var q=(typeof MAP_QUERY_OVERRIDE!=="undefined"&&MAP_QUERY_OVERRIDE[h[0]])?MAP_QUERY_OVERRIDE[h[0]]:(h[0]+" 웨딩홀");return"https://map.naver.com/p/search/"+encodeURIComponent(q);};
 try{hFilt="all";hSort="tier";hSel=null;}catch(e){window.hFilt="all";window.hSort="tier";window.hSel=null;}
-window.renderHalls=function(){var rows=HALLS.map(function(h,i){var t=hallTotal(h);var g=guar();var pp=h[4]+(h[3]*10000/g);var tier,clr,ord;if(pp>=200000){tier='S';clr='#8b5cf6';ord=5;}else if(pp>=100000){tier='A';clr='#f59e0b';ord=3;}else if(pp>=80000){tier='B';clr='#3b82f6';ord=1;}else if(pp>=60000){tier='C';clr='#10b981';ord=2;}else{tier='D';clr='#6b7280';ord=4;}return{h:h,i:i,t:t,tier:tier,clr:clr,ord:ord};});if(hFilt==="east")rows=rows.filter(function(r){return r.h[8]===1;});if(hFilt==="weekend")rows=rows.filter(function(r){return r.h[9]===1;});if(hFilt==="budget")rows=rows.filter(function(r){return r.t<=1900;});var k;if(hSort==="meal")k=function(r){return r.h[4];};else if(hSort==="rent")k=function(r){return r.h[3];};else if(hSort==="tier")k=function(r){return r.ord*100000+r.t;};else k=function(r){return r.t;};rows.sort(function(a,b){return k(a)-k(b);});var grid=document.getElementById("hallGrid");if(!grid)return;grid.innerHTML=rows.map(function(r){var h=r.h,kc=h[6]==="할인가"?"g":h[6]==="정찰"?"r":"n",kt=h[6]==="정찰"?"정찰제":h[6],tc=r.t<=1900?"lo":r.t>=2800?"hi":"";var ml=h[4]>=10000?(h[4]/10000).toFixed(1)+"만":h[4].toLocaleString();var imgD=HALL_IMAGES[h[0]]||'';if(!imgD){var hk=Object.keys(HALL_IMAGES);for(var x=0;x<hk.length;x++){if(h[0].indexOf(hk[x])>=0||hk[x].indexOf(h[0])>=0){imgD=HALL_IMAGES[hk[x]];break;}}}var gH;if(typeof imgD==='string'&&imgD.length>10){gH='<div class="hcard-gallery"><img src="'+imgD+'" alt="'+h[0]+'"></div>';}else{gH='<div class="hcard-gallery"><a href="'+hallMapUrl(h)+'" target="_blank" onclick="event.stopPropagation()" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f8f8f8,#eee);color:#bbb;font-size:13px;text-decoration:none">사진 보기 ↗</a></div>';}return '<div class="hcard'+(hSel===r.i?' sel':'')+'" data-i="'+r.i+'">'+gH+'<div class="hcard-body"><div class="hcard-head"><strong>'+h[0]+'</strong><span style="font:700 10px/1 inherit;padding:2px 6px;border-radius:3px;background:'+r.clr+';color:#fff">'+r.tier+'</span></div><div class="hcard-loc">'+h[1]+'</div><div class="hcard-price '+tc+'">'+fmt(r.t)+'<small>만</small></div><div style="display:flex;gap:12px;font-size:12px;color:#888;margin-bottom:8px"><span>식대 <b style="color:#444">'+ml+'원</b></span><span>대관 <b style="color:#444">'+h[3]+'만</b></span></div><div class="hcard-tags"><span class="tag '+kc+'">'+kt+'</span></div></div></div>';}).join("")||'<div style="text-align:center;color:#aaa;padding:40px">조건에 맞는 홀이 없어요.</div>';_qsa("#hallGrid .hcard[data-i]").forEach(function(c){c.onclick=function(){openHallModal(+c.dataset.i);};});};
+window.renderHalls=function(){var rows=HALLS.map(function(h,i){var t=hallTotal(h);var g=guar();var pp=h[4]+(h[3]*10000/g);var tier,clr,ord;if(pp>=200000){tier='S';clr='#8b5cf6';ord=5;}else if(pp>=100000){tier='A';clr='#f59e0b';ord=3;}else if(pp>=80000){tier='B';clr='#3b82f6';ord=1;}else if(pp>=60000){tier='C';clr='#10b981';ord=2;}else{tier='D';clr='#6b7280';ord=4;}return{h:h,i:i,t:t,tier:tier,clr:clr,ord:ord};});if(hFilt==="east")rows=rows.filter(function(r){return r.h[8]===1;});if(hFilt==="weekend")rows=rows.filter(function(r){return r.h[9]===1;});if(hFilt==="budget")rows=rows.filter(function(r){return r.t<=1900;});var k;if(hSort==="meal")k=function(r){return r.h[4];};else if(hSort==="rent")k=function(r){return r.h[3];};else if(hSort==="tier")k=function(r){return r.ord*100000+r.t;};
+  else if(hSort==="review")k=function(r){var rc=REVIEW_COUNTS[r.h[0]];return rc?-rc.total:-0;};else k=function(r){return r.t;};rows.sort(function(a,b){return k(a)-k(b);});var grid=document.getElementById("hallGrid");if(!grid)return;grid.innerHTML=rows.map(function(r){var h=r.h,kc=h[6]==="할인가"?"g":h[6]==="정찰"?"r":"n",kt=h[6]==="정찰"?"정찰제":h[6],tc=r.t<=1900?"lo":r.t>=2800?"hi":"";var ml=h[4]>=10000?(h[4]/10000).toFixed(1)+"만":h[4].toLocaleString();var imgD=HALL_IMAGES[h[0]]||'';if(!imgD){var hk=Object.keys(HALL_IMAGES);for(var x=0;x<hk.length;x++){if(h[0].indexOf(hk[x])>=0||hk[x].indexOf(h[0])>=0){imgD=HALL_IMAGES[hk[x]];break;}}}var gH;var imgArr=Array.isArray(imgD)?imgD:(typeof imgD==='string'&&imgD.length>10)?[imgD]:[];if(imgArr.length>0){gH='<div class="hcard-gallery">'+imgArr.map(function(u){return '<img src="'+u+'" alt="'+h[0]+'">';}).join('')+(imgArr.length>1?'<span class="hcard-more">'+imgArr.length+'장</span>':'')+'</div>';}else{gH='<div class="hcard-gallery"><a href="'+hallMapUrl(h)+'" target="_blank" onclick="event.stopPropagation()" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f8f8f8,#eee);color:#bbb;font-size:13px;text-decoration:none">사진 보기 ↗</a></div>';}return '<div class="hcard'+(hSel===r.i?' sel':'')+'" data-i="'+r.i+'">'+gH+'<div class="hcard-body"><div class="hcard-head"><strong>'+h[0]+'</strong><span style="font:700 10px/1 inherit;padding:2px 6px;border-radius:3px;background:'+r.clr+';color:#fff">'+r.tier+'</span></div><div class="hcard-loc">'+h[1]+'</div><div class="hcard-price '+tc+'">'+fmt(r.t)+'<small>만</small></div><div style="display:flex;gap:12px;font-size:12px;color:#888;margin-bottom:8px"><span>식대 <b style="color:#444">'+ml+'원</b></span><span>대관 <b style="color:#444">'+h[3]+'만</b></span></div><div class="hcard-tags"><span class="tag '+kc+'">'+kt+'</span></div></div></div>';}).join("")||'<div style="text-align:center;color:#aaa;padding:40px">조건에 맞는 홀이 없어요.</div>';_qsa("#hallGrid .hcard[data-i]").forEach(function(c){c.onclick=function(){openHallModal(+c.dataset.i);};});};
 var hctl=document.getElementById("hallCtl");if(hctl)hctl.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;if(b.dataset.f!==undefined){hFilt=b.dataset.f;_qsa("#hallCtl [data-f]").forEach(function(x){x.classList.toggle("on",x===b);});}if(b.dataset.s!==undefined){hSort=b.dataset.s;_qsa("#hallCtl [data-s]").forEach(function(x){x.classList.toggle("on",x===b);});}renderHalls();});
 var gel=document.getElementById("guar");if(gel)gel.addEventListener("change",function(){renderHalls();renderTotal();});
 setTimeout(function(){try{renderHalls();}catch(e){console.error(e);}try{renderTotal();}catch(e){}},100);
