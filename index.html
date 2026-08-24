@@ -224,12 +224,9 @@ details li{margin:.3em 0}
 .hcard-imgs::-webkit-scrollbar{height:0}
 
 /* Hall cards - single column, large photo */
-/* Horizontal swipe card layout */
-.card-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;padding:4px 0 16px;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}
-.card-grid::-webkit-scrollbar{height:4px}
-.card-grid::-webkit-scrollbar-thumb{background:#ddd;border-radius:2px}
-.hcard{min-width:min(400px,85vw);max-width:400px;scroll-snap-align:start;flex-shrink:0}
-@media(max-width:500px){.hcard{min-width:90vw;max-width:90vw}}
+.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:640px){.card-grid{grid-template-columns:1fr}}
+.hcard{width:100%}
 .hcard{background:#fff;border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:box-shadow .15s;display:flex;flex-direction:column;overflow:hidden;padding:0}
 .hcard:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
 .hcard.sel{border-color:var(--c);box-shadow:0 0 0 2px var(--c)}
@@ -336,7 +333,7 @@ details li{margin:.3em 0}
 <div class="divider"></div>
 <div class="inl">보증 <input type="number" id="guar" value="200" min="1" max="500">명</div>
 </div>
-<div id="hallScrollInfo" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:12px;color:#999"><span id="hallCount"></span><span>← 좌우로 넘기세요 →</span></div>
+<div id="hallScrollInfo" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:12px;color:#999"><span id="hallCount"></span><span></span></div>
 <div id="hallGrid" class="card-grid"></div>
 <div id="hallDetail" style="margin-top:16px"></div>
 <details style="margin-top:24px;background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px 16px">
