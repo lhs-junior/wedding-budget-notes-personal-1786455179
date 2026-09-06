@@ -329,6 +329,7 @@ details li{margin:.3em 0}
 <button class="chip" data-s="rent">대관 ↑</button>
 <button class="chip" data-s="review">후기순</button>
 <button class="chip on" data-s="tier">인기순</button>
+<button class="chip" id="dealToggle" style="margin-left:4px;background:#fff3f0;border:1px solid #e8573a;color:#e8573a;font-weight:600">💰 할인가</button>
 <div class="divider"></div>
 <div class="inl">보증 <input type="number" id="guar" value="200" min="1" max="500">명</div>
 </div>
@@ -4556,6 +4557,13 @@ window.renderHalls=function(){var rows=HALLS.map(function(h,i){var t=hallTotal(h
 var hctl=document.getElementById("hallCtl");if(hctl)hctl.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;if(b.dataset.f!==undefined){hFilt=b.dataset.f;_qsa("#hallCtl [data-f]").forEach(function(x){x.classList.toggle("on",x===b);});}if(b.dataset.s!==undefined){hSort=b.dataset.s;_qsa("#hallCtl [data-s]").forEach(function(x){x.classList.toggle("on",x===b);});}renderHalls();});
 var gel=document.getElementById("guar");if(gel)gel.addEventListener("change",function(){renderHalls();renderTotal();});
 setTimeout(function(){try{renderHalls();}catch(e){console.error(e);}try{renderTotal();}catch(e){}},100);
+
+/* ── 할인가 토글 ── */
+var HALL_DEAL={"L65호텔웨딩컨벤션":{r:220,m:69000,n:"잔여타임(토10:30)"},"아벤티움":{r:900,m:79000,n:"이벤트가(27/8)"},"베뉴비안":{r:0,m:48000,n:"27년 프로모션(대관무료)"},"더컨벤션 잠실":{r:530,m:62000,n:"잔여타임"},"JK아트컨벤션":{r:550,m:68000,n:"일 프로모션"},"루벨 강동":{r:650,m:71600,n:"프로모션"},"SW컨벤션센터":{r:180,m:56000,n:"계약확정가"},"코엑스 그래머시":{r:0,m:70000,n:"연출료만270만"},"DMC타워웨딩":{r:420,m:57000,n:"27/3 오후"},"더컨벤션 반포":{r:510,m:68000,n:"할인가"},"더채플앳청담":{r:659,m:78100,n:"할인가"},"로얄호텔서울":{r:400,m:80000,n:"토 11:30"},"더컨벤션 송파문정":{r:900,m:92000,n:"할인가"},"루이비스 중구":{r:660,m:77000,n:"할인가"},"루이비스 강서":{r:690,m:81000,n:"할인가"},"규수당":{r:350,m:55000,n:"당일계약"},"신도림 웨딩시티":{r:265,m:51500,n:"26/8 오후"},"웨스턴베니비스 신도림":{r:690,m:69000,n:"정가"},"여의도웨딩컨벤션":{r:450,m:69000,n:"26/8 오후"},"합정 웨딩시그니처":{r:680,m:73000,n:"할인가"},"제이오스티엘":{r:210,m:49000,n:"이벤트가"},"노원 비엔티(BNT)":{r:180,m:58000,n:"27/11"},"포레스트원 성북":{r:680,m:58000,n:"정가"},"엘로라인가든 송파":{r:790,m:79000,n:"정가(꽃포함)"},"루이비스 송파문정":{r:950,m:87000,n:"정가"},"더베네치아 잠실":{r:750,m:75000,n:"정가"},"라온제나 강남구청":{r:770,m:70000,n:"정가"},"KDW 강동":{r:90,m:88000,n:"정가"},"지타워 구로":{r:650,m:82000,n:"할인가"},"HW컨벤션":{r:810,m:81000,n:"할인가"},"서울웨딩타워":{r:800,m:82000,n:"할인가"},"aT포레":{r:700,m:80000,n:"할인가"},"더빅토리아웨딩파티":{r:480,m:58000,n:"정가(꽃포함)"},"레노스블랑쉬 왕십리":{r:300,m:41000,n:"프로모션"},"노블발렌티 삼성":{r:870,m:87000,n:"할인가"},"노블발렌티 대치":{r:600,m:89000,n:"할인가"}};
+var _dealOn=false,_origHT=window.hallTotal;
+function _dealTotal(h){var d=HALL_DEAL[h[0]];return d?(d.r+d.m*guar()/10000):null;}
+function _injectDeals(){_qsa(".hcard[data-i]").forEach(function(c){var i=+c.dataset.i,h=HALLS[i];if(!h)return;var d=HALL_DEAL[h[0]];if(!d)return;var origT=_origHT(h),dealT=d.r+d.m*guar()/10000;if(dealT>=origT)return;var old=c.querySelector(".deal-badge");if(old)old.remove();var p=c.querySelector(".hcard-price");if(!p)return;var b=document.createElement("div");b.className="deal-badge";b.style.cssText="font-size:11px;margin-top:-4px;margin-bottom:4px;line-height:1.3";if(_dealOn){p.classList.add("lo");p.classList.remove("hi");b.innerHTML="<s style='color:#aaa'>정가 "+fmt(origT)+"만</s> <span style='color:#16a34a;font-weight:600'>"+d.n+"</span>";}else{b.innerHTML="<span style='color:#16a34a'>할인 시 <b>"+fmt(dealT)+"만</b></span> <span style='color:#aaa'>·"+d.n+"</span>";}p.parentNode.insertBefore(b,p.nextSibling);});}
+(function(){var btn=document.getElementById("dealToggle");if(!btn)return;btn.onclick=function(){_dealOn=!_dealOn;btn.textContent=_dealOn?"\ud83d\udccc 정가":"\ud83d\udcb0 할인가";btn.style.background=_dealOn?"#e8573a":"#fff3f0";btn.style.color=_dealOn?"#fff":"#e8573a";window.hallTotal=_dealOn?function(h){var dt=_dealTotal(h);return dt!==null?dt:_origHT(h);}:_origHT;renderHalls();};var _oR=window.renderHalls;window.renderHalls=function(){_oR();setTimeout(_injectDeals,30);};setTimeout(function(){renderHalls();},250);})();
 </script>
 </body>
 </html>
