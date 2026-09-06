@@ -275,6 +275,19 @@ details li{margin:.3em 0}
 
 <
 </style>
+
+<style id="hall-explorer-css">
+/* V2_HALL_EXPLORER */
+#pickedNotice{display:none;margin:0 0 10px;padding:10px 12px;border:1px solid #f0c9bf;background:#fff7f4;color:#7b3428;font-size:12px;line-height:1.5;border-radius:6px}
+#pickedNotice strong{color:#c94f3a}#pickedNotice button{border:0;background:transparent;color:#a74231;text-decoration:underline;cursor:pointer;font:600 11px/1 inherit;padding:0 0 0 5px}
+.hall-filter-label{font-size:11px;font-weight:700;color:#777;margin:14px 0 6px;display:flex;align-items:center;gap:7px}.hall-filter-label:after{content:'';height:1px;background:#eee;flex:1}
+#hallFacetCtl{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}.facet-chip{background:#fff;border:1px solid #ddd;border-radius:5px;padding:6px 8px;color:#666;font:600 11px/1 inherit;cursor:pointer}.facet-chip:hover{border-color:#c96a58;color:#a94434}.facet-chip.on{border-color:#c95743;background:#fff3f0;color:#a94434}.facet-chip .count{font-weight:500;color:inherit;opacity:.65;margin-left:2px}
+.hall-result-summary{font-size:12px;color:#777;margin:0 0 10px}.hall-result-summary b{color:#333;font-variant-numeric:tabular-nums}
+.hcard{padding:0;overflow:hidden;border-radius:8px}.hcard-gallery{height:122px;background:#f7f7f7;overflow:hidden}.hcard-gallery img{width:100%;height:100%;object-fit:cover;display:block}.hcard-body{padding:13px 14px 12px}.hcard-head{margin-bottom:3px}.hcard-loc{margin-bottom:8px}.hcard-price{font:800 23px/1 inherit;margin:2px 0 5px;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:#333}.hcard-price small{font-size:12px;margin-left:1px}.hcard-price.lo{color:#17895d}.hcard-price.hi{color:#b14f44}.hcard-money{display:flex;gap:9px;font-size:11px;color:#777;margin-bottom:9px}.hcard-money b{font-weight:700;color:#414141;font-variant-numeric:tabular-nums}.hcard-specs{display:flex;gap:4px;flex-wrap:wrap;min-height:20px}.spec-tag{max-width:100%;border:1px solid #ece8e5;background:#faf9f8;border-radius:4px;color:#6b625d;font-size:10px;line-height:1.2;padding:4px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.spec-tag.feature{border-color:#efe1dd;background:#fff9f7;color:#9b4a3b}.spec-tag.food{border-color:#f3d9b4;background:#fff9ed;color:#9a5a16}.hcard-footer{display:flex;align-items:center;justify-content:space-between;margin-top:10px;color:#999;font-size:10px}.hcard-footer .tag{margin:0}.detail-affordance{color:#ab4939;font-weight:700}.hcard:focus-visible,.pick-line:focus-visible,.facet-chip:focus-visible{outline:2px solid #c95743;outline-offset:2px}
+.pick-line{position:relative;border:1px solid transparent;cursor:pointer;transition:border-color .15s,background .15s;padding:11px 12px!important}.pick-line:hover{border-color:#e3c9c2!important;background:#fff!important}.pick-line:after{content:'웨딩홀 상세 보기 →';display:block;font-size:10px;font-weight:700;color:#a74737;margin-top:8px}.pick-price-evidence{display:flex;flex-wrap:wrap;gap:5px 10px;margin-top:8px;padding-top:7px;border-top:1px solid rgba(0,0,0,.07);font-size:10px;color:#777}.pick-price-evidence b{color:#414141}.pick-price-evidence .known{color:#147a50;font-weight:700}.pick-price-evidence .unknown{color:#9a8f89}.pick-price-evidence .source{width:100%;color:#a29b96;font-size:9px}.pick-line[data-unlinked="1"]{cursor:default}.pick-line[data-unlinked="1"]:after{content:'웨딩홀 탭 상세 데이터 수집 전';color:#999}
+@media(max-width:640px){.card-grid{grid-template-columns:1fr 1fr;gap:8px;max-height:none}.hcard-gallery{height:98px}.hcard-body{padding:11px}.hcard-head strong{font-size:13px}.hcard-price{font-size:20px}.hcard-money{display:block;line-height:1.6}.hcard-money span+span{margin-left:7px}.spec-tag{font-size:9px;padding:3px 4px}.facet-chip{font-size:10px;padding:6px 7px}.pick-line{font-size:12px!important}}
+@media(max-width:390px){.card-grid{grid-template-columns:1fr}.hcard-gallery{height:140px}}
+</style>
 </head>
 <body>
 
@@ -4687,6 +4700,76 @@ setTimeout(function(){var btn=document.getElementById("dealToggle");if(!btn){con
   };
 })();
 
+
+/* V2_HALL_EXPLORER */
+(function(){
+  var PICK_ALIASES={
+    '베뉴비안':'베뉴비안','아벤티움':'아벤티움','해군호텔':'해군호텔 W웨딩홀','신도림 웨딩시티':'신도림 웨딩시티','공군호텔':'공군호텔 웨딩홀','레노스블랑쉬':'레노스블랑쉬 왕십리','제이오스티엘':'제이오스티엘','L65 잔여타임':'L65호텔웨딩컨벤션','더빅토리아 하늘정원':'더빅토리아웨딩파티','더에스비':'더에스비웨딩컨벤션',
+    '라시따시어터':'라시따시어터','상록아트홀':'상록아트홀','빌라드지디 청담':'빌라드지디 청담','엘리에나 호텔':'엘리에나 호텔','노블발렌티 삼성':'노블발렌티 삼성','아르베 강남':'아르베 강남','루이비스 강서':'루이비스 강서','세인트메리엘':'세인트메리엘 강남역','그랜드힐':'그랜드힐컨벤션','르비르모어':'르비르모어',
+    '아펠가모 반포':'아펠가모 반포','라루체 명동':'라루체 명동','보테가마지오':'보테가마지오','JK아트컨벤션':'JK아트컨벤션','더채플앳청담':'더채플앳청담','루벨 강동':'루벨 강동','케이터틀 신촌':'케이터틀 신촌','오펠리스':'오펠리스웨딩홀','루이비스 중구':'루이비스 중구','노블발렌티 대치':'노블발렌티 대치'
+  };
+  var facetState={};
+  var advanced=[
+    ['chapel','채플'],['garden','가든·야외'],['bright','밝은홀'],['dark','어두운홀'],['food','맛집'],['interval','90분+ 간격'],['parking','주차 500대+']
+  ];
+  function esc(v){return String(v==null?'':v).replace(/[&<>'"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c];});}
+  function hallInfo(h){return HALL_INFO[h[0]]||{};}
+  function hallDetail(h){return HALL_DETAIL[h[0]]||{};}
+  function foodFor(h){return FOOD_FAME[h[0]]||'';}
+  function moodText(h){var i=hallInfo(h);return [i.mood||'',i.hallCount||'',i.ceremonyType||''].join(' ');}
+  function featureText(h){var d=hallDetail(h),a=Array.isArray(d.features)?d.features:[];return a.join(' ');}
+  function parkMax(h){var t=(hallInfo(h).parking||'').replace(/,/g,'');var a=t.match(/\d+/g)||[];return a.reduce(function(m,v){return Math.max(m,+v);},0);}
+  function matchFacet(h,key){var m=moodText(h),i=hallInfo(h),f=featureText(h);
+    if(key==='chapel')return /채플/.test(m);
+    if(key==='garden')return /가든|야외|테라스|정원/.test(m+' '+f);
+    if(key==='bright')return /밝은/.test(m);
+    if(key==='dark')return /어두운/.test(m);
+    if(key==='food')return !!foodFor(h);
+    if(key==='interval')return /(?:90|100|110|120|150|180)분/.test(i.interval||'');
+    if(key==='parking')return parkMax(h)>=500;
+    return true;
+  }
+  function activeFacetCount(){return Object.keys(facetState).filter(function(k){return facetState[k];}).length;}
+  function matchesAdvanced(h){return Object.keys(facetState).every(function(k){return !facetState[k]||matchFacet(h,k);});}
+  function shortParking(h){var p=hallInfo(h).parking||'';var m=p.match(/(?:\d{1,3}(?:,\d{3})?|\d{1,4})(?:~(?:\d{1,3}(?:,\d{3})?|\d{1,4}))?대/);return m&& !/^0+대$/.test(m[0])?'주차 '+m[0]:'';}
+  function station(h){var t=hallInfo(h).transport||'';if(t==='영역')return '';var m=t.match(/[^/·]{0,18}역(?:\([^)]*\))?/);return m?m[0].trim():'';}
+  function road(h){var f=featureText(h);var m=f.match(/버진로드\s*\d+(?:\s*~\s*\d+)?m/);return m?m[0]:'';}
+  function specTags(h){var i=hallInfo(h),m=moodText(h),a=[];
+    function add(x,c){if(x&&a.length<6)a.push('<span class="spec-tag '+(c||'')+'">'+esc(x)+'</span>');}
+    if(/채플/.test(m))add('채플','feature');else if(/가든|야외|테라스|정원/.test(m))add('가든·야외','feature');
+    if(/밝은/.test(m))add('밝은홀');else if(/어두운/.test(m))add('어두운홀');
+    if(foodFor(h))add('맛집 · '+foodFor(h).replace(/\([^)]*\)/g,''),'food');
+    if(i.mealType)add(i.mealType);
+    if(shortParking(h))add(shortParking(h));
+    if(i.ceilingHeight)add('천고 '+i.ceilingHeight.replace(/\([^)]*\)/g,''));
+    if(road(h))add(road(h));
+    if(i.interval)add(i.interval+' 간격');
+    if(station(h))add(station(h));
+    return a.join('');
+  }
+  function getImage(h){var img=HALL_IMAGES[h[0]]||'';if(!img){var ks=Object.keys(HALL_IMAGES);for(var x=0;x<ks.length;x++){if(h[0].indexOf(ks[x])>=0||ks[x].indexOf(h[0])>=0){img=HALL_IMAGES[ks[x]];break;}}}var arr=Array.isArray(img)?img:(typeof img==='string'&&img.length>10?[img]:[]);return arr.length?'<div class="hcard-gallery"><img src="'+esc(arr[0])+'" alt="'+esc(h[0])+' 웨딩홀 사진" loading="lazy">'+(arr.length>1?'<span class="hcard-more">'+arr.length+'장</span>':'')+'</div>':'<div class="hcard-gallery"><a href="'+esc(hallMapUrl(h))+'" target="_blank" onclick="event.stopPropagation()" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#f5f4f3;color:#999;font-size:12px;text-decoration:none">지도에서 위치 보기 ↗</a></div>';}
+  function renderExplorer(){
+    var rows=HALLS.map(function(h,i){var t=hallTotal(h),g=guar(),pp=h[4]+(h[3]*10000/g),tier,clr,ord;if(pp>=200000){tier='S';clr='#8b5cf6';ord=5;}else if(pp>=100000){tier='A';clr='#f59e0b';ord=3;}else if(pp>=80000){tier='B';clr='#3b82f6';ord=1;}else if(pp>=60000){tier='C';clr='#10b981';ord=2;}else{tier='D';clr='#6b7280';ord=4;}return{h:h,i:i,t:t,tier:tier,clr:clr,ord:ord};});
+    if(hFilt==='east')rows=rows.filter(function(r){return r.h[8]===1;});if(hFilt==='weekend')rows=rows.filter(function(r){return r.h[9]===1;});if(hFilt==='budget')rows=rows.filter(function(r){return r.t<=1900;});rows=rows.filter(function(r){return matchesAdvanced(r.h);});
+    var k=hSort==='meal'?function(r){return r.h[4];}:hSort==='rent'?function(r){return r.h[3];}:hSort==='review'?function(r){var rc=REVIEW_COUNTS[r.h[0]];return rc?-rc.total:0;}:hSort==='tier'?function(r){return r.ord*100000+r.t;}:function(r){return r.t;};rows.sort(function(a,b){return k(a)-k(b);});
+    var summary=document.getElementById('hallResultSummary');if(summary)summary.innerHTML='<b>'+rows.length+'곳</b> 표시'+(activeFacetCount()?' · 선택한 세부 조건 '+activeFacetCount()+'개 적용':'');
+    var grid=document.getElementById('hallGrid');if(!grid)return;grid.innerHTML=rows.map(function(r){var h=r.h,kc=h[6]==='할인가'?'g':h[6]==='정찰'?'r':'n',kt=h[6]==='정찰'?'정찰제':h[6],tc=r.t<=1900?'lo':r.t>=2800?'hi':'',ml=h[4]>=10000?(h[4]/10000).toFixed(1)+'만':h[4].toLocaleString();return '<article class="hcard'+(hSel===r.i?' sel':'')+'" data-i="'+r.i+'" tabindex="0" aria-label="'+esc(h[0])+' 상세 보기">'+getImage(h)+'<div class="hcard-body"><div class="hcard-head"><strong>'+esc(h[0])+'</strong><span style="font:700 10px/1 inherit;padding:2px 6px;border-radius:3px;background:'+r.clr+';color:#fff">'+r.tier+'</span></div><div class="hcard-loc">'+esc(h[1])+'</div><div class="hcard-price '+tc+'">'+fmt(r.t)+'<small>만</small></div><div class="hcard-money"><span>식대 <b>'+ml+'원</b></span><span>대관 <b>'+h[3]+'만</b></span></div><div class="hcard-specs">'+specTags(h)+'</div><div class="hcard-footer"><span class="tag '+kc+'">'+esc(kt)+'</span><span class="detail-affordance">상세 보기 →</span></div></div></article>';}).join('')||'<div style="text-align:center;color:#777;padding:40px">선택한 조건을 모두 만족하는 홀이 없어요. 세부 필터를 하나 해제해 보세요.</div>';
+    _qsa('#hallGrid .hcard[data-i]').forEach(function(c){c.addEventListener('click',function(){openHallModal(+c.dataset.i);});c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openHallModal(+c.dataset.i);}});});setTimeout(function(){if(window._injectDeals)window._injectDeals();},30);
+  }
+  function setHallNotice(label,reason){var n=document.getElementById('pickedNotice');if(!n)return;n.style.display='block';n.innerHTML='<strong>추천에서 선택:</strong> '+esc(label)+(reason?' · '+esc(reason):'')+' <button type="button" id="backToPicks">추천으로 돌아가기</button>';var b=document.getElementById('backToPicks');if(b)b.onclick=function(){document.querySelector('[data-p="picks"]').click();window.scrollTo({top:0,behavior:'smooth'});};}
+  function openFromPick(label){var key=PICK_ALIASES[label],idx=HALLS.findIndex(function(h){return h[0]===key;});if(idx<0)return;var line=document.querySelector('.pick-line[data-pick-label="'+label.replace(/"/g,'\"')+'"]');var reason=line?(line.querySelector('b')?line.querySelector('b').nextSibling&&line.querySelector('b').nextSibling.textContent:'') : '';document.querySelector('[data-p="hall"]').click();hFilt='';hSel=idx;renderExplorer();window.scrollTo({top:0,behavior:'smooth'});setHallNotice(label,'추천 탭에서 연결됨');setTimeout(function(){openHallModal(idx);},120);}
+  function priceEvidence(key){var h=HALLS.find(function(x){return x[0]===key;}),d=HALL_DEAL[key];if(!d)return '<div class="pick-price-evidence"><span class="unknown"><b>정가</b> 확인 안 됨</span><span class="unknown"><b>할인가</b> 확인 안 됨</span><span class="source">온라인 실견적 데이터 수집 전</span></div>';
+    var amount=Math.round(d.r+d.m*200/10000),cond=d.n||'',isList=/정가|정찰/.test(cond),isDeal=/할인|잔여|프로모션|최저|회원가/.test(cond),verified=d.v?'검증':'미검증';var a=isList?'<span class="known"><b>정가</b> '+fmt(amount)+'만</span><span class="unknown"><b>할인가</b> 확인 안 됨</span>':isDeal?'<span class="unknown"><b>정가</b> 확인 안 됨</span><span class="known"><b>할인가(조건가)</b> '+fmt(amount)+'만</span>':'<span class="unknown"><b>정가</b> 확인 안 됨</span><span class="unknown"><b>할인가</b> 확인 안 됨</span><span class="known"><b>확인값</b> '+fmt(amount)+'만</span>';
+    return '<div class="pick-price-evidence">'+a+'<span class="source">200명 기준 · '+esc(cond)+' · '+esc(d.d||'날짜 미상')+' · '+verified+'</span></div>';
+  }
+  function enhancePicks(){var p=document.getElementById('p-picks');if(!p)return;var lines=p.querySelectorAll('div[style*="padding:10px"]');lines.forEach(function(line){var nameEl=line.querySelector('b');if(!nameEl||line.dataset.pickReady)return;var label=nameEl.textContent.trim(),key=PICK_ALIASES[label];if(!key)return;line.dataset.pickReady='1';line.dataset.pickLabel=label;line.classList.add('pick-line');line.tabIndex=0;if(!HALLS.some(function(h){return h[0]===key;}))line.dataset.unlinked='1';line.insertAdjacentHTML('beforeend',priceEvidence(key));if(!line.dataset.unlinked){line.addEventListener('click',function(){openFromPick(label);});line.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openFromPick(label);}});}});
+    var intro=p.querySelector('p');if(intro)intro.textContent='추천 이유만 나열하지 않습니다. 모든 추천 홀에 정가·조건가 확인 상태와 출처를 붙였고, 누르면 웨딩홀 상세로 바로 연결됩니다. 총액은 200명 기준입니다.';
+  }
+  function addExplorerControls(){var toolbar=document.getElementById('hallCtl');if(!toolbar||document.getElementById('hallFacetCtl'))return;var summary=document.createElement('div');summary.id='hallResultSummary';toolbar.insertAdjacentElement('afterend',summary);var label=document.createElement('div');label.className='hall-filter-label';label.textContent='세부 조건';summary.insertAdjacentElement('afterend',label);var box=document.createElement('div');box.id='hallFacetCtl';label.insertAdjacentElement('afterend',box);advanced.forEach(function(x){var b=document.createElement('button');b.type='button';b.className='facet-chip';b.dataset.facet=x[0];b.innerHTML=esc(x[1])+' <span class="count">'+HALLS.filter(function(h){return matchFacet(h,x[0]);}).length+'</span>';b.title='수집된 해당 정보가 있는 홀 기준';b.addEventListener('click',function(){facetState[x[0]]=!facetState[x[0]];b.classList.toggle('on',!!facetState[x[0]]);renderExplorer();});box.appendChild(b);});
+    var notice=document.createElement('div');notice.id='pickedNotice';toolbar.parentNode.insertBefore(notice,toolbar);
+  }
+  addExplorerControls();enhancePicks();window.renderHalls=renderExplorer;renderExplorer();
+})();
 </script>
 </body>
 </html>
