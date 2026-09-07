@@ -1,196 +1,32 @@
-/* honeymoon.js — 신혼여행 탭 렌더링·상호작용·저장 */
+/* honeymoon.js — 신혼여행 탭 리디자인 v2 */
 (function(){
-var SK='wedding-budget-notes:honeymoon:v1';
-var state;try{state=JSON.parse(localStorage.getItem(SK)||'{}');}catch(e){state={};}
-if(state._v!==1){state={_v:1,picks:[],budgetMax:null,cmpIds:[]};}
-function save(){localStorage.setItem(SK,JSON.stringify(state));}
-function esc(s){return String(s||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+var SK='wedding-budget-notes:honeymoon:v2';
+var st;try{st=JSON.parse(localStorage.getItem(SK)||'{}');}catch(e){st={};}
+if(st._v!==2)st={_v:2,picks:[],style:'',budget:'',region:''};
+function save(){localStorage.setItem(SK,JSON.stringify(st));}
+function esc(s){return String(s||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]});}
 function fmt(n){if(n==null)return'확인 안 됨';return n.toLocaleString()+'만원';}
-function badge(st){var m={'official_confirmed':'공식','independent_two_source':'2곳검증','single_source':'단일출처','unknown':'확인 안 됨'};var c={'official_confirmed':'#2e7d32','independent_two_source':'#1565c0','single_source':'#ef6c00','unknown':'#999'};return'<span class="hm-badge" style="background:'+c[st]+'">'+esc(m[st]||st)+'</span>';}
-function srcLink(ids){if(!ids||!ids.length)return'';return ids.map(function(id){var s=HONEYMOON_SOURCES[id];if(!s)return'';return'<a href="'+esc(s.u)+'" target="_blank" class="hm-src" title="'+esc(s.t)+' · '+esc(s.p)+'">'+esc(s.p)+(s.fromPrice?' (부터가)':'')+'</a>';}).join(' ');}
-
-function renderList(){
-var wrap=document.getElementById('hmList');if(!wrap)return;
-var html='<div class="hm-baseline"><b>기준:</b> 가을 출발 · 10박 이상 · 2인';
-if(state.budgetMax)html+=' · 예산 상한 '+state.budgetMax+'만원';
-html+='<span style="color:#999;margin-left:8px">(출발 연·월, 최종 예산은 후보를 본 뒤 확정)</span></div>';
-html+='<div class="hm-controls"><label>예산 상한(만원) <input type="number" id="hmBudget" value="'+(state.budgetMax||'')+'" placeholder="미입력 시 전체 표시" style="width:120px"></label>';
-html+='<button id="hmBudgetApply" class="hm-btn">적용</button><button id="hmBudgetClear" class="hm-btn-s">초기화</button></div>';
-HONEYMOON_DEST.forEach(function(d){
-var totalEst=d.cost&&d.cost.direct&&d.cost.direct.total?d.cost.direct.total.v:null;
-var evalClass='';var evalLabel='';
-if(state.budgetMax&&totalEst!=null){
-if(totalEst<=state.budgetMax){evalClass='hm-pass';evalLabel='통과';}
-else{evalClass='hm-over';evalLabel='조건 초과';}
-}else if(state.budgetMax&&totalEst==null){evalClass='hm-hold';evalLabel='보류(비용 미확인)';}
-var picked=state.picks.indexOf(d.id)>=0;
-html+='<div class="hm-card '+evalClass+'" data-id="'+d.id+'">';
-html+='<div class="hm-card-head">';
-html+='<div><b class="hm-name">'+esc(d.name)+'</b><small class="hm-region">'+esc(d.region)+'</small>';
-if(evalLabel)html+='<span class="hm-eval">'+evalLabel+'</span>';
-html+='</div>';
-html+='<button class="hm-pick'+(picked?' on':'')+'" data-pick="'+d.id+'">'+(picked?'✓ 담김':'후보에 담기')+'</button>';
-html+='</div>';
-html+='<p class="hm-summary">'+esc(d.summary.v)+' '+badge(d.summary.st)+'</p>';
-html+='<div class="hm-chips">';
-html+='<span class="hm-chip" title="가을 적합 월">🍂 '+d.autumn.v.months.map(function(m){return m+'월';}).join('·')+'</span>';
-html+='<span class="hm-chip" title="여행 일수">🗓️ '+d.trip.v.nights+'박</span>';
-html+='<span class="hm-chip" title="2인 예상 총액">💰 '+(totalEst!=null?fmt(totalEst):'확인 안 됨')+'</span>';
-html+='<span class="hm-chip" title="이동">✈️ '+esc(d.mobility.v.longHaul.replace('인천→','').substring(0,20))+'</span>';
-html+='</div>';
-// 4 experiences 한줄씩
-html+='<div class="hm-exp-grid">';
-['nature','rest','culture','adventure'].forEach(function(k){
-var label={nature:'🏔 자연',rest:'🛏 휴식',culture:'🍽 문화·미식',adventure:'🧗 모험'}[k];
-html+='<div class="hm-exp-item"><b>'+label+'</b><span>'+esc((d.exp[k].v||'').substring(0,60))+(d.exp[k].v.length>60?'…':'')+'</span></div>';
-});
-html+='</div>';
-// 반복 단점 1줄
-if(d.cons.length)html+='<div class="hm-con">⚠️ '+esc(d.cons[0].v)+' '+badge(d.cons[0].st)+'</div>';
-html+='<button class="hm-detail-btn" data-detail="'+d.id+'">상세 보기</button>';
-html+='</div>';
-});
-wrap.innerHTML=html;
-// picked count
-var pickedCount=state.picks.length;
-var cmpBtn=document.getElementById('hmCompareBtn');
-if(cmpBtn){cmpBtn.disabled=pickedCount<2;cmpBtn.textContent=pickedCount>=2?'담은 '+pickedCount+'곳 비교':'2곳 이상 담으면 비교 가능';}
-// events
-wrap.querySelectorAll('[data-pick]').forEach(function(b){b.onclick=function(e){e.stopPropagation();togglePick(b.dataset.pick);};});
-wrap.querySelectorAll('[data-detail]').forEach(function(b){b.onclick=function(e){e.stopPropagation();openDetail(b.dataset.detail);};});
-wrap.querySelectorAll('.hm-card').forEach(function(c){c.onclick=function(){openDetail(c.dataset.id);};});
-document.getElementById('hmBudgetApply').onclick=function(){var v=parseInt(document.getElementById('hmBudget').value);state.budgetMax=v>0?v:null;save();renderList();};
-document.getElementById('hmBudgetClear').onclick=function(){state.budgetMax=null;document.getElementById('hmBudget').value='';save();renderList();};
-}
-
-function togglePick(id){
-var idx=state.picks.indexOf(id);
-if(idx>=0)state.picks.splice(idx,1);
-else if(state.picks.length>=3){alert('비교는 최대 3곳까지 가능합니다.');return;}
-else state.picks.push(id);
-save();renderList();
-}
-
-function openDetail(id){
-var d=HONEYMOON_DEST.find(function(x){return x.id===id;});if(!d)return;
-var modal=document.getElementById('hmModal');
-var body=document.getElementById('hmModalBody');
-var html='<h2>'+esc(d.name)+' <small>'+esc(d.region)+'</small></h2>';
-html+='<p>'+esc(d.summary.v)+' '+badge(d.summary.st)+' '+srcLink(d.summary.s)+'</p>';
-
-// 가을
-html+='<h3>🍂 가을 적합성 '+badge(d.autumn.st)+'</h3>';
-html+='<p>'+esc(d.autumn.v.cond)+'</p>';
-if(d.autumn.v.cautions.length)html+='<ul>'+d.autumn.v.cautions.map(function(c){return'<li>⚠️ '+esc(c)+'</li>';}).join('')+'</ul>';
-html+=srcLink(d.autumn.s);
-
-// 일정
-html+='<h3>🗓️ '+d.trip.v.nights+'박 예시 일정</h3>';
-html+='<p><b>경로:</b> '+d.trip.v.route.map(esc).join(' → ')+'</p>';
-html+='<table class="hm-table"><tr><th>출발</th><th>도착</th><th>수단</th><th>시간</th></tr>';
-d.trip.v.segs.forEach(function(s){html+='<tr><td>'+esc(s.f)+'</td><td>'+esc(s.t)+'</td><td>'+esc(s.m)+'</td><td>'+esc(s.d)+'</td></tr>';});
-html+='</table>';
-html+=srcLink(d.trip.s);
-
-// 경험
-html+='<h3>네 가지 경험</h3>';
-['nature','rest','culture','adventure'].forEach(function(k){
-var label={nature:'🏔 자연',rest:'🛏 휴식',culture:'🍽 문화·미식',adventure:'🧗 모험'}[k];
-html+='<div class="hm-exp-detail"><b>'+label+'</b><p>'+esc(d.exp[k].v)+'</p></div>';
-});
-
-// 이동
-html+='<h3>✈️ 이동과 피로</h3>';
-html+='<p><b>장거리:</b> '+esc(d.mobility.v.longHaul)+'</p>';
-if(d.mobility.v.transfers.length)html+='<p><b>경유:</b> '+d.mobility.v.transfers.map(esc).join(', ')+'</p>';
-if(d.mobility.v.fatigue.length)html+='<ul>'+d.mobility.v.fatigue.map(function(f){return'<li>'+esc(f)+'</li>';}).join('')+'</ul>';
-
-// 반복 단점
-html+='<h3>⚠️ 반복되는 단점</h3><ul>';
-d.cons.forEach(function(c){html+='<li>'+esc(c.v)+' '+badge(c.st)+' '+srcLink(c.s)+'</li>';});
-html+='</ul>';
-
-// 비용
-html+='<h3>💰 2인 비용 비교</h3>';
-html+='<p class="hm-cost-basis"><b>비교 기준:</b> '+esc(d.cost.basis)+'</p>';
-html+='<div class="hm-cost-grid">';
-// 패키지
-html+='<div class="hm-cost-box"><h4>여행사 패키지</h4>';
-if(d.cost.pkg.provider)html+='<p><b>'+esc(d.cost.pkg.provider)+'</b> '+esc(d.cost.pkg.name||'')+'</p>';
-html+='<p>'+(d.cost.pkg.total!=null?'<b>'+fmt(d.cost.pkg.total)+'</b>':'확인 안 됨')+'</p>';
-if(d.cost.pkg.note)html+='<small>'+esc(d.cost.pkg.note)+'</small>';
-html+=' '+badge(d.cost.pkg.st)+' '+srcLink(d.cost.pkg.s);
-html+='</div>';
-// 직접예약
-html+='<div class="hm-cost-box"><h4>직접 예약</h4>';
-html+='<table class="hm-table"><tr><th>항목</th><th>금액</th><th>비고</th></tr>';
-['airfare','hotel','other','total'].forEach(function(k){
-var item=d.cost.direct[k];if(!item)return;
-var label={airfare:'항공',hotel:'숙소',other:'식비·이동·투어',total:'2인 합계'}[k];
-html+='<tr><td>'+label+'</td><td class="num">'+(item.v!=null?fmt(item.v):'확인 안 됨')+'</td><td><small>'+esc(item.note||'')+'</small></td></tr>';
-});
-html+='</table>';
-html+='<small>잠정 시나리오 — 출발 연·월 확정 시 재확인 필요</small>';
-html+='</div></div>';
-if(d.cost.ref)html+='<p class="hm-ref">참고: '+esc(d.cost.ref)+' '+srcLink(d.cost.refS)+'</p>';
-
-body.innerHTML=html;
-modal.classList.add('open');
-modal.focus();
-}
-
-function renderCompare(){
-if(state.picks.length<2){alert('2곳 이상 담아야 비교할 수 있습니다.');return;}
-var dests=state.picks.map(function(id){return HONEYMOON_DEST.find(function(x){return x.id===id;});}).filter(Boolean);
-var modal=document.getElementById('hmModal');
-var body=document.getElementById('hmModalBody');
-var cols=dests.length;
-var html='<h2>후보 비교 ('+cols+'곳)</h2>';
-html+='<table class="hm-cmp-table"><thead><tr><th></th>';
-dests.forEach(function(d){html+='<th>'+esc(d.name)+'</th>';});
-html+='</tr></thead><tbody>';
-// rows
-var rows=[
-{label:'가을 적합 월',fn:function(d){return d.autumn.v.months.map(function(m){return m+'월';}).join('·');}},
-{label:'일수',fn:function(d){return d.trip.v.nights+'박';}},
-{label:'장거리 이동',fn:function(d){return d.mobility.v.longHaul;}},
-{label:'🏔 자연',fn:function(d){return d.exp.nature.v.substring(0,80);}},
-{label:'🛏 휴식',fn:function(d){return d.exp.rest.v.substring(0,80);}},
-{label:'🍽 문화·미식',fn:function(d){return d.exp.culture.v.substring(0,80);}},
-{label:'🧗 모험',fn:function(d){return d.exp.adventure.v.substring(0,80);}},
-{label:'핵심 단점',fn:function(d){return d.cons[0]?d.cons[0].v:'-';}},
-{label:'2인 추정 총액',fn:function(d){var t=d.cost&&d.cost.direct&&d.cost.direct.total?d.cost.direct.total.v:null;return t!=null?fmt(t):'확인 안 됨';}},
-{label:'검증 상태',fn:function(d){return d.cost&&d.cost.direct&&d.cost.direct.total?'잠정 시나리오':'확인 안 됨';}}
-];
-rows.forEach(function(r){
-html+='<tr><td><b>'+esc(r.label)+'</b></td>';
-dests.forEach(function(d){html+='<td>'+esc(r.fn(d))+'</td>';});
-html+='</tr>';
-});
-html+='</tbody></table>';
-html+='<p style="color:#999;font-size:12px;margin-top:12px">모든 비용은 잠정 시나리오이며, 출발 연·월 확정 시 재확인이 필요합니다. 총액만으로 우열을 판단하지 마세요.</p>';
-body.innerHTML=html;
-modal.classList.add('open');
-modal.focus();
-}
-
-// init
+function priceLabel(d){var t=d.cost&&d.cost.direct&&d.cost.direct.total?d.cost.direct.total.v:null;return t!=null?t.toLocaleString()+'만원~':'확인 안 됨';}
+function priceNum(d){return d.cost&&d.cost.direct&&d.cost.direct.total?d.cost.direct.total.v:null;}
+function budgetBand(n){if(n==null)return'';if(n<=500)return'~500';if(n<=800)return'500~800';if(n<=1200)return'800~1200';return'1200+';}
+function regionOf(d){var r=d.region||'';if(/동남아/.test(r))return'동남아';if(/유럽|발칸|지중해/.test(r))return'유럽';if(/태평양|오세아니아/.test(r))return'대양주';if(/미국|북미|중미|카리브/.test(r))return'미주';if(/인도양/.test(r))return'인도양';if(/아프리카/.test(r))return'아프리카';if(/일본/.test(r))return'일본';if(/북유럽/.test(r))return'북유럽';return'기타';}
+function matchFilter(d){if(st.style&&d.styleTags&&d.styleTags.indexOf(st.style)<0)return false;if(st.budget&&budgetBand(priceNum(d))!==st.budget)return false;if(st.region&&regionOf(d)!==st.region)return false;return true;}
+function badgeSt(s){var m={official_confirmed:'공식',independent_two_source:'2곳검증',single_source:'단일출처',unknown:'확인 안 됨'};var c={official_confirmed:'official',independent_two_source:'two',single_source:'single',unknown:'unknown'};return'<span class="hm-badge-s '+(c[s]||'unknown')+'">'+esc(m[s]||s)+'</span>';}
+function renderList(){var wrap=document.getElementById('hmList');if(!wrap)return;var filtered=HONEYMOON_DEST.filter(matchFilter);var html='';filtered.forEach(function(d){var picked=st.picks.indexOf(d.id)>=0;var pLabel=priceLabel(d);html+='<div class="hm-card" data-id="'+d.id+'"><div class="hm-card-img">';if(d.img)html+='<img src="'+esc(d.img)+'" alt="'+esc(d.name)+'" loading="lazy">';html+='<span class="hm-badge-region">'+esc(d.region)+'</span><span class="hm-badge-price">'+esc(pLabel)+'</span></div><div class="hm-card-body"><div class="hm-card-name">'+esc(d.name)+'</div><div class="hm-card-tagline">'+esc(d.tagline||d.summary.v)+'</div>';if(d.styleTags)html+='<div class="hm-card-tags">'+d.styleTags.map(function(t){return'<span>'+esc(t)+'</span>';}).join('')+'</div>';html+='<div class="hm-card-specs"><span>✈ '+(d.mobility.v.longHaul||'').replace(/인천→/,'').substring(0,25)+'</span><span>🗓 '+d.trip.v.nights+'박</span><span>🍂 '+d.autumn.v.months.map(function(m){return m+'월';}).join('·')+'</span></div>';if(d.cons&&d.cons[0])html+='<div class="hm-card-warn">⚠ '+esc(d.cons[0].v.substring(0,60))+(d.cons[0].v.length>60?'…':'')+'</div>';html+='<div class="hm-card-actions"><button class="hm-btn-detail" data-detail="'+d.id+'">상세 보기 →</button><button class="hm-btn-pick'+(picked?' on':'')+'" data-pick="'+d.id+'">'+(picked?'✓ 담김':'♡ 담기')+'</button></div></div></div>';});if(!filtered.length)html='<div style="text-align:center;padding:40px;color:#9a8e86">필터 조건에 맞는 여행지가 없습니다.</div>';wrap.innerHTML=html;var cBtn=document.getElementById('hmCmpBtn');if(cBtn){cBtn.disabled=st.picks.length<2;cBtn.textContent=st.picks.length>=2?'담은 '+st.picks.length+'곳 비교':'2곳 이상 담으면 비교 가능';}wrap.querySelectorAll('[data-pick]').forEach(function(b){b.onclick=function(e){e.stopPropagation();togglePick(b.dataset.pick);};});wrap.querySelectorAll('[data-detail]').forEach(function(b){b.onclick=function(e){e.stopPropagation();openDetail(b.dataset.detail);};});wrap.querySelectorAll('.hm-card').forEach(function(c){c.onclick=function(){openDetail(c.dataset.id);};});document.getElementById('hmCount').textContent=filtered.length+'곳';}
+function togglePick(id){var i=st.picks.indexOf(id);if(i>=0)st.picks.splice(i,1);else if(st.picks.length>=3){alert('비교는 최대 3곳까지 가능합니다.');return;}else st.picks.push(id);save();renderList();}
+var currentDest=null,currentTab='intro';
+function openDetail(id){var d=HONEYMOON_DEST.find(function(x){return x.id===id;});if(!d)return;var modal=document.getElementById('hmModal');document.getElementById('hmModalTitle').innerHTML=esc(d.name)+' <small>'+esc(d.region)+'</small>';document.querySelectorAll('.hm-dtab').forEach(function(b){b.style.display='';});currentDest=d;currentTab='intro';renderDetailTab();modal.classList.add('open');modal.focus();}
+function renderDetailTab(){var d=currentDest;if(!d)return;var body=document.getElementById('hmDPanel');document.querySelectorAll('.hm-dtab').forEach(function(b){b.classList.toggle('on',b.dataset.tab===currentTab);});var h='';if(currentTab==='intro'){if(d.img)h+='<div class="hm-gallery"><img src="'+esc(d.img)+'" alt="'+esc(d.name)+'"></div>';h+='<p class="hm-intro-text">'+esc(d.tagline||d.summary.v)+'</p>';h+='<div class="hm-exp-cards">';var el={nature:'🏔 자연',rest:'🛏 휴식',culture:'🍽 문화·미식',adventure:'🧗 모험'};['nature','rest','culture','adventure'].forEach(function(k){h+='<div class="hm-exp-card"><b>'+el[k]+'</b><p>'+esc(d.exp[k].v)+'</p></div>';});h+='</div>';h+='<div class="hm-pros-cons"><div class="hm-pros"><b>✓ 이 여행의 매력</b><br>';['nature','rest'].forEach(function(k){h+='· '+esc(d.exp[k].v.substring(0,50))+'<br>';});h+='</div><div class="hm-cons-box"><b>✗ 미리 알아야 할 것</b><br>';d.cons.slice(0,3).forEach(function(c){h+='· '+esc(c.v.substring(0,60))+'<br>';});h+='</div></div>';h+='<div class="hm-couple-fit">';if(d.forCouple)h+='<div class="yes">👍 '+esc(d.forCouple)+'</div>';if(d.notForCouple)h+='<div class="no">👎 '+esc(d.notForCouple)+'</div>';h+='</div>';if(d.oneLinerReview)h+='<div class="hm-review-quote">"'+esc(d.oneLinerReview)+'"</div>';}else if(currentTab==='itinerary'){h+='<div class="hm-timeline">';(d.trip.v.route||[]).forEach(function(r,i){h+='<div class="hm-timeline-item"><h4>'+esc(r)+'</h4>';var seg=d.trip.v.segs[i];if(seg)h+='<p>'+esc(seg.f)+' → '+esc(seg.t)+'</p><span class="hm-seg">'+esc(seg.m)+' · '+esc(seg.d)+'</span>';h+='</div>';});h+='</div>';if(d.mobility&&d.mobility.v.fatigue&&d.mobility.v.fatigue.length){h+='<div class="hm-fatigue"><b>⚡ 이동 피로</b><br>';d.mobility.v.fatigue.forEach(function(f){h+='· '+esc(f)+'<br>';});h+='</div>';}}else if(currentTab==='cost'){var total=priceNum(d);h+='<div class="hm-cost-total">2인 '+fmt(total)+'</div><div class="hm-cost-sub">'+esc(d.cost.basis)+' · 잠정 시나리오</div>';var items=[{k:'airfare',l:'항공'},{k:'hotel',l:'숙소'},{k:'other',l:'식비·투어'}];var mx=0;items.forEach(function(x){var v=d.cost.direct[x.k]?d.cost.direct[x.k].v:0;if(v>mx)mx=v;});h+='<div class="hm-cost-bars">';items.forEach(function(x){var v=d.cost.direct[x.k]?d.cost.direct[x.k].v:null;var pct=v!=null&&mx>0?Math.round(v/mx*100):0;h+='<div class="hm-cost-bar"><span class="label">'+esc(x.l)+'</span><span class="bar"><span class="fill" style="width:'+pct+'%"></span></span><span class="amt">'+(v!=null?fmt(v):'?')+'</span></div>';});h+='</div>';if(d.cost.pkg&&d.cost.pkg.note)h+='<div class="hm-cost-note"><b>패키지:</b> '+esc(d.cost.pkg.note)+'</div>';if(d.cost.ref)h+='<div class="hm-cost-note" style="margin-top:8px"><b>실경비:</b> '+esc(d.cost.ref)+'</div>';h+='<div class="hm-cost-note" style="margin-top:8px;color:#b5513c">⚠ 잠정 추정입니다. 출발 월 확정 시 반드시 재확인하세요.</div>';}else if(currentTab==='source'){if(d.oneLinerReview)h+='<div class="hm-review-quote" style="margin-bottom:16px">"'+esc(d.oneLinerReview)+'"</div>';h+='<div style="margin-bottom:16px"><b>🍂 가을 적합성</b> '+badgeSt(d.autumn.st)+'<br>'+esc(d.autumn.v.cond)+'</div>';if(d.autumn.v.cautions&&d.autumn.v.cautions.length){h+='<ul style="font-size:12px;color:#b5513c;margin:0 0 16px;padding-left:18px">';d.autumn.v.cautions.forEach(function(c){h+='<li>'+esc(c)+'</li>';});h+='</ul>';}h+='<b style="font-size:13px">출처</b><ul class="hm-source-list">';var allS={};function addS(a){if(!a)return;a.forEach(function(id){if(HONEYMOON_SOURCES[id])allS[id]=HONEYMOON_SOURCES[id];});}addS(d.summary.s);addS(d.autumn.s);addS(d.trip.s);d.cons.forEach(function(c){addS(c.s);});if(d.cost.pkg)addS(d.cost.pkg.s);if(d.cost.refS)addS(d.cost.refS);Object.keys(allS).forEach(function(id){var s=allS[id];h+='<li><a href="'+esc(s.u)+'" target="_blank">'+esc(s.t)+'</a> <small>'+esc(s.p)+'</small></li>';});h+='</ul>';h+='<div style="margin-top:12px;font-size:12px;color:#9a8e86">더 많은 후기는 <a href="https://search.naver.com/search.naver?query='+encodeURIComponent(d.name+' 신혼여행 후기')+'" target="_blank" style="color:#1565c0">네이버 검색</a>에서 확인하세요.</div>';}body.innerHTML=h;}
+function renderCompare(){if(st.picks.length<2)return;var ds=st.picks.map(function(id){return HONEYMOON_DEST.find(function(x){return x.id===id;});}).filter(Boolean);var n=ds.length;var modal=document.getElementById('hmModal');document.getElementById('hmModalTitle').innerHTML='후보 '+n+'곳 비교';document.querySelectorAll('.hm-dtab').forEach(function(b){b.style.display='none';});var h='<div class="hm-cmp-grid cols-'+n+'">';ds.forEach(function(d){h+='<div class="hm-cmp-card">';if(d.img)h+='<img src="'+esc(d.img)+'" alt="'+esc(d.name)+'" loading="lazy">';h+='<div class="hm-cmp-card-body"><h3>'+esc(d.name)+'</h3><p class="tagline">'+esc(d.tagline||'')+'</p><div style="font:700 16px/1 inherit;color:#a0522d;margin-top:4px">'+priceLabel(d)+'</div></div></div>';});h+='</div>';var rows=[{dim:'적합 월',fn:function(d){return d.autumn.v.months.map(function(m){return m+'월';}).join('·');}},{dim:'일수',fn:function(d){return d.trip.v.nights+'박';}},{dim:'비행',fn:function(d){return(d.mobility.v.longHaul||'').replace('인천→','');}},{dim:'매력',fn:function(d){return d.forCouple||'';}},{dim:'리스크',fn:function(d){return d.cons[0]?d.cons[0].v.substring(0,50)+'…':'-';}},{dim:'2인 비용',fn:function(d){return priceLabel(d);}}];h+='<div class="hm-cmp-rows">';rows.forEach(function(r){h+='<div class="hm-cmp-row cols-'+n+'"><span class="dim">'+esc(r.dim)+'</span>';ds.forEach(function(d){h+='<span>'+esc(r.fn(d))+'</span>';});h+='</div>';});h+='</div>';document.getElementById('hmDPanel').innerHTML=h;modal.classList.add('open');modal.focus();}
 var page=document.getElementById('p-honeymoon');if(!page)return;
-page.innerHTML='<section class="hm-wrap">'+
-'<h2>신혼여행 후보 비교</h2>'+
-'<p class="hm-intro">인기순이 아닙니다. 가을 출발·10박 이상에서 자연·휴식·문화·모험을 함께 담을 수 있는 후보를 비교하고, 실제 비용 구조를 봅니다.</p>'+
-'<div id="hmList"></div>'+
-'<div class="hm-compare-bar"><button id="hmCompareBtn" class="hm-btn" disabled>2곳 이상 담으면 비교 가능</button></div>'+
-'</section>'+
-'<div class="hm-modal" id="hmModal" tabindex="-1" role="dialog" aria-modal="true">'+
-'<div class="hm-modal-inner">'+
-'<button class="hm-modal-close" id="hmModalClose" aria-label="닫기">×</button>'+
-'<div id="hmModalBody"></div>'+
-'</div></div>';
-
+page.innerHTML='<div class="hm"><div class="hm-hero"><h2>두 사람이 평생 기억할 여행을 고르는 화면</h2><p>인기순이 아닙니다. 가을 출발, 10박 이상 기준으로 자연·휴식·문화·모험을 함께 담을 수 있는 26곳의 후보를 비교합니다.</p></div><div class="hm-filter-row"><span class="hm-filter-label">스타일</span><div class="hm-filters" id="hmFStyle">'+['','휴양','자연모험','도시탐험','미식','럭셔리','가성비','버킷리스트','로맨틱','액티비티'].map(function(t){return'<button data-style="'+t+'" class="'+(st.style===t?'on':'')+'">'+(t||'전체')+'</button>';}).join('')+'</div></div><div class="hm-filter-row"><span class="hm-filter-label">예산</span><div class="hm-filters" id="hmFBudget">'+['','~500','500~800','800~1200','1200+'].map(function(b){var l={'':'전체','~500':'~500만','500~800':'500~800만','800~1200':'800~1200만','1200+':'1200만+'};return'<button data-budget="'+b+'" class="'+(st.budget===b?'on':'')+'">'+l[b]+'</button>';}).join('')+'</div></div><div class="hm-filter-row"><span class="hm-filter-label">지역</span><div class="hm-filters" id="hmFRegion">'+['','동남아','일본','유럽','대양주','미주','인도양','아프리카','북유럽'].map(function(r){return'<button data-region="'+r+'" class="'+(st.region===r?'on':'')+'">'+(r||'전체')+'</button>';}).join('')+'</div></div><div style="font-size:12px;color:#9a8e86;margin-bottom:4px"><b id="hmCount">26</b>곳</div><div class="hm-grid" id="hmList"></div><div class="hm-compare-bar"><button id="hmCmpBtn" disabled>2곳 이상 담으면 비교 가능</button></div></div><div class="hm-modal" id="hmModal" tabindex="-1" role="dialog" aria-modal="true"><div class="hm-modal-inner"><div class="hm-modal-header"><h2 id="hmModalTitle"></h2><button class="hm-modal-close" id="hmClose" aria-label="닫기">×</button></div><div class="hm-dtabs"><button class="hm-dtab on" data-tab="intro">소개</button><button class="hm-dtab" data-tab="itinerary">일정</button><button class="hm-dtab" data-tab="cost">비용</button><button class="hm-dtab" data-tab="source">후기·출처</button></div><div class="hm-dpanel" id="hmDPanel"></div></div></div>';
 renderList();
-document.getElementById('hmCompareBtn').onclick=renderCompare;
-document.getElementById('hmModalClose').onclick=function(){document.getElementById('hmModal').classList.remove('open');};
-document.getElementById('hmModal').onclick=function(e){if(e.target===this)this.classList.remove('open');};
-document.addEventListener('keydown',function(e){if(e.key==='Escape'){document.getElementById('hmModal').classList.remove('open');}});
+function wireFilter(cid,key,attr){document.getElementById(cid).querySelectorAll('button').forEach(function(b){b.onclick=function(){st[key]=b.dataset[attr];save();document.getElementById(cid).querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x.dataset[attr]===st[key]);});renderList();};});}
+wireFilter('hmFStyle','style','style');wireFilter('hmFBudget','budget','budget');wireFilter('hmFRegion','region','region');
+document.querySelectorAll('.hm-dtab').forEach(function(b){b.onclick=function(){currentTab=b.dataset.tab;renderDetailTab();};});
+document.getElementById('hmCmpBtn').onclick=renderCompare;
+function closeModal(){document.getElementById('hmModal').classList.remove('open');document.querySelectorAll('.hm-dtab').forEach(function(b){b.style.display='';});}
+document.getElementById('hmClose').onclick=closeModal;
+document.getElementById('hmModal').onclick=function(e){if(e.target===this)closeModal();};
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
 })();
