@@ -123,3 +123,12 @@
 .hm-cmp-grid.cols-3{grid-template-columns:1fr}
 .hm-cmp-row.cols-3{grid-template-columns:1fr}
 }
+
+/* ref links in source tab */
+.hm-refs{display:flex;flex-direction:column;gap:16px}
+.hm-ref-group b{display:block;font-size:13px;color:#3d2e27;margin-bottom:6px}
+.hm-ref-list{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.hm-ref-list li{flex:0 0 auto}
+.hm-ref-list a{display:inline-flex;align-items:center;gap:4px;padding:8px 14px;border:1px solid #e8e2de;border-radius:8px;font:500 12px/1 inherit;color:#3d2e27;text-decoration:none;background:#fff;transition:.15s}
+.hm-ref-list a:hover{border-color:#a0522d;background:#fdf8f5;color:#a0522d}
+.hm-ref-list small{font-size:10px;color:#bbb;margin-left:2px}
