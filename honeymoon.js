@@ -1,6 +1,5 @@
 /* honeymoon.js — 신혼여행 탭 리디자인 v2 */
 (function(){
-if(typeof HONEYMOON_DEST==='undefined'||!HONEYMOON_DEST.length){setTimeout(arguments.callee,200);return;}
 var SK='wedding-budget-notes:honeymoon:v2';
 var st;try{st=JSON.parse(localStorage.getItem(SK)||'{}');}catch(e){st={};}
 if(st._v!==2)st={_v:2,picks:[],style:'',budget:'',region:''};
