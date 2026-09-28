@@ -118,6 +118,32 @@ function quotes(){
    '<fieldset><legend>계약가에 포함된 것</legend><label><input type="checkbox" name="orig"> 원본·수정본</label><label><input type="checkbox" name="helper"> 헬퍼비</label><label><input type="checkbox" name="tour"> 투어비</label></fieldset>'+
    '<button class="sd-btn" type="submit">견적 추가</button></form>'+(list||'<p class="sd-muted">아직 기록한 견적이 없어요. 상담에서 받은 금액을 넣으면 실지출과 사례 대비 위치를 바로 보여줘요.</p>');
 }
+var TIER_LABEL={A:'A · 검증됨',B:'B · 실계약 후기',C:'C · 업체 공개가',D:'D · 확인 안됨'};
+var TIER_DESC={A:'서로 다른 사람이 같은 가격을 독립적으로 확인',B:'실제 계약자 1인칭 후기지만 출처 1건',C:'업체 자체 페이지·광고성 후기. 실거래 확인 안됨',D:'가격 미공개(DM 전용) 또는 근거 약함'};
+var snapUi={tier:''};
+function snapPrice(c){var s=c.solo?parseFloat(c.solo):null,d=c.duo?parseFloat(c.duo):null;return s!=null?s:(d!=null?d:999);}
+function snapRows(){
+  var rows=SNAP_CASES.filter(function(c){return !snapUi.tier||c.tier===snapUi.tier;});
+  rows.sort(function(a,b){return snapPrice(a)-snapPrice(b);});
+  var body=rows.map(function(c){
+    var src=(c.src||[]).map(function(s){return s.url&&/^https?:/.test(s.url)?'<a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.note||'출처')+'</a>':esc((s.url||'')+(s.note?' · '+s.note:''));}).join(' · ');
+    return '<tr><td class="sd-tier sd-tier-'+c.tier+'">'+c.tier+'</td><td><b>'+esc(c.name)+'</b></td><td class="sd-num">'+esc(c.solo||'–')+'</td><td class="sd-num">'+esc(c.duo||'–')+'</td><td class="sd-note">'+esc(c.note||'')+(src?'<br><small>'+src+'</small>':'')+'</td></tr>';
+  }).join('');
+  return '<p class="sd-stat">'+rows.length+'곳</p><div class="sd-tablewrap"><table class="sd-table"><thead><tr><th>등급</th><th>업체</th><th>1인</th><th>2인</th><th>메모·출처</th></tr></thead><tbody>'+body+'</tbody></table></div>';
+}
+function snapSection(){
+  var counts={};SNAP_CASES.forEach(function(c){counts[c.tier]=(counts[c.tier]||0)+1;});
+  return '<section class="sd-sec"><h3>본식 아이폰스냅 업체 비교</h3>'+
+  '<p class="sd-lead">숨고·네이버 블로그·카페·크몽·Threads·인스타그램을 직접 열어 모았어요. 등급은 가격이 얼마나 믿을 만한지를 뜻해요.</p>'+
+  '<div class="sd-tierlegend">'+['A','B','C','D'].map(function(t){return '<div><b class="sd-tier sd-tier-'+t+'">'+t+'</b><span>'+TIER_DESC[t]+' ('+(counts[t]||0)+'곳)</span></div>';}).join('')+'</div>'+
+  '<div class="sd-ctl"><div>'+['','A','B','C','D'].map(function(t){return '<button class="sd-chip'+(snapUi.tier===t?' on':'')+'" data-snapt="'+t+'">'+(t?TIER_LABEL[t]:'전체')+'</button>';}).join('')+'</div></div>'+
+  '<div id="snapRows">'+snapRows()+'</div>'+
+  '<p class="sd-note">A등급도 \'업체가 지금 내건 할인가가 진짜\'라는 확인이지, 실제 그 값에 계약이 됐다는 보장은 아니에요. 계약 전엔 항상 최신 가격을 다시 물어보세요. 이 밖에 존재만 확인되고 가격을 못 찾은 업체가 15곳 더 있어요 (ARC ONE, 몹시도사랑히, 비쥬스냅, 뉴올드, 디아일, 러브하드, 포레버위드유, 블루아이, 디어마이선샤인, 이은, sorisnap, 모먼트무브, 오브하우스, 아로소, 오제스냅, 무브아, 마인드그라피, 수이프레임, 하루그라피, 잉스냅).</p>'+
+  '</section>';
+}
+function bindSnap(){
+  root.querySelectorAll('[data-snapt]').forEach(function(b){b.onclick=function(){snapUi.tier=b.dataset.snapt;root.querySelectorAll('[data-snapt]').forEach(function(x){x.classList.toggle('on',x.dataset.snapt===snapUi.tier);});document.getElementById('snapRows').innerHTML=snapRows();};});
+}
 function render(){
   root.innerHTML='<div class="sd">'+
   '<header class="sd-hero"><h2>스드메</h2><p>네이버 카페 원문 '+SDM_CASES.length+'건을 직접 열어 업체 조합과 금액을 정리했어요. (2026-09-24 수집)</p>'+
@@ -128,6 +154,7 @@ function render(){
    '<p class="sd-note">다이렉트 카페 글이 많아요. 다이렉트 카페는 운영사가 직접 운영하고 후기 작성 시 포인트를 줘서 “광고성”으로 표시했어요. 금액은 원문 그대로입니다.</p></section>'+
   '<section class="sd-sec"><h3>같은 조합, 다른 회사 견적</h3><p class="sd-lead">동행이냐 비동행이냐보다, 같은 조합을 어느 회사가 견적 내느냐의 차이가 더 컸어요.</p><div class="sd-same-grid">'+sameBlock()+'</div>'+
    '<p class="sd-note">웨딩킹 비교글 3건은 웨딩킹 운영 카페의 홍보글이라 차이가 과장됐을 수 있어요.</p></section>'+
+  (typeof SNAP_CASES!=='undefined'?snapSection():'')+
   '<section class="sd-sec"><h3>플래너 상담 가이드</h3>'+guide()+'</section>'+
   '<section class="sd-sec"><h3>내 견적 기록</h3><div id="sdQuotes">'+quotes()+'</div></section>'+
   '</div>';
@@ -143,6 +170,7 @@ function bind(){
   var co=document.getElementById('sdContractOnly');if(co)co.onchange=function(){ui.contractOnly=co.checked;refreshCases();};
   var q=document.getElementById('sdQ');if(q)q.oninput=function(){ui.q=q.value;refreshCases();};
   bindCases();
+  bindSnap();
   root.querySelectorAll('[data-ck]').forEach(function(x){x.onchange=function(){st.checks[x.dataset.ck]=x.checked;save();x.closest('.sd-task').classList.toggle('done',x.checked);};});
   var cp=document.getElementById('sdCopyQ');if(cp)cp.onclick=function(){var txt=QUESTIONS.map(function(q,i){return (i+1)+'. '+q[0];}).join('\n');var msg=document.getElementById('sdCopyMsg');(navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(function(){msg.textContent=' 복사됐어요';},function(){msg.textContent=' 복사가 막혀 있어요. 길게 눌러 선택해 주세요';});};
   bindQuotes();
