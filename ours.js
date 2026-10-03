@@ -19,7 +19,7 @@ function show(html){
   document.getElementById('owLock').onclick=function(){sessionStorage.removeItem(SS);gate();};
 }
 function gate(msg){
-  root.innerHTML='<div class="ow-gate"><h2>우리 결혼식 관련 정보</h2><p>비밀번호를 한 번 더 입력해주세요</p><form id="owForm"><input id="owPw" type="password" inputmode="numeric" autocomplete="off" placeholder="••••"><button>열기</button></form><p class="ow-err">'+(msg||'')+'</p></div>';
+  root.innerHTML='<div class="ow-gate"><h2>우리 결혼식 관련 정보</h2><p>비밀번호를 한 번 더 입력해주세요</p><p class="ow-hint">힌트: 의왕 현관문에 있는 번호</p><form id="owForm"><input id="owPw" type="password" inputmode="numeric" autocomplete="off" placeholder="••••"><button>열기</button></form><p class="ow-err">'+(msg||'')+'</p></div>';
   document.getElementById('owForm').onsubmit=function(ev){ev.preventDefault();var pw=document.getElementById('owPw').value.trim();
     decrypt(pw).then(function(h){sessionStorage.setItem(SS,pw);show(h);},function(){gate('비밀번호가 맞지 않아요.');});};
 }
