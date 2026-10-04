@@ -105,7 +105,10 @@
     ['MSC Armonia 최근 선박 후기','Reddit / r/MSCCruises','https://www.reddit.com/r/MSCCruises/comments/1vwf1uy/msc_armonia_review/'],
     ['Celestyal 7박 공식 요금·포함항목','Celestyal','https://celestyal.com/our-cruises/idyllic-greece/7-nights'],
     ['Celestyal 4박 공식 요금·포함항목','Celestyal','https://celestyal.com/us/our-cruises/iconic-greek-islands/4-nights'],
-    ['Costa 2027년 9월 공식 요금','Costa','https://www.costacruises.com/cruises-by-season/september-cruises.html']
+    ['Costa 2027년 9월 공식 요금','Costa','https://www.costacruises.com/cruises-by-season/september-cruises.html'],
+    ['MSC Orchestra 9/14 일정·가격','iCruise','https://www.icruise.com/itineraries/7-night-piraeus-to-piraeus-cruise_msc-orchestra_9-14-2027.html'],
+    ['MSC Orchestra 9/14 일정 교차검증','Travel Weekly Asia','https://www.travelweekly-asia.com/Cruise/MSC-Cruises/MSC-Orchestra/Cruise-p61282293?id=359108'],
+    ['MSC Orchestra 한국어 선박·운항정보','크루즈맵','https://travelersmap.co.kr/cruise/ship/msc-orchestra-ship']
   ];
 
   function won(n){return Math.round(n/10000).toLocaleString()+'만원';}
@@ -160,22 +163,23 @@
 
   var timeline=[
     ['9/12','결혼식','서울'],
-    ['9/13~14','유럽 출국','인천 → 아테네'],
-    ['9/14~16','시차 적응','아테네 2~3박 · 가족 함께'],
-    ['9/17~24','가족 크루즈','그리스·터키 7박 · 7명'],
-    ['9/24','가족 귀국 / 부부 이동','가족: 한국 · 부부: 포르투갈'],
-    ['9/24~27','관광 70 · 휴식 30','리스본 3박'],
-    ['9/27~10/02','휴식 70 · 관광 30','마데이라 5박'],
-    ['10/02~05','관광 50 · 휴식 50','포르투 3박'],
-    ['10/05~06','귀국','총 약 3주']
+    ['9/12 밤~13','유럽 출국','인천 → 아테네'],
+    ['9/13','아테네 도착','호텔 1박 · 가족 함께'],
+    ['9/14~21','가족 크루즈','MSC Orchestra 동지중해 7박 · 7명'],
+    ['9/21','가족 귀국 / 부부 이동','가족: 한국 · 부부: 포르투갈'],
+    ['9/21~24','관광 70 · 휴식 30','리스본 3박'],
+    ['9/24~29','휴식 70 · 관광 30','마데이라 5박'],
+    ['9/29~10/02','관광 50 · 휴식 50','포르투 3박'],
+    ['10/02~03','귀국','총 약 3주']
   ];
 
   var html='<section class="hme-shell">'
     +'<header class="hme-hero"><div><span class="hme-kicker">2027 EUROPE HONEYMOON · FAMILY CRUISE</span><h2>가족과 7박 크루즈,<br>둘만의 유럽 신혼여행 10~12일</h2><p>9월 12일 예식 · 가족 7명 · 총 약 3주 · 관광과 힐링 50:50. 여행사 상품을 고르듯 실제 2027 운항 일정, 숨은 비용, 후기까지 한 화면에서 비교합니다.</p><div class="hme-hero-chips"><span>👨‍👩‍👧‍👦 7명</span><span>🚢 7박</span><span>💑 부부 10~12일 추가</span><span>🚗 무렌트 기본</span></div></div>'
-    +'<div class="hme-pick"><small>현재 추천</small><strong>9/17 아테네 출항</strong><span>그리스 + 터키 7박</span><em>예식 5일 뒤 출항이라 3주 일정에 가장 자연스럽습니다.</em></div></header>'
+    +'<div class="hme-pick"><small>딥서치 후 현재 추천</small><strong>9/14 아테네 출항</strong><span>MSC Orchestra · 동지중해 7박</span><em>9/12 밤 출국 → 9/13 아테네 도착 → 1박 → 9/14 18:00 승선. 현재 조건에 가장 정확히 맞습니다.</em></div></header>'
 
     +'<section class="hme-section"><div class="hme-section-head"><span>01</span><div><h3>크루즈 상품 비교</h3><p>가격보다 먼저 일정 궁합·부모님 체력·배의 성격을 봅니다. 가격은 공식 페이지의 현재 표시가 스냅샷입니다.</p></div></div>'
     +PRODUCTS.map(productCard).join('')+'</section>'
+    +'<section class="hme-section"><div class="hme-section-head"><span>01-A</span><div><h3>딥서치 검증 1순위 · 9/14 MSC Orchestra</h3><p>해외 4개 이상의 일정 DB/판매처와 한국어 크루즈 DB에서 교차검증했습니다.</p></div></div><div class="hme-alt-card value"><span class="hme-proof official">출항일 교차검증 완료</span><h4>MSC Orchestra · 2027.09.14 아테네(피레우스) 왕복 7박</h4><b>9/14 18:00 출항 → 9/21 07:00 귀항</b><p>아테네 → 카타콜론(올림피아) → 케팔로니아/아르고스톨리 → 코르푸 → 바리 → 해상일 → 미코노스 → 아테네.</p><ul><li>CruiseMapper: 9/14 피레우스 왕복 7박 확인</li><li>iCruise: 동일 항차 CN-14215816, 세금·수수료 포함 $1,230/인 내측 표시</li><li>Travel Weekly Asia: 동일 날짜·동일 기항지, 내측 $813부터 표시 — 판매채널별 가격 차 큼</li><li>CruiseTimetables: 9/14 출항·9/21 귀항·동일 기항지 확인</li><li>한국 크루즈맵: MSC Orchestra 피레우스 왕복 7박 운항축 및 2027년 9월 출항 존재 확인</li></ul><p><b>중요:</b> 표시가격은 판매처마다 $813~$1,230 이상 차이가 나므로, 실제 예약은 7명·3객실 기준 최종 인보이스로 다시 받아야 합니다.</p></div></section>'
     +'<section class="hme-section"><div class="hme-section-head"><span>01-B</span><div><h3>놓친 노선까지 다시 찾은 결과</h3><p>공식가·제3자 판매가·포함항목을 분리해서 비교합니다. “가장 싼 표시가”가 곧 최저 총비용은 아닙니다.</p></div></div>'
     +'<div class="hme-alt-grid">'
       +'<article class="hme-alt-card value"><span class="hme-proof third">제3자 판매 스냅샷</span><h4>MSC Armonia · 아드리아해 7박</h4><b>2027.09.19 베니스 출항 · £799/인 내측 사례</b><p>베니스 → 두브로브니크 → 코르푸 → 코토르 → 브린디시 → 스플리트 → 베니스. 7명 단순 합산은 약 '+won(799*7*FX.gbp)+'. 다만 MSC 공식 직판가·서비스차지 포함 여부는 별도 재확인해야 합니다.</p><ul><li>항구 가까운 도시가 많아 DIY 관광 비중을 높이기 좋음</li><li>최근 아드리아해 후기에 따르면 두브로브니크 외 대부분 항구는 도보 5분권 또는 무료 셔틀 사례</li><li>단점: Armonia는 오래된 소형선이고 최근 음식·시설 평가가 엇갈림</li></ul><a href="https://www.cruisecritic.com/en-gb/find-a-cruise/destination-eastern-mediterranean/month-september-2027" target="_blank" rel="noopener">판매 스냅샷 확인 ↗</a></article>'
@@ -186,7 +190,7 @@
 
     +'<section class="hme-section"><div class="hme-section-head"><span>01-C</span><div><h3>서유럽·지중해를 싸게 타는 실전 방법</h3><p>선사 가격보다 더 큰 차이는 객실·기항지 투어·포함항목·예약 시점에서 납니다.</p></div></div>'
     +'<div class="hme-save-grid"><div><b>1. 배보다 노선 우선</b><strong>기항지형 유럽 크루즈</strong><p>최근 MSC 유럽 후기에서도 매일 아침 하선해 관광하고 돌아와 저녁 먹고 자는 패턴이라, 선박 시설에 프리미엄을 크게 줄 필요가 없다는 의견이 반복됩니다.</p></div><div><b>2. 항구 가까운 노선</b><strong>아드리아해가 유리</strong><p>스플리트·코토르·두브로브니크 등은 도시 자체가 항구와 가깝습니다. 로마·피렌체처럼 항구↔도심 장거리 이동 비용을 줄일 수 있습니다.</p></div><div><b>3. 선사 투어 선별</b><strong>7명이면 사설 밴 비교</strong><p>도보권 항구는 DIY, 에페소스·로마처럼 멀거나 귀항 실패 리스크가 큰 곳만 선사 투어. 7명이면 전용 밴이 7장 투어권보다 경쟁력 있을 수 있습니다.</p></div><div><b>4. 객실 믹스</b><strong>신혼부부만 발코니</strong><p>부부 1실 발코니 + 부모님 2실 내측/오션뷰 조합을 우선 견적. 가족 공용시간은 객실보다 라운지·식당·갑판에서 보냅니다.</p></div><div><b>5. 패키지 자동구매 금지</b><strong>음료·Wi‑Fi 손익 계산</strong><p>유럽 기항지형은 낮에 배 밖에 있는 시간이 길어 전원 음료패키지·Wi‑Fi가 손해일 수 있습니다. 기본 식사만으로도 충분하다는 후기가 많습니다.</p></div><div><b>6. 표시가가 아니라 최종 인보이스</b><strong>포함항목 표준화</strong><p>객실가 + taxes/port fees + daily gratuity + 하선세 + 필수 셔틀/교통까지 합친 뒤 비교해야 합니다. 판매 국가에 따라 gratuity 포함 여부도 다릅니다.</p></div></div>'
-    +'<div class="hme-ranking"><b>현재 결론</b><span>일정 궁합 1위 <strong>Royal 9/17 아테네</strong></span><span>가성비 재검증 1위 <strong>MSC 아드리아해</strong></span><span>포함항목 명확성 1위 <strong>Celestyal</strong></span><span>현재 우선순위 낮음 <strong>Costa</strong></span></div></section>'
+    +'<div class="hme-ranking"><b>현재 결론</b><span>일정 궁합 1위 <strong>MSC Orchestra 9/14 아테네</strong></span><span>백업 1위 <strong>Royal 9/17 아테네</strong></span><span>가성비 재검증 <strong>MSC 아드리아해</strong></span><span>포함항목 명확성 <strong>Celestyal</strong></span></div></section>'
 
 
     +'<section class="hme-section"><div class="hme-section-head"><span>02</span><div><h3>“부모님은 계속 배에 있어도 돼?”</h3><p>네. 크루즈는 매 기항지 하선이 의무가 아닙니다. 가족 7명이 같은 배를 호텔처럼 쓰고, 기항지마다 각자 강도를 조절할 수 있습니다.</p></div></div>'
