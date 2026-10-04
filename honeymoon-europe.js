@@ -3,7 +3,7 @@
   var page=document.getElementById('p-honeymoon');
   if(!page)return;
 
-  var FX={usd:1343.19, eur:1512.34, asOf:'2026-10-03'};
+  var FX={usd:1343.19, eur:1512.34, gbp:1774.42, asOf:'2026-10-04'};
   var guests=7;
   var gratuity=18.5;
 
@@ -99,7 +99,13 @@
     ['마데이라 9~11월 계절 정보','Visit Madeira','https://visitmadeira.com/en/blog/visit-madeira/when-is-the-best-time-to-visit-madeira/'],
     ['마데이라 교통·Uber/Bolt','Visit Madeira','https://www.visitmadeira.com/en/travel-info/faq/'],
     ['Rhapsody 실제 탑승 커뮤니티 의견','Reddit / r/royalcaribbean','https://www.reddit.com/r/royalcaribbean/comments/18ywx0k'],
-    ['그리스 기항지 투어 후기','Reddit / r/royalcaribbean','https://www.reddit.com/r/royalcaribbean/comments/1v3jyvu/royal_caribbean_cruise_greek_isles/']
+    ['그리스 기항지 투어 후기','Reddit / r/royalcaribbean','https://www.reddit.com/r/royalcaribbean/comments/1v3jyvu/royal_caribbean_cruise_greek_isles/'],
+    ['MSC Armonia 9/19 베니스 7박 판매 스냅샷','Cruise Critic','https://www.cruisecritic.com/en-gb/find-a-cruise/destination-eastern-mediterranean/month-september-2027'],
+    ['MSC Armonia 아드리아해 실제 후기','Reddit / r/MSCCruises','https://www.reddit.com/r/MSCCruises/comments/1va5mj3/msc_armonia_adriatic_itinerary_excursion/'],
+    ['MSC Armonia 최근 선박 후기','Reddit / r/MSCCruises','https://www.reddit.com/r/MSCCruises/comments/1vwf1uy/msc_armonia_review/'],
+    ['Celestyal 7박 공식 요금·포함항목','Celestyal','https://celestyal.com/our-cruises/idyllic-greece/7-nights'],
+    ['Celestyal 4박 공식 요금·포함항목','Celestyal','https://celestyal.com/us/our-cruises/iconic-greek-islands/4-nights'],
+    ['Costa 2027년 9월 공식 요금','Costa','https://www.costacruises.com/cruises-by-season/september-cruises.html']
   ];
 
   function won(n){return Math.round(n/10000).toLocaleString()+'만원';}
@@ -170,6 +176,18 @@
 
     +'<section class="hme-section"><div class="hme-section-head"><span>01</span><div><h3>크루즈 상품 비교</h3><p>가격보다 먼저 일정 궁합·부모님 체력·배의 성격을 봅니다. 가격은 공식 페이지의 현재 표시가 스냅샷입니다.</p></div></div>'
     +PRODUCTS.map(productCard).join('')+'</section>'
+    +'<section class="hme-section"><div class="hme-section-head"><span>01-B</span><div><h3>놓친 노선까지 다시 찾은 결과</h3><p>공식가·제3자 판매가·포함항목을 분리해서 비교합니다. “가장 싼 표시가”가 곧 최저 총비용은 아닙니다.</p></div></div>'
+    +'<div class="hme-alt-grid">'
+      +'<article class="hme-alt-card value"><span class="hme-proof third">제3자 판매 스냅샷</span><h4>MSC Armonia · 아드리아해 7박</h4><b>2027.09.19 베니스 출항 · £799/인 내측 사례</b><p>베니스 → 두브로브니크 → 코르푸 → 코토르 → 브린디시 → 스플리트 → 베니스. 7명 단순 합산은 약 '+won(799*7*FX.gbp)+'. 다만 MSC 공식 직판가·서비스차지 포함 여부는 별도 재확인해야 합니다.</p><ul><li>항구 가까운 도시가 많아 DIY 관광 비중을 높이기 좋음</li><li>최근 아드리아해 후기에 따르면 두브로브니크 외 대부분 항구는 도보 5분권 또는 무료 셔틀 사례</li><li>단점: Armonia는 오래된 소형선이고 최근 음식·시설 평가가 엇갈림</li></ul><a href="https://www.cruisecritic.com/en-gb/find-a-cruise/destination-eastern-mediterranean/month-september-2027" target="_blank" rel="noopener">판매 스냅샷 확인 ↗</a></article>'
+      +'<article class="hme-alt-card"><span class="hme-proof official">공식가</span><h4>Celestyal · Idyllic Greece 7박</h4><b>2027년 9월 $1,429/인부터</b><p>아테네 → 쿠사다시 → 로도스 → 크레타 → 산토리니 → 미코노스 → 밀로스 → 아테네. 7명 단순 합산 약 '+won(1429*7*FX.usd)+'.</p><ul><li>항만비·gratuities·Essential Wi‑Fi·기본 식사/음료 포함</li><li>표시가는 높지만 Royal처럼 팁을 별도 더하지 않아 포함항목 보정 필요</li><li>그리스 집중형이라 가족 크루즈 자체가 여행의 핵심일 때 적합</li></ul><a href="https://celestyal.com/our-cruises/idyllic-greece/7-nights" target="_blank" rel="noopener">Celestyal 공식 ↗</a></article>'
+      +'<article class="hme-alt-card budget"><span class="hme-proof official">공식가 · 비용절감 특수안</span><h4>Celestyal · 그리스 섬 4박</h4><b>2027년 9월 $859/인부터</b><p>아테네 → 미코노스 → 쿠사다시 → 파트모스 → 로도스 → 크레타 → 산토리니 → 아테네. 7명 단순 합산 약 '+won(859*7*FX.usd)+'.</p><ul><li>항만비·gratuities·Essential Wi‑Fi 포함</li><li>가족 크루즈 비용을 줄이고 부부 신혼여행 2주에 예산 집중 가능</li><li>단점: 4박에 7개 항구라 부모님 휴양형 일정으로는 너무 빡빡함</li></ul><a href="https://celestyal.com/us/our-cruises/iconic-greek-islands/4-nights" target="_blank" rel="noopener">Celestyal 공식 ↗</a></article>'
+      +'<article class="hme-alt-card muted"><span class="hme-proof official">공식가</span><h4>Costa · 2027년 9월</h4><b>서부 $1,412 / 동부 $1,487부터</b><p>Taxes & Fees는 포함이지만 성인 gratuity €12/박은 별도. 7명 기준 표시가만 각각 약 '+won(1412*7*FX.usd)+' / '+won(1487*7*FX.usd)+'부터입니다.</p><ul><li>현재 확인가만 보면 “Costa라서 무조건 싸다”는 결론은 틀림</li><li>프로모션·날짜별 가격 하락은 있을 수 있지만 3개 객실 동시 확보 리스크 존재</li><li>지금은 Royal/MSC/Celestyal보다 우선순위를 낮춤</li></ul><a href="https://www.costacruises.com/cruises-by-season/september-cruises.html" target="_blank" rel="noopener">Costa 공식 ↗</a></article>'
+    +'</div></section>'
+
+    +'<section class="hme-section"><div class="hme-section-head"><span>01-C</span><div><h3>서유럽·지중해를 싸게 타는 실전 방법</h3><p>선사 가격보다 더 큰 차이는 객실·기항지 투어·포함항목·예약 시점에서 납니다.</p></div></div>'
+    +'<div class="hme-save-grid"><div><b>1. 배보다 노선 우선</b><strong>기항지형 유럽 크루즈</strong><p>최근 MSC 유럽 후기에서도 매일 아침 하선해 관광하고 돌아와 저녁 먹고 자는 패턴이라, 선박 시설에 프리미엄을 크게 줄 필요가 없다는 의견이 반복됩니다.</p></div><div><b>2. 항구 가까운 노선</b><strong>아드리아해가 유리</strong><p>스플리트·코토르·두브로브니크 등은 도시 자체가 항구와 가깝습니다. 로마·피렌체처럼 항구↔도심 장거리 이동 비용을 줄일 수 있습니다.</p></div><div><b>3. 선사 투어 선별</b><strong>7명이면 사설 밴 비교</strong><p>도보권 항구는 DIY, 에페소스·로마처럼 멀거나 귀항 실패 리스크가 큰 곳만 선사 투어. 7명이면 전용 밴이 7장 투어권보다 경쟁력 있을 수 있습니다.</p></div><div><b>4. 객실 믹스</b><strong>신혼부부만 발코니</strong><p>부부 1실 발코니 + 부모님 2실 내측/오션뷰 조합을 우선 견적. 가족 공용시간은 객실보다 라운지·식당·갑판에서 보냅니다.</p></div><div><b>5. 패키지 자동구매 금지</b><strong>음료·Wi‑Fi 손익 계산</strong><p>유럽 기항지형은 낮에 배 밖에 있는 시간이 길어 전원 음료패키지·Wi‑Fi가 손해일 수 있습니다. 기본 식사만으로도 충분하다는 후기가 많습니다.</p></div><div><b>6. 표시가가 아니라 최종 인보이스</b><strong>포함항목 표준화</strong><p>객실가 + taxes/port fees + daily gratuity + 하선세 + 필수 셔틀/교통까지 합친 뒤 비교해야 합니다. 판매 국가에 따라 gratuity 포함 여부도 다릅니다.</p></div></div>'
+    +'<div class="hme-ranking"><b>현재 결론</b><span>일정 궁합 1위 <strong>Royal 9/17 아테네</strong></span><span>가성비 재검증 1위 <strong>MSC 아드리아해</strong></span><span>포함항목 명확성 1위 <strong>Celestyal</strong></span><span>현재 우선순위 낮음 <strong>Costa</strong></span></div></section>'
+
 
     +'<section class="hme-section"><div class="hme-section-head"><span>02</span><div><h3>“부모님은 계속 배에 있어도 돼?”</h3><p>네. 크루즈는 매 기항지 하선이 의무가 아닙니다. 가족 7명이 같은 배를 호텔처럼 쓰고, 기항지마다 각자 강도를 조절할 수 있습니다.</p></div></div>'
     +'<div class="hme-family-grid"><div><b>전원 하선</b><strong>아테네 · 이스탄불</strong><p>대표 관광지만 가이드/차량으로 편하게.</p></div><div><b>선택 하선</b><strong>미코노스 · 산토리니</strong><p>부모님 컨디션에 따라 배에서 쉬어도 됨. 텐더 이동까지 고려.</p></div><div><b>부부/자녀만</b><strong>에페소스 집중 관광</strong><p>유적지 보행량이 많아 부모님은 선내 휴식 선택 가능.</p></div><div><b>다 같이 휴식</b><strong>해상일</strong><p>수영장·카페·공연·정찬 등 배 자체를 즐기는 날.</p></div></div></section>'
