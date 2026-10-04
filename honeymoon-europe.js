@@ -93,6 +93,8 @@
     ['9/25 라벤나 출항 공식 일정·가격','Royal Caribbean','https://www.royalcaribbean.com/cruises/itinerary/7-night-greek-isles-from-ravenna-on-brilliance/BR07BLQ-2504782598?country=USA&currency=USD&sail-date=2027-09-25'],
     ['2027 유럽 배치표','Royal Caribbean Incentives','https://www.royalcaribbeanincentives.com/content/uploads/Europe-Deployment-2027.pdf'],
     ['선내 서비스 팁 정책','Royal Caribbean','https://www.royalcaribbean.com/faq/questions/onboard-service-gratuity-expense'],
+    ['세금·항만비 안내','Royal Caribbean','https://www.royalcaribbean.com/faq/questions/how-much-are-taxes-fees-and-port-expenses'],
+    ['그리스 크루즈 하선세 법령','Greek Government','https://www.e-nomothesia.gr/index.php/kya-3133-1-45989-2025.html'],
     ['ETIAS 공식 안내','EU','https://www.travel-europe.europa.eu/etias'],
     ['마데이라 9~11월 계절 정보','Visit Madeira','https://visitmadeira.com/en/blog/visit-madeira/when-is-the-best-time-to-visit-madeira/'],
     ['마데이라 교통·Uber/Bolt','Visit Madeira','https://www.visitmadeira.com/en/travel-info/faq/'],
@@ -173,10 +175,10 @@
     +'<div class="hme-family-grid"><div><b>전원 하선</b><strong>아테네 · 이스탄불</strong><p>대표 관광지만 가이드/차량으로 편하게.</p></div><div><b>선택 하선</b><strong>미코노스 · 산토리니</strong><p>부모님 컨디션에 따라 배에서 쉬어도 됨. 텐더 이동까지 고려.</p></div><div><b>부부/자녀만</b><strong>에페소스 집중 관광</strong><p>유적지 보행량이 많아 부모님은 선내 휴식 선택 가능.</p></div><div><b>다 같이 휴식</b><strong>해상일</strong><p>수영장·카페·공연·정찬 등 배 자체를 즐기는 날.</p></div></div></section>'
 
     +'<section class="hme-section"><div class="hme-section-head"><span>03</span><div><h3>7명 비용, 이렇게 나눠서 봐야 합니다</h3><p>크루즈가 비싸 보이지 않게 “배값”과 항공·전후박·투어를 섞지 않습니다.</p></div></div>'
-    +'<div class="hme-budget"><div class="fixed"><h4>① 크루즈 고정에 가까운 비용</h4><p><b>객실요금</b> 공식 시작가 × 인원. 기본 식사·숙박·도시간 이동이 포함됩니다.</p><p><b>선내 팁</b> 현재 일반 객실 $18.50/인/일. 7명 7박이면 약 '+won(usdToWon(gratuity*7*7))+'.</p><p><b>3개 객실</b> 권장 가정은 2+2+3. 실제 3인실 재고에 따라 가격이 달라집니다.</p></div>'
+    +'<div class="hme-budget"><div class="fixed"><h4>① 크루즈 고정에 가까운 비용</h4><p><b>객실요금</b> 공식 시작가 × 인원. 기본 식사·숙박·도시간 이동이 포함됩니다.</p><p><b>세금·항만비</b> 판매채널에 따라 기본운임과 따로 보이거나 최종 표시가에 포함됩니다. 예약 인보이스의 Taxes, fees and port expenses를 반드시 확인하세요.</p><p><b>선내 팁</b> 현재 일반 객실 USD 18.50/인/일. 7명 7박이면 약 '+won(usdToWon(gratuity*7*7))+'.</p><p><b>3개 객실</b> 권장 가정은 2+2+3. 실제 3인실 재고에 따라 가격이 달라집니다.</p></div>'
     +'<div><h4>② 선택하면 늘어나는 비용</h4><p><b>기항지 투어</b> 모든 항구에서 살 필요 없음. 에페소스처럼 이동이 필요한 곳만 집중.</p><p><b>음료·Wi-Fi·스페셜티 식당</b> 기본 상품에 꼭 필요한 비용은 아님.</p><p><b>부모님 투어</b> 매일이 아니라 2~3개 핵심 기항지만 같이 가면 체력·비용 모두 절약.</p></div>'
     +'<div><h4>③ 크루즈와 분리할 비용</h4><p><b>한국↔유럽 항공</b> 7명 전체 항공과 부부 후속 여행 오픈조/다구간 항공을 별도 비교.</p><p><b>승선 전 2~3박</b> 시차 적응용 아테네 숙소.</p><p><b>부부 후속 10~12일</b> 포르투갈은 신혼여행 예산으로 별도 관리.</p></div></div>'
-    +'<p class="hme-disclaimer">※ 원화 환산은 '+FX.asOf+' 기준 참고 환율 USD 1 = '+FX.usd.toLocaleString()+'원. 실제 결제 환율·프로모션·객실 재고에 따라 달라집니다.</p></section>'
+    +'<div class="hme-fee-grid"><div><b>그리스 하선세</b><strong>9월 미코노스·산토리니 각 €20/인</strong><p>두 섬 모두 7명이 하선하면 €280 규모. Royal Caribbean은 최근 예약분은 booking taxes/fees에 포함하고, 해당 항구에서 배에 남으면 SeaPass로 크레딧한다고 안내합니다.</p></div><div><b>선내 추가구매 팁</b><strong>음료·스페셜티 등 +18%</strong><p>음료·음료패키지·스페셜티 다이닝·룸서비스·미니바 등에 자동 gratuity가 추가됩니다. 스파·살롱은 +20%입니다.</p></div><div><b>기항지에서 새는 돈</b><strong>투어·셔틀·현지교통</strong><p>텐더 보트 자체는 크루즈 이동의 일부지만 산토리니 케이블카, 항구↔도심 셔틀·택시·현지투어는 별도일 수 있습니다.</p></div><div><b>계약 후 변동 가능</b><strong>정부세·유류할증 등</strong><p>정부가 새 세금을 도입하거나 선사 약관상 surcharge가 생길 수 있어 최종 인보이스와 출항 전 공지를 다시 봐야 합니다.</p></div></div><p class="hme-disclaimer">※ 원화 환산은 '+FX.asOf+' 기준 참고 환율 USD 1 = '+FX.usd.toLocaleString()+'원, EUR 1 = '+FX.eur.toLocaleString()+'원. 실제 결제 환율·객실 재고·정부세 변경에 따라 달라집니다.</p></section>'
 
     +'<section class="hme-section"><div class="hme-section-head"><span>04</span><div><h3>총 3주 추천 일정</h3><p>크루즈에서 관광 강도를 높이고, 뒤 10~12일은 포르투갈에서 속도를 낮추는 구성입니다.</p></div></div>'
     +'<div class="hme-timeline">'+timeline.map(function(x){return '<div><time>'+x[0]+'</time><span>'+x[1]+'</span><b>'+x[2]+'</b></div>';}).join('')+'</div>'
@@ -185,7 +187,7 @@
     +'<section class="hme-section"><div class="hme-section-head"><span>05</span><div><h3>운전은 선택 옵션</h3><p>첫 해외운전이므로 무렌터카 버전을 기본 상품으로 두고, 현지에서 자신이 생기면 마데이라 2~3일만 렌트하는 안을 추가합니다.</p></div></div>'
     +'<div class="hme-drive"><div class="recommended"><span>추천</span><h4>렌터카 없이</h4><ul><li>리스본·포르투: 대중교통 + Bolt/Uber</li><li>마데이라: 푼샬 숙박 + 동/서부 일일투어</li><li>공항: Aerobus/택시/사전 픽업</li><li>국제면허·주차·보험 스트레스 최소</li></ul></div><div><span>선택</span><h4>마데이라 2~3일만 렌트</h4><ul><li>원하는 전망대를 자유롭게 이동</li><li>산악 경사·좁은 길·급커브 적응 필요</li><li>자동변속 차량 + 완전면책 우선 검토</li><li>출국 전 국제운전 관련 서류와 렌터카 약관 재확인</li></ul></div></div></section>'
 
-    +'<section class="hme-section"><div class="hme-section-head"><span>06</span><div><h3>한국인 후기·영상으로 먼저 체감하기</h3><p>여행사 광고만 보지 않고, 한국어 탑승기와 최근 실제 후기를 같이 봅니다.</p></div></div><div class="hme-reviews">'+REVIEWS.map(reviewCard).join('')+'</div>'
+    +'<section class="hme-section"><div class="hme-section-head"><span>06</span><div><h3>한국인 후기·영상으로 먼저 체감하기</h3><p>영상은 분위기·동선 참고용입니다. 비용 판단은 영상 요약만 믿지 않고 선사 공식 요금·세금 정책과 실제 후기 글을 교차검증합니다.</p></div></div><div class="hme-reviews">'+REVIEWS.map(reviewCard).join('')+'</div>'
     +'<div class="hme-review-points"><div><b>후기에서 반복되는 장점</b><p>짐을 매일 싸지 않고 여러 나라를 이동 · 저녁마다 배로 돌아오니 가족 관리가 쉬움 · 그리스 섬 풍경 만족도가 높음.</p></div><div><b>후기에서 반복되는 단점</b><p>그리스 제도는 기항지 중심이라 생각보다 피곤함 · 텐더 대기 · 오래된 소형선은 “선박 자체가 목적”인 사람에게 심심할 수 있음.</p></div><div><b>우리에게 적용</b><p>부모님은 매일 하선시키지 않고 2~3개 핵심 기항지만 함께. 배는 호텔처럼 쓰고, 부부는 필요한 날 별도 관광.</p></div></div></section>'
 
     +'<section class="hme-section"><div class="hme-section-head"><span>07</span><div><h3>비자·입국 체크</h3><p>3주 여행 자체 때문에 별도 장기 관광비자를 준비하는 일정은 아닙니다. 다만 2027년에는 ETIAS를 출국 전에 확인해야 합니다.</p></div></div>'
