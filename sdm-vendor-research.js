@@ -273,5 +273,76 @@ var SDM_VENDOR_RESEARCH = {
   pain:['과거 후기에는 담당자 변경 후 결과가 달라졌다는 사례가 있어 “샵 이름”보다 담당자 고정이 중요하다.','오래된 후기에는 대기공간이 작거나 주말 혼잡했다는 지적도 있다.'],
   avoid:['촬영·본식 동일 담당자 여부 확인','원하는 눈썹·립 색을 사진으로 지정','주말 대기시간 여유 확보'],
   sources:[{label:'2025 진행후기',url:'https://thewedd.com/2025/09/14/%EA%B2%90%EA%B7%B8%EB%A0%88%EC%95%84-%EB%A9%94%EC%9D%B4%ED%81%AC%EC%97%85-%EC%A7%84%ED%96%89%ED%9B%84%EA%B8%B0/',kind:'최근후기'}]
+ },
+ 'dress|에델린':{
+  researched:'2026-10-06',
+  reviewEvidence:{recent:1,latest:'2026-07',note:'2026 실제 본식 후기 1건 확인. 최근 24개월 독립 후기 2건 기준에는 아직 부족.'},
+  hero:'https://img3.daumcdn.net/thumb/R658x0.q70/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fnews%2F202212%2F19%2FWEDDING21%2F20221219110007565xadp.jpg',
+  links:[{label:'업체 정보',url:'https://www.directwedding.co.kr/dress/edeline'},{label:'2026 실제 후기',url:'https://nochedeverano26.tistory.com/1732'},{label:'2026 이벤트',url:'https://www.iwedding.co.kr/event/detail/46921'}],
+  style:'화려한 비즈·레이스가 강점인 드레스샵. 반짝임과 입체감 있는 본식 드레스 선호 시 후보가 많음.',
+  includes:['투어 약 4벌','촬영가봉 약 6벌','본식가봉 약 4벌 수준 안내'],
+  costTriggers:['프리미엄/블랙라벨 업그레이드','2부 드레스','피팅비·헬퍼비'],
+  pain:['당일 혜택이 크더라도 상위 라벨을 입어본 뒤 추가금이 커질 수 있다.','주말에는 인기 드레스가 예식에 나가 투어 선택지가 줄 수 있다.'],
+  avoid:['수·목 투어 우선','기본라벨에서 먼저 선택 가능한 벌 수 확인','당일혜택을 계약서에 명시'],
+  sources:[{label:'다이렉트 업체정보',url:'https://www.directwedding.co.kr/dress/edeline',kind:'업체정보'},{label:'2026 실제후기',url:'https://nochedeverano26.tistory.com/1732',kind:'개인후기'}]
+ },
+ 'dress|브라이드윤':{
+  researched:'2026-10-06',
+  reviewEvidence:{recent:1,latest:'2025-H2',note:'2025 하반기 본식 실사용 후기 1건 확인. 신생업체라 후기 축적량이 적어 추가 조사 필요.'},
+  links:[{label:'화보·후기',url:'https://www.directwedding.co.kr/dress/brideyun'},{label:'주소 확인',url:'https://willyoumarrygo.com/dress/%EC%84%9C%EC%9A%B8/193880285/'}],
+  style:'자체제작 기반의 실크·레이스 드레스. 클래식하면서 디테일 포인트가 있는 유니크한 스타일.',
+  includes:['본식 드레스','악세사리 대여 후기 확인'],
+  costTriggers:['신상/퍼스트웨어 여부','헬퍼비·피팅비는 계약별 확인'],
+  pain:['신생업체라 가격·추가금·헬퍼 품질 데이터가 아직 충분히 쌓이지 않았다.','드레스 자체 컨디션은 좋다는 후기지만 후기 표본이 적다.'],
+  avoid:['최근 본식 후기 최소 2~3건 더 확인','드레스 상태와 헬퍼 포함 범위를 계약서로 확인'],
+  sources:[{label:'다이렉트 2025 후기',url:'https://www.directwedding.co.kr/dress/brideyun',kind:'플랫폼후기'}]
+ },
+ 'studio|어바웃제인':{
+  researched:'2026-10-06',
+  reviewEvidence:{recent:1,latest:'2025-05',note:'2025 실제 촬영후기 1건 확인. 과거 장문의 후기들은 스타일 참고용으로만 사용.'},
+  hero:'https://www.iwedding.co.kr/_next/image?q=75&url=https%3A%2F%2Fwww.iwedding.co.kr%2Fcenter%2Fwebsite%2Fbrandplus%2F1759130416.jpg&w=2048',
+  links:[{label:'화보 보기',url:'https://www.iwedding.co.kr/enterprise/info/co_sl_s332'},{label:'2025 실제 후기',url:'https://choicehalls.com/blog/2025/05/13/%EC%96%B4%EB%B0%94%EC%9B%83%EC%A0%9C%EC%9D%B8-%EC%8A%A4%ED%8A%9C%EB%94%94%EC%98%A4-%EC%B6%94%EC%B2%9C-%EC%9D%B4%EC%9C%A0/'}],
+  style:'인물 중심·따뜻한 색감. 계절감 있는 야외와 하우스 배경을 섞는 스타일.',
+  includes:['인물 중심 촬영','야외·야간 전구씬 가능 사례','단독 촬영 선호 후기'],
+  costTriggers:['내곡동 위치로 인한 드레스 헬퍼 출장 추가 가능','야간/로케이션 조건은 계약별 확인'],
+  pain:['청담권과 거리가 있어 이동/헬퍼 출장비가 추가될 수 있다.','단독 촬영 여부와 실제 촬영팀 운영 방식은 계약 전 확인이 필요하다.'],
+  avoid:['메이크업샵→스튜디오 이동시간 계산','헬퍼 출장비 포함 최종가 확인','야간씬 포함 여부 계약서 명시'],
+  sources:[{label:'2025 실제후기',url:'https://choicehalls.com/blog/2025/05/13/%EC%96%B4%EB%B0%94%EC%9B%83%EC%A0%9C%EC%9D%B8-%EC%8A%A4%ED%8A%9C%EB%94%94%EC%98%A4-%EC%B6%94%EC%B2%9C-%EC%9D%B4%EC%9C%A0/',kind:'개인후기'}]
+ },
+ 'studio|지니어스':{
+  researched:'2026-10-06',
+  reviewEvidence:{recent:1,latest:'2025-H2',note:'2025 하반기 실제 촬영후기 1건 확인. 최근 독립 후기 1건 추가 확보 필요.'},
+  hero:'https://cdn.imweb.me/upload/S20240204aca494e0b4938/15f49b6cf1beb.jpg',
+  links:[{label:'최신 화보',url:'https://yozmwedding.co.kr/studio/?bmode=view&idx=156312947'},{label:'2025 촬영후기',url:'https://www.directwedding.co.kr/studio/genius'},{label:'과거 셀렉후기',url:'https://yannichoongs.tistory.com/397?category=965870'}],
+  style:'배경 중심이지만 인물컷도 병행. 지하~옥상까지 다양한 세트와 발랄한 연출이 강점.',
+  includes:['토탈 진행 가능','건물 내 헤어·메이크업·가봉·촬영 동선','다양한 배경'],
+  costTriggers:['앨범 페이지 추가','액자 업그레이드','셀렉 단계 추가결제'],
+  pain:['과거 셀렉 후기에서 기본 액자가 마음에 들지 않아 원목 액자로 바꾸며 25만원 추가된 사례가 있다.','촬영팀이 여러 팀 동시에 움직여 원하는 배경 대기 가능성이 있다.'],
+  avoid:['기본 액자 실물 미리 확인','앨범 추가 페이지 상한 합의','원하는 배경 우선순위 3개 전달'],
+  sources:[{label:'2025 촬영후기',url:'https://www.directwedding.co.kr/studio/genius',kind:'플랫폼후기'},{label:'과거 셀렉후기',url:'https://yannichoongs.tistory.com/397?category=965870',kind:'과거후기'}]
+ },
+ 'makeup|고센뷰티':{
+  researched:'2026-10-06',
+  reviewEvidence:{recent:3,latest:'2026-10',note:'2025 실제 촬영후기와 2026 최근 이용후기 2건 이상 확인. 최근성 기준 충족.'},
+  hero:'https://www.iwedding.co.kr/center/website/brandplus/1722409307.jpg',
+  links:[{label:'화보 보기',url:'https://www.iwedding.co.kr/enterprise/info/co_sl_m009'},{label:'2025 실제 후기',url:'https://weddingdirect.tistory.com/52?category=1185695'},{label:'2026 최근 후기',url:'https://www.myrealtrip.com/guides/115785'}],
+  style:'매끄러운 피부표현과 자연스러운 색조. 음영·코랄 등 레퍼런스에 맞춰 조정하는 후기 확인.',
+  includes:['신부 헤어·메이크업','신랑 헤어·메이크업','바디 메이크업 사례'],
+  costTriggers:['옆머리 커트 추가','직급 지정','얼리스타트','혼주 메이크업'],
+  pain:['샵 입구가 눈에 잘 띄지 않았다는 후기가 있다.','옆머리 길이 때문에 현장에서 커트를 권유받고 추가비가 발생한 실제 사례가 있다.','헤어와 메이크업 층이 달라 이동이 반복될 수 있다.'],
+  avoid:['옆머리·잔머리 셀프컷 금지','레퍼런스 3장 이상 준비','예상 소요시간 3시간 기준으로 이동계획'],
+  sources:[{label:'2025 개인후기',url:'https://weddingdirect.tistory.com/52?category=1185695',kind:'개인후기'},{label:'2026 실제이용후기',url:'https://www.myrealtrip.com/guides/115785',kind:'플랫폼후기'}]
+ },
+ 'makeup|로나':{
+  researched:'2026-10-06',
+  reviewEvidence:{recent:1,latest:'2025',note:'2025 계약·선호 후기는 확인했지만 실제 본식/촬영 독립 후기 2건 기준에는 아직 부족.'},
+  hero:'https://cdn.imweb.me/upload/S20240204aca494e0b4938/0c76dd73ee378.jpeg',
+  links:[{label:'화보 보기',url:'https://yozmwedding.co.kr/makeup/?bmode=view&idx=152274468'},{label:'다이렉트 정보',url:'https://www.directwedding.co.kr/makeup/lona'},{label:'2025 계약후기',url:'https://challenger-yj.tistory.com/61'}],
+  style:'촉촉한 피부표현과 자연스러운 메이크업·헤어. 과하지 않은 청담식 웨딩 메이크업.',
+  includes:['신랑·신부 본식 헤어메이크업 상품 확인'],
+  costTriggers:['직급 지정','얼리스타트','레이트아웃','헤어피스·컷·염색·펌'],
+  pain:['다이렉트 자체 고객리뷰가 거의 없어 실제 담당자별 편차 파악이 어렵다.','예식 시간이 낮이어도 이동시간 때문에 얼리스타트가 붙을 수 있다.'],
+  avoid:['담당자 최근 작업물 직접 확인','촬영·본식 동일 담당자 여부 확인','얼리스타트 기준시각 계약 전에 질문'],
+  sources:[{label:'다이렉트 업체정보',url:'https://www.directwedding.co.kr/makeup/lona',kind:'업체정보'},{label:'2025 계약후기',url:'https://challenger-yj.tistory.com/61',kind:'개인후기'}]
  }
 };
