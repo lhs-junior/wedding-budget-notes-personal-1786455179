@@ -7,6 +7,7 @@ var st;try{st=JSON.parse(localStorage.getItem(SK)||'{}');}catch(e){st={};}
 if(st._v!==1)st={_v:1,checks:{},quotes:[]};
 function save(){localStorage.setItem(SK,JSON.stringify(st));}
 var ui={how:'비동행',reg:'',sort:'asc',q:'',open:'',contractOnly:true};
+var vendorUi={role:'',q:''};
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 function man(n){return n==null?'':(Math.round(n*10)/10).toLocaleString()+'만';}
 function median(a){if(!a.length)return null;var b=a.slice().sort(function(x,y){return x-y;}),m=b.length>>1;return b.length%2?b[m]:(b[m-1]+b[m])/2;}
@@ -66,6 +67,63 @@ function sameBlock(){
   return SDM_SAME.map(function(g){
     return '<article class="sd-same"><h4>'+esc(g.what)+'</h4><table>'+g.rows.map(function(r){return '<tr><th>'+esc(r[0])+'</th><td>'+esc(r[1])+'</td></tr>';}).join('')+'</table><p>'+esc(g.take)+'</p><a href="'+esc(g.src)+'" target="_blank" rel="noopener">원문</a> '+adTag(g.ad)+'</article>';
   }).join('');
+}
+
+var ROLE_INFO={
+ studio:{label:'스튜디오',title:'촬영 결과물',desc:'공간·세트·작가·보정 스타일을 결정해요.',checks:['촬영 시간·의상 벌수','원본·수정본 포함','야간·로드씬 추가금','지정 작가·페이지 추가금']},
+ dress:{label:'드레스',title:'드레스 선택 범위',desc:'촬영·본식 드레스와 피팅, 라벨 등급이 핵심이에요.',checks:['촬영/본식 제공 벌수','피팅비·투어비','프리미엄 라벨 추가금','신상·지정 드레스 추가금']},
+ makeup:{label:'메이크업',title:'헤어·메이크업',desc:'촬영일·본식일 헤어와 메이크업을 담당해요.',checks:['원장/부원장/실장 직급','촬영·본식 포함 범위','얼리스타트','헤어변형·출장비']}
+};
+function cleanVendor(v){return String(v||'').replace(/\([^)]*\)/g,'').split('·')[0].trim();}
+function buildVendors(){
+ var map={};
+ SDM_CASES.forEach(function(c){
+  [['studio',c.s],['dress',c.d],['makeup',c.m]].forEach(function(x){
+   var role=x[0],name=cleanVendor(x[1]);if(!name||/^미기재/.test(name))return;
+   var k=role+'|'+name;if(!map[k])map[k]={role:role,name:name,cases:[],extras:{},notes:[]};
+   var v=map[k];v.cases.push(c);
+   (c.out||[]).forEach(function(e){var key=e.replace(/\s*\d+(?:\.\d+)?(?:만|만원)?(?:×\d+)?/g,'').trim();if(key)v.extras[key]=(v.extras[key]||0)+1;});
+   if(c.note&&v.notes.indexOf(c.note)<0)v.notes.push(c.note);
+  });
+ });
+ return Object.keys(map).map(function(k){var v=map[k],p=v.cases.map(function(c){return c.c;});v.med=median(p);v.min=Math.min.apply(null,p);v.max=Math.max.apply(null,p);v.contracts=v.cases.filter(function(c){return c.st==='계약';}).length;v.extraList=Object.keys(v.extras).sort(function(a,b){return v.extras[b]-v.extras[a];}).slice(0,4);return v;});
+}
+var VENDORS=buildVendors();
+function vendorCards(){
+ var q=vendorUi.q.trim().toLowerCase(),rows=VENDORS.filter(function(v){return (!vendorUi.role||v.role===vendorUi.role)&&(!q||v.name.toLowerCase().indexOf(q)>=0);});
+ rows.sort(function(a,b){return b.cases.length-a.cases.length||a.name.localeCompare(b.name);});
+ if(!rows.length)return '<p class="sd-muted">조건에 맞는 업체가 없어요.</p>';
+ return '<div class="sd-vendor-grid">'+rows.slice(0,36).map(function(v){
+  var r=ROLE_INFO[v.role],level=v.cases.length>=3?'높음':v.cases.length>=2?'보통':'낮음';
+  var extras=v.extraList.length?v.extraList.map(function(e){return esc(e)+'('+v.extras[e]+'건)';}).join(' · '):'확인된 별도비용 없음';
+  var notes=v.notes.slice(0,2).map(function(n){return '<li>'+esc(n)+'</li>';}).join('');
+  var src=v.cases.slice(0,3).map(function(c){return '<a href="'+esc(c.src)+'" target="_blank" rel="noopener">'+esc(c.date)+' '+esc(c.co)+'</a>';}).join(' · ');
+  var key=v.role+'|'+v.name,rr=(typeof SDM_VENDOR_RESEARCH!=='undefined'&&SDM_VENDOR_RESEARCH[key])||null;
+  var painGuide=(typeof SDM_PAIN_GUIDE!=='undefined'&&SDM_PAIN_GUIDE[v.role])||r.checks;
+  var researched=rr?'<span class="sd-researched">후기 조사 '+esc(rr.researched)+'</span>':'<span class="sd-researched sd-unresearched">업체별 불편후기 추가 조사 필요</span>';
+  var rrStyle=rr?'<div class="sd-vendor-block"><b>어떤 스타일?</b><p>'+esc(rr.style)+'</p></div>':'';
+  var rrInc=rr&&rr.includes&&rr.includes.length?'<div class="sd-vendor-block"><b>확인된 구성</b><p>'+rr.includes.map(esc).join(' · ')+'</p></div>':'';
+  var rrCost=rr&&rr.costTriggers&&rr.costTriggers.length?'<div class="sd-vendor-block sd-cost"><b>💸 돈이 더 붙는 지점</b><ul>'+rr.costTriggers.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>':'';
+  var rrPain=rr&&rr.pain&&rr.pain.length?'<div class="sd-vendor-block sd-pain"><b>⚠ 후기에서 먼저 볼 불편·고생 포인트</b><ul>'+rr.pain.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>':'<div class="sd-vendor-block sd-pain"><b>⚠ 이 업체 후기에서 꼭 찾을 것</b><ul>'+painGuide.slice(0,4).map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>';
+  var rrAvoid=rr&&rr.avoid&&rr.avoid.length?'<div class="sd-vendor-block sd-avoid"><b>우리의 방어법</b><ul>'+rr.avoid.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>':'';
+  var rrSrc=rr&&rr.sources&&rr.sources.length?rr.sources.map(function(s){return '<a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.label)+' · '+esc(s.kind)+'</a>';}).join(' · '):'';
+  return '<article class="sd-vendor-card"><header><div><span class="sd-role">'+r.label+'</span><h4>'+esc(v.name)+'</h4>'+researched+'</div><span class="sd-confidence">'+level+'</span></header>'+
+   '<p class="sd-vendor-what"><b>'+r.title+'</b> · '+r.desc+'</p>'+
+   rrStyle+
+   '<div class="sd-vendor-metrics"><div><small>확인 사례</small><b>'+v.cases.length+'건</b><span>계약 '+v.contracts+'건</span></div><div><small>조합 계약가</small><b>'+man(v.med)+'</b><span>'+man(v.min)+' ~ '+man(v.max)+'</span></div><div><small>근거량</small><b>'+level+'</b><span>가격·후기 판단 자료</span></div></div>'+
+   rrInc+rrCost+rrPain+rrAvoid+
+   '<div class="sd-vendor-block"><b>현재 계약사례의 추가비</b><p>'+extras+'</p></div>'+
+   '<div class="sd-vendor-block"><b>기존 계약 메모</b>'+(notes?'<ul>'+notes+'</ul>':'<p class="sd-muted">구체 메모 없음</p>')+'</div>'+
+   '<div class="sd-vendor-block"><b>상담 때 기본 확인</b><p>'+r.checks.map(esc).join(' · ')+'</p></div><footer>'+(rrSrc?rrSrc+(src?' · ':''):'')+src+'</footer></article>';
+ }).join('')+'</div>';
+}
+function vendorSection(){
+ var btns=[['','전체'],['studio','스튜디오'],['dress','드레스'],['makeup','메이크업']].map(function(x){return '<button class="sd-chip'+(vendorUi.role===x[0]?' on':'')+'" data-vrole="'+x[0]+'">'+x[1]+'</button>';}).join('');
+ var researchCount=typeof SDM_VENDOR_RESEARCH!=='undefined'?Object.keys(SDM_VENDOR_RESEARCH).length:0;
+ return '<section class="sd-sec"><h3>가격 말고 업체 자체를 비교</h3><p class="sd-lead">무엇을 해주는 곳인지 → <b>후기에서 실제로 고생한 지점</b> → 추가금 발생 조건 → 피하는 방법 → 최종가 순서로 봐요. 현재 업체별 심층후기 '+researchCount+'곳 조사 완료.</p>'+
+  '<div class="sd-meaning-grid">'+Object.keys(ROLE_INFO).map(function(k){var r=ROLE_INFO[k];return '<article><span>'+r.label+'</span><b>'+r.title+'</b><p>'+r.desc+'</p><small>'+r.checks.join(' · ')+'</small></article>';}).join('')+'</div>'+
+  '<div class="sd-value-rule"><b>가성비 판단 순서</b><span>① 원하는 결과에 맞는가 → ② 기본가 포함 범위 → ③ 필수 추가비 포함 최종가 → ④ 실제 후기·근거 수 → ⑤ 같은 조건 업체 비교</span></div>'+
+  '<div class="sd-ctl"><div>'+btns+'</div><input id="sdVendorQ" class="sd-q" placeholder="업체명 검색" value="'+esc(vendorUi.q)+'"></div><div id="sdVendors">'+vendorCards()+'</div></section>';
 }
 function check(k,t,sub){return '<label class="sd-task'+(st.checks[k]?' done':'')+'"><input type="checkbox" data-ck="'+k+'"'+(st.checks[k]?' checked':'')+'><span>'+t+(sub?'<small>'+sub+'</small>':'')+'</span></label>';}
 var QUESTIONS=[
@@ -150,6 +208,7 @@ function render(){
    '<div class="sd-kpi"><div><small>비동행 계약가 중간값</small><b>'+man(medAll)+'</b><span>업체명 공개 '+base.length+'건 · 서울만 '+seoul.length+'건은 '+man(medSeoul)+'</span></div>'+
    '<div><small>거의 항상 붙는 추가금</small><b>+55~100만</b><span>원본·수정본 44 · 헬퍼 50 · 투어비 11</span></div>'+
    '<div><small>L65 기준 목표 실지출</small><b>280~320만</b><span>계약가 220~250 + 추가금. 본식 원판·DVD는 식장 필수라 별도</span></div></div></header>'+
+  vendorSection()+
   '<section class="sd-sec"><h3>실제 계약 사례</h3><p class="sd-lead">줄을 누르면 포함·별도 항목과 원문 링크가 나와요. 업체명을 누르면 그 업체가 들어간 사례만 모아 봐요.</p>'+controls()+'<div id="sdCases">'+caseRows()+'</div>'+
    '<p class="sd-note">다이렉트 카페 글이 많아요. 다이렉트 카페는 운영사가 직접 운영하고 후기 작성 시 포인트를 줘서 “광고성”으로 표시했어요. 금액은 원문 그대로입니다.</p></section>'+
   '<section class="sd-sec"><h3>같은 조합, 다른 회사 견적</h3><p class="sd-lead">동행이냐 비동행이냐보다, 같은 조합을 어느 회사가 견적 내느냐의 차이가 더 컸어요.</p><div class="sd-same-grid">'+sameBlock()+'</div>'+
@@ -166,7 +225,9 @@ function bindCases(){
   root.querySelectorAll('.sd-v').forEach(function(b){b.onclick=function(ev){ev.stopPropagation();ui.q=b.dataset.q;ui.how='';ui.contractOnly=false;render();var t=document.getElementById('sdQ');if(t)t.scrollIntoView({block:'center'});};});
 }
 function bind(){
-  root.querySelectorAll('.sd-chip').forEach(function(b){b.onclick=function(){ui[b.dataset.k]=b.dataset.v;root.querySelectorAll('.sd-chip[data-k="'+b.dataset.k+'"]').forEach(function(x){x.classList.toggle('on',x===b);});refreshCases();};});
+  root.querySelectorAll('[data-vrole]').forEach(function(b){b.onclick=function(){vendorUi.role=b.dataset.vrole;root.querySelectorAll('[data-vrole]').forEach(function(x){x.classList.toggle('on',x===b);});document.getElementById('sdVendors').innerHTML=vendorCards();};});
+  var vq=document.getElementById('sdVendorQ');if(vq)vq.oninput=function(){vendorUi.q=vq.value;document.getElementById('sdVendors').innerHTML=vendorCards();};
+  root.querySelectorAll('.sd-chip[data-k]').forEach(function(b){b.onclick=function(){ui[b.dataset.k]=b.dataset.v;root.querySelectorAll('.sd-chip[data-k="'+b.dataset.k+'"]').forEach(function(x){x.classList.toggle('on',x===b);});refreshCases();};});
   var co=document.getElementById('sdContractOnly');if(co)co.onchange=function(){ui.contractOnly=co.checked;refreshCases();};
   var q=document.getElementById('sdQ');if(q)q.oninput=function(){ui.q=q.value;refreshCases();};
   bindCases();

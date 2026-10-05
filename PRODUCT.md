@@ -14,6 +14,8 @@ A couple planning a Seoul wedding for roughly 200 to 300 guests. They need to na
 
 Turn scattered public prices, real quotes, hall specifications, and guest-experience evidence into an auditable wedding-hall decision workflow.
 
+For studio/dress/makeup (스드메), price alone is not a decision metric. The product must explain what each component/vendor does, what is included, how surcharges arise, what real-user evidence exists, and only then support a value-for-money judgment.
+
 ## Positioning
 
 This is not a lead-generation venue marketplace. It distinguishes list price from condition-based price, exposes missing evidence instead of inventing it, and helps the couple decide what to tour next.
@@ -28,6 +30,7 @@ The couple is considering weekend slots before 3 PM, with guest traffic, parking
 - 181 venue records with uneven specification coverage.
 - Recommendation groups for affordable, dramatic, and food-focused halls.
 - Price evidence carries condition, date/source, and verified versus unverified status.
+- SDM vendor comparison must expose service role, inclusion/exclusion evidence, surcharge patterns, review/evidence count, and source quality alongside price.
 - Government, corporate, university, and other access-restricted venues are not preferred candidates.
 - Never present unknown discounts as verified prices.
 
@@ -41,6 +44,7 @@ The couple is considering weekend slots before 3 PM, with guest traffic, parking
 - Gate choices with hard constraints before ranking softer preferences.
 - Make why a venue passed or needs verification legible at the point of decision.
 - Treat a missing fact as missing, never as a plausible guess.
+- Never label an SDM vendor “good value” from package price alone. Compare fit, inclusions, likely mandatory extras, evidence quality, and comparable alternatives.
 - Link discovery, comparison, and touring rather than splitting them into disconnected lists.
 
 ## Accessibility & Inclusion
