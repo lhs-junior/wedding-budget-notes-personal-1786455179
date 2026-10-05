@@ -32,6 +32,8 @@ var SDM_PAIN_GUIDE = {
 var SDM_VENDOR_RESEARCH = {
  'studio|세미앙':{
   researched:'2026-10-06',
+  hero:'https://cdn.imweb.me/thumbnail/20250905/ff312390a763f.jpg',
+  links:[{label:'화보 보기',url:'https://www.thefirstwedding.com/studio/?idx=159'},{label:'인스타그램',url:'https://www.instagram.com/_semia.n/'},{label:'업체 정보',url:'https://thefirstwedding.com/shop_view/198?idx=198'}],
   style:'인물중심 · 모던 · 차분한 감성. 심플/그리너리 배경, 비토탈 진행.',
   includes:['드레스 3벌 + 자유복 2벌까지','촬영 중간 모니터링','원본·수정본 JPG 제공'],
   costTriggers:['야간씬 선택 +22만','작가 지정 +22~33만','드레스 1벌 추가 +11만'],
@@ -47,6 +49,7 @@ var SDM_VENDOR_RESEARCH = {
  },
  'studio|원세컨드':{
   researched:'2026-10-06',
+  links:[{label:'화보 보기',url:'https://yozmwedding.co.kr/studio/?bmode=view&idx=18307399'},{label:'다이렉트',url:'https://www.directwedding.co.kr/studio/onesecond'},{label:'웨딩북 후기',url:'https://www.wdgbook.com/page/onesecondstudio/review/cbfa0a1f-809f-11e9-a278-0ab3aefe6e38'}],
   style:'세미촬영 · 인물중심 · 짧은 시간에 다양한 포즈를 빠르게 진행하는 타입.',
   includes:['세미촬영 후기 기준 약 2시간 촬영','비치 드레스·장신구 활용 가능 사례','원본+앨범+액자 구성 사례'],
   costTriggers:['후기 사례: 원본 23만','후기 사례: 드레스 대여/헬퍼 10만','신랑 턱시도 대여 5.5만 사례'],
@@ -62,6 +65,8 @@ var SDM_VENDOR_RESEARCH = {
  },
  'studio|메이스튜디오':{
   researched:'2026-10-06',
+  hero:'https://cdn.imweb.me/upload/S201904265cc294845b98d/9fb847de9fa0b.jpg',
+  links:[{label:'화보 보기',url:'https://www.directwedding.co.kr/studio/may'},{label:'촬영 후기',url:'https://yyyyy13.tistory.com/66'},{label:'셀렉 후기',url:'https://sweets-sokuri.tistory.com/entry/%EC%9B%A8%EB%94%A9-%EA%B2%B0%ED%98%BC-%EC%A4%80%EB%B9%84-21-%EC%8A%A4%ED%8A%9C%EB%94%94%EC%98%A4-%EC%B4%AC%EC%98%81-%EB%A9%94%EC%9D%B4-%EC%8A%A4%ED%8A%9C%EB%94%94%EC%98%A4-%ED%86%A0%ED%83%88%EC%83%B5-4-%EC%85%80%EB%A0%89-%ED%9B%84%EA%B8%B0'}],
   style:'깔끔한 인물 + 그리너리/배경 혼합. 실내에서 야외 느낌을 내는 세트가 특징.',
   includes:['실내 다중 배경','날씨 영향이 적은 촬영 환경'],
   costTriggers:['후기 사례: 앨범 페이지 추가 장당 3만원','원본·수정본 44만원 별도 계약 사례 존재','피팅비 별도 계약 사례 존재'],
@@ -78,6 +83,8 @@ var SDM_VENDOR_RESEARCH = {
  },
  'dress|아뜨레블랑':{
   researched:'2026-10-06',
+  hero:'https://www.weddingcrowd.kr/data/partner/297/20240625013839_341823_19%EA%BE%B8%EB%AF%B8%EA%B8%B0.jpg',
+  links:[{label:'드레스 사진 12장',url:'https://www.weddingnote.co.kr/dress/attrait_blanc'},{label:'인스타그램',url:'https://www.instagram.com/attrait_blanc/'},{label:'드레스투어 후기',url:'https://2nd-daughter.tistory.com/317'}],
   style:'실크와 잔비즈 모두 선택지가 있는 편. 촬영가봉에서 여러 벌 비교하는 후기 다수.',
   includes:['촬영가봉 6벌 피팅 후 3벌 선택 사례','당일지정 시 블랙라벨 업그레이드 혜택 사례'],
   costTriggers:['드레스투어 피팅비 사례 5만','라벨 업그레이드 여부는 계약별 확인 필요','2부 드레스는 계약/프로모션별 서비스 여부 차이'],
@@ -95,6 +102,8 @@ var SDM_VENDOR_RESEARCH = {
  },
  'dress|브라이드벨라':{
   researched:'2026-10-06',
+  hero:'https://cdn.imweb.me/upload/S2024100788c40fba991cd/9d4e2782b073b.jpg',
+  links:[{label:'컬렉션 보기',url:'https://colorinwedding.com/bridebella'},{label:'인스타그램',url:'https://www.instagram.com/bridebella_/'},{label:'상품/FAQ',url:'https://www.directwedding.co.kr/dress/bridebella'}],
   style:'기본·상위 라벨 선택 구조가 있는 드레스샵. 촬영 3벌+본식 1벌 기본 안내.',
   includes:['기본라벨 촬영드레스 3벌','기본라벨 본식드레스 1벌'],
   costTriggers:['촬영드레스 추가','본식 2부 드레스','라벨 업그레이드: 안내상 보통 각 최소 30만원부터'],
@@ -110,6 +119,8 @@ var SDM_VENDOR_RESEARCH = {
  },
  'makeup|헤움':{
   researched:'2026-10-06',
+  hero:'https://www.directweddingmall.com/goods/img_dir/thum_img/WSP02039_16722193946.jpg',
+  links:[{label:'공식 화보·상품',url:'https://directweddingmall.com/goods/view_comp.php?ccode=WSP02039'},{label:'후기·사진',url:'https://www.wdgbook.com/page/heumm/review/f7ba6a1e-283c-11e9-ab42-020502fcb5d0'},{label:'촬영·본식 후기',url:'https://2nd-daughter.tistory.com/339'}],
   style:'과하지 않고 깨끗한 피부표현·단아한 스타일 후기가 많음.',
   includes:['촬영/본식 헤어·메이크업 사례','요청 스타일 상담'],
   costTriggers:['직급 지정비는 계약별 확인','얼리스타트·신랑 포함 범위는 계약별 확인'],
@@ -126,6 +137,8 @@ var SDM_VENDOR_RESEARCH = {
  },
  'makeup|치치라보':{
   researched:'2026-10-06',
+  hero:'https://www.iwedding.co.kr/center/iweddingb/product_coupon/coupon_8733_1710900026_74893900_3232256100.jpg',
+  links:[{label:'상품·사진',url:'https://www.iwedding.co.kr/enterprise/prd/co_sl_m195/13459'},{label:'화보 보기',url:'https://m.fundegi.co.kr/store/makeup.htm?idx=2382&mode=view&page=2'},{label:'촬영 후기',url:'https://oslife.tistory.com/29'}],
   style:'자연스럽고 단정한 음영 계열. 촬영 콘셉트를 보고 맞춰주는 후기가 있음.',
   includes:['헤어 후 메이크업, 촬영 전 최종 터치 사례','드레스 환복 공간 사례'],
   costTriggers:['직급 지정·얼리·헤어변형은 계약별 확인 필요'],
@@ -142,6 +155,7 @@ var SDM_VENDOR_RESEARCH = {
  },
  'makeup|메이븐':{
   researched:'2026-10-06',
+  links:[{label:'화보·후기',url:'https://www.weddingbook.com/partner/89b6c64e-6352-11ea-9bb0-0ab3aefe6e38?inApp=0&tab=review'},{label:'인스타그램 안내',url:'https://lameld.com/mavenwedding'},{label:'다이렉트',url:'https://www.directwedding.co.kr/makeup/maven'}],
   style:'담당자가 레퍼런스와 요구사항을 확인하고 단계적으로 색조를 조정하는 방식의 후기.',
   includes:['기초/베이스 후 담당자 메이크업 진행 사례','헤어 후 색조 추가·수정 단계 사례'],
   costTriggers:['부원장 등 직급 지정 계약 사례','직급별 가격은 계약별 확인 필요'],

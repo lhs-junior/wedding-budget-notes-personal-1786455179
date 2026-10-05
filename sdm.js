@@ -101,6 +101,7 @@ function vendorCards(){
   var key=v.role+'|'+v.name,rr=(typeof SDM_VENDOR_RESEARCH!=='undefined'&&SDM_VENDOR_RESEARCH[key])||null;
   var painGuide=(typeof SDM_PAIN_GUIDE!=='undefined'&&SDM_PAIN_GUIDE[v.role])||r.checks;
   var researched=rr?'<span class="sd-researched">후기 조사 '+esc(rr.researched)+'</span>':'<span class="sd-researched sd-unresearched">업체별 불편후기 추가 조사 필요</span>';
+  var rrMedia=rr?((rr.hero?'<a class="sd-heroimg" href="'+esc((rr.links&&rr.links[0]&&rr.links[0].url)||rr.hero)+'" target="_blank" rel="noopener"><img src="'+esc(rr.hero)+'" alt="'+esc(v.name)+' 대표 이미지" loading="lazy" onerror="this.parentNode.style.display=\'none\'"></a>':'')+(rr.links&&rr.links.length?'<div class="sd-linkbar">'+rr.links.map(function(l){return '<a href="'+esc(l.url)+'" target="_blank" rel="noopener">'+esc(l.label)+'</a>';}).join('')+'</div>':'')):'';
   var rrStyle=rr?'<div class="sd-vendor-block"><b>어떤 스타일?</b><p>'+esc(rr.style)+'</p></div>':'';
   var rrInc=rr&&rr.includes&&rr.includes.length?'<div class="sd-vendor-block"><b>확인된 구성</b><p>'+rr.includes.map(esc).join(' · ')+'</p></div>':'';
   var rrCost=rr&&rr.costTriggers&&rr.costTriggers.length?'<div class="sd-vendor-block sd-cost"><b>💸 돈이 더 붙는 지점</b><ul>'+rr.costTriggers.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>':'';
@@ -109,7 +110,7 @@ function vendorCards(){
   var rrSrc=rr&&rr.sources&&rr.sources.length?rr.sources.map(function(s){return '<a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.label)+' · '+esc(s.kind)+'</a>';}).join(' · '):'';
   return '<article class="sd-vendor-card"><header><div><span class="sd-role">'+r.label+'</span><h4>'+esc(v.name)+'</h4>'+researched+'</div><span class="sd-confidence">'+level+'</span></header>'+
    '<p class="sd-vendor-what"><b>'+r.title+'</b> · '+r.desc+'</p>'+
-   rrStyle+
+   rrMedia+rrStyle+
    '<div class="sd-vendor-metrics"><div><small>확인 사례</small><b>'+v.cases.length+'건</b><span>계약 '+v.contracts+'건</span></div><div><small>조합 계약가</small><b>'+man(v.med)+'</b><span>'+man(v.min)+' ~ '+man(v.max)+'</span></div><div><small>근거량</small><b>'+level+'</b><span>가격·후기 판단 자료</span></div></div>'+
    rrInc+rrCost+rrPain+rrAvoid+
    '<div class="sd-vendor-block"><b>현재 계약사례의 추가비</b><p>'+extras+'</p></div>'+
