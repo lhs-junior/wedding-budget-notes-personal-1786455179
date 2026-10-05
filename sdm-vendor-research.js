@@ -83,8 +83,9 @@ var SDM_VENDOR_RESEARCH = {
  },
  'dress|아뜨레블랑':{
   researched:'2026-10-06',
+  reviewEvidence:{recent:2,latest:'2026-04',note:'최근 24개월 후기 2명 이상 확인. 일부 후기는 포인트 제공 고지가 있어 광고성 가능성은 별도 감안.'},
   hero:'https://www.weddingcrowd.kr/data/partner/297/20240625013839_341823_19%EA%BE%B8%EB%AF%B8%EA%B8%B0.jpg',
-  links:[{label:'드레스 사진 12장',url:'https://www.weddingnote.co.kr/dress/attrait_blanc'},{label:'인스타그램',url:'https://www.instagram.com/attrait_blanc/'},{label:'드레스투어 후기',url:'https://2nd-daughter.tistory.com/317'}],
+  links:[{label:'드레스 사진 12장',url:'https://www.weddingnote.co.kr/dress/attrait_blanc'},{label:'2026 촬영가봉 후기',url:'https://pandarank.net/contents/69dd02ef8926cb45bfa23856'},{label:'2025 2부가봉 후기',url:'https://www.keyzard.cc/seohee109/nb/223862005629'}],
   style:'실크와 잔비즈 모두 선택지가 있는 편. 촬영가봉에서 여러 벌 비교하는 후기 다수.',
   includes:['촬영가봉 6벌 피팅 후 3벌 선택 사례','당일지정 시 블랙라벨 업그레이드 혜택 사례'],
   costTriggers:['드레스투어 피팅비 사례 5만','라벨 업그레이드 여부는 계약별 확인 필요','2부 드레스는 계약/프로모션별 서비스 여부 차이'],
@@ -119,8 +120,9 @@ var SDM_VENDOR_RESEARCH = {
  },
  'makeup|헤움':{
   researched:'2026-10-06',
+  reviewEvidence:{recent:1,latest:'2025-06',note:'2025-06 실제 이용후기 1건 확인. 최근 24개월 독립 후기 2건 기준에는 아직 부족.'},
   hero:'https://www.directweddingmall.com/goods/img_dir/thum_img/WSP02039_16722193946.jpg',
-  links:[{label:'공식 화보·상품',url:'https://directweddingmall.com/goods/view_comp.php?ccode=WSP02039'},{label:'후기·사진',url:'https://www.wdgbook.com/page/heumm/review/f7ba6a1e-283c-11e9-ab42-020502fcb5d0'},{label:'촬영·본식 후기',url:'https://2nd-daughter.tistory.com/339'}],
+  links:[{label:'공식 화보·상품',url:'https://directweddingmall.com/goods/view_comp.php?ccode=WSP02039'},{label:'2025 실제 후기',url:'https://www.keyzard.cc/seohee109/nb/223891980318'},{label:'과거 후기 모음',url:'https://www.wdgbook.com/page/heumm'}],
   style:'과하지 않고 깨끗한 피부표현·단아한 스타일 후기가 많음.',
   includes:['촬영/본식 헤어·메이크업 사례','요청 스타일 상담'],
   costTriggers:['직급 지정비는 계약별 확인','얼리스타트·신랑 포함 범위는 계약별 확인'],
@@ -155,7 +157,8 @@ var SDM_VENDOR_RESEARCH = {
  },
  'makeup|메이븐':{
   researched:'2026-10-06',
-  links:[{label:'화보·후기',url:'https://www.weddingbook.com/partner/89b6c64e-6352-11ea-9bb0-0ab3aefe6e38?inApp=0&tab=review'},{label:'인스타그램 안내',url:'https://lameld.com/mavenwedding'},{label:'다이렉트',url:'https://www.directwedding.co.kr/makeup/maven'}],
+  reviewEvidence:{recent:1,latest:'2025-08',note:'2025-08 실제 촬영메이크업 후기 1건 확인. 최근 24개월 독립 후기 2건 기준에는 아직 부족.'},
+  links:[{label:'2025 실제 후기',url:'https://www.keyzard.cc/gyomjilak/nb/223932016168'},{label:'화보·후기',url:'https://www.weddingbook.com/partner/89b6c64e-6352-11ea-9bb0-0ab3aefe6e38?inApp=0&tab=review'},{label:'다이렉트',url:'https://www.directwedding.co.kr/makeup/maven'}],
   style:'담당자가 레퍼런스와 요구사항을 확인하고 단계적으로 색조를 조정하는 방식의 후기.',
   includes:['기초/베이스 후 담당자 메이크업 진행 사례','헤어 후 색조 추가·수정 단계 사례'],
   costTriggers:['부원장 등 직급 지정 계약 사례','직급별 가격은 계약별 확인 필요'],

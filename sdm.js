@@ -94,13 +94,16 @@ function vendorCards(){
  rows.sort(function(a,b){return b.cases.length-a.cases.length||a.name.localeCompare(b.name);});
  if(!rows.length)return '<p class="sd-muted">조건에 맞는 업체가 없어요.</p>';
  return '<div class="sd-vendor-grid">'+rows.slice(0,36).map(function(v){
-  var r=ROLE_INFO[v.role],level=v.cases.length>=3?'높음':v.cases.length>=2?'보통':'낮음';
+  var r=ROLE_INFO[v.role];
   var extras=v.extraList.length?v.extraList.map(function(e){return esc(e)+'('+v.extras[e]+'건)';}).join(' · '):'확인된 별도비용 없음';
   var notes=v.notes.slice(0,2).map(function(n){return '<li>'+esc(n)+'</li>';}).join('');
   var src=v.cases.slice(0,3).map(function(c){return '<a href="'+esc(c.src)+'" target="_blank" rel="noopener">'+esc(c.date)+' '+esc(c.co)+'</a>';}).join(' · ');
   var key=v.role+'|'+v.name,rr=(typeof SDM_VENDOR_RESEARCH!=='undefined'&&SDM_VENDOR_RESEARCH[key])||null;
   var painGuide=(typeof SDM_PAIN_GUIDE!=='undefined'&&SDM_PAIN_GUIDE[v.role])||r.checks;
+  var ev=rr&&rr.reviewEvidence?rr.reviewEvidence:null;
   var researched=rr?'<span class="sd-researched">후기 조사 '+esc(rr.researched)+'</span>':'<span class="sd-researched sd-unresearched">업체별 불편후기 추가 조사 필요</span>';
+  var evBadge=ev&&ev.recent>=2?'<span class="sd-evidence-ok">최근 후기 '+ev.recent+'건'+(ev.latest?' · 최신 '+esc(ev.latest):'')+'</span>':'<span class="sd-evidence-warn">최근 후기 부족 · 판단 보류</span>';
+  var evNote=ev?'<p class="sd-evidence-note">'+esc(ev.note||'최근 24개월 내 독립 후기 2건 이상 확보해야 업체 판단에 사용')+'</p>':'<p class="sd-evidence-note">최근 24개월 내 독립 후기 2건 이상 확보하기 전에는 후기 평가는 참고만 하세요.</p>';
   var rrMedia=rr?((rr.hero?'<a class="sd-heroimg" href="'+esc((rr.links&&rr.links[0]&&rr.links[0].url)||rr.hero)+'" target="_blank" rel="noopener"><img src="'+esc(rr.hero)+'" alt="'+esc(v.name)+' 대표 이미지" loading="lazy" onerror="this.parentNode.style.display=\'none\'"></a>':'')+(rr.links&&rr.links.length?'<div class="sd-linkbar">'+rr.links.map(function(l){return '<a href="'+esc(l.url)+'" target="_blank" rel="noopener">'+esc(l.label)+'</a>';}).join('')+'</div>':'')):'';
   var rrStyle=rr?'<div class="sd-vendor-block"><b>어떤 스타일?</b><p>'+esc(rr.style)+'</p></div>':'';
   var rrInc=rr&&rr.includes&&rr.includes.length?'<div class="sd-vendor-block"><b>확인된 구성</b><p>'+rr.includes.map(esc).join(' · ')+'</p></div>':'';
@@ -108,10 +111,10 @@ function vendorCards(){
   var rrPain=rr&&rr.pain&&rr.pain.length?'<div class="sd-vendor-block sd-pain"><b>⚠ 후기에서 먼저 볼 불편·고생 포인트</b><ul>'+rr.pain.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>':'<div class="sd-vendor-block sd-pain"><b>⚠ 이 업체 후기에서 꼭 찾을 것</b><ul>'+painGuide.slice(0,4).map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>';
   var rrAvoid=rr&&rr.avoid&&rr.avoid.length?'<div class="sd-vendor-block sd-avoid"><b>우리의 방어법</b><ul>'+rr.avoid.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>':'';
   var rrSrc=rr&&rr.sources&&rr.sources.length?rr.sources.map(function(s){return '<a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.label)+' · '+esc(s.kind)+'</a>';}).join(' · '):'';
-  return '<article class="sd-vendor-card"><header><div><span class="sd-role">'+r.label+'</span><h4>'+esc(v.name)+'</h4>'+researched+'</div><span class="sd-confidence">'+level+'</span></header>'+
+  return '<article class="sd-vendor-card"><header><div><span class="sd-role">'+r.label+'</span><h4>'+esc(v.name)+'</h4>'+researched+'</div><span class="sd-confidence">가격사례 '+v.cases.length+'건</span></header>'+
    '<p class="sd-vendor-what"><b>'+r.title+'</b> · '+r.desc+'</p>'+
    rrMedia+rrStyle+
-   '<div class="sd-vendor-metrics"><div><small>확인 사례</small><b>'+v.cases.length+'건</b><span>계약 '+v.contracts+'건</span></div><div><small>조합 계약가</small><b>'+man(v.med)+'</b><span>'+man(v.min)+' ~ '+man(v.max)+'</span></div><div><small>근거량</small><b>'+level+'</b><span>가격·후기 판단 자료</span></div></div>'+
+   '<div class="sd-vendor-metrics"><div><small>가격 사례</small><b>'+v.cases.length+'건</b><span>실계약 '+v.contracts+'건</span></div><div><small>조합 계약가</small><b>'+man(v.med)+'</b><span>'+man(v.min)+' ~ '+man(v.max)+'</span></div><div><small>최근 후기</small>'+evBadge+'<span>최근성·출처 수 기준</span></div></div>'+evNote+
    rrInc+rrCost+rrPain+rrAvoid+
    '<div class="sd-vendor-block"><b>현재 계약사례의 추가비</b><p>'+extras+'</p></div>'+
    '<div class="sd-vendor-block"><b>기존 계약 메모</b>'+(notes?'<ul>'+notes+'</ul>':'<p class="sd-muted">구체 메모 없음</p>')+'</div>'+
