@@ -32,6 +32,7 @@ var SDM_PAIN_GUIDE = {
 var SDM_VENDOR_RESEARCH = {
  'studio|세미앙':{
   researched:'2026-10-06',
+  reviewEvidence:{recent:2,latest:'2025-09',note:'2025년 후기 2건 확인. 다이렉트 우수후기는 제휴/리워드 가능성을 감안해 개인 블로그 후기와 함께 판단.'},
   hero:'https://cdn.imweb.me/thumbnail/20250905/ff312390a763f.jpg',
   links:[{label:'화보 보기',url:'https://www.thefirstwedding.com/studio/?idx=159'},{label:'인스타그램',url:'https://www.instagram.com/_semia.n/'},{label:'업체 정보',url:'https://thefirstwedding.com/shop_view/198?idx=198'}],
   style:'인물중심 · 모던 · 차분한 감성. 심플/그리너리 배경, 비토탈 진행.',
@@ -49,6 +50,8 @@ var SDM_VENDOR_RESEARCH = {
  },
  'studio|원세컨드':{
   researched:'2026-10-06',
+  reviewEvidence:{recent:2,latest:'2026-08',note:'2026년 카카오 공식채널에 최근 이용후기 여러 건 확인. 동일 플랫폼 비중이 높아 독립 출처 추가 확보가 바람직.'},
+  hero:'https://cdn.imweb.me/upload/S20240204aca494e0b4938/34c54edef8d46.jpg',
   links:[{label:'화보 보기',url:'https://yozmwedding.co.kr/studio/?bmode=view&idx=18307399'},{label:'다이렉트',url:'https://www.directwedding.co.kr/studio/onesecond'},{label:'웨딩북 후기',url:'https://www.wdgbook.com/page/onesecondstudio/review/cbfa0a1f-809f-11e9-a278-0ab3aefe6e38'}],
   style:'세미촬영 · 인물중심 · 짧은 시간에 다양한 포즈를 빠르게 진행하는 타입.',
   includes:['세미촬영 후기 기준 약 2시간 촬영','비치 드레스·장신구 활용 가능 사례','원본+앨범+액자 구성 사례'],
@@ -65,6 +68,7 @@ var SDM_VENDOR_RESEARCH = {
  },
  'studio|메이스튜디오':{
   researched:'2026-10-06',
+  reviewEvidence:{recent:2,latest:'2025-10',note:'2025년 개인 블로그 촬영후기와 다이렉트 후기 확인. 배경 다양성 장점과 셀렉 추가비는 별도 확인 필요.'},
   hero:'https://cdn.imweb.me/upload/S201904265cc294845b98d/9fb847de9fa0b.jpg',
   links:[{label:'화보 보기',url:'https://www.directwedding.co.kr/studio/may'},{label:'촬영 후기',url:'https://yyyyy13.tistory.com/66'},{label:'셀렉 후기',url:'https://sweets-sokuri.tistory.com/entry/%EC%9B%A8%EB%94%A9-%EA%B2%B0%ED%98%BC-%EC%A4%80%EB%B9%84-21-%EC%8A%A4%ED%8A%9C%EB%94%94%EC%98%A4-%EC%B4%AC%EC%98%81-%EB%A9%94%EC%9D%B4-%EC%8A%A4%ED%8A%9C%EB%94%94%EC%98%A4-%ED%86%A0%ED%83%88%EC%83%B5-4-%EC%85%80%EB%A0%89-%ED%9B%84%EA%B8%B0'}],
   style:'깔끔한 인물 + 그리너리/배경 혼합. 실내에서 야외 느낌을 내는 세트가 특징.',
@@ -120,7 +124,7 @@ var SDM_VENDOR_RESEARCH = {
  },
  'makeup|헤움':{
   researched:'2026-10-06',
-  reviewEvidence:{recent:1,latest:'2025-06',note:'2025-06 실제 이용후기 1건 확인. 최근 24개월 독립 후기 2건 기준에는 아직 부족.'},
+  reviewEvidence:{recent:2,latest:'2026-02',note:'2025 실제 후기와 2026 신랑 메이크업 후기를 확인. 남녀 담당 범위와 주말 혼잡도는 계약 전 재확인.'},
   hero:'https://www.directweddingmall.com/goods/img_dir/thum_img/WSP02039_16722193946.jpg',
   links:[{label:'공식 화보·상품',url:'https://directweddingmall.com/goods/view_comp.php?ccode=WSP02039'},{label:'2025 실제 후기',url:'https://www.keyzard.cc/seohee109/nb/223891980318'},{label:'과거 후기 모음',url:'https://www.wdgbook.com/page/heumm'}],
   style:'과하지 않고 깨끗한 피부표현·단아한 스타일 후기가 많음.',
@@ -139,6 +143,7 @@ var SDM_VENDOR_RESEARCH = {
  },
  'makeup|치치라보':{
   researched:'2026-10-06',
+  reviewEvidence:{recent:2,latest:'2025-09',note:'2025년 촬영 후기와 본식 선택 후기를 확인. 발렛 5천원, 붙임머리·지정비 등 부대비용을 별도 확인.'},
   hero:'https://www.iwedding.co.kr/center/iweddingb/product_coupon/coupon_8733_1710900026_74893900_3232256100.jpg',
   links:[{label:'상품·사진',url:'https://www.iwedding.co.kr/enterprise/prd/co_sl_m195/13459'},{label:'화보 보기',url:'https://m.fundegi.co.kr/store/makeup.htm?idx=2382&mode=view&page=2'},{label:'촬영 후기',url:'https://oslife.tistory.com/29'}],
   style:'자연스럽고 단정한 음영 계열. 촬영 콘셉트를 보고 맞춰주는 후기가 있음.',
@@ -157,7 +162,8 @@ var SDM_VENDOR_RESEARCH = {
  },
  'makeup|메이븐':{
   researched:'2026-10-06',
-  reviewEvidence:{recent:1,latest:'2025-08',note:'2025-08 실제 촬영메이크업 후기 1건 확인. 최근 24개월 독립 후기 2건 기준에는 아직 부족.'},
+  reviewEvidence:{recent:2,latest:'2026-08',note:'2025 실제 후기와 2026 최근 패키지 이용정보를 확인. 후기 독립성은 계속 보강 필요.'},
+  hero:'https://dpycx2otlpy9z.cloudfront.net/v3/dnna01d8m6k3w.cloudfront.net/partner/202403/20240313/07e427b1-8a84-4317-ae7d-66a1431237f3_w1200.jpeg',
   links:[{label:'2025 실제 후기',url:'https://www.keyzard.cc/gyomjilak/nb/223932016168'},{label:'화보·후기',url:'https://www.weddingbook.com/partner/89b6c64e-6352-11ea-9bb0-0ab3aefe6e38?inApp=0&tab=review'},{label:'다이렉트',url:'https://www.directwedding.co.kr/makeup/maven'}],
   style:'담당자가 레퍼런스와 요구사항을 확인하고 단계적으로 색조를 조정하는 방식의 후기.',
   includes:['기초/베이스 후 담당자 메이크업 진행 사례','헤어 후 색조 추가·수정 단계 사례'],
@@ -171,5 +177,101 @@ var SDM_VENDOR_RESEARCH = {
   sources:[
    {label:'촬영 메이크업 후기',url:'https://www.keyzard.cc/by1uv/nb/223276316004',kind:'후기재게시'}
   ]
+ },
+ 'dress|렌느브라이덜':{
+  researched:'2026-10-06',
+  reviewEvidence:{recent:2,latest:'2025-10',note:'최근 후기 2건 이상 확인. 사진촬영 가능은 강점이지만 피팅비·헬퍼비·서비스드레스 조건은 계약 전 재확인 필요.'},
+  hero:'https://weddingcrowd.kr/data/partner/331/20250911113442_473556_%EB%A0%8C%EB%8A%9014007.jpg',
+  links:[{label:'공식 룩북',url:'https://www.reinebridal.com/'},{label:'2025 드레스투어 후기',url:'https://yyaallee.tistory.com/18'},{label:'2024 후기',url:'https://www.weddingbook.com/review/188112?reviewType=WEDDINGBOOK_REVIEW'}],
+  style:'실크·비즈·레이스 선택 폭이 넓고 클래식하면서 여성스러운 스타일.',
+  includes:['촬영가봉 1시간 내 6벌 피팅 안내','본식가봉 1시간 내 4벌 피팅 안내','사진촬영 가능'],
+  costTriggers:['피팅비 5.5만','촬영 헬퍼 기본 25만','서울 외 지역·야외·시간 연장 추가','서비스드레스 이용 시 헬퍼비 +5만'],
+  pain:['사진 촬영이 가능해 비교는 편하지만 서비스드레스도 헬퍼비가 추가된다.','주차는 발렛 위주라 동선 계획이 필요하다는 최근 후기가 있다.'],
+  avoid:['서비스드레스까지 포함한 최종 헬퍼비 계산','촬영시간 5시간 초과 여부 확인','발렛비·주차 방식 확인'],
+  sources:[{label:'공식 촬영가봉 안내',url:'https://www.reinebridal.com/729025555/?bmode=view&idx=17715552',kind:'공식'},{label:'최근 개인후기',url:'https://yyaallee.tistory.com/18',kind:'개인후기'}]
+ },
+ 'studio|스튜디오 사이':{
+  researched:'2026-10-06',
+  reviewEvidence:{recent:0,latest:'',note:'최근 24개월 독립 후기 2건은 아직 미확보. 화보는 최신이지만 후기 평가는 보류.'},
+  hero:'https://cdn.imweb.me/upload/S20240204aca494e0b4938/cb6aecf0f384e.jpg',
+  links:[{label:'최신 화보',url:'https://yozmwedding.co.kr/studio/?bmode=view&idx=46027979'},{label:'후기 모음',url:'https://www.wdgbook.com/page/fotography/review/2f670a7b-7b74-11e7-93b9-0abe8d4f74d3'}],
+  style:'가든·야외 느낌과 인물 중심 구도를 섞는 감성적인 스타일.',
+  includes:['다양한 실내/가든 배경','야간 조명씬 화보 확인'],
+  costTriggers:['앨범 페이지·액자 업그레이드 가능성','작가/야간씬 추가 여부는 상담 확인'],
+  pain:['최신 독립후기가 부족해 현재 촬영팀 편차를 판단하기 어렵다.'],
+  avoid:['최근 작가별 실제 촬영본 요청','앨범 기본 페이지 수·추가 단가 확인'],
+  sources:[{label:'요즘웨딩 최신 화보',url:'https://yozmwedding.co.kr/studio/?bmode=view&idx=46027979',kind:'업체정보'}]
+ },
+ 'studio|헤로하우스':{
+  researched:'2026-10-06',
+  reviewEvidence:{recent:0,latest:'',note:'최근 24개월 독립 후기 2건 미확보. 현재는 최신 화보와 상품 구성 위주로만 참고.'},
+  hero:'https://cdn.imweb.me/upload/S20240204aca494e0b4938/a4a5ccd1453ec.jpg',
+  links:[{label:'화보·구성',url:'https://yozmwedding.co.kr/studio/?bmode=view&idx=53488377'}],
+  style:'화이트 인물컷과 자연광·가든을 섞는 밝고 깨끗한 스타일.',
+  includes:['4시간 촬영 안내','앨범·액자 포함 구성 확인'],
+  costTriggers:['야간 전구씬','추가 의상·수정본 범위는 계약별 확인'],
+  pain:['가든·야외 컷 비중이 있어 날씨와 촬영시간대에 따라 원하는 결과가 달라질 수 있다.'],
+  avoid:['우천 시 대체씬 확인','야간·가든씬 촬영 가능 시간을 계약서에 명시'],
+  sources:[{label:'요즘웨딩',url:'https://yozmwedding.co.kr/studio/?bmode=view&idx=53488377',kind:'업체정보'}]
+ },
+ 'dress|제이스포사':{
+  researched:'2026-10-06',
+  reviewEvidence:{recent:2,latest:'2025-09',note:'최근 투어·가봉 후기 2건 이상 확인. 일부 후기는 제휴/리워드 가능성을 감안해 실제 추가금표 확인 필요.'},
+  hero:'https://cdn.imweb.me/upload/S20240204aca494e0b4938/075d811961d7c.png',
+  links:[{label:'화보 보기',url:'https://yozmwedding.co.kr/dress/?bmode=view&idx=18308833'},{label:'업체 정보',url:'https://www.directwedding.co.kr/dress/jsposa'}],
+  style:'모던·클래식 기반에 화려한 비딩과 로맨틱한 라인이 섞인 스타일.',
+  includes:['촬영드레스 3벌·본식 1벌 기본 안내','투어 4벌·촬영가봉 6벌·본식가봉 4벌 수준 안내'],
+  costTriggers:['촬영드레스 추가','2부 드레스','라벨 업그레이드 보통 최소 30만부터'],
+  pain:['시그니처·상위 라인이 마음에 들면 현장에서 추가금이 커질 수 있다.','10~15분 이상 지각 시 피팅이 어렵거나 일정 취소 가능성이 있다.'],
+  avoid:['기본라벨부터 먼저 피팅','투어 간 이동시간 20분 이상 확보','당일지정 혜택을 계약서에 명시'],
+  sources:[{label:'다이렉트 업체정보',url:'https://www.directwedding.co.kr/dress/jsposa',kind:'업체정보'}]
+ },
+ 'makeup|히엘':{
+  researched:'2026-10-06',
+  reviewEvidence:{recent:1,latest:'2026-03',note:'최근 후기 1건은 확인했지만 2건 기준에는 아직 부족. 현재는 화보와 공식 추가비 구조를 함께 참고.'},
+  hero:'https://cdn-optimized.imweb.me/upload/S2024100788c40fba991cd/1fdf9a9549248.jpg?w=1920',
+  links:[{label:'화보 보기',url:'https://thefirstwedding.com/makeup/?idx=208'},{label:'업체 정보',url:'https://www.directwedding.co.kr/makeup/hiel'}],
+  style:'피부톤 맞춤 베이스와 과하지 않은 화사한 색조, 자연스럽고 또렷한 웨딩 메이크업.',
+  includes:['신부 헤어·메이크업','신랑 포함 범위는 계약별 확인'],
+  costTriggers:['특정 아티스트 지정','얼리스타트','레이트아웃','헤어피스·흑채·컷트·염색·펌','혼주 헤어메이크업'],
+  pain:['낮 예식이어도 샵 이동·대기 때문에 생각보다 매우 이른 스타트가 잡힐 수 있다.','직급을 계약해도 어느 단계까지 직접 담당하는지 확인이 필요하다.'],
+  avoid:['예식장 이동시간까지 넣어 얼리스타트 여부 계산','계약 직급의 실제 담당 단계 확인','혼주 얼리비 포함 여부 질문'],
+  sources:[{label:'다이렉트 업체정보',url:'https://www.directwedding.co.kr/makeup/hiel',kind:'업체정보'}]
+ },
+ 'dress|로브마지오':{
+  researched:'2026-10-06',
+  reviewEvidence:{recent:1,latest:'2025',note:'2025 본식 후기 1건 확인. 최근 독립 후기 1건 이상 추가 확보 전까지 판단 보류.'},
+  hero:'https://cdn-optimized.imweb.me/upload/S2024100788c40fba991cd/b235823eeb03c.jpg?w=1920',
+  links:[{label:'화보 보기',url:'https://thefirstwedding.com/dress/?idx=100'},{label:'업체 화보',url:'https://yozmwedding.co.kr/dress/?bmode=view&idx=26285675'}],
+  style:'실크 중심의 정제되고 고급스러운 스타일. 오간자·미카도 계열을 비교하기 좋음.',
+  includes:['드레스 피팅','본식 드레스'],
+  costTriggers:['피팅비 5.5만 안내','헬퍼비 25만 안내','지역·시간 추가 가능'],
+  pain:['실크 소재와 라인별 체감 차이가 커서 화보만 보고 결정하기 어렵다.'],
+  avoid:['조명 아래 원단 광택 직접 비교','헬퍼비·시간 추가 포함 최종가 확인'],
+  sources:[{label:'더퍼스트웨딩',url:'https://thefirstwedding.com/dress/?idx=100',kind:'업체정보'}]
+ },
+ 'makeup|유림':{
+  researched:'2026-10-06',
+  reviewEvidence:{recent:0,latest:'',note:'최신 화보·상품은 확인되지만 최근 24개월 독립 후기 2건은 미확보. 오래된 후기 154건은 현재 품질 판단에서 제외.'},
+  hero:'https://www.iwedding.co.kr/center/iweddingb/product/800_22397_1756888317_12892200_3232256098.jpg',
+  links:[{label:'최신 상품·화보',url:'https://www.iwedding.co.kr/enterprise/prd/co_sl_m209/22397'},{label:'후기 모음',url:'https://www.weddingbook.com/partner/e729255c-8521-11e6-93b9-0abe8d4f74d3'}],
+  style:'맑고 자연스러운 피부 표현과 부드러운 색조 계열.',
+  includes:['신랑·신부 촬영 헤어메이크업 상품 확인'],
+  costTriggers:['직급 지정','얼리스타트','피스 여부는 계약 확인'],
+  pain:['과거 후기에는 주말 대기시간과 담당자 변경 사례가 있어 현재 운영 방식 재확인이 필요하다.'],
+  avoid:['최근 담당자 포트폴리오 확인','주말 예상 소요시간·대기시간 질문','촬영과 본식 담당자 동일 여부 확인'],
+  sources:[{label:'아이웨딩 최신 상품',url:'https://www.iwedding.co.kr/enterprise/prd/co_sl_m209/22397',kind:'업체정보'}]
+ },
+ 'makeup|겐그레아':{
+  researched:'2026-10-06',
+  reviewEvidence:{recent:1,latest:'2025-09',note:'2025 최근 진행후기는 확인했지만 같은 채널 중심이라 독립 후기 2건 기준에는 아직 부족.'},
+  hero:'https://blog.kakaocdn.net/dna/0Dcfe/btrjVCt1LhE/AAAAAAAAAAAAAAAAAAAAAMRm-1vPFhZcCxuUjPcgMQrhOMucnCAUq6lPIOFCh6JY/img.jpg?allow_ip=&allow_referer=&credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1777561199&signature=7RzT4tej%2BASZfpvksPfbnDV%2Fztg%3D',
+  links:[{label:'2025 진행 후기',url:'https://thewedd.com/2025/09/14/%EA%B2%90%EA%B7%B8%EB%A0%88%EC%95%84-%EB%A9%94%EC%9D%B4%ED%81%AC%EC%97%85-%EC%A7%84%ED%96%89%ED%9B%84%EA%B8%B0/'},{label:'메이크업샵 정보',url:'https://m.fundegi.co.kr/store/makeup.htm'}],
+  style:'화려한 색조부터 세미스모키까지 요청에 맞춰 강약 조절하는 스타일.',
+  includes:['촬영 헤어·메이크업','헤어피스 선택 가능 사례'],
+  costTriggers:['헤어피스','직급 지정','얼리스타트 여부 확인'],
+  pain:['과거 후기에는 담당자 변경 후 결과가 달라졌다는 사례가 있어 “샵 이름”보다 담당자 고정이 중요하다.','오래된 후기에는 대기공간이 작거나 주말 혼잡했다는 지적도 있다.'],
+  avoid:['촬영·본식 동일 담당자 여부 확인','원하는 눈썹·립 색을 사진으로 지정','주말 대기시간 여유 확보'],
+  sources:[{label:'2025 진행후기',url:'https://thewedd.com/2025/09/14/%EA%B2%90%EA%B7%B8%EB%A0%88%EC%95%84-%EB%A9%94%EC%9D%B4%ED%81%AC%EC%97%85-%EC%A7%84%ED%96%89%ED%9B%84%EA%B8%B0/',kind:'최근후기'}]
  }
 };
