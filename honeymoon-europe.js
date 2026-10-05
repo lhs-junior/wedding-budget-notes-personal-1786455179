@@ -114,7 +114,31 @@
     ['MSC Virtuosa 9/14 한국 판매정보','크루즈맵','https://travelersmap.co.kr/cruise/v/msc-virtuosa-7n-barcelona-da6fbd58f071'],
     ['MSC World Europa 9/15 로마 일정·가격','iCruise','https://www.icruise.com/itineraries/7-night-civitavecchia-to-civitavecchia-cruise_msc-world-europa_9-15-2027.html'],
     ['Royal Legend 9/16 로마 일정·가격','iCruise','https://www.icruise.com/itineraries/7-night-western-mediterranean-cruise_legend-of-the-seas_9-16-2027.html'],
-    ['2027 서부지중해 한국어 비교','CruiseTMK','https://silversea.kr/wv/cms/boardView?no=347&type=RECM']
+    ['2027 서부지중해 한국어 비교','CruiseTMK','https://silversea.kr/wv/cms/boardView?no=347&type=RECM'],
+    ['9/13 Royal 유럽 출항 전체','CruiseTimetables','https://www.cruisetimetables.com/royalcaribbeancruises-13sep2027.html'],
+    ['9/13 MSC 출항 전체','CruiseTimetables','https://www.cruisetimetables.com/msccruises-13sep2027.html'],
+    ['9/14 Princess 출항 전체','CruiseTimetables','https://www.cruisetimetables.com/princesscruises-14sep2027.html'],
+    ['9/13 AIDA 출항 전체','CruiseTimetables','https://www.cruisetimetables.com/aidacruises-13sep2027.html'],
+    ['9/15 NCL 출항 전체','CruiseTimetables','https://www.cruisetimetables.com/nclcruises-15sep2027.html'],
+    ['9/15 Silversea 출항 전체','CruiseTimetables','https://www.cruisetimetables.com/silverseacruises-15sep2027.html'],
+    ['9/15 Windstar 출항 전체','CruiseTimetables','https://www.cruisetimetables.com/windstarcruises-15sep2027.html'],
+    ['9/15 Viking 출항 예시','CruiseTimetables','https://www.cruisetimetables.com/cruisesonvikingvela-15sep2027.html'],
+    ['9/14 Regent 출항 예시','CruiseTimetables','https://www.cruisetimetables.com/cruisesonsevenseasvoyager-14sep2027.html'],
+    ['2027년 9월 한국어 전체 크루즈 색인','크루즈맵','https://travelersmap.co.kr/cruise/departures/2027-09'],
+    ['Emerald 유럽 리버/요트 전체','크루즈맵','https://travelersmap.co.kr/cruise/line/emerald-waterways'],
+    ['튀르키예 현재 여행경보','대한민국 외교부 해외안전여행','https://mgr.0404.go.kr/ntnSafetyInfo/228/detail'],
+    ['이스탄불 안전여행 가이드 2026','주이스탄불총영사관','https://0404.go.kr/bbs/embsyNtc/1347215/detail?ntnCd=228'],
+    ['이집트 현재 여행경보','대한민국 외교부 해외안전여행','https://0404.go.kr/ntnSafetyInfo/178/detail'],
+    ['그리스 여행경보','U.S. State Department','https://travel.state.gov/en/international-travel/travel-advisories/greece.html'],
+    ['키프로스 여행경보','U.S. State Department','https://travel.state.gov/en/international-travel/travel-advisories/destination.cyp.html'],
+    ['튀르키예 여행경보','U.S. State Department','https://travel.state.gov/en/international-travel/travel-advisories/turkey.html'],
+    ['이스라엘 여행경보','U.S. State Department','https://travel.state.gov/content/travel/en/traveladvisories/traveladvisories/israel-west-bank-and-gaza-travel-advisory.html'],
+    ['이집트 여행경보','U.S. State Department','https://travel.state.gov/en/international-travel/travel-advisories/egypt.html'],
+    ['튀르키예 범죄·성폭력·테러 정보','UK FCDO','https://www.gov.uk/foreign-travel-advice/turkey/safety-and-security'],
+    ['이집트 범죄·성희롱·테러 정보','UK FCDO','https://www.gov.uk/foreign-travel-advice/egypt/safety-and-security'],
+    ['키프로스 범죄·성폭력 정보','UK FCDO','https://www.gov.uk/foreign-travel-advice/cyprus/safety-and-security'],
+    ['이스탄불 2027년 9월 출항','CruiseTimetables','https://www.cruisetimetables.com/fromistanbulturkey-sep2027.html'],
+    ['하이파 2027년 9월 출항','CruiseTimetables','https://www.cruisetimetables.com/fromhaifaisrael-sep2027.html']
   ];
 
   function won(n){return Math.round(n/10000).toLocaleString()+'만원';}
@@ -190,6 +214,34 @@
     +'<div class="hme-day-col safe"><h4>9/15 승선 · 안정적</h4><p>9/13 출국 → 9/14 도착 → 1박 → 승선. 항공 스케줄을 덜 공격적으로 잡을 수 있음.</p><ul><li><b>MSC World Europa</b> 로마 7박 · $1,193~1,366</li><li><b>MSC Fantasia</b> 칸 7박 · $1,093~</li><li><b>MSC Seaview</b> 나폴리 7박 · $1,348~</li><li><b>MSC World Asia</b> 발레타 7박 · $1,636~1,790</li><li><b>MSC Sinfonia</b> 제노바 10박 · $1,644~</li><li><b>NCL Viva</b> 라벤나 9박 · $2,429~</li></ul><p><b>실전 shortlist:</b> 로마 World Europa. 나머지는 가격/접근성/기간 때문에 후순위.</p></div></div>'
     +'<div class="hme-audit-note"><b>한국 판매공고 확인 결과</b><p>크루즈맵은 2027년 9월 전체 640편, 지중해 288편을 색인하고 있고 이 날짜대 MSC 항차들을 확인할 수 있습니다. 하나투어는 2027 서부지중해 MSC 상품군을 공개 중이지만 현재 검색되는 공개 페이지에는 9/13~15 정확한 출발일 상품이 아직 충분히 풀리지 않았습니다. 모두투어·참좋은여행·노랑풍선 등도 공개 검색으로는 해당 날짜의 2027 지중해 패키지 재고를 확인하지 못했습니다. 따라서 “한국 여행사 상품이 없다”가 아니라 아직 공개 색인이 덜 된 상태로 보는 게 맞습니다.</p></div></section>'
 
+
+    +'<section class="hme-section"><div class="hme-section-head"><span>00-A</span><div><h3>유럽 크루즈 전체시장 검증</h3><p>서·동지중해만 보지 않고 2027.09.13~15에 유럽에서 실제 승선 가능한 공개 항차를 북유럽·영국·서유럽·아드리아해·에게해·럭셔리·리버까지 다시 분류했습니다.</p></div></div>'
+    +'<div class="hme-audit-grid"><div><b>메인스트림에서 실제 출항 확인</b><p>MSC · Royal Caribbean · Costa · Celestyal · NCL · Princess · AIDA · P&O.</p></div><div><b>럭셔리/소형선에서 실제 출항 확인</b><p>Crystal · Oceania · Viking · Windstar · Silversea · Regent Seven Seas.</p></div><div><b>같은 날짜대 운항은 있으나 승선일 불일치</b><p>Celebrity · Virgin Voyages · TUI/Mein Schiff · Marella 등은 9/13~15 유럽 ‘신규 승선’ 기준에서 핵심 후보가 아니었습니다.</p></div><div><b>리버/요트 시장 별도 확인</b><p>Emerald Cruises의 라인·다뉴브·론·도루강 및 아드리아/에게해 요트 상품도 확인. 가격과 여행 성격이 달라 가족 7명 해양 크루즈 shortlist에서는 분리했습니다.</p></div></div>'
+    +'<div class="hme-wide-table"><div class="hme-wide-head"><span>승선일</span><span>권역</span><span>선사/선박</span><span>승선항</span><span>기간</span><span>판단</span></div>'
+    +'<div><span>9/13</span><span>서지중해</span><span>Royal Explorer</span><span>바르셀로나</span><span>7박</span><span>가격 최저권 · 당일승선 위험</span></div>'
+    +'<div><span>9/13</span><span>서지중해</span><span>MSC Fantasia</span><span>로마</span><span>7박</span><span>당일승선 위험</span></div>'
+    +'<div><span>9/13</span><span>북유럽</span><span>AIDAmar / AIDAprima</span><span>바르네뮌데 / 함부르크</span><span>5~10박</span><span>존재 확인 · 신혼여행 방향과 다름</span></div>'
+    +'<div><span>9/13</span><span>북유럽</span><span>P&O Aurora</span><span>사우샘프턴</span><span>4박</span><span>존재 확인 · 너무 짧음</span></div>'
+    +'<div><span>9/13</span><span>서유럽</span><span>Crystal Symphony</span><span>리스본</span><span>9/18박</span><span>럭셔리 · 예산 초과</span></div>'
+    +'<div><span>9/13</span><span>서유럽</span><span>Oceania Insignia</span><span>르아브르</span><span>42박</span><span>장기 · 제외</span></div>'
+    +'<div class="best"><span>9/14</span><span>동지중해</span><span>MSC Orchestra</span><span>아테네</span><span>7박</span><span>현재 일정 1순위</span></div>'
+    +'<div class="best"><span>9/14</span><span>서지중해</span><span>MSC Virtuosa</span><span>바르셀로나</span><span>7박</span><span>현재 가성비 1순위</span></div>'
+    +'<div><span>9/14</span><span>서지중해</span><span>MSC Fantasia / Seaview</span><span>리보르노 / 제노바</span><span>7박</span><span>접근성 때문에 후순위</span></div>'
+    +'<div><span>9/14</span><span>아드리아</span><span>Enchanted Princess</span><span>트리에스테</span><span>11박+</span><span>기간 길어 제외</span></div>'
+    +'<div><span>9/14</span><span>서유럽</span><span>Regent Voyager</span><span>사우샘프턴</span><span>13박</span><span>초고가 럭셔리</span></div>'
+    +'<div class="best"><span>9/15</span><span>서지중해</span><span>MSC World Europa</span><span>로마</span><span>7박</span><span>선박+가족 만족도 1순위</span></div>'
+    +'<div><span>9/15</span><span>지중해</span><span>MSC Seaview / Fantasia / World Asia</span><span>나폴리 / 칸 / 발레타</span><span>7박</span><span>항공/접근성 열세</span></div>'
+    +'<div><span>9/15</span><span>아드리아</span><span>NCL Viva</span><span>라벤나</span><span>9박</span><span>비싸고 김</span></div>'
+    +'<div><span>9/15</span><span>서유럽</span><span>Viking Vela / Libra</span><span>런던</span><span>7~11박</span><span>고가 프리미엄</span></div>'
+    +'<div><span>9/15</span><span>서지중해</span><span>Windstar Star Explorer</span><span>바르셀로나</span><span>8박</span><span>부티크 · 고가</span></div>'
+    +'<div><span>9/15</span><span>서유럽/아드리아</span><span>Silversea Dawn / Spirit</span><span>사우샘프턴 / 로마</span><span>12~13박</span><span>초고가 럭셔리</span></div>'
+    +'<div><span>9/15</span><span>서유럽</span><span>Oceania Sonata</span><span>사우샘프턴</span><span>10박+</span><span>고가 · 장기</span></div></div>'
+    +'<div class="hme-audit-note"><b>검증 한계도 명시</b><p>“전 세계 모든 여행사 내부 재고 100%”는 검증할 수 없습니다. 이번 표는 공개 웹에서 조회 가능한 선사 일정, CruiseTimetables·CruiseMapper·OTA, 한국 크루즈맵/여행사 공개 페이지를 교차한 결과입니다. 로그인 전용·B2B GDS·아직 미공개된 2027 한국 패키지는 이후 추가될 수 있습니다.</p></div></section>'
+
+    +'<section class="hme-section"><div class="hme-section-head"><span>00-B</span><div><h3>튀르키예 인접권까지 확장 · 안전 우선 필터</h3><p>튀르키예는 대륙횡단국가이며 국토 대부분은 서아시아입니다. 이번에는 동지중해·에게해·튀르키예 연안·키프로스·이집트·이스라엘 연계 노선까지 별도로 봤습니다.</p></div></div>'
+    +'<div class="hme-safety-grid"><div class="safe1"><b>그리스</b><strong>낮은 위험</strong><p>현재 미국 여행경보 Level 1. 가족여행 기본축으로 가장 무난. 관광지 소매치기·시위 정도는 일반 주의.</p></div><div class="safe1"><b>키프로스 남부</b><strong>낮음~보통</strong><p>현재 미국 Level 1. 일반 범죄는 낮은 편이지만 중동 정세 영향으로 항공/항만 변동 가능성 존재. 북키프로스는 영사 지원 제약.</p></div><div class="safe2"><b>튀르키예 서부·이스탄불</b><strong>보통</strong><p>한국 외교부는 대부분 지역 여행유의, 미국은 Level 2. 이스탄불 관광지 소매치기·택시사기, 테러·시위 리스크가 있고 성폭력 신고 사례도 있어 가족 단독 야간이동은 보수적으로.</p></div><div class="safe3"><b>이집트</b><strong>보통~높음</strong><p>한국 외교부는 카이로·지중해 연안 여행유의, 일부 시나이·국경은 상향 경보. 미국 Level 2. 테러·사기·성희롱/성폭력 신고 때문에 가족 자유관광보다 선사/검증된 투어 권장.</p></div><div class="safe4"><b>이스라엘</b><strong>높음 · 현재 제외</strong><p>현재 미국 Level 3 ‘여행 재고’, 일부 지역 Level 4. 무력충돌·테러·갑작스런 운항변경 가능성이 커 가족여행 후보에서는 제외.</p></div></div>'
+    +'<div class="hme-nearby-grid"><article><span>실제 9/13 승선</span><h4>이스탄불 · Explora II 7박</h4><p>이스탄불 → 마르마리스 → 파트모스 → 시로스 → 크레타 → 미코노스 → 아테네. 출항 자체는 확인되지만 약 $5,880/인으로 가족 7명에는 비현실적.</p><em>안전: 보통 · 가격: 매우 높음</em></article><article><span>9/16 승선</span><h4>이스탄불 · Windstar 8박</h4><p>이스탄불 → 미리나 → 미코노스 → 쿠사다시 → 보드룸 → 산토리니 → 델피 → 아테네. 일정은 좋지만 약 $4,844/인.</p><em>안전: 보통 · 가격: 높음</em></article><article><span>키프로스 포함</span><h4>아테네 출발 · Cyprus/Egypt 계열</h4><p>Royal 등에서 아테네→리마솔→알렉산드리아 형태가 2027 편성에 존재. 하지만 너희 9/13~15 승선 최적 날짜와는 정확히 맞지 않고, 이집트 안전부담도 추가됨.</p><em>안전: 그리스 낮음 / 키프로스 낮음~보통 / 이집트 보통~높음</em></article><article class="avoid"><span>현재 제외</span><h4>하이파 출발 · 이스라엘</h4><p>2027년 9월 Crown Iris 상품은 실제 등록돼 있지만 현재 중동 정세와 여행경보 기준으로 가족여행 후보에 넣지 않음. 2027년 실제 운항도 변경 가능성 큼.</p><em>안전: 높음 · 전쟁/운항변경 리스크</em></article></div>'
+    +'<div class="hme-war-note"><b>전쟁·지역정세 판단</b><p>2026년 현재 중동 정세는 여전히 변동성이 큽니다. 튀르키예는 시리아·이라크 접경과 이스탄불/대도시를 같은 위험도로 보면 안 되고, 키프로스도 직접 분쟁지역은 아니지만 중동 충돌로 항공편이 흔들린 사례가 있습니다. 이스라엘은 현재 가족여행 후보에서 제외하고, 이집트는 Alexandria 등 일반 관광지가 곧바로 ‘금지지역’은 아니지만 선사 일정 변경과 현지 보안 리스크까지 감안해 후순위로 둡니다. 2027년 7~8월에 외교부 경보와 선사 기항지 변경을 반드시 다시 확인해야 합니다.</p></div></section>'
     +'<section class="hme-section"><div class="hme-section-head"><span>01</span><div><h3>크루즈 상품 비교</h3><p>가격보다 먼저 일정 궁합·부모님 체력·배의 성격을 봅니다. 가격은 공식 페이지의 현재 표시가 스냅샷입니다.</p></div></div>'
     +PRODUCTS.map(productCard).join('')+'</section>'
     +'<section class="hme-section"><div class="hme-section-head"><span>01-A</span><div><h3>딥서치 검증 1순위 · 9/14 MSC Orchestra</h3><p>해외 4개 이상의 일정 DB/판매처와 한국어 크루즈 DB에서 교차검증했습니다.</p></div></div><div class="hme-alt-card value"><span class="hme-proof official">출항일 교차검증 완료</span><h4>MSC Orchestra · 2027.09.14 아테네(피레우스) 왕복 7박</h4><b>9/14 18:00 출항 → 9/21 07:00 귀항</b><p>아테네 → 카타콜론(올림피아) → 케팔로니아/아르고스톨리 → 코르푸 → 바리 → 해상일 → 미코노스 → 아테네.</p><ul><li>CruiseMapper: 9/14 피레우스 왕복 7박 확인</li><li>iCruise: 동일 항차 CN-14215816, 세금·수수료 포함 $1,230/인 내측 표시</li><li>Travel Weekly Asia: 동일 날짜·동일 기항지, 내측 $813부터 표시 — 판매채널별 가격 차 큼</li><li>CruiseTimetables: 9/14 출항·9/21 귀항·동일 기항지 확인</li><li>한국 크루즈맵: MSC Orchestra 피레우스 왕복 7박 운항축 및 2027년 9월 출항 존재 확인</li></ul><p><b>중요:</b> 표시가격은 판매처마다 $813~$1,230 이상 차이가 나므로, 실제 예약은 7명·3객실 기준 최종 인보이스로 다시 받아야 합니다.</p></div></section>'
