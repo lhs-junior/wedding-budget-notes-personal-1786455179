@@ -109,7 +109,44 @@
 .sd-myq-grid small{display:block;color:#888;font-size:11px}
 .sd-myq-grid b{font-size:18px}
 .sd-myq p{margin:8px 0 0}
-@media(max-width:760px){.sd-kpi,.sd-guide,.sd-myq-grid,.sd-meaning-grid{grid-template-columns:1fr}.sd-vendor-grid{grid-template-columns:1fr}.sd-value-rule{flex-direction:column;gap:4px}}
+@media(max-width:760px){
+ .sd{max-width:none}
+ .sd-sec{margin-top:28px}
+ .sd-hero h2{font-size:21px}
+ .sd-hero p,.sd-lead{font-size:13px;line-height:1.55}
+ .sd-kpi,.sd-guide,.sd-myq-grid,.sd-meaning-grid{grid-template-columns:1fr}
+ .sd-kpi>div{padding:13px 14px}
+ .sd-kpi b{font-size:21px}
+ .sd-vendor-grid{grid-template-columns:1fr;gap:12px}
+ .sd-vendor-card{padding:14px;border-radius:10px;font-size:13px}
+ .sd-vendor-card h4{font-size:17px}
+ .sd-vendor-what,.sd-vendor-block p,.sd-vendor-block ul{font-size:13px;line-height:1.6}
+ .sd-vendor-metrics{grid-template-columns:1fr 1fr}
+ .sd-vendor-metrics>div:last-child{grid-column:1/-1}
+ .sd-vendor-metrics b{font-size:14px}
+ .sd-heroimg{aspect-ratio:4/3;border-radius:9px}
+ .sd-linkbar{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+ .sd-linkbar a{justify-content:center;min-height:42px;padding:10px 8px;font-size:12px;text-align:center}
+ .sd-linkbar a:first-child:last-child{grid-column:1/-1}
+ .sd-value-rule{flex-direction:column;gap:4px;padding:13px 14px;font-size:13px}
+ .sd-ctl{gap:8px}
+ .sd-ctl>div{gap:7px}
+ .sd-chip{min-height:40px;padding:9px 13px;font-size:13px}
+ .sd-chk{min-height:40px;margin-left:0;font-size:13px}
+ .sd-q{max-width:none;min-height:44px;font-size:16px}
+ .sd-tablewrap{margin-left:-4px;margin-right:-4px;-webkit-overflow-scrolling:touch;position:relative}
+ .sd-table{font-size:12px;min-width:760px}
+ .sd-table th,.sd-table td{padding:9px 10px}
+ .sd-detail dl{grid-template-columns:1fr;gap:2px 0;font-size:13px}
+ .sd-detail dt{font-weight:700;margin-top:7px}
+ .sd-form{align-items:stretch}
+ .sd-form input[type=text],.sd-form input:not([type]),.sd-form input[type=number]{flex:1 1 100%;min-height:44px;font-size:16px}
+ .sd-form fieldset{width:100%;flex-wrap:wrap;gap:8px 14px}
+ .sd-form .sd-btn,.sd-btn{min-height:44px;font-size:13px}
+}
+@media(min-width:761px) and (max-width:1100px){
+ .sd-vendor-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
 /* 우리 결혼식 탭 */
 .ow-gate{max-width:320px;margin:60px auto;text-align:center}
 .ow-gate h2{font:700 20px/1.3 inherit;margin:0 0 6px}
