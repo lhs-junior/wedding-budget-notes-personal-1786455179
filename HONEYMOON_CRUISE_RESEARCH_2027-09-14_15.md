@@ -46,6 +46,28 @@ MSC 공식 운영정보:
 - 국내 승선 준비: https://info.cruisetmk.kr/guide/msc — 승선 터미널 최종 정보를 발급된 CruiseTicket으로 대조
 - 2025년 국내 준비물 경험: https://www.cruisedot.co.kr/cruisedot-news/cruise-checklist-beginners
 
+## 2026-10-10 최신 후기 추가 검증
+- 2026년 8월 World Europa 후기에는 뷔페 혼잡·객실 만족이 동시에 언급됨: https://www.cruisecritic.com/cruise/msc/msc-world-europa/reviews/743458
+- 2026년 4월 가족 탑승 후기에는 여러 항구 분산 승선으로 덜 혼잡하다는 반대 경험: https://www.cruisecritic.com/cruise/msc/msc-world-europa/reviews/739515
+- 2026년 8월 승선 대기 약 2시간 경험: https://www.cruisecritic.com/cruise/msc/msc-world-europa/reviews/743753
+- 2026년 3월 반복 탑승자의 첫날 선내 결제 카드 등록 및 기계 혼잡 조언: https://www.reddit.com/r/MSCCruises/comments/1rlr6d8/tips_tricks_suggestions_for_first_timer/
+- 2026년 2월 정찬 식사 약 2시간으로 공연 일정과 충돌한 후기: https://www.cruisecritic.com/cruise/msc/msc-world-europa/reviews/738379
+- **후기 분석 원칙**: 개별 경험담은 발생률 통계가 아니며, 탑승월·객실 등급·동행 인원·출발항·사용 시간대를 함께 비교한다.
+
+## A–Z 예약 직전 필수 증빙
+1. 선사 공식 승선/하선 날짜 및 전체 기항지 시간표
+2. 7명 신원별 여권·국적·입국/비자 요건
+3. 예약 가능 객실 배치, 등급 및 연결객실/3인실 확인서
+4. 세금·항만비·팁·음료·인터넷 포함/별도 총견적
+5. 항공편 편명·도착시각·7석 재고·환승 연결 보호·수하물
+6. 승선 전 호텔의 7명 객실 배치와 취소 규정
+7. 공항/항구 밴 정원, 짐 적재 한도, 이동비
+8. 매 기항지 투어 귀선 마감 및 지연 시 복귀 보장
+9. 부모님 보행량·텐더/계단·멀미·선내 의료보험
+10. 경찰·영사관·보험 긴급연락, 치안/테러/전쟁 최신 경보
+11. 가족 5명 귀국편과 부부 2명 연장 여행 귀국편
+12. e-ticket, 온라인 체크인, 짐 태그, Cruise Card 결제 방법
+
 ## A–Z 실행 중 미완료
 
 | 영역 | 확인해야 할 사항 | 현재 상태 |
