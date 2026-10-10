@@ -26,6 +26,26 @@
 - https://www.cruisetimetables.com/costacruises-sep2027.html : Costa 월간 전체를 날짜별 재검증해야 한다. 현재 위 10개 목록이 전선사 전수조사라고 표시하지 않는다.
 - 중복 노선, 동일 항차를 다른 승선항에서 탑승하는 편을 구별해야 한다.
 
+## 실제 탑승 후기 보강 (2026-10-10)
+
+후기는 경험에 따른 개별 사례다. 객실등급·선박·일정이 다르며 통계적 발생률이 아니다.
+
+| 누락된 준비 | 실사용자 경험 | 반드시 실행할 대책 | 근거 |
+|---|---|---|---|
+| 체크인 오류 | World Europa에서 주소/카드 입력 실패 | e-ticket, 수하물 태그를 조기 발급하고 카드 선내등록 대안 숙지 | https://www.cruisecritic.com/cruise/msc/msc-world-europa/reviews/727278 |
+| 투어 조기매진 | 인기 기항지 투어 판매 개시 직후 매진 | 예약 개시일 알림 및 선사/독립 투어 환불규칙 사전 비교 | https://www.cruisecritic.com/cruise/msc/msc-world-europa/reviews/727278 |
+| 귀선 실패 | 제노바–밀라노 선사 투어 지연으로 출항 대기 사례 | 장거리 선사 투어와 독립 관광의 귀선 보장 차이 확인 | https://www.reddit.com/r/MSCCruises/comments/1j14qi8 |
+| 뷔페 혼잡·다이닝 | 식탁 찾기 어려웠다는 후기와 만족한 후기가 공존 | 7명 식사시간 지정·정찬 선택·혼잡 시간 대안 조사 | https://www.cruisecritic.com/cruise/msc/msc-world-europa/reviews/727325 ; https://www.cruisecritic.com/cruise/msc/msc-world-europa/reviews/727639 |
+| 여권·현금 도난 | 바르셀로나 도착 후 가족 소지품 도난 | 사본·영사관·경찰 신고·보험 긴급연락망, 차량 수하물 관리 | https://www.cruisecritic.com/cruise/msc/msc-world-europa/reviews/726159 |
+| 패키지 통역 가치 | 2026년 한국 신혼여행자 후기에서 일정 조율과 가이드 도움 | 독립여행 vs 패키지 항공/투어/통역/쇼핑 유무 동등비교. 여행사 게시글 편향 주의 | https://lottetour.com/magazine/community/prdeval/view?godCommentId=111933 |
+| 객실 등급 격차 | 반복 탑승자는 Yacht Club / Aurea / 기본 객실 체감 차이 지적 | 같은 객실등급 후기만 비교, 연결객실 여부 및 소음/엘리베이터 거리 확인 | https://www.reddit.com/r/MSCCruises/comments/1v0u4ov/new_to_msc_looking_at_world_europa_tips_for/ |
+
+MSC 공식 운영정보:
+- 체크인: https://www.msccruises.com/int/manage-booking/before-you-go/web-check-in-faqs — 모든 여행객의 정보 필요, 출항 2일 전까지 온라인 체크인, 사전 신용카드 등록은 필수 아님
+- 선내결제: https://www.msccruises.com/int/faq/onboard-payment — 개인 Cruise Card 결제 및 선내 카드 활성화/현금 보증금
+- 국내 승선 준비: https://info.cruisetmk.kr/guide/msc — 승선 터미널 최종 정보를 발급된 CruiseTicket으로 대조
+- 2025년 국내 준비물 경험: https://www.cruisedot.co.kr/cruisedot-news/cruise-checklist-beginners
+
 ## A–Z 실행 중 미완료
 
 | 영역 | 확인해야 할 사항 | 현재 상태 |

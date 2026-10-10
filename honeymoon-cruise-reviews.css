@@ -1,0 +1,17 @@
+/* Traveler evidence — restrained editorial layout */
+#p-honeymoon .cruise-review-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+#p-honeymoon .cruise-review-card{padding:27px;background:#fff;border:1px solid #dfe5dd;display:flex;flex-direction:column;gap:11px}
+#p-honeymoon .cruise-review-meta{display:flex;justify-content:space-between;color:#657b6b;font-size:10px;letter-spacing:.06em}
+#p-honeymoon .cruise-review-card h4{font-size:18px;color:#304f40;margin:4px 0 0;letter-spacing:-.04em}
+#p-honeymoon .cruise-review-card>p{font-size:12px;line-height:1.85;color:#667469;margin:0}
+#p-honeymoon .cruise-review-action{background:#f5f7f2;padding:16px;border-left:2px solid #739782;margin-top:auto}
+#p-honeymoon .cruise-review-action b{font-size:11px;color:#466d52}
+#p-honeymoon .cruise-review-action p{font-size:12px;line-height:1.8;color:#4b6654;margin:8px 0 0}
+#p-honeymoon .cruise-review-card>a{font-size:11px;color:#54735d;text-decoration:underline;text-underline-offset:3px;margin-top:4px}
+#p-honeymoon .cruise-gap-grid{border-top:1px solid #dfe5dd}
+#p-honeymoon .cruise-gap-grid article{display:grid;grid-template-columns:45px 140px 1fr;gap:14px;padding:19px 4px;border-bottom:1px solid #e5ebe3;align-items:start}
+#p-honeymoon .cruise-gap-grid article>span{font:20px Georgia,serif;color:#a9b7a9}
+#p-honeymoon .cruise-gap-grid article>div{display:contents}
+#p-honeymoon .cruise-gap-grid h4{font-size:13px;color:#345343;margin:0}
+#p-honeymoon .cruise-gap-grid p{font-size:12px;color:#68766b;line-height:1.8;margin:0}
+@media(max-width:650px){#p-honeymoon .cruise-review-grid{grid-template-columns:1fr}#p-honeymoon .cruise-gap-grid article{grid-template-columns:34px 1fr;gap:4px 10px}#p-honeymoon .cruise-gap-grid p{grid-column:2}#p-honeymoon .cruise-gap-grid article>div{display:contents}}
