@@ -24,6 +24,14 @@
 - Windstar Star Explorer 9/15 바르셀로나→로마 8박: https://www.cruisetimetables.com/windstarcruises-15sep2027.html (표시 시작가 $5,450, 다른 판매처와 차이 있음: 확정가 표시 보류)
 - 현재 웹 화면에 10개 후보를 7박/8박 및 날짜 필터와 함께 표시. 이는 모든 선사·여행사 전수확인이 아닌 **일정이 확인된 후보 리스트**.
 
+## 2026-10-10 한국 판매채널 및 8박 보강
+
+- 크루즈맵 한국어 판매 색인: 2027년 9월 MSC Virtuosa **9/14 바르셀로나 7박 $1,207/인~ 표시**. https://travelersmap.co.kr/cruise/v/msc-virtuosa-7n-barcelona-da6fbd58f071 . 선실 7명 재고/결제액은 미확인.
+- 크루즈맵 2027년 9월 색인: https://travelersmap.co.kr/cruise/departures/2027-09 . 9월 전체 638편이라는 월간 데이터는 9/14·15 승선의 전수검증을 의미하지 않음.
+- Windstar 9/15 바르셀로나→로마 8박: https://www.icruise.com/ships/windstar-cruises-star-explorer-cruise-itineraries-september-2027.html 에 **오션뷰 2인 1실 1인 $3,323 표시**, https://windstarcruisesale.com/itinerary/8-night-yachtsmans-harbors-of-the-rivieras-cruise/736263/1625433 에 **$5,130 표시**. 판매 채널별 객실/포함조건 차이 확인 필요.
+- 외교부 0404.go.kr 공식 경보, 각 기항지 개별 위험도는 예약 직전 재조회 필요. 날짜별 항공 실시간 좌석/가격 조회 및 한국 여행사 실제 견적 수령 불가: **미완료** 표시 유지.
+- 웹 화면은 2027년 9/14·15 승선 7~8박 비교를 중심으로 편집형 스타일로 개선. 선사·일정의 공개 근거와 실제 예약재고는 분리.
+
 ## 추가 검증 대기
 
 - 9/15 MSC Fantasia (Cannes), MSC Seaview (Naples), MSC World Asia (Valletta): 1차 대화에서 후보로 기록됐지만 **이번 세션에서 개별 항차 근거 재검증 대기**.
