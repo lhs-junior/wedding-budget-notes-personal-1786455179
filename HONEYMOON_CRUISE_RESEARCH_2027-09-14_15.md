@@ -1,5 +1,12 @@
 # 2027년 9월 14·15일 승선 유럽 크루즈 — 조사·검증 상태표
 
+## 2026-10-10 후기 기반 마지막 점검
+
+- 2026년 수하물 분실·보상 분쟁 주장: https://www.reddit.com/r/Cruise/comments/1w2ei7r/msc_cruises_lost_my_luggage_no_compensation/ . 단일 이용자 주장으로만 다루며 사고 빈도와 선사 책임을 확정하지 않는다. 수하물 태그 사진, 영수증, 보험 약관, 선사 분실 신고 기한 준비.
+- 2026년 휠체어 경사로·승하선 안내 문제: https://www.reddit.com/r/Cruises/comments/1v4c6jg/msc_cruises_beware/ . 승선항과 기항지의 텐더 제한, 이동약자 지원 사전 요청.
+- 2025~2026년 승선 대기는 같은 선사에서도 10분~90분 이상으로 상반된 사례: https://www.reddit.com/r/MSCCruises/comments/1n9ji5n 및 https://www.reddit.com/r/MSCCruises/comments/1mqvciu/seashore_review_first_time_trying_msc/ . 특정 대기시간을 여행 예정 항차에 적용하지 않는다.
+- 정확한 2027-09-14 MSC 출항일/승선항/가격 5개 교차 확인: https://www.cruisetimetables.com/msccruises-14sep2027.html . 판매 가격은 실시간 예약재고가 아니다.
+
 기준일 2026-10-10. 정확히 2027-09-14 또는 2027-09-15 현지 항구 **승선**, 7박 또는 8박, 가족 7명. 예식 후 한국 출발일은 역산한다. 확인되지 않은 가격, 항공편, 위험 등급을 만들어내지 않는다.
 
 ## 공개 항차 확인 목록 (서로 다른 승선 항구는 별도 항차)
