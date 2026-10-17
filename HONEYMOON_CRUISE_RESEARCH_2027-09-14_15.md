@@ -1,5 +1,27 @@
 # 2027년 9월 14·15일 승선 유럽 크루즈 — 조사·검증 상태표
 
+## 2026-10-17 MSC Orchestra 9/16 7박 예약 가능 여부 교차검증
+
+- 2027-09-16 MSC Orchestra 7박 항차 자체는 여러 판매처 확인되나 **판매 가능한 객실과 5인 조합 실재고는 확인되지 않음**.
+- Taoticket 공식 판매 검색 결과 'sold out': https://www.taoticket.fr/port-cruise/c/msc-yacht-club/marseille/septembre
+- AffordableTours 내측/오션뷰/발코니/스위트 네 등급 모두 N/A Sold Out: https://www.affordabletours.com/cruises/s/167991270916
+- Kreuzfahrt-Ticket 'nicht mehr buchbar'(현재 예약 불가): https://www.kreuzfahrt-ticket.de/p/msc-orchestra-7-160927/
+- HelloCruise 금액 게시와 문의 가능 표시: https://hellocruise.co.uk/msc-orchestra/cruises/16-september-2027-7-nights-376679/ 단, 실제 구매 가능 객실 확인 아님.
+- MSC 공식 검색 페이지는 동적/접근 제한으로 직접 실재고 검증 불가. 사용자가 제공한 링크의 passengers=2|0|0|0은 성인 2인 검색. 5인 선실 2+3 또는 2+2+1 재고와 최종 금액은 반드시 MSC 직판 또는 예약처 확인 필요.
+- **최종 판정: 항차 존재 확인, 여러 판매처 매진/예약 불가, 5인 실제 예약 가능 미검증.** 과거 표시가를 현재 최저 예약 가능가로 안내 금지.
+
+## 중요 정정 2026-10-17: 9월 16일 마르세유 7박 실제 존재
+
+이전 보고서의 **"9/16 마르세유 7박 미발견"이라는 판정은 틀림. 철회.** MSC Orchestra가 2027-09-16 마르세유 출발, 09-23 귀항하는 **7박 8일** 공개 항차를 독립적인 여러 판매사에서 확인. 선택지 누락으로 전체 추천 결과 신뢰성 훼손했음을 명시.
+
+- MSC Orchestra 항차 코드 MSCOR20270916MRSMRS: https://hellocruise.co.uk/msc-orchestra/cruises/16-september-2027-7-nights-376679/
+- 프랑스 Taoticket: https://www.taoticket.fr/ports/marseille/septembre 2027-09-16 MSC Orchestra 7 nuits 783€ 참고가 및 **sold out 표기**. 가격 공개는 현재 실제 예약 가능 뜻이 아님.
+- 독일 Cruise24: https://img1.cruise24.de/details/136767/MSC%20Cruises/MSC%20Orchestra/Marseille%2C%20Tarragona%2C%20Valencia%2C%20La%20Spezia%2C%20Civitavecchia%2C%20Genoa%2C%20Marseille 782€ 참고가, 9/16 18:00 출항→9/23 09:00 귀항, 전체 기항 시각.
+- AffordableTours: https://www.affordabletours.com/cruises/s/167991270916 동일 날짜, 7박, 출발 및 귀항 마르세유 표기. 객실 유형별 N/A/Sold Out 표기가 존재.
+- 상세 기항: 9/16 마르세유 18:00 출항, 9/17 타라고나 09~18, 9/18 발렌시아 07~18, 9/19 해상일, 9/20 라스페치아 08~18, 9/21 치비타베키아 07~19, 9/22 제노바 09~18, 9/23 마르세유 09시 도착.
+- **중요한 모순**: CruiseTimetables의 2027-09-16 MSC 전체 출항 색인에서는 Orchestra가 안 나오고 Marseille 항만표에는 Sinfonia만 나타남. 그러나 다수의 타사 판매 상품에서 완전히 일치하는 날짜/선박/항로가 확인됨. 선사 원본 예약 가능 목록의 실제 확인은 아직 불가하며 *취소된 옛 상품의 잔존 색인* 가능성을 배제할 수 없다. **운항 예정 항차 발견**과 **실제 판매 중, 5인 예약 가능**은 구분해야 한다.
+- 사이트 크루즈 검색에 MSC Orchestra를 9/16 7박으로 추가. 출항 후보는 전체 **20개**, 9/16은 Orchestra 7박 + Sinfonia 10박의 2개. 가격은 직접 비교 불가능하므로 미표시. 공식 재고 미확인 상태 강조.
+
 ## 2026-10-17 마르세유 9/13~19일 재감사 — 이전 누락 정정
 
 **앞선 '충분히 검증/전수조사'라는 표현은 철회.** 9/17 MSC Musica, 9/18 Costa Fascinosa 등 누락 사례 확인. 특정 선사만 조사하지 않고 공개 연간 전 출항 데이터 전체를 날짜로 필터하고 월간 별도 출항 DB 및 프랑스 현지 사이트, 한국어 출항 색인을 교차 대조.
