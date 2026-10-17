@@ -1,5 +1,17 @@
 # 2027년 9월 14·15일 승선 유럽 크루즈 — 조사·검증 상태표
 
+## 2026-10-17 추가: 9월 16일 마르세유 출발 대안
+
+- **MSC Sinfonia / 2027-09-16(목) 17:00 마르세유 출항 → 09-26(일) 09:00 마르세유 하선 / 10박 11일**. 기존 7~8박 제한을 벗어나므로 예외 대안으로 표시.
+- 일자: 9/16 마르세유 출항, 17 해상일, 18 말라가 08~18, 19 카디스 07~17, 20 리스본 09~18, 21 해상일, 22 알리칸테 10~18, 23 마온 09:30~16, 24 올비아 10~19, 25 제노바 09~18, 26 마르세유 09 도착.
+- 해외 상품 직접 확인: https://www.icruise.com/itineraries/10-night-marseille-to-marseille-cruise_msc-sinfonia_9-16-2027.html ($1,771 표시), https://www.cruisecheap.com/itineraries/10-night-marseille-to-marseille-cruise_msc-sinfonia_9-16-2027.html ($1,726 표시), https://cruise.veltra.com/en/cruise/MSC-SX20270916MRSMRS (출항표), https://www.seascanner.com/cruise-k291991-western-mediterranean-msc-sinfonia-marseilles (€2,642 표시, 화면의 2인 기본설정).
+- 한국어 VELTRA 개별 상품 URL: https://cruise.veltra.com/ko/cruise/MSC-SX20270916MRSMRS (검색 시스템에서 직접 내용 조회 실패, 존재 및 구매 가능 여부 미검증). 크루즈나라, 크루즈맵, 하나투어, 모두투어는 동일 날짜 상품의 공개 판매 증거 미확보. 해외 상품 확인과 국내 실제 판매여부 확인을 분리.
+- 항공/열차 추천 설계: 9/13 인천→파리(5석 미확인), 9/14 파리→마르세유 TGV(약 3시간대 일반 노선, 2027 특정 편 미확인), 9/15 마르세유 전박, 9/16 승선. 9/26 하선 후 가족 3명 귀국, 신혼부부 2명 연장. 출항 당일 파리에서 이동하는 방식은 피할 것.
+- 마르세유 승선항 공식 안내 https://www.marseille-port.fr/en/cruise-passengers (Gate 4, Chemin du Littoral, 13015 Marseille) 및 관광청 무료 셔틀 https://www.marseille-tourisme.com/en/organize-your-stay/practical-information/arriving-in-marseille/access-to-marseille-cruise-port/ . 정확한 터미널은 예약서 기준.
+- 2027.9.14/15 마르세유 **7~8박 승선 상품 미발견** 판단은 유지. 16일 Sinfonia는 조건 불일치 예외로만 비교. 5인 실제 객실 구성, 최종 KRW/EUR/USD 결제액, 항공·TGV 5석, 항공편 번호 및 호텔은 미확인.
+
+
+
 ## 2026-10-17 항공 실현가능성 재조사와 보완
 
 **중요**: 인천→파리→바르셀로나 및 귀국 항공편은 모두 아직 **2027년 해당 날짜 5인 좌석/확정 운임/실시간 편명 미확인**. 예전 페이지의 '이동 가능'은 실제 항공 예약을 뜻하지 않음. 특히 9/14 MSC는 당일 파리→바르셀로나 연결이 위험하며, **바르셀로나 전박을 하지 못하면 항차를 바꾸는 것이 우선**.
