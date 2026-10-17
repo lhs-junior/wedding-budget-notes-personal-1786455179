@@ -1,5 +1,39 @@
 # 2027년 9월 14·15일 승선 유럽 크루즈 — 조사·검증 상태표
 
+## 2026-10-17 마르세유 9/13~19일 재감사 — 이전 누락 정정
+
+**앞선 '충분히 검증/전수조사'라는 표현은 철회.** 9/17 MSC Musica, 9/18 Costa Fascinosa 등 누락 사례 확인. 특정 선사만 조사하지 않고 공개 연간 전 출항 데이터 전체를 날짜로 필터하고 월간 별도 출항 DB 및 프랑스 현지 사이트, 한국어 출항 색인을 교차 대조.
+
+| 날짜 | 선박 | 기간 | 하선일/항구 | 검증 수준 |
+|---|---|---|---|---|
+| 9/13 월 | MSC Seaview | 7박 | 9/20 마르세유 | CruiseTimetables + CruiseNexus |
+| 9/13 월 | MSC Virtuosa | 7박 | 9/20 마르세유 | CruiseTimetables + CruiseNexus |
+| 9/14 화 | 해당 날짜 신규 승선 상품 미발견 | - | - | 공개 DB 2곳·기항 DB와 대조. 부재 확정 아님 |
+| 9/15 수 | 해당 날짜 신규 승선 상품 미발견 | - | - | 공개 DB 2곳·기항 DB와 대조. 부재 확정 아님 |
+| 9/16 목 | MSC Sinfonia | **10박** | 9/26 마르세유 | CruiseTimetables + iCruise. 기간 조건 초과 |
+| 9/17 금 | MSC Musica | **7박** | 9/24 마르세유 | CruiseTimetables + iCruise + 한국 크루즈맵 |
+| 9/18 토 | **Costa Fascinosa** | **7박** | **9/25 툴롱** | CruiseTimetables + 프랑스 Plus de Croisières. 편도·하선항 다름 |
+| 9/18 토 | Costa Smeralda | **7박** | 9/25 마르세유 | CruiseTimetables + CruiseNexus |
+| 9/18 토 | MSC World Asia | **7박** | 9/25 마르세유 | CruiseTimetables + 한국 크루즈맵에서 정확히 9/18 기재 |
+| 9/19 일 | Costa Toscana | **7박** | 9/26 마르세유 | CruiseTimetables + CruiseNexus |
+| 9/19 일 | MSC World Europa | **7박** | 9/26 마르세유 | CruiseTimetables + CruiseNexus + 한국어 이전 주차 MSC 항차 |
+
+합계 **공개 승선 항차 9건**: 7박 8건 / 10박 1건. 7박 중 9/18 Costa Fascinosa만 툴롱 하선의 편도 항차. **9/16 당일 승선 7박 미발견**과 **9/16 이후 출발 7박 존재**는 다르다.
+
+### 교차검증 실증 링크
+- 기준 연간 출항 412개 전체 색인에서 2027년 9월 13~19일 필터: https://www.cruisetimetables.com/cruises-from-marseille-france-2027.html
+- 별도 업체 월간 출항 DB: https://www.thecruisenexus.com/port-monthly-schedule/Marseille/September-2027
+- 9/18 정확 날짜 Costa Fascinosa/Costa Smeralda/MSC World Asia 3건: https://www.cruisetimetables.com/frommarseillefrance-18sep2027.html
+- **프랑스 판매처 Costa Fascinosa 2027-09-18 마르세유 출발 7박 EUR 939 표시**: https://www.plusdecroisieres.fr/compagnies-croisieres/costa-croisieres/costa-fascinosa/
+- **한국어 크루즈맵 MSC World Asia 2027-09-18 출발 명시**: https://travelersmap.co.kr/cruise/v/msc-world-asia-7n-marseille-4634600c2fe2
+- **한국어 크루즈맵 MSC Musica 7박 운항 기록**: https://travelersmap.co.kr/cruise/v/msc-musica-7n-marseille-393c72aaa3d6
+- 9/14 마르세유 기항과 승선 차이: https://www.cruisetimetables.com/marseillefranceschedule-14sep2027.html
+
+### 완료와 미완료 분리
+- 완료: 9/13~19 공개 마르세유 출항 후보 항차/기간/귀항지 2차 대조, 9/18 누락 정정.
+- 미완료: 모든 선사의 비공개 단체/수시 편성 존재 여부, 선사 직판 실제 객실 5명 가용 여부, 국내 여행사별 최종 결제/취소 조건, 2027 항공·TGV 5좌석, 국제 보험 및 안전 경보.
+- 사용자가 요청한 로컬 `claude -p`는 **설치 확인** 되었지만 이번 시도는 **90초 타임아웃(종료코드 143)** 으로 독립 판단 결과를 받지 못함. 교차검증 성공이라고 주장하지 말 것.
+
 ## 2026-10-17 재검증: 9월 17일 마르세유 출발 7박 항차 발견
 
 **중요 정정:** 9/16 10박 Sinfonia만 검토하고 마르세유 주변 날짜의 7박 대안을 충분히 소개하지 못한 것은 조사 누락. **9/17(금) MSC Musica 7박, 9/24(금) 하선** 확인됨. 9/16 **당일** 마르세유 7박은 항만 출입항표와 출항표에서 미발견 상태이나, 전체 일정에 적용되는 마르세유 7박 항차가 없다는 뜻 아님.
