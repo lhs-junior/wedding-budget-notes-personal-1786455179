@@ -1,98 +1,58 @@
-/* USD/KRW display and reference rate refresh. Daily benchmark, not an intraday live quote. */
+/* Korean-first cruise budget display: KRW default, EUR and original USD reference. */
 (function(){
 'use strict';
-const root=document.getElementById('p-honeymoon');
-if(!root)return;
-const byId=id=>root.querySelector('#'+id);
-const list=byId('cruise-list'),fx=byId('cruise-fx');
-if(!list||!fx)return;
-const status=byId('cruise-rate-status'),usd=byId('cruise-use-usd'),krw=byId('cruise-use-krw'),refresh=byId('cruise-refresh-rate');
-let currency='USD',rateDate='',apiVerified=false;
-const korean=n=>Math.round(n).toLocaleString('ko-KR')+'원';
-const dollar=n=>'US$ '+Number(n).toLocaleString('en-US',{maximumFractionDigits:2});
-function rate(){const n=Number(fx.value);return Number.isFinite(n)&&n>0?n:0;}
-function label(){
-  const n=rate();
-  if(!n){status.textContent='올바른 환율을 입력해 주세요';return;}
-  const origin=apiVerified?'Frankfurter 기준환율 (일 1회 갱신) · '+rateDate:'수동 입력 환율 · 실시간 확인되지 않음';
-  status.textContent='1 USD = '+n.toLocaleString('ko-KR',{maximumFractionDigits:4})+' KRW · '+origin;
+const root=document.getElementById('p-honeymoon');if(!root)return;
+const q=id=>root.querySelector('#'+id);
+const list=q('cruise-list'),fx=q('cruise-fx'),status=q('cruise-rate-status'),refresh=q('cruise-refresh-rate');
+if(!list||!fx||!status||!refresh)return;
+const usd=q('cruise-use-usd'),krw=q('cruise-use-krw');
+const eur=document.createElement('button');eur.type='button';eur.id='cruise-use-eur';eur.textContent='유로 € (EUR)';usd.after(eur);
+usd.textContent='달러 $ (USD)';krw.textContent='원화 ₩ (KRW)';
+const money=(n,c)=>c==='KRW'?Math.round(n).toLocaleString('ko-KR')+'원':c==='EUR'?'€'+n.toLocaleString('ko-KR',{maximumFractionDigits:2}):'US$'+n.toLocaleString('ko-KR',{maximumFractionDigits:2});
+let currency='KRW',eurPerKrw=0,updated='',verifiedUSD=false,verifiedEUR=false,budgetWon=0,updating=false;
+const rate=()=>{const n=Number(fx.value);return Number.isFinite(n)&&n>0?n:0;};
+function showStatus(){
+ const u=rate();
+ let info='1달러 = '+(u?u.toLocaleString('ko-KR',{maximumFractionDigits:4}):'미입력')+'원';
+ if(eurPerKrw)info+=' · 1유로 = '+eurPerKrw.toLocaleString('ko-KR',{maximumFractionDigits:4})+'원';
+ info+=verifiedUSD&&verifiedEUR?' · '+updated+' 기준환율 (매일 갱신)':' · 일부 또는 전체 수동/미확인 환율';
+ status.textContent=info;
 }
-function apply(){
-  const n=rate();
-  list.querySelectorAll('.cruise-option-price strong').forEach(el=>{
-    let value=Number(el.dataset.usd);
-    if(!Number.isFinite(value)||value<=0){
-      const match=el.textContent.match(/US\$\s*([\d,]+(?:\.\d+)?)/);
-      if(match){value=Number(match[1].replace(/,/g,''));el.dataset.usd=String(value);}
-    }
-    if(Number.isFinite(value)&&value>0){
-      const output=currency==='KRW'&&n?korean(value*n):dollar(value);
-      if(el.textContent!==output)el.textContent=output;
-    }
-  });
-  usd.classList.toggle('active',currency==='USD');
-  krw.classList.toggle('active',currency==='KRW');
-  usd.setAttribute('aria-pressed',String(currency==='USD'));
-  krw.setAttribute('aria-pressed',String(currency==='KRW'));
-  const total=byId('cruise-total'),caption=byId('cruise-total-caption');
-  if(total&&caption){
-    let wonValue=Number(total.dataset.won);
-    if(!Number.isFinite(wonValue)){
-      const text=total.textContent.replace(/[^0-9]/g,'');
-      if(text){wonValue=Number(text);total.dataset.won=String(wonValue);}
-    }
-    if(currency==='KRW'){
-      if(Number.isFinite(wonValue))total.textContent=korean(wonValue);
-    }else if(n&&Number.isFinite(wonValue)){total.textContent=dollar(wonValue/n);}
-    const note=byId('cruise-currency-total-note');
-    if(note)note.textContent=currency==='USD'?'USD 환산액 · 항공 및 기타 원화 예산도 동일 환율로 환산':'KRW 계산액';
-  }
-  label();
+function update(){
+ if(updating)return;updating=true;
+ const u=rate(),e=eurPerKrw;
+ list.querySelectorAll('.cruise-option-price strong').forEach(node=>{
+   let original=Number(node.dataset.usd);
+   if(!original){const match=node.textContent.match(/US\$\s*([\d,]+(?:\.\d+)?)/);if(match){original=Number(match[1].replace(/,/g,''));node.dataset.usd=String(original);}}
+   if(!original)return;
+   if(currency==='KRW')node.textContent=u?money(original*u,'KRW'):money(original,'USD');
+   if(currency==='EUR')node.textContent=u&&e?money(original*u/e,'EUR'):money(original,'USD');
+   if(currency==='USD')node.textContent=money(original,'USD');
+ });
+ const total=q('cruise-total'),note=q('cruise-currency-total-note');
+ if(total&&Number.isFinite(budgetWon)){
+   if(currency==='KRW')total.textContent=money(budgetWon,'KRW');
+   if(currency==='EUR')total.textContent=e?money(budgetWon/e,'EUR'):'환율 미확인';
+   if(currency==='USD')total.textContent=u?money(budgetWon/u,'USD'):'환율 미확인';
+ }
+ [krw,eur,usd].forEach(b=>{const active=b.id==='cruise-use-'+currency.toLowerCase();b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});
+ if(note)note.textContent='해외 판매 사이트의 달러 참고가격을 환산한 값입니다. 실제 결제 통화와 청구액은 예약처마다 다릅니다.';
+ showStatus();updating=false;
 }
-function updateAfterCalc(){
-  const total=byId('cruise-total');
-  if(!total)return;
-  const txt=total.textContent;
-  if(txt.includes('원')){const v=Number(txt.replace(/[^\d]/g,''));if(Number.isFinite(v))total.dataset.won=String(v);}
-  apply();
+const note=document.createElement('small');note.id='cruise-currency-total-note';q('cruise-total')?.parentElement?.appendChild(note);
+function syncBudget(){const t=q('cruise-total');if(!t)return;const match=t.textContent.match(/^([\d,]+)원$/);if(match)budgetWon=Number(match[1].replace(/,/g,''));update();}
+[krw,eur,usd].forEach((b,i)=>b.addEventListener('click',()=>{if(i===1&&!eurPerKrw){showStatus();return;}currency=['KRW','EUR','USD'][i];update();}));
+['cruise-budget-ship','cruise-air','cruise-extra','cruise-fx'].forEach(id=>q(id)?.addEventListener('input',()=>{if(id==='cruise-fx')verifiedUSD=false;syncBudget();}));
+new MutationObserver(records=>{if(records.some(r=>r.type==='childList'))update();}).observe(list,{childList:true});
+async function fetchRate(from,to){const res=await fetch('https://api.frankfurter.dev/v2/rate/'+from+'/'+to,{cache:'no-store'});if(!res.ok)throw Error('HTTP '+res.status);const d=await res.json();if(d.base!==from||d.quote!==to||!Number.isFinite(d.rate)||d.rate<=0||!/^\d{4}-\d\d-\d\d$/.test(d.date))throw Error('invalid rate');return d;}
+async function refreshRates(){
+ refresh.disabled=true;status.textContent='원화·유로 기준환율 조회 중…';
+ const data=await Promise.allSettled([fetchRate('USD','KRW'),fetchRate('EUR','KRW')]);
+ if(data[0].status==='fulfilled'){const d=data[0].value;fx.value=String(d.rate);verifiedUSD=true;updated=d.date;}else verifiedUSD=false;
+ if(data[1].status==='fulfilled'){const d=data[1].value;eurPerKrw=d.rate;verifiedEUR=true;updated=updated||d.date;}else verifiedEUR=false;
+ q('cruise-budget-ship')?.dispatchEvent(new Event('input',{bubbles:true}));
+ syncBudget();refresh.disabled=false;
 }
-[usd,krw].forEach((el,i)=>el.addEventListener('click',()=>{currency=i?'KRW':'USD';apply();}));
-const calcInputs=['cruise-budget-ship','cruise-fx','cruise-air','cruise-extra'];
-calcInputs.forEach(id=>byId(id)?.addEventListener('input',()=>{
-  if(id==='cruise-fx')apiVerified=false;
-  // original estimator's handler runs first and writes KRW
-  updateAfterCalc();
-}));
-const listObserver=new MutationObserver(records=>{
- if(records.some(record=>record.type==='childList'))apply();
-});
-listObserver.observe(list,{childList:true});
-async function loadRate(){
- refresh.disabled=true;
- status.textContent='USD/KRW 기준환율 조회 중…';
- try{
-  const controller=new AbortController();
-  const timeout=setTimeout(()=>controller.abort(),10000);
-  let response;
-  try{response=await fetch('https://api.frankfurter.dev/v2/rate/USD/KRW',{cache:'no-store',signal:controller.signal});}
-  finally{clearTimeout(timeout);}
-  if(!response.ok)throw new Error('HTTP '+response.status);
-  const data=await response.json();
-  const value=Number(data.rate);
-  if(data.base!=='USD'||data.quote!=='KRW'||!Number.isFinite(value)||value<100||value>10000||!/^\d{4}-\d\d-\d\d$/.test(String(data.date)))throw new Error('invalid rate');
-  fx.value=String(value);
-  rateDate=data.date;
-  apiVerified=true;
-  byId('cruise-budget-ship')?.dispatchEvent(new Event('input',{bubbles:true}));
-  updateAfterCalc();
- }catch(e){
-  apiVerified=false;
-  status.textContent='환율 자동조회 실패 · 직접 입력한 값 사용 (실시간 환율 아님)';
-  apply();
- }finally{refresh.disabled=false;}
-}
-refresh.addEventListener('click',loadRate);
-const budgetHeader=byId('cruise-total')?.parentElement;
-if(budgetHeader){const el=document.createElement('small');el.id='cruise-currency-total-note';el.textContent='';budgetHeader.appendChild(el);}
-apply();loadRate();
+refresh.addEventListener('click',refreshRates);
+syncBudget();refreshRates();
 })();

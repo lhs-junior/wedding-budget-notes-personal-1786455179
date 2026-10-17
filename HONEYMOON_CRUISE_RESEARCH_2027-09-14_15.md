@@ -1,5 +1,14 @@
 # 2027년 9월 14·15일 승선 유럽 크루즈 — 조사·검증 상태표
 
+## 2026-10-17 한국어 UI / 표시 통화 및 일자별 일정 업데이트
+
+- UI는 **KRW 원화 기본 표시**, EUR·USD 선택 가능. 출처 사이트의 USD 참고가격에서 Frankfurter의 USD/KRW·EUR/KRW 기준환율로 환산. 데이터는 일 단위 참고환율이며 카드 결제 시점 환율·해외결제 수수료와 다르다. 수동 USD/KRW 값 수정 가능. 조회 실패 시 EUR 전환은 제공하지 않으며 원화 수동 값을 활용한다.
+- **유럽=반드시 유로 결제 아님**: MSC 지중해 선내 결제 통화는 유로라는 MSC 공식 공지: https://www.msccruises.com/int/manage-booking/before-you-go/on-board-payment . Windstar 선사 결제는 USD라는 공식 약관: https://www.windstarcruises.com/BlankSite/media/flipbooks/flipbook-2024/Atlas_22-2459.pdf . 한국 여행사 구매 가격/결제통화는 판매처 예약서 개별 확인.
+- 현지시간 **MSC Virtuosa 2027-09-14~21 일별 상세표**: 바르셀로나 14일 19:00 출항→15일 해상일→16일 튀니스 08~18→17일 팔레르모 08~18→18일 나폴리 06~17→19일 리보르노 09~20→20일 마르세유 10~18→21일 바르셀로나 07:00 입항. 출처 https://www.icruise.com/itineraries/7-night-barcelona-to-barcelona-cruise_msc-virtuosa_9-14-2027.html .
+- 현지시간 **Windstar Star Explorer 2027-09-15~23 일별 상세표**: 15일 바르셀로나 17:00 출항→16일 팔라모스 08~22→17일 포르방드르 08~17→18일 사나리쉬르메르 08~18→19일 몬테카를로 08~23:59→20일 칸 07~18→21일 포르토피노 09~21→22일 포르토페라이오 08~18→23일 치비타베키아 07:00 입항. 출처 https://windstarcruisesale.com/itinerary/8-night-yachtsmans-harbors-of-the-rivieras-cruise/736263/1625433 및 https://www.windstarcruises.co.uk/itineraries/yachtsmans-harbors-of-the-rivieras-15th-september-2027-wind1047701/ .
+- **파리 경유**: 9/13 파리 도착·9/14 바르셀로나 이동·9/15 승선은 일수상 연결 가능한 설계이나 2027년 해당 항공편/5석 재고/지연 위험을 검증하지 못했다. 9/14 MSC를 고르면 파리→바르셀로나 당일 승선 연결이므로 비추천. 예약 전날 바르셀로나 도착을 우선함.
+- 상세표의 관광 코스는 추천 선택지이지 구매 완료된 투어가 아님. 입항·출항 시각과 실제 귀선 마감은 다르며 최종 선사 e-ticket 기준.
+
 ## 2026-10-10 후기 기반 마지막 점검
 
 - 2026년 수하물 분실·보상 분쟁 주장: https://www.reddit.com/r/Cruise/comments/1w2ei7r/msc_cruises_lost_my_luggage_no_compensation/ . 단일 이용자 주장으로만 다루며 사고 빈도와 선사 책임을 확정하지 않는다. 수하물 태그 사진, 영수증, 보험 약관, 선사 분실 신고 기한 준비.
