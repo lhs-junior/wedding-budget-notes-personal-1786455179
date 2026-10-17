@@ -23,7 +23,7 @@
 #p-honeymoon .cruise-intro p{font-size:13px;line-height:1.9;color:#6b7770}
 #p-honeymoon .cruise-section{margin-top:90px}
 #p-honeymoon .cruise-section-title{display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:26px;border-bottom:1px solid #dce2dd;padding-bottom:20px}
-#p-honeymoon .cruise-section-title h3{font-size:27px;letter-spacing:-.05em;color:#2b493d;margin:8px 0 0;font-weight:650}
+#p-honeymoon .cruise-section-title h3{word-break:keep-all;font-size:27px;letter-spacing:-.05em;color:#2b493d;margin:8px 0 0;font-weight:650}
 #p-honeymoon .cruise-counter{font:11px Georgia,serif;color:#718478;letter-spacing:.12em}
 #p-honeymoon .cruise-controls{display:grid;grid-template-columns:1fr 1fr 1.5fr 1fr;gap:12px;padding:19px;background:#f6f8f4;border:1px solid #e1e6dd;margin-bottom:15px}
 #p-honeymoon .cruise-controls label,#p-honeymoon .cruise-calculator label{display:flex;flex-direction:column;gap:8px;font-size:11px;font-weight:650;color:#66776b}
