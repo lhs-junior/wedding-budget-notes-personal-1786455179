@@ -3940,7 +3940,7 @@ function show(){ $("#gate").style.display="none"; $("#app").style.display="block
 $("#go").onclick=unlock;
 $("#pw").addEventListener("keydown",e=>{ if(e.key==="Enter") unlock(); });
 if(sessionStorage.getItem("ok")==="1") show();
-setTimeout(function(){renderHalls();renderTotal();},10);
+setTimeout(function(){try{renderHalls();renderTotal();}catch(e){}},10); /* 정의 전이면 4655행 재호출이 그림 */
 
 /* tabs */
 $("#nav").addEventListener("click",e=>{

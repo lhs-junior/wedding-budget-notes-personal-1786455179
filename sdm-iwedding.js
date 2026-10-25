@@ -35,6 +35,7 @@ function model(v,old){
  var prices=allCase.map(function(c){return c.c;});
  var p0=(v.products||[])[0];
  var insta=(v.insta||[]).slice();
+ var ig=(g.SDM_IG||{})[v.name];if(!insta.length&&ig)insta.push({handle:ig.handle,url:ig.url});
  if(!insta.length&&rr&&rr.links)rr.links.forEach(function(l){if(/instagram\.com/.test(l.url))insta.push({handle:l.url.replace(/^.*instagram\.com\/|\/$/g,'').split('/')[0],url:l.url});});
  return {v:v,old:old,role:role,roles:[role],name:v.name,cases:cases,rrs:link.rrs,
   portrait:/인물/.test(texts)?'인물 중심':(role==='studio'?'미확인':''),
@@ -67,10 +68,28 @@ function thumb(m,cls){
  var p=m.photos[0];
  return p?'<img class="'+cls+'" src="'+esc(p.src)+'" alt="'+esc(baseName(m.name))+' 대표 사진" loading="lazy" decoding="async">':'<span class="'+cls+' vt-ph vt-'+esc(m.role)+'" aria-hidden="true">'+esc(baseName(m.name).slice(0,2))+'</span>';
 }
+/* 목록 카드 사진: 여러 장이면 겹쳐 두고 타이머가 한 장씩 넘김(rotate) */
+function slides(m){
+ var ps=m.photos.slice(0,8);if(ps.length<2)return thumb(m,'vt-img');
+ return '<span class="vt-slides vt-img">'+ps.map(function(p,i){return '<img class="'+(i?'':'on')+'" src="'+esc(p.src)+'" alt="'+(i?'':esc(baseName(m.name))+' 사진')+'" loading="lazy" decoding="async">';}).join('')+
+  '<span class="vt-dots" aria-hidden="true">'+ps.map(function(p,i){return '<i'+(i?'':' class="on"')+'></i>';}).join('')+'</span></span>';
+}
+var tick=0;
+function rotate(){
+ if(document.hidden||(g.matchMedia&&g.matchMedia('(prefers-reduced-motion: reduce)').matches))return;
+ tick++;var H=g.innerHeight;
+ document.querySelectorAll('.vt-slides').forEach(function(el,i){
+  if((tick+i)%2)return; // 카드마다 엇갈려 넘어가게
+  var r=el.getBoundingClientRect();if(!r.width||r.bottom<0||r.top>H)return;
+  var im=el.querySelectorAll('img'),dt=el.querySelectorAll('.vt-dots i'),k=0;
+  im.forEach(function(x,j){if(x.classList.contains('on'))k=j;});
+  var n=(k+1)%im.length;im[k].classList.remove('on');im[n].classList.add('on');
+  if(dt[k])dt[k].classList.remove('on');if(dt[n])dt[n].classList.add('on');});
+}
 /* 목록 카드: 사진·이름·가격·태그만. 나머지는 상세 모달에서 */
 function tile(m){
  var p=priceOf(m);
- return '<button type="button" class="vt'+(m.cafeOnly?' vt-cafe':'')+'" data-vid="'+m.id+'">'+thumb(m,'vt-img')+
+ return '<button type="button" class="vt'+(m.cafeOnly?' vt-cafe':'')+'" data-vid="'+m.id+'">'+slides(m)+
   '<span class="vt-body"><span class="vt-role">'+esc(roleText(m))+(subName(m.name)?' · '+esc(subName(m.name)):'')+'</span>'+
   '<b class="vt-name">'+esc(baseName(m.name))+'</b>'+
   '<span class="vt-price">'+grade(p.gr)+' <b>'+esc(p.t)+'</b></span>'+
@@ -81,7 +100,7 @@ function sec(title,body,cls){return body?'<section class="md-sec'+(cls?' '+cls:'
 /* 상세 모달: 업체에 대해 모은 것 전부. 새 정보는 여기 섹션으로 추가 */
 function detail(m){
  var v=m.v,O=g.SDM_OLD,r=v.reviews||{items:[]},p=priceOf(m);
- var gal=m.photos.length?'<div class="md-galw"><button type="button" class="md-nav" data-gal="-1" aria-label="이전 사진">‹</button><button type="button" class="md-nav md-next" data-gal="1" aria-label="다음 사진">›</button><div class="md-gal">'+m.photos.map(function(x,i){return '<a href="'+esc(x.src)+'" target="_blank" rel="noopener"><img src="'+esc(x.src)+'" alt="'+esc(baseName(m.name))+' 사진 '+(i+1)+'" loading="'+(i<2?'eager':'lazy')+'" decoding="async"'+(x.w&&x.h?' style="aspect-ratio:'+x.w+'/'+x.h+'"':'')+'></a>';}).join('')+'</div></div><p class="md-src">사진 '+m.photos.length+'장 · 출처 '+a(v.iwUrl,'아이웨딩 업체정보')+' (옆으로 넘겨 보기, 누르면 원본)</p>'
+ var gal=m.photos.length?'<div class="md-galw"><button type="button" class="md-nav" data-gal="-1" aria-label="이전 사진">‹</button><button type="button" class="md-nav md-next" data-gal="1" aria-label="다음 사진">›</button><div class="md-gal">'+m.photos.map(function(x,i){return '<a href="'+esc(/^photos\/ig\//.test(x.src)&&x.from?x.from:x.src)+'" target="_blank" rel="noopener"><img src="'+esc(x.src)+'" alt="'+esc(baseName(m.name))+' 사진 '+(i+1)+'" loading="'+(i<2?'eager':'lazy')+'" decoding="async"'+(x.w&&x.h?' style="aspect-ratio:'+x.w+'/'+x.h+'"':'')+'></a>';}).join('')+'</div></div><p class="md-src">사진 '+m.photos.length+'장 · 출처 '+(/^photos\/ig\//.test(m.photos[0].src)&&m.insta[0]?a(m.insta[0].url,'인스타 @'+m.insta[0].handle)+' 최근 게시물':a(v.iwUrl,'아이웨딩 업체정보'))+' (옆으로 넘겨 보기, 누르면 원본)</p>'
   :'<div class="md-nogal">'+thumb(m,'md-ph')+'<p>공개 사진을 아직 모으지 못했어요.'+(m.insta.length?' 인스타에서 분위기를 보세요.':'')+'</p></div>';
  var head='<header class="md-head"><span class="vt-role">'+esc(roleText(m))+(subName(m.name)?' · '+esc(subName(m.name)):'')+'</span><h4>'+esc(baseName(m.name))+'</h4><div class="vt-tags">'+tagsOf(m)+'</div>'+
   (m.insta.length?'<div class="md-ig">'+m.insta.map(function(i){return '<a class="vc-ig" href="'+esc(i.url)+'" target="_blank" rel="noopener">인스타 @'+esc(i.handle)+'</a>';}).join('')+'</div>':'')+'</header>';
@@ -261,6 +280,7 @@ g.SDM_IW_PARTS={
  }
 };
 g.SDM_IW_BIND=function(root){
+ if(!g.__sdmRotate)g.__sdmRotate=setInterval(rotate,1600);
  function q(sel){return root.querySelector(sel);}
  function redraw(){var c=q('#iwCmp');if(c)c.innerHTML=compare();root.querySelectorAll('.iw-combos').forEach(function(x){x.innerHTML=D.combos.map(comboRow).join('');});}
  var vq=q('#iwVendorQ');if(vq)vq.addEventListener('input',function(){ui.q=vq.value;var v=q('#iwVendors');if(v)v.innerHTML=vendors();});
