@@ -26,7 +26,7 @@ function revBadge(r){
 
 function vendorCard(v){
  var r=v.reviews||{items:[]};
- return '<article class="iw-card"><header><div><span class="sd-role">'+esc(D.roleLabel[v.role])+(v.total!=null?' · '+(v.total?'토탈':'비토탈'):'')+(v.fabric?' · '+esc(v.fabric):'')+'</span><h4>'+esc(v.name)+'</h4></div>'+revBadge(r)+'</header>'+
+ return '<article class="iw-card"><header><div><span class="sd-role">'+esc(D.roleLabel[v.role])+(v.total!=null?' · '+(v.total==='both'?'토탈·비토탈 상품 모두':v.total?'토탈':'비토탈'):'')+(v.fabric?' · '+esc(v.fabric):'')+'</span><h4>'+esc(v.name)+'</h4></div>'+revBadge(r)+'</header>'+
   (v.style?'<p class="iw-style">'+esc(v.style)+'</p>':'')+
   (v.insta?'<div class="iw-insta">'+v.insta.map(function(i){return '<a href="'+esc(i.url)+'" target="_blank" rel="noopener">Instagram @'+esc(i.handle)+' →</a>';}).join('')+(v.instaFeel?'<p>피드 느낌: '+esc(v.instaFeel)+'</p>':'')+'</div>':'')+
   '<div class="iw-prods">'+(v.products||[]).map(function(p){return '<div class="iw-prod"><div>'+grade(p.grade)+' <b>'+esc(p.price)+'</b></div><p>'+a(p.url,p.name)+'</p><small>'+esc(p.cond||'')+' · 확인 '+esc(p.checked||D.checked)+'</small></div>';}).join('')+'</div>'+
@@ -42,7 +42,7 @@ function vendorCard(v){
 function vendors(){
  var rows=D.vendors.filter(function(v){
   if(ui.role&&v.role!==ui.role)return false;
-  if(ui.kind&&!(v.role==='studio'&&(ui.kind==='total'?v.total:!v.total)))return false;
+  if(ui.kind&&!(v.role==='studio'&&(v.total==='both'||(ui.kind==='total'?v.total:!v.total))))return false;
   if(ui.fabric&&!(v.role==='dress'&&String(v.fabric||'').indexOf(ui.fabric)>=0))return false;
   return true;});
  rows.sort(function(x,y){return ui.sort==='review'?((y.reviews||{}).independent||0)-((x.reviews||{}).independent||0):(x.role+x.name).localeCompare(y.role+y.name);});
@@ -87,43 +87,58 @@ function totalVs(){
  return '<div class="sd-tablewrap"><table class="sd-table iw-roles"><thead><tr><th>항목</th><th>토탈</th><th>비토탈</th></tr></thead><tbody>'+t.rows.map(function(r){return '<tr><td><b>'+esc(r[0])+'</b></td><td>'+esc(r[1])+'</td><td>'+esc(r[2])+'</td></tr>';}).join('')+'</tbody></table></div>'+
   '<div class="iw-claims">'+t.claims.map(function(c){return '<article><b>'+esc(c[0])+'</b><span class="iw-verdict">'+esc(c[1])+'</span><p>'+esc(c[2])+'</p></article>';}).join('')+'</div><p class="iw-cond">'+esc(t.verdict)+'</p>';
 }
-g.SDM_IW_HTML=function(){
- var b=D.baseline;
- return '<section class="sd-sec iw" id="iwAudit"><h3>아이웨딩 상세페이지 재검증 · '+esc(D.checked)+'</h3>'+
-  '<p class="sd-lead">'+esc(D.summary)+'</p>'+
-  '<div class="iw-base">'+b.map(function(x){return '<div><small>'+esc(x.label)+' '+grade(x.grade)+'</small><b>'+man(x.total)+'</b><span>'+esc(x.parts)+'</span></div>';}).join('')+'</div>'+
-  '<p class="sd-note">'+esc(D.baselineNote)+'</p>'+
-  '<div class="iw-legend">'+Object.keys(D.gradeInfo).map(function(k){return '<span>'+grade(k)+' '+esc(D.gradeInfo[k])+'</span>';}).join('')+'</div>'+
-  '<h4 class="iw-h">추천 TOP 3</h4>'+picks()+
-  '<h4 class="iw-h">조합 비교 · 실지불액 계산</h4><p class="sd-lead">2~4개를 골라 나란히 보세요. 모든 조합에 같은 기준(헬퍼·피팅비)을 더해 비교해요. 선택 옵션은 체크한 것만 더하고, 미확인 비용은 합계에 넣지 않고 개수로만 보여줘요.</p>'+
-  '<div class="iw-combos">'+D.combos.map(comboRow).join('')+'</div><p class="iw-cmpmsg" id="iwCmpMsg" aria-live="polite"></p><div id="iwCmp">'+compare()+'</div>'+
-  '<h4 class="iw-h">업체별 상세페이지·후기</h4>'+
-  '<div class="sd-ctl"><div>'+chips('role',[['','전체'],['studio','스튜디오'],['dress','드레스'],['makeup','메이크업']])+'</div><div>'+chips('kind',[['','토탈·비토탈'],['total','토탈'],['nontotal','비토탈']])+chips('fabric',[['','소재 전체'],['실크','실크'],['비즈','비즈']])+chips('sort',[['grade','이름순'],['review','후기 많은 순']])+'</div></div>'+
-  '<div id="iwVendors">'+vendors()+'</div>'+
-  (D.totalVs?'<h4 class="iw-h">토탈(포괄) vs 비토탈 · 들리는 얘기 따져보기</h4>'+totalVs():'')+
-  '<h4 class="iw-h">플래너 이용 vs 셀프 준비</h4>'+roles()+
-  '<div class="iw-links">'+D.pages.map(function(p){return '<a href="'+esc(p.url)+'">'+esc(p.label)+' →</a>';}).join('')+'</div>'+
-  '</section>';
+function calcTable(){
+ var c=D.calc;if(!c)return '';
+ var base=c.rows[0]&&c.rows[0].final;
+ return '<h4 class="iw-h">아이웨딩 공식 계산기 · 비토탈 조합 비교</h4><p class="sd-lead">'+esc(c.basis)+' '+a(c.url,'계산기 열기')+'</p>'+
+  '<div class="sd-tablewrap"><table class="sd-table iw-calc"><thead><tr><th>조합 (스튜디오 + 드레스 + 메이크업)</th><th class="sd-num">최종 할인가</th><th class="sd-num">받은 견적 조합 대비</th></tr></thead><tbody>'+
+  c.rows.slice().sort(function(x,y){return (x.final==null)-(y.final==null)||x.final-y.final;}).map(function(r){return '<tr'+(r===c.rows[0]?' class="iw-calc-base"':'')+'><td>'+esc(r.combo)+(r.final==null?'<small>'+esc(r.status+' · '+r.note)+'</small>':'')+'</td><td class="sd-num"><b>'+(r.final==null?'계산 불가':man(r.final))+'</b></td><td class="sd-num">'+(r.final==null?'–':r===c.rows[0]?'기준':diff(r.final,base))+'</td></tr>';}).join('')+
+  '</tbody></table></div>';
+}
+function grades(){return '<div class="iw-legend">'+Object.keys(D.gradeInfo).map(function(k){return '<span>'+grade(k)+' '+esc(D.gradeInfo[k])+'</span>';}).join('')+'</div>';}
+g.SDM_IW_PARTS={
+ decide:function(){
+  var b=D.baseline;
+  return '<section class="sd-sec iw"><h3>받은 견적 · 검증 '+esc(D.checked)+'</h3>'+
+   '<div class="iw-base">'+b.map(function(x){return '<div><small>'+esc(x.label)+' '+grade(x.grade)+'</small><b>'+man(x.total)+'</b><span>'+esc(x.parts)+'</span></div>';}).join('')+'</div>'+
+   '<details class="iw-more iw-memo"><summary>근거·계산 메모 펼치기</summary><p>'+esc(D.baselineNote)+'</p><p>'+esc(D.summary)+'</p>'+grades()+'</details>'+
+   '<h4 class="iw-h">추천 TOP 3 · 비토탈</h4>'+(D.picksNote?'<p class="sd-lead">'+esc(D.picksNote)+'</p>':'')+picks()+
+   calcTable()+
+   '<h4 class="iw-h">조합 비교 · 실지불액 계산</h4><p class="sd-lead">2~4개를 골라 나란히 보세요. 모든 조합에 같은 기준(헬퍼비)을 더해 비교해요. 선택 옵션은 체크한 것만 더하고, 미확인 비용은 합계에 넣지 않고 개수로만 보여줘요.</p>'+
+   '<div class="iw-combos">'+D.combos.map(comboRow).join('')+'</div><p class="iw-cmpmsg" id="iwCmpMsg" aria-live="polite"></p><div id="iwCmp">'+compare()+'</div></section>';
+ },
+ vendors:function(){
+  return '<section class="sd-sec iw"><h3>아이웨딩 상세페이지·후기 검증 업체</h3><p class="sd-lead">가격 근거 등급, 포함·별도 비용, 쿠폰·특전, 후기, 공식 인스타를 한 카드에 모았어요.</p>'+grades()+
+   '<div class="sd-ctl"><div>'+chips('role',[['','전체'],['studio','스튜디오'],['dress','드레스'],['makeup','메이크업']])+'</div><div>'+chips('kind',[['','토탈·비토탈'],['total','토탈'],['nontotal','비토탈']])+chips('fabric',[['','소재 전체'],['실크','실크'],['비즈','비즈']])+chips('sort',[['grade','이름순'],['review','후기 많은 순']])+'</div></div>'+
+   '<div id="iwVendors">'+vendors()+'</div></section>';
+ },
+ guide:function(){
+  return '<section class="sd-sec iw">'+(D.totalVs?'<h3>토탈(포괄) vs 비토탈 · 들리는 얘기 따져보기</h3>'+totalVs():'')+
+   '<h4 class="iw-h">플래너 이용 vs 셀프 준비</h4>'+roles()+
+   '<div class="iw-links">'+D.pages.map(function(p){return '<a href="'+esc(p.url)+'">'+esc(p.label)+' →</a>';}).join('')+'</div></section>';
+ }
 };
 g.SDM_IW_BIND=function(root){
- var sec=root.querySelector('#iwAudit');if(!sec)return;
- function redraw(){sec.querySelector('#iwCmp').innerHTML=compare();sec.querySelectorAll('.iw-combos').forEach(function(x){x.innerHTML=D.combos.map(comboRow).join('');});}
- sec.addEventListener('click',function(e){
-  var b=e.target.closest('[data-iwk]');if(!b)return;
-  ui[b.dataset.iwk]=b.dataset.iwv;
-  sec.querySelectorAll('[data-iwk="'+b.dataset.iwk+'"]').forEach(function(x){x.classList.toggle('on',x===b);});
-  sec.querySelector('#iwVendors').innerHTML=vendors();
- });
- sec.addEventListener('change',function(e){
-  var t=e.target,msg=sec.querySelector('#iwCmpMsg');
-  if(t.dataset.cmp){
-   var id=t.dataset.cmp,i=ui.cmp.indexOf(id);
-   if(t.checked&&i<0){if(ui.cmp.length>=4){t.checked=false;msg.textContent='최대 4개까지 비교할 수 있어요.';return;}ui.cmp.push(id);}
-   if(!t.checked&&i>=0)ui.cmp.splice(i,1);
-   msg.textContent='';redraw();
-  }else if(t.dataset.opt){
-   var s=ui.sel[t.dataset.opt]=ui.sel[t.dataset.opt]||{};s[t.dataset.i]=t.checked;redraw();
-  }
+ function q(sel){return root.querySelector(sel);}
+ function redraw(){var c=q('#iwCmp');if(c)c.innerHTML=compare();root.querySelectorAll('.iw-combos').forEach(function(x){x.innerHTML=D.combos.map(comboRow).join('');});}
+ root.querySelectorAll('.iw').forEach(function(sec){
+  sec.addEventListener('click',function(e){
+   var b=e.target.closest('[data-iwk]');if(!b)return;
+   ui[b.dataset.iwk]=b.dataset.iwv;
+   sec.querySelectorAll('[data-iwk="'+b.dataset.iwk+'"]').forEach(function(x){x.classList.toggle('on',x===b);});
+   var v=q('#iwVendors');if(v)v.innerHTML=vendors();
+  });
+  sec.addEventListener('change',function(e){
+   var t=e.target,msg=q('#iwCmpMsg');
+   if(t.dataset.cmp){
+    var id=t.dataset.cmp,i=ui.cmp.indexOf(id);
+    if(t.checked&&i<0){if(ui.cmp.length>=4){t.checked=false;msg.textContent='최대 4개까지 비교할 수 있어요.';return;}ui.cmp.push(id);}
+    if(!t.checked&&i>=0)ui.cmp.splice(i,1);
+    msg.textContent='';redraw();
+   }else if(t.dataset.opt){
+    var s=ui.sel[t.dataset.opt]=ui.sel[t.dataset.opt]||{};s[t.dataset.i]=t.checked;redraw();
+   }
+  });
  });
 };
 })(typeof window!=='undefined'?window:globalThis);

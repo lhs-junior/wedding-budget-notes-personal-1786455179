@@ -124,7 +124,7 @@ function vendorCards(){
 function vendorSection(){
  var btns=[['','전체'],['studio','스튜디오'],['dress','드레스'],['makeup','메이크업']].map(function(x){return '<button class="sd-chip'+(vendorUi.role===x[0]?' on':'')+'" data-vrole="'+x[0]+'">'+x[1]+'</button>';}).join('');
  var researchCount=typeof SDM_VENDOR_RESEARCH!=='undefined'?Object.keys(SDM_VENDOR_RESEARCH).length:0;
- return '<section class="sd-sec"><h3>가격 말고 업체 자체를 비교</h3><p class="sd-lead">무엇을 해주는 곳인지 → <b>후기에서 실제로 고생한 지점</b> → 추가금 발생 조건 → 피하는 방법 → 최종가 순서로 봐요. 현재 업체별 심층후기 '+researchCount+'곳 조사 완료.</p>'+
+ return '<section class="sd-sec"><h3>카페 계약사례 기반 업체 메모</h3><p class="sd-lead">무엇을 해주는 곳인지 → <b>후기에서 실제로 고생한 지점</b> → 추가금 발생 조건 → 피하는 방법 → 최종가 순서로 봐요. 현재 업체별 심층후기 '+researchCount+'곳 조사 완료.</p>'+
   '<div class="sd-meaning-grid">'+Object.keys(ROLE_INFO).map(function(k){var r=ROLE_INFO[k];return '<article><span>'+r.label+'</span><b>'+r.title+'</b><p>'+r.desc+'</p><small>'+r.checks.join(' · ')+'</small></article>';}).join('')+'</div>'+
   '<div class="sd-value-rule"><b>가성비 판단 순서</b><span>① 원하는 결과에 맞는가 → ② 기본가 포함 범위 → ③ 필수 추가비 포함 최종가 → ④ 실제 후기·근거 수 → ⑤ 같은 조건 업체 비교</span></div>'+
   '<div class="sd-ctl"><div>'+btns+'</div><input id="sdVendorQ" class="sd-q" placeholder="업체명 검색" value="'+esc(vendorUi.q)+'"></div><div id="sdVendors">'+vendorCards()+'</div></section>';
@@ -206,29 +206,42 @@ function snapSection(){
 function bindSnap(){
   root.querySelectorAll('[data-snapt]').forEach(function(b){b.onclick=function(){snapUi.tier=b.dataset.snapt;root.querySelectorAll('[data-snapt]').forEach(function(x){x.classList.toggle('on',x.dataset.snapt===snapUi.tier);});document.getElementById('snapRows').innerHTML=snapRows();};});
 }
+var VIEWS=[['decide','결론·비교'],['vendors','업체'],['cases','계약 사례'],['guide','준비 가이드'],['mine','내 견적']];
+var view;try{view=sessionStorage.getItem('sdm:view')||'decide';}catch(e){view='decide';}
+function panel(id,html){return '<div class="sd-panel" data-view="'+id+'"'+(view===id?'':' hidden')+'>'+html+'</div>';}
 function render(){
+  var IW=window.SDM_IW_PARTS||null;
   root.innerHTML='<div class="sd">'+
-  '<header class="sd-hero"><h2>스드메</h2><p>네이버 카페 원문 '+SDM_CASES.length+'건을 직접 열어 업체 조합과 금액을 정리했어요. (2026-09-24 수집)</p>'+
-   '<div class="sd-kpi"><div><small>비동행 계약가 중간값</small><b>'+man(medAll)+'</b><span>업체명 공개 '+base.length+'건 · 서울만 '+seoul.length+'건은 '+man(medSeoul)+'</span></div>'+
-   '<div><small>거의 항상 붙는 추가금</small><b>+55~100만</b><span>원본·수정본 44 · 헬퍼 50 · 투어비 11</span></div>'+
-   '<div><small>L65 기준 목표 실지출</small><b>280~320만</b><span>계약가 220~250 + 추가금. 본식 원판·DVD는 식장 필수라 별도</span></div></div></header>'+
-  (window.SDM_IW_HTML?SDM_IW_HTML():'')+
-  vendorSection()+
-  '<section class="sd-sec"><h3>실제 계약 사례</h3><p class="sd-lead">줄을 누르면 포함·별도 항목과 원문 링크가 나와요. 업체명을 누르면 그 업체가 들어간 사례만 모아 봐요.</p>'+controls()+'<div id="sdCases">'+caseRows()+'</div>'+
-   '<p class="sd-note">다이렉트 카페 글이 많아요. 다이렉트 카페는 운영사가 직접 운영하고 후기 작성 시 포인트를 줘서 “광고성”으로 표시했어요. 금액은 원문 그대로입니다.</p></section>'+
-  '<section class="sd-sec"><h3>같은 조합, 다른 회사 견적</h3><p class="sd-lead">동행이냐 비동행이냐보다, 같은 조합을 어느 회사가 견적 내느냐의 차이가 더 컸어요.</p><div class="sd-same-grid">'+sameBlock()+'</div>'+
-   '<p class="sd-note">웨딩킹 비교글 3건은 웨딩킹 운영 카페의 홍보글이라 차이가 과장됐을 수 있어요.</p></section>'+
-  (typeof SNAP_CASES!=='undefined'?snapSection():'')+
-  '<section class="sd-sec"><h3>플래너 상담 가이드</h3>'+guide()+'</section>'+
-  '<section class="sd-sec"><h3>내 견적 기록</h3><div id="sdQuotes">'+quotes()+'</div></section>'+
+  '<header class="sd-hero"><h2>스드메</h2></header>'+
+  '<nav class="sd-subnav" role="tablist" aria-label="스드메 메뉴">'+VIEWS.map(function(v){return '<button role="tab" data-view="'+v[0]+'" aria-selected="'+(view===v[0])+'"'+(view===v[0]?' class="on"':'')+'>'+v[1]+'</button>';}).join('')+'</nav>'+
+  panel('decide',(IW?IW.decide():''))+
+  panel('vendors',(IW?IW.vendors():'')+vendorSection())+
+  panel('cases',
+   '<section class="sd-sec"><h3>실제 계약 사례</h3><p class="sd-lead">네이버 카페 원문 '+SDM_CASES.length+'건을 직접 열어 업체 조합과 금액을 정리했어요. (2026-09-24 수집) 줄을 누르면 포함·별도 항목과 원문 링크가 나와요. 업체명을 누르면 그 업체가 들어간 사례만 모아 봐요.</p>'+
+    '<div class="sd-kpi"><div><small>비동행 계약가 중간값</small><b>'+man(medAll)+'</b><span>업체명 공개 '+base.length+'건 · 서울만 '+seoul.length+'건은 '+man(medSeoul)+'</span></div>'+
+    '<div><small>카페 사례에서 자주 붙은 추가금</small><b>+55~100만</b><span>원본·수정본 44 · 헬퍼 50 · 투어비 11 (아이웨딩은 원본·1회 피팅이 상품가에 포함)</span></div>'+
+    '<div><small>L65 기준 목표 실지출</small><b>280~320만</b><span>계약가 220~250 + 추가금. 본식 원판·DVD는 식장 필수라 별도</span></div></div>'+
+    controls()+'<div id="sdCases">'+caseRows()+'</div>'+
+    '<p class="sd-note">다이렉트 카페 글이 많아요. 다이렉트 카페는 운영사가 직접 운영하고 후기 작성 시 포인트를 줘서 “광고성”으로 표시했어요. 금액은 원문 그대로입니다.</p></section>'+
+   '<section class="sd-sec"><h3>같은 조합, 다른 회사 견적</h3><p class="sd-lead">동행이냐 비동행이냐보다, 같은 조합을 어느 회사가 견적 내느냐의 차이가 더 컸어요.</p><div class="sd-same-grid">'+sameBlock()+'</div>'+
+    '<p class="sd-note">웨딩킹 비교글 3건은 웨딩킹 운영 카페의 홍보글이라 차이가 과장됐을 수 있어요.</p></section>'+
+   (typeof SNAP_CASES!=='undefined'?snapSection():''))+
+  panel('guide',(IW?IW.guide():'')+'<section class="sd-sec"><h3>플래너 상담 가이드</h3>'+guide()+'</section>')+
+  panel('mine','<section class="sd-sec"><h3>내 견적 기록</h3><div id="sdQuotes">'+quotes()+'</div></section>')+
   '</div>';
   bind();
   if(window.SDM_IW_BIND)SDM_IW_BIND(root);
+  root.querySelectorAll('.sd-subnav [data-view]').forEach(function(b){b.onclick=function(){
+    view=b.dataset.view;try{sessionStorage.setItem('sdm:view',view);}catch(e){}
+    root.querySelectorAll('.sd-subnav [data-view]').forEach(function(x){var on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-selected',on);});
+    root.querySelectorAll('.sd-panel').forEach(function(pn){pn.hidden=pn.dataset.view!==view;});
+    var nav=root.querySelector('.sd-subnav');if(nav&&nav.getBoundingClientRect().top<0)nav.scrollIntoView({block:'start'});
+  };});
 }
 function refreshCases(){document.getElementById('sdCases').innerHTML=caseRows();bindCases();}
 function bindCases(){
   root.querySelectorAll('.sd-row').forEach(function(tr){tr.onclick=function(ev){if(ev.target.closest('.sd-v')||ev.target.closest('a'))return;ui.open=ui.open===tr.dataset.id?'':tr.dataset.id;refreshCases();};});
-  root.querySelectorAll('.sd-v').forEach(function(b){b.onclick=function(ev){ev.stopPropagation();ui.q=b.dataset.q;ui.how='';ui.contractOnly=false;render();var t=document.getElementById('sdQ');if(t)t.scrollIntoView({block:'center'});};});
+  root.querySelectorAll('.sd-v').forEach(function(b){b.onclick=function(ev){ev.stopPropagation();ui.q=b.dataset.q;ui.how='';ui.contractOnly=false;view='cases';try{sessionStorage.setItem('sdm:view',view);}catch(e){}render();var t=document.getElementById('sdQ');if(t)t.scrollIntoView({block:'center'});};});
 }
 function bind(){
   root.querySelectorAll('[data-vrole]').forEach(function(b){b.onclick=function(){vendorUi.role=b.dataset.vrole;root.querySelectorAll('[data-vrole]').forEach(function(x){x.classList.toggle('on',x===b);});document.getElementById('sdVendors').innerHTML=vendorCards();};});
