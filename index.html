@@ -38,10 +38,8 @@ body{background:var(--bg);color:#111;font-size:14px;line-height:1.6;-webkit-font
 nav{background:#fff;border-bottom:1px solid var(--border);padding:0 24px;overflow-x:auto;white-space:nowrap;position:sticky;top:0;z-index:30}
 nav::-webkit-scrollbar{height:0}
 nav .inner{display:flex;gap:0;max-width:1100px;margin:0 auto}
-nav button,nav a{border:none;background:none;color:#999;text-decoration:none;padding:12px 14px;font:500 13px/1 inherit;cursor:pointer;border-bottom:2px solid transparent;transition:.1s;white-space:nowrap}
-nav button:hover,nav a:hover{color:#555}
-/* 버튼은 위 font 선언이 무효라 브라우저 기본 글꼴로 보임 → 링크도 같은 모양으로 맞춤 */
-nav a{font:13.3333px Arial,sans-serif;line-height:normal}
+nav button{border:none;background:none;color:#999;padding:12px 14px;font:500 13px/1 inherit;cursor:pointer;border-bottom:2px solid transparent;transition:.1s;white-space:nowrap}
+nav button:hover{color:#555}
 nav button.on{color:#111;border-bottom-color:var(--c)}
 
 /* ── Content ── */
@@ -189,7 +187,7 @@ details li{margin:.3em 0}
   .card-grid{grid-template-columns:1fr 1fr;gap:6px}
   .card{padding:12px 14px}
   .card-price{font-size:19px}
-  nav button,nav a{padding:10px 10px;font-size:12px}
+  nav button{padding:10px 10px;font-size:12px}
   .bar .amt{font-size:22px}
   .bar .inner{border-radius:0;border-left:none;border-right:none}
   .wrap{padding:0 16px 120px}
@@ -326,7 +324,7 @@ details li{margin:.3em 0}
 <nav><div class="inner" id="nav">
 <button class="on" data-p="hall">웨딩홀</button>
 <button data-p="sdm">스드메</button>
-<a href="./groom-suit.html">신랑 예복</a>
+<button data-p="suit">신랑 예복</button>
 <button data-p="vendor">부대업체</button>
 <button data-p="map">전체 비용</button>
 <button data-p="timing">요일·시간</button>
@@ -466,6 +464,9 @@ details li{margin:.3em 0}
 </div>
 <div id="sdmDetail"></div>
 </div>
+
+<!-- ═══ 신랑 예복 ═══ -->
+<div class="page" id="p-suit"></div>
 
 <!-- ═══ 부대업체 ═══ -->
 <div class="page" id="p-vendor">
@@ -4913,6 +4914,8 @@ setTimeout(function(){var btn=document.getElementById("dealToggle");if(!btn){con
 <script src="sdm-photos.js"></script>
 <script src="sdm-iwedding.js"></script>
 <script src="sdm.js"></script>
+<script src="groom-suit-data.js"></script>
+<script src="groom-suit.js"></script>
 <script src="ours-data.js"></script>
 <script src="ours.js"></script>
 </body>

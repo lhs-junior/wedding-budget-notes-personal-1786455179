@@ -1,8 +1,9 @@
-/* groom-suit.js — 신랑 예복 렌탈 페이지: 스드메 탭과 같은 구성(결정·업체·후기·준비 가이드·내 견적) */
+/* groom-suit.js — 신랑 예복 탭: 스드메 탭과 같은 구성(결정·업체·후기·준비 가이드·내 견적) */
 (function(){
 var root=document.getElementById('p-suit');
 if(!root||typeof SUIT==='undefined')return;
 var D=SUIT;
+document.head.insertAdjacentHTML('beforeend','<style>.gs-tbl td small{display:block;color:#888;font-size:11px}.gs-tbl tr[data-vid]{cursor:pointer}.gs-tbl tr[data-vid]:hover{background:#fafafa}</style>');
 var SK='wedding-budget-notes:suit:v1';
 var st;try{st=JSON.parse(localStorage.getItem(SK)||'{}');}catch(e){st={};}
 if(st._v!==1)st={_v:1,checks:{},quotes:[]};
@@ -190,6 +191,7 @@ function bindQuotes(){
   root.querySelectorAll('[data-del]').forEach(function(b){b.onclick=function(){st.quotes.splice(+b.dataset.del,1);save();document.getElementById('gsQuotes').innerHTML=quotes();bindQuotes();};});
 }
 root.addEventListener('click',function(e){var t=e.target.closest('[data-vid]');if(t)openVendor(+t.dataset.vid);});
-setInterval(rotate,1600);
+/* 스드메 탭이 이미 문서 전체 .vt-slides를 넘기고 있으면 중복 타이머를 만들지 않음 */
+if(!window.__sdmRotate)window.__sdmRotate=setInterval(rotate,1600);
 render();
 })();
