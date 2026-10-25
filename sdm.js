@@ -75,27 +75,36 @@ var ROLE_INFO={
  makeup:{label:'메이크업',title:'헤어·메이크업',desc:'촬영일·본식일 헤어와 메이크업을 담당해요.',checks:['원장/부원장/실장 직급','촬영·본식 포함 범위','얼리스타트','헤어변형·출장비']}
 };
 function cleanVendor(v){return String(v||'').replace(/\([^)]*\)/g,'').split('·')[0].trim();}
+/* 같은 업체를 한 카드로: 직급(원장·부원장·실장)과 별칭을 떼고, "A·B 중" 후보는 모두 연결 */
+var VENDOR_ALIAS={'에델린꾸뛰르':'에델린'};
+function vendorNames(raw){
+  var t=String(raw||'').replace(/\([^)]*\)/g,'').trim(),cand=/\s중$/.test(t);
+  return t.replace(/\s중$/,'').split('·').map(function(n){n=n.replace(/\s*(부원장|원장|실장)$/,'').trim();return {name:VENDOR_ALIAS[n]||n,cand:cand,rank:(String(raw).match(/(부원장|원장|실장)/)||[''])[0]};}).filter(function(x){return x.name&&!/^미기재/.test(x.name);});
+}
 function buildVendors(){
  var map={};
  SDM_CASES.forEach(function(c){
   [['studio',c.s],['dress',c.d],['makeup',c.m]].forEach(function(x){
-   var role=x[0],name=cleanVendor(x[1]);if(!name||/^미기재/.test(name))return;
-   var k=role+'|'+name;if(!map[k])map[k]={role:role,name:name,cases:[],extras:{},notes:[]};
-   var v=map[k];v.cases.push(c);
+   vendorNames(x[1]).forEach(function(nm){
+   var role=x[0],name=nm.name;
+   var k=role+'|'+name;if(!map[k])map[k]={role:role,name:name,cases:[],extras:{},notes:[],cand:0,ranks:{}};
+   var v=map[k];v.cases.push(c);if(nm.cand)v.cand++;if(nm.rank)v.ranks[nm.rank]=1;
+   if(nm.cand){(v.candIds=v.candIds||{})[c.id]=1;}
    (c.out||[]).forEach(function(e){var key=e.replace(/\s*\d+(?:\.\d+)?(?:만|만원)?(?:×\d+)?/g,'').trim();if(key)v.extras[key]=(v.extras[key]||0)+1;});
    if(c.note&&v.notes.indexOf(c.note)<0)v.notes.push(c.note);
+   });
   });
  });
- return Object.keys(map).map(function(k){var v=map[k],p=v.cases.map(function(c){return c.c;});v.med=median(p);v.min=Math.min.apply(null,p);v.max=Math.max.apply(null,p);v.contracts=v.cases.filter(function(c){return c.st==='계약';}).length;v.extraList=Object.keys(v.extras).sort(function(a,b){return v.extras[b]-v.extras[a];}).slice(0,4);return v;});
+ return Object.keys(map).map(function(k){var v=map[k],p=v.cases.map(function(c){return c.c;});v.med=median(p);v.min=Math.min.apply(null,p);v.max=Math.max.apply(null,p);v.contracts=v.cases.filter(function(c){return c.st==='계약'&&!(v.candIds&&v.candIds[c.id]);}).length;v.extraList=Object.keys(v.extras).sort(function(a,b){return v.extras[b]-v.extras[a];});return v;});
 }
 var VENDORS=buildVendors();
 function rrFor(key){return (typeof SDM_VENDOR_RESEARCH!=='undefined'&&SDM_VENDOR_RESEARCH[key])||null;}
 /* 카페 계약사례 기반 정보 블록: 단독 카드와 아이웨딩 카드 안 메모에서 함께 사용 */
 function caseBlocks(v){
   var extras=v.extraList.length?v.extraList.map(function(e){return esc(e)+'('+v.extras[e]+'건)';}).join(' · '):'확인된 별도비용 없음';
-  var notes=v.notes.slice(0,2).map(function(n){return '<li>'+esc(n)+'</li>';}).join('');
-  var src=v.cases.slice(0,3).map(function(c){return '<a href="'+esc(c.src)+'" target="_blank" rel="noopener">'+esc(c.date)+' '+esc(c.co)+'</a>';}).join(' · ');
-  return '<div class="sd-vendor-metrics"><div><small>가격 사례</small><b>'+v.cases.length+'건</b><span>실계약 '+v.contracts+'건</span></div><div><small>조합 계약가</small><b>'+man(v.med)+'</b><span>'+man(v.min)+' ~ '+man(v.max)+'</span></div><div><small>카페 업체명</small><b>'+esc(v.name)+'</b><span>'+ROLE_INFO[v.role].label+'</span></div></div>'+
+  var notes=v.notes.map(function(n){return '<li>'+esc(n)+'</li>';}).join('');
+  var src=v.cases.map(function(c){return '<a href="'+esc(c.src)+'" target="_blank" rel="noopener">'+esc(c.date)+' '+esc(c.co)+'</a>';}).join(' · ');
+  return (v.cand?'<p class="sd-note">이 중 '+v.cand+'건은 "A·B 중" 후보로만 적힌 사례예요(계약 건수에서 제외).</p>':'')+(Object.keys(v.ranks||{}).length?'<p class="sd-note">사례에 적힌 직급: '+Object.keys(v.ranks).join(', ')+'</p>':'')+'<div class="sd-vendor-metrics"><div><small>가격 사례</small><b>'+v.cases.length+'건</b><span>실계약 '+v.contracts+'건</span></div><div><small>조합 전체 계약가</small><b>'+man(v.med)+'</b><span>'+man(v.min)+' ~ '+man(v.max)+'</span></div><div><small>카페 업체명</small><b>'+esc(v.name)+'</b><span>'+ROLE_INFO[v.role].label+'</span></div></div>'+
    '<div class="sd-vendor-block"><b>현재 계약사례의 추가비</b><p>'+extras+'</p></div>'+
    '<div class="sd-vendor-block"><b>기존 계약 메모</b>'+(notes?'<ul>'+notes+'</ul>':'<p class="sd-muted">구체 메모 없음</p>')+'</div>'+
    (src?'<p class="sd-src">'+src+'</p>':'');
@@ -126,6 +135,9 @@ var normName=function(s){return String(s).replace(/\s|\(.*$/g,'').replace(/스�
 /* 아이웨딩 카드와 같은 업체인 카페 사례 업체 */
 function oldMatches(role,name){var n=normName(name);return VENDORS.filter(function(v){var o=normName(v.name);return v.role===role&&o.length>=2&&(n.indexOf(o)===0||o.indexOf(n)===0);});}
 window.SDM_OLD={
+  caseBlocks:caseBlocks,researchBlocks:researchBlocks,rrFor:rrFor,roleInfo:ROLE_INFO,
+  link:function(role,name){var m=oldMatches(role,name),keys=[role+'|'+name.replace(/\s*\(.*$/,'')].concat(m.map(function(v){return v.role+'|'+v.name;})),seen={},rrs=[];keys.forEach(function(k){var rr=rrFor(k);if(rr&&!seen[k]){seen[k]=1;rrs.push(rr);}});return {matches:m,rrs:rrs};},
+
   list:function(){return VENDORS.slice().sort(function(a,b){return b.cases.length-a.cases.length||a.name.localeCompare(b.name);});},
   matches:oldMatches,
   card:oldCard,
@@ -212,13 +224,13 @@ function snapSection(){
   '<div class="sd-tierlegend">'+['A','B','C','D'].map(function(t){return '<div><b class="sd-tier sd-tier-'+t+'">'+t+'</b><span>'+TIER_DESC[t]+' ('+(counts[t]||0)+'곳)</span></div>';}).join('')+'</div>'+
   '<div class="sd-ctl"><div>'+['','A','B','C','D'].map(function(t){return '<button class="sd-chip'+(snapUi.tier===t?' on':'')+'" data-snapt="'+t+'">'+(t?TIER_LABEL[t]:'전체')+'</button>';}).join('')+'</div></div>'+
   '<div id="snapRows">'+snapRows()+'</div>'+
-  '<p class="sd-note">A등급도 \'업체가 지금 내건 할인가가 진짜\'라는 확인이지, 실제 그 값에 계약이 됐다는 보장은 아니에요. 계약 전엔 항상 최신 가격을 다시 물어보세요. 이 밖에 존재만 확인되고 가격을 못 찾은 업체가 15곳 더 있어요 (ARC ONE, 몹시도사랑히, 비쥬스냅, 뉴올드, 디아일, 러브하드, 포레버위드유, 블루아이, 디어마이선샤인, 이은, sorisnap, 모먼트무브, 오브하우스, 아로소, 오제스냅, 무브아, 마인드그라피, 수이프레임, 하루그라피, 잉스냅).</p>'+
+  '<p class="sd-note">A등급도 \'업체가 지금 내건 할인가가 진짜\'라는 확인이지, 실제 그 값에 계약이 됐다는 보장은 아니에요. 계약 전엔 항상 최신 가격을 다시 물어보세요. 이 밖에 존재만 확인되고 가격을 못 찾은 업체가 20곳 더 있어요 (ARC ONE, 몹시도사랑히, 비쥬스냅, 뉴올드, 디아일, 러브하드, 포레버위드유, 블루아이, 디어마이선샤인, 이은, sorisnap, 모먼트무브, 오브하우스, 아로소, 오제스냅, 무브아, 마인드그라피, 수이프레임, 하루그라피, 잉스냅).</p>'+
   '</section>';
 }
 function bindSnap(){
-  root.querySelectorAll('[data-snapt]').forEach(function(b){b.onclick=function(){snapUi.tier=b.dataset.snapt;root.querySelectorAll('[data-snapt]').forEach(function(x){x.classList.toggle('on',x.dataset.snapt===snapUi.tier);});document.getElementById('snapRows').innerHTML=snapRows();};});
+  root.querySelectorAll('[data-snapt]').forEach(function(b){b.onclick=function(){snapUi.tier=b.dataset.snapt;root.querySelectorAll('[data-snapt]').forEach(function(x){x.classList.toggle('on',x.dataset.snapt===snapUi.tier);});document.getElementById('snapRows').innerHTML=snapRows();labelTables();};});
 }
-var VIEWS=[['decide','결론·비교'],['vendors','업체'],['cases','계약 사례'],['guide','준비 가이드'],['mine','내 견적']];
+var VIEWS=[['decide','결정'],['vendors','업체'],['cases','계약 사례'],['snap','본식 스냅'],['guide','준비 가이드'],['mine','내 견적']];
 var view;try{view=sessionStorage.getItem('sdm:view')||'decide';}catch(e){view='decide';}
 function panel(id,html){return '<div class="sd-panel" data-view="'+id+'"'+(view===id?'':' hidden')+'>'+html+'</div>';}
 function render(){
@@ -227,7 +239,7 @@ function render(){
   '<header class="sd-hero"><h2>스드메</h2></header>'+
   '<nav class="sd-subnav" role="tablist" aria-label="스드메 메뉴">'+VIEWS.map(function(v){return '<button role="tab" data-view="'+v[0]+'" aria-selected="'+(view===v[0])+'"'+(view===v[0]?' class="on"':'')+'>'+v[1]+'</button>';}).join('')+'</nav>'+
   panel('decide',(IW?IW.decide():''))+
-  panel('vendors',vendorSection()+(IW?IW.vendors():''))+
+  panel('vendors',(IW?IW.vendors():'')+'<section class="sd-sec"><details class="iw-fold"><summary>업체를 볼 때 순서 (설명)</summary>'+vendorSection()+'</details></section>')+
   panel('cases',
    '<section class="sd-sec"><h3>실제 계약 사례</h3><p class="sd-lead">네이버 카페 원문 '+SDM_CASES.length+'건을 직접 열어 업체 조합과 금액을 정리했어요. (2026-09-24 수집) 줄을 누르면 포함·별도 항목과 원문 링크가 나와요. 업체명을 누르면 그 업체가 들어간 사례만 모아 봐요.</p>'+
     '<div class="sd-kpi"><div><small>비동행 계약가 중간값</small><b>'+man(medAll)+'</b><span>업체명 공개 '+base.length+'건 · 서울만 '+seoul.length+'건은 '+man(medSeoul)+'</span></div>'+
@@ -236,13 +248,14 @@ function render(){
     controls()+'<div id="sdCases">'+caseRows()+'</div>'+
     '<p class="sd-note">다이렉트 카페 글이 많아요. 다이렉트 카페는 운영사가 직접 운영하고 후기 작성 시 포인트를 줘서 “광고성”으로 표시했어요. 금액은 원문 그대로입니다.</p></section>'+
    '<section class="sd-sec"><h3>같은 조합, 다른 회사 견적</h3><p class="sd-lead">동행이냐 비동행이냐보다, 같은 조합을 어느 회사가 견적 내느냐의 차이가 더 컸어요.</p><div class="sd-same-grid">'+sameBlock()+'</div>'+
-    '<p class="sd-note">웨딩킹 비교글 3건은 웨딩킹 운영 카페의 홍보글이라 차이가 과장됐을 수 있어요.</p></section>'+
-   (typeof SNAP_CASES!=='undefined'?snapSection():''))+
+    '<p class="sd-note">웨딩킹 비교글 3건은 웨딩킹 운영 카페의 홍보글이라 차이가 과장됐을 수 있어요.</p></section>')+
+  panel('snap',(typeof SNAP_CASES!=='undefined'?snapSection():''))+
   panel('guide',(IW?IW.guide():'')+'<section class="sd-sec"><h3>플래너 상담 가이드</h3>'+guide()+'</section>')+
   panel('mine','<section class="sd-sec"><h3>내 견적 기록</h3><div id="sdQuotes">'+quotes()+'</div></section>')+
   '</div>';
   bind();
   if(window.SDM_IW_BIND)SDM_IW_BIND(root);
+  labelTables();
   root.querySelectorAll('.sd-subnav [data-view]').forEach(function(b){b.onclick=function(){
     view=b.dataset.view;try{sessionStorage.setItem('sdm:view',view);}catch(e){}
     root.querySelectorAll('.sd-subnav [data-view]').forEach(function(x){var on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-selected',on);});
@@ -250,7 +263,9 @@ function render(){
     var nav=root.querySelector('.sd-subnav');if(nav&&nav.getBoundingClientRect().top<0)nav.scrollIntoView({block:'start'});
   };});
 }
-function refreshCases(){document.getElementById('sdCases').innerHTML=caseRows();bindCases();}
+/* 모바일에서 표를 카드처럼 보이게: 각 칸에 머리글 이름을 붙임 */
+function labelTables(){root.querySelectorAll('table.sd-table').forEach(function(t){var hs=[].map.call(t.querySelectorAll('thead th'),function(h){return h.textContent;});t.querySelectorAll('tbody tr').forEach(function(tr){[].forEach.call(tr.children,function(td,i){if(hs[i]&&!td.hasAttribute('colspan'))td.setAttribute('data-label',hs[i]);});});});}
+function refreshCases(){document.getElementById('sdCases').innerHTML=caseRows();bindCases();labelTables();}
 function bindCases(){
   root.querySelectorAll('.sd-row').forEach(function(tr){tr.onclick=function(ev){if(ev.target.closest('.sd-v')||ev.target.closest('a'))return;ui.open=ui.open===tr.dataset.id?'':tr.dataset.id;refreshCases();};});
   root.querySelectorAll('.sd-v').forEach(function(b){b.onclick=function(ev){ev.stopPropagation();ui.q=b.dataset.q;ui.how='';ui.contractOnly=false;view='cases';try{sessionStorage.setItem('sdm:view',view);}catch(e){}render();var t=document.getElementById('sdQ');if(t)t.scrollIntoView({block:'center'});};});
