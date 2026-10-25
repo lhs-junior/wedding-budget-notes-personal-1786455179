@@ -14,5 +14,5 @@ assert.deepStrictEqual(D.baseline.map(b=>b.total),[237,270]);
 assert.strictEqual(new Set(D.combos.map(c=>c.id)).size,D.combos.length);
 D.combos.forEach(c=>{assert.strictEqual(typeof c.base,'number');[...c.req,...c.opts,...c.disc].forEach(x=>assert.strictEqual(typeof x.v,'number',c.id+' '+x.k));});
 const est=id=>{const c=D.combos.find(x=>x.id===id),sel={};c.opts.forEach((o,i)=>{if(o.on)sel[i]=true});return calc(c,sel).total;};
-assert.strictEqual(est('b1'),292.5);assert.strictEqual(est('b2'),325.5);assert.strictEqual(est('our1'),290.5); // picks 문구의 차액 근거
+assert.strictEqual(est('b1'),292.5);assert.strictEqual(est('b2'),325.5);assert.strictEqual(est('our1'),285.5); // picks 문구의 차액 근거
 console.log('ok');

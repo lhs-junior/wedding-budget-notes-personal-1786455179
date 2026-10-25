@@ -28,8 +28,10 @@ function vendorCard(v){
  var r=v.reviews||{items:[]};
  return '<article class="iw-card"><header><div><span class="sd-role">'+esc(D.roleLabel[v.role])+(v.total!=null?' · '+(v.total?'토탈':'비토탈'):'')+(v.fabric?' · '+esc(v.fabric):'')+'</span><h4>'+esc(v.name)+'</h4></div>'+revBadge(r)+'</header>'+
   (v.style?'<p class="iw-style">'+esc(v.style)+'</p>':'')+
+  (v.insta?'<div class="iw-insta">'+v.insta.map(function(i){return '<a href="'+esc(i.url)+'" target="_blank" rel="noopener">Instagram @'+esc(i.handle)+' →</a>';}).join('')+(v.instaFeel?'<p>피드 느낌: '+esc(v.instaFeel)+'</p>':'')+'</div>':'')+
   '<div class="iw-prods">'+(v.products||[]).map(function(p){return '<div class="iw-prod"><div>'+grade(p.grade)+' <b>'+esc(p.price)+'</b></div><p>'+a(p.url,p.name)+'</p><small>'+esc(p.cond||'')+' · 확인 '+esc(p.checked||D.checked)+'</small></div>';}).join('')+'</div>'+
   '<details class="iw-more"><summary>포함·추가금·후기 펼치기</summary>'+
+  ((v.benefits||[]).length?'<div class="sd-vendor-block sd-avoid"><b>쿠폰·특전 (상세페이지 표기, 중복 적용 여부 미확인)</b>'+li(v.benefits)+'</div>':'')+
   '<div class="sd-vendor-block"><b>상품가에 포함</b>'+li(v.included,'상세페이지에서 확인되지 않음')+'</div>'+
   '<div class="sd-vendor-block sd-cost"><b>확인된 별도 비용</b>'+money(v.extras)+'</div>'+
   '<div class="sd-vendor-block sd-pain"><b>아직 확인 안 된 비용·조건</b>'+li(v.unknown,'없음')+'</div>'+
@@ -80,6 +82,11 @@ function roles(){
  return '<div class="sd-tablewrap"><table class="sd-table iw-roles"><thead><tr><th>할 일</th><th>플래너 이용</th><th>셀프 준비</th></tr></thead><tbody>'+D.roles.map(function(r){return '<tr><td><b>'+esc(r[0])+'</b></td><td>'+esc(r[1])+'</td><td>'+esc(r[2])+'</td></tr>';}).join('')+'</tbody></table></div>';
 }
 
+function totalVs(){
+ var t=D.totalVs;
+ return '<div class="sd-tablewrap"><table class="sd-table iw-roles"><thead><tr><th>항목</th><th>토탈</th><th>비토탈</th></tr></thead><tbody>'+t.rows.map(function(r){return '<tr><td><b>'+esc(r[0])+'</b></td><td>'+esc(r[1])+'</td><td>'+esc(r[2])+'</td></tr>';}).join('')+'</tbody></table></div>'+
+  '<div class="iw-claims">'+t.claims.map(function(c){return '<article><b>'+esc(c[0])+'</b><span class="iw-verdict">'+esc(c[1])+'</span><p>'+esc(c[2])+'</p></article>';}).join('')+'</div><p class="iw-cond">'+esc(t.verdict)+'</p>';
+}
 g.SDM_IW_HTML=function(){
  var b=D.baseline;
  return '<section class="sd-sec iw" id="iwAudit"><h3>아이웨딩 상세페이지 재검증 · '+esc(D.checked)+'</h3>'+
@@ -93,6 +100,7 @@ g.SDM_IW_HTML=function(){
   '<h4 class="iw-h">업체별 상세페이지·후기</h4>'+
   '<div class="sd-ctl"><div>'+chips('role',[['','전체'],['studio','스튜디오'],['dress','드레스'],['makeup','메이크업']])+'</div><div>'+chips('kind',[['','토탈·비토탈'],['total','토탈'],['nontotal','비토탈']])+chips('fabric',[['','소재 전체'],['실크','실크'],['비즈','비즈']])+chips('sort',[['grade','이름순'],['review','후기 많은 순']])+'</div></div>'+
   '<div id="iwVendors">'+vendors()+'</div>'+
+  (D.totalVs?'<h4 class="iw-h">토탈(포괄) vs 비토탈 · 들리는 얘기 따져보기</h4>'+totalVs():'')+
   '<h4 class="iw-h">플래너 이용 vs 셀프 준비</h4>'+roles()+
   '<div class="iw-links">'+D.pages.map(function(p){return '<a href="'+esc(p.url)+'">'+esc(p.label)+' →</a>';}).join('')+'</div>'+
   '</section>';
