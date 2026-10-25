@@ -45,37 +45,61 @@ function model(v,old){
   rev:{n:r.independent||0,all:(r.items||[]).length,latest:r.latest},
   extras:(v.extras&&v.extras.length?v.extras.map(function(x){return x.k+(x.v!=null?' '+man(x.v):'');}):[]).concat(cases.reduce(function(acc,c){return acc.concat(c.extraList.map(function(e){return '카페 사례: '+e+' ('+c.extras[e]+'건)';}));},[])).concat(v.extras&&v.extras.length?[]:(rr&&rr.costTriggers)||[]).slice(0,4),
   cond:p0&&p0.cond?p0.cond:'',unk:(v.unknown||[])[0]||'',
-  insta:insta,feel:v.instaFeel||''};
+  insta:insta,feel:v.instaFeel||'',photos:(g.SDM_PHOTOS||{})[v.name]||[]};
 }
 function hasRole(m,r){return m.role===r||(m.roles||[]).indexOf(r)>=0;}
 function tag(t,cls){return t?'<span class="vc-tag'+(cls?' '+cls:'')+'">'+esc(t)+'</span>':'';}
-function unifiedCard(m){
- var v=m.v,O=g.SDM_OLD,r=v.reviews||{items:[]};
- var role=(m.roles&&m.roles.length>1?m.roles:[m.role]).map(function(r){return D.roleLabel[r]||r;}).join('·')+(m.roles&&m.roles.length>1?' (토탈샵)':'');
+function roleText(m){return (m.roles&&m.roles.length>1?m.roles:[m.role]).map(function(r){return D.roleLabel[r]||r;}).join('·')+(m.roles&&m.roles.length>1?' (토탈샵)':'');}
+function baseName(n){return String(n).replace(/\s*\(.*\)$/,'');}
+function subName(n){var x=String(n).match(/\((.*)\)$/);return x?x[1]:'';}
+/* 카드에 보일 짧은 가격: "… = 114만" → 114만, "118만 → 노투어 107만" → 107만, 그 외 첫 금액 */
+function shortPrice(t){t=String(t||'');var s=t.split(/=|→/).pop(),x=s.match(/[\d.]+만/)||t.match(/[\d.]+만/);return x?x[0]:t;}
+function tagsOf(m){
  var fabCls=/실크/.test(m.fabric)?'good':m.fabric==='비즈'||/비즈 위주|비즈·튈/.test(m.fabric)?'warn':'';
- var head='<header class="vc-head"><div><span class="vc-role">'+esc(role)+'</span><h4>'+esc(m.name)+'</h4></div>'+
-  (m.price?'<div class="vc-price">'+grade(m.price.gr)+' <b>'+esc(m.price.t)+'</b></div>':m.cafe?'<div class="vc-price">'+grade(m.cafe.contracts?'C':'D')+' <b>업체 단독가 미확인</b><small>카페 '+(m.cafe.contracts?'계약':'견적')+' 사례만 있음</small></div>':'<div class="vc-price">'+grade('미확인')+' <b>가격 미확인</b></div>')+'</header>';
- var tags='<div class="vc-tags">'+(m.role==='studio'?tag(m.portrait==='인물 중심'?'인물 중심':'인물 중심 여부 미확인',m.portrait==='인물 중심'?'good':''):'')+(m.role==='dress'?tag('소재 '+m.fabric,fabCls):'')+tag(m.kind,m.kind==='비토탈'||m.kind==='토탈·비토탈'?'good':'')+'</div>';
- var facts='<dl class="vc-facts">'+
-  (m.cond?'<dt>가격 조건</dt><dd>'+esc(m.cond)+'</dd>':'')+
-  (m.unk?'<dt>미확인</dt><dd class="warn">'+esc(m.unk)+'</dd>':'')+
-  '<dt>후기</dt><dd>'+(m.rev.all||m.rev.n?'독립 '+m.rev.n+'건'+(m.rev.all?' / 전체 '+m.rev.all+'건':'')+(m.rev.latest?' · 최신 '+esc(m.rev.latest):''):'확보한 후기 없음')+'</dd>'+
-  '<dt>카페 계약사례</dt><dd>'+(m.cafe?m.cafe.n+'건(실계약 '+m.cafe.contracts+') · 조합 전체가 '+man(m.cafe.min)+'~'+man(m.cafe.max)+'<small>스드메 3곳 합친 금액이에요(이 업체 단독가 아님)</small>':'없음')+'</dd>'+
-  '<dt>추가금</dt><dd>'+(m.extras.length?m.extras.map(esc).join(' · '):'확인된 항목 없음')+'</dd>'+
-  '<dt>인스타</dt><dd>'+(m.insta.length?m.insta.map(function(i){return '<a class="vc-ig" href="'+esc(i.url)+'" target="_blank" rel="noopener">@'+esc(i.handle)+'</a>';}).join(' ')+(m.feel?'<small>'+esc(m.feel)+'</small>':''):'계정 미확인')+'</dd>'+
-  (v.style?'<dt>특징</dt><dd>'+esc(v.style)+'</dd>':'')+
- '</dl>';
- var more='';
- if(v.products&&v.products.length)more+='<div class="sd-vendor-block"><b>상품·가격</b><ul>'+v.products.map(function(p){return '<li>'+grade(p.grade)+' <b>'+esc(p.price)+'</b> '+a(p.url,p.name)+(p.cond?'<small>'+esc(p.cond)+'</small>':'')+'</li>';}).join('')+'</ul></div>';
- if((v.benefits||[]).length)more+='<div class="sd-vendor-block sd-avoid"><b>쿠폰·특전 (상세페이지 표기)</b>'+li(v.benefits)+'</div>';
- if((v.included||[]).length)more+='<div class="sd-vendor-block"><b>상품가에 포함</b>'+li(v.included)+'</div>';
- if((v.extras||[]).length)more+='<div class="sd-vendor-block sd-cost"><b>확인된 별도 비용 전체</b>'+money(v.extras)+'</div>';
- if((v.unknown||[]).length)more+='<div class="sd-vendor-block sd-pain"><b>아직 확인 안 된 것</b>'+li(v.unknown)+'</div>';
- if((r.items||[]).length)more+='<div class="sd-vendor-block"><b>후기 '+r.items.length+'건</b><ul class="iw-revlist">'+r.items.map(function(x){return '<li><span class="iw-kind">'+esc(x.kind)+'</span> '+a(x.url,x.date+' '+(x.title||''))+(x.ad?' <span class="sd-ad sd-ad-y">'+esc(x.ad)+'</span>':'')+(x.paid?'<small>지불 '+esc(x.paid)+'</small>':'')+(x.good?'<small>+ '+esc(x.good)+'</small>':'')+(x.bad?'<small>− '+esc(x.bad)+'</small>':'')+'</li>';}).join('')+'</ul>'+(r.note?'<p class="sd-evidence-note">'+esc(r.note)+'</p>':'')+'</div>';
- if(O){m.cases.forEach(function(c){more+='<div class="sd-vendor-block"><b>카페 계약사례 · '+esc(c.name)+'</b>'+O.caseBlocks(c)+'</div>';});m.rrs.forEach(function(rr){more+='<div class="sd-vendor-block"><b>조사 메모 ('+esc(rr.researched)+')</b>'+O.researchBlocks(rr,m.role)+'</div>';});
-  if(!m.rrs.length&&O.roleInfo[m.role])more+='<div class="sd-vendor-block"><b>상담 때 기본 확인</b><p>'+O.roleInfo[m.role].checks.map(esc).join(' · ')+'</p></div>';}
- var links=(v.iwUrl?a(v.iwUrl,'아이웨딩 업체정보'):'')+((v.links||[]).length?' · '+v.links.map(function(l){return a(l.url,l.label);}).join(' · '):'');
- return '<article class="vc'+(m.old?' vc-cafe':'')+'">'+head+tags+facts+(more?'<details class="iw-more"><summary>전체 근거 펼치기</summary>'+more+'</details>':'')+(links?'<footer>'+links+'</footer>':'')+'</article>';
+ return (m.role==='studio'?tag(m.portrait==='인물 중심'?'인물 중심':'인물 중심 미확인',m.portrait==='인물 중심'?'good':''):'')+(m.role==='dress'?tag(m.fabric,fabCls):'')+tag(m.kind,m.kind==='비토탈'||m.kind==='토탈·비토탈'?'good':'');
+}
+function priceOf(m){
+ if(m.price)return {gr:m.price.gr,t:shortPrice(m.price.t),full:m.price.t};
+ if(m.cafe)return {gr:m.cafe.contracts?'C':'D',t:'단독가 미확인',full:'카페 '+(m.cafe.contracts?'계약':'견적')+' 사례만 있음 · 조합 전체가 '+man(m.cafe.min)+'~'+man(m.cafe.max)};
+ return {gr:'미확인',t:'가격 미확인',full:''};
+}
+function thumb(m,cls){
+ var p=m.photos[0];
+ return p?'<img class="'+cls+'" src="'+esc(p.src)+'" alt="'+esc(baseName(m.name))+' 대표 사진" loading="lazy" decoding="async">':'<span class="'+cls+' vt-ph vt-'+esc(m.role)+'" aria-hidden="true">'+esc(baseName(m.name).slice(0,2))+'</span>';
+}
+/* 목록 카드: 사진·이름·가격·태그만. 나머지는 상세 모달에서 */
+function tile(m){
+ var p=priceOf(m);
+ return '<button type="button" class="vt'+(m.cafeOnly?' vt-cafe':'')+'" data-vid="'+m.id+'">'+thumb(m,'vt-img')+
+  '<span class="vt-body"><span class="vt-role">'+esc(roleText(m))+(subName(m.name)?' · '+esc(subName(m.name)):'')+'</span>'+
+  '<b class="vt-name">'+esc(baseName(m.name))+'</b>'+
+  '<span class="vt-price">'+grade(p.gr)+' <b>'+esc(p.t)+'</b></span>'+
+  '<span class="vt-tags">'+tagsOf(m)+'</span>'+
+  '<span class="vt-meta">후기 '+m.rev.n+'건'+(m.cafe?' · 카페 사례 '+m.cafe.n+'건':'')+(m.photos.length?' · 사진 '+m.photos.length:'')+'</span></span></button>';
+}
+function sec(title,body,cls){return body?'<section class="md-sec'+(cls?' '+cls:'')+'"><h5>'+title+'</h5>'+body+'</section>':'';}
+/* 상세 모달: 업체에 대해 모은 것 전부. 새 정보는 여기 섹션으로 추가 */
+function detail(m){
+ var v=m.v,O=g.SDM_OLD,r=v.reviews||{items:[]},p=priceOf(m);
+ var gal=m.photos.length?'<div class="md-galw"><button type="button" class="md-nav" data-gal="-1" aria-label="이전 사진">‹</button><button type="button" class="md-nav md-next" data-gal="1" aria-label="다음 사진">›</button><div class="md-gal">'+m.photos.map(function(x,i){return '<a href="'+esc(x.src)+'" target="_blank" rel="noopener"><img src="'+esc(x.src)+'" alt="'+esc(baseName(m.name))+' 사진 '+(i+1)+'" loading="'+(i<2?'eager':'lazy')+'" decoding="async"'+(x.w&&x.h?' style="aspect-ratio:'+x.w+'/'+x.h+'"':'')+'></a>';}).join('')+'</div></div><p class="md-src">사진 '+m.photos.length+'장 · 출처 '+a(v.iwUrl,'아이웨딩 업체정보')+' (옆으로 넘겨 보기, 누르면 원본)</p>'
+  :'<div class="md-nogal">'+thumb(m,'md-ph')+'<p>공개 사진을 아직 모으지 못했어요.'+(m.insta.length?' 인스타에서 분위기를 보세요.':'')+'</p></div>';
+ var head='<header class="md-head"><span class="vt-role">'+esc(roleText(m))+(subName(m.name)?' · '+esc(subName(m.name)):'')+'</span><h4>'+esc(baseName(m.name))+'</h4><div class="vt-tags">'+tagsOf(m)+'</div>'+
+  (m.insta.length?'<div class="md-ig">'+m.insta.map(function(i){return '<a class="vc-ig" href="'+esc(i.url)+'" target="_blank" rel="noopener">인스타 @'+esc(i.handle)+'</a>';}).join('')+'</div>':'')+'</header>';
+ var kpi='<div class="md-kpi"><div><small>가격</small><b>'+esc(p.t)+'</b><span>'+grade(p.gr)+' '+esc(D.gradeInfo[p.gr]||'')+'</span></div>'+
+  '<div><small>독립 후기</small><b>'+m.rev.n+'건</b><span>'+(m.rev.latest?'최신 '+esc(m.rev.latest):'날짜 미확인')+(m.rev.n<3?' · 3건 미만':'')+'</span></div>'+
+  '<div><small>카페 사례</small><b>'+(m.cafe?m.cafe.n+'건':'없음')+'</b><span>'+(m.cafe?'실계약 '+m.cafe.contracts+'건 · 조합가 '+man(m.cafe.min)+(m.cafe.max!==m.cafe.min?'~'+man(m.cafe.max):''):'')+'</span></div></div>';
+ var body='';
+ body+=sec('가격 근거',(p.full&&p.full!==p.t?'<p class="md-price">'+esc(p.full)+'</p>':'')+(m.cond?'<p>'+esc(m.cond)+'</p>':'')+(v.products&&v.products.length?'<ul>'+v.products.map(function(x){return '<li>'+grade(x.grade)+' <b>'+esc(x.price)+'</b> · '+a(x.url,x.name)+(x.cond?'<small>'+esc(x.cond)+'</small>':'')+'</li>';}).join('')+'</ul>':''));
+ body+=sec('특징',v.style?'<p>'+esc(v.style)+'</p>'+(m.feel?'<p class="sd-muted">인스타 느낌: '+esc(m.feel)+'</p>':''):(m.feel?'<p>'+esc(m.feel)+'</p>':''));
+ body+=sec('상품가에 포함',(v.included||[]).length?li(v.included):'');
+ body+=sec('별도 비용',(v.extras||[]).length||m.extras.length?((v.extras||[]).length?money(v.extras):li(m.extras)):'','md-cost');
+ body+=sec('쿠폰·특전',(v.benefits||[]).length?li(v.benefits):'');
+ body+=sec('아직 확인 안 된 것',(v.unknown||[]).length?li(v.unknown):'','md-unk');
+ body+=sec('후기 '+(r.items||[]).length+'건',(r.items||[]).length?'<ul class="md-rev">'+r.items.map(function(x){return '<li><div><span class="iw-kind">'+esc(x.kind)+'</span> '+a(x.url,x.date+' '+(x.title||''))+(x.ad?' <span class="sd-ad sd-ad-y">'+esc(x.ad)+'</span>':'')+'</div>'+(x.paid?'<small>지불 '+esc(x.paid)+'</small>':'')+(x.good?'<p class="md-good">+ '+esc(x.good)+'</p>':'')+(x.bad?'<p class="md-bad">− '+esc(x.bad)+'</p>':'')+'</li>';}).join('')+'</ul>'+(r.note?'<p class="sd-evidence-note">'+esc(r.note)+'</p>':''):'');
+ if(O){m.cases.forEach(function(c){body+=sec('카페 계약사례 · '+esc(c.name),O.caseBlocks(c));});m.rrs.forEach(function(rr){body+=sec('조사 메모 ('+esc(rr.researched)+')',O.researchBlocks(rr,m.role));});
+  if(!m.rrs.length&&O.roleInfo[m.role])body+=sec('상담 때 확인할 것','<p>'+O.roleInfo[m.role].checks.map(esc).join(' · ')+'</p>');}
+ var links=(v.iwUrl?a(v.iwUrl,'아이웨딩 업체정보 →'):'')+(v.links||[]).map(function(l){return a(l.url,l.label+' →');}).join('');
+ return '<div class="md-top"><button type="button" class="md-x" data-close aria-label="닫기">←</button><b>'+esc(baseName(m.name))+'</b></div>'+gal+head+kpi+body+(links?'<div class="iw-links md-links">'+links+'</div>':'');
 }
 function allModels(){
  var O=g.SDM_OLD,list=D.vendors.map(function(v){return model(v,null);}),used={};
@@ -88,6 +112,7 @@ function allModels(){
   var m=model(fake,c);m.cases=[c];m.rrs=rr?[rr]:[];m.cafeOnly=true;
   if(rr&&rr.reviewEvidence)m.rev={n:rr.reviewEvidence.recent||0,all:0,latest:rr.reviewEvidence.latest};
   list.push(m);});
+ list.forEach(function(m,i){m.id=i;});
  return list;
 }
 var MODELS=null;
@@ -107,7 +132,7 @@ function vendors(){
   if(ui.sort==='review'||ui.sort==='focus')return (y.rev.n-x.rev.n)||((y.cafe?y.cafe.n:0)-(x.cafe?x.cafe.n:0));
   return (x.role+x.name).localeCompare(y.role+y.name);});
  var nV=rows.filter(function(m){return !m.cafeOnly;}).length;
- return rows.length?'<p class="sd-stat"><b>'+rows.length+'곳</b> · 아이웨딩 검증 '+nV+'곳 + 카페 계약사례만 있는 업체 '+(rows.length-nV)+'곳</p><div class="vc-grid">'+rows.map(unifiedCard).join('')+'</div>':'<p class="sd-muted">조건에 맞는 업체가 없어요.</p>';
+ return rows.length?'<p class="sd-stat"><b>'+rows.length+'곳</b> · 아이웨딩 검증 '+nV+'곳 + 카페 계약사례만 있는 업체 '+(rows.length-nV)+'곳</p><div class="vt-grid">'+rows.map(tile).join('')+'</div>':'<p class="sd-muted">조건에 맞는 업체가 없어요.</p>';
 }
 
 function comboRow(c){
@@ -184,12 +209,33 @@ function cartTable(){
   '</tbody></table></div><p class="sd-note">'+esc(c.common)+'</p>';
 }
 function grades(){return '<div class="iw-legend">'+Object.keys(D.gradeInfo).map(function(k){return '<span>'+grade(k)+' '+esc(D.gradeInfo[k])+'</span>';}).join('')+'</div>';}
+/* 상세 모달: 휴대폰 뒤로가기로 닫히도록 history 한 칸 사용 */
+var dlg=null;
+function openVendor(id){
+ MODELS=MODELS||allModels();var m=MODELS[id];if(!m)return;
+ if(!dlg){dlg=document.createElement('dialog');dlg.className='md';document.body.appendChild(dlg);
+  dlg.addEventListener('click',function(e){var n=e.target.closest('[data-gal]');if(n){var gl=dlg.querySelector('.md-gal');gl.scrollBy({left:+n.dataset.gal*gl.clientWidth*0.8,behavior:'smooth'});return;}
+   if(e.target===dlg||e.target.closest('[data-close]'))closeVendor();});
+  dlg.addEventListener('cancel',function(e){e.preventDefault();closeVendor();});
+  g.addEventListener('popstate',function(){if(dlg.open)dlg.close();});}
+ dlg.innerHTML='<div class="md-in">'+detail(m)+'</div>';
+ if(!dlg.open){dlg.showModal();history.pushState({sdmVendor:id},'');}
+ dlg.querySelector('.md-in').scrollTop=0;
+}
+function closeVendor(){if(history.state&&history.state.sdmVendor!=null)history.back();else if(dlg)dlg.close();}
+/* 조합 이름("클레 + 에델린 + 제이와이")의 각 업체를 카드 모델과 이어 사진으로 보여줌 */
+function comboThumbs(name){
+ MODELS=MODELS||allModels();
+ return '<div class="gl-thumbs">'+name.split(' + ').map(function(part){var k=part.replace(/\(.*\)/,'').trim();
+  var m=MODELS.filter(function(x){return !x.cafeOnly&&baseName(x.name).indexOf(k)===0;})[0];
+  return m?'<button type="button" class="gl-th" data-vid="'+m.id+'">'+thumb(m,'gl-img')+'<span>'+esc(part)+'</span></button>':'<span class="gl-th">'+esc(part)+'</span>';}).join('')+'</div>';
+}
 g.SDM_IW_PARTS={
  decide:function(){
   var G=D.glance;
   var glance=G?'<section class="sd-sec iw"><h3>결론</h3><div class="gl-verdicts">'+G.verdicts.map(function(v){return '<div><span>'+esc(v[0])+'</span><b>'+esc(v[1])+'</b></div>';}).join('')+'</div>'+
    '<h3 class="gl-h">한눈 비교</h3><p class="sd-lead">'+esc(G.basis)+'</p>'+
-   '<div class="gl">'+G.rows.map(function(r){return '<article class="gl-row"><div class="gl-top"><span class="vc-tag'+(r.tag==='받은 견적'?'':' good')+'">'+esc(r.tag)+'</span><h4>'+esc(r.name)+'</h4><div class="gl-price"><b>'+man(r.price)+'</b><span>'+(r.diff==='기준'?'기준':esc(r.diff)+'만')+'</span><em>헬퍼 포함 '+man(r.price+50)+'</em></div></div><small class="gl-note">'+esc(r.priceNote)+'</small>'+
+   '<div class="gl">'+G.rows.map(function(r){return '<article class="gl-row"><div class="gl-top"><span class="vc-tag'+(r.tag==='받은 견적'?'':' good')+'">'+esc(r.tag)+'</span><h4>'+esc(r.name)+'</h4><div class="gl-price"><b>'+man(r.price)+'</b><span>'+(r.diff==='기준'?'기준':esc(r.diff)+'만')+'</span><em>헬퍼 포함 '+man(r.price+50)+'</em></div></div><small class="gl-note">'+esc(r.priceNote)+'</small>'+comboThumbs(r.name)+
     '<dl class="vc-facts"><dt>스튜디오</dt><dd>'+esc(r.studio)+'</dd><dt>드레스</dt><dd class="'+esc(r.dressCls)+'">'+esc(r.dress)+'</dd><dt>메이크업</dt><dd>'+esc(r.makeup)+'</dd><dt>주의</dt><dd>'+esc(r.risk)+'</dd></dl></article>';}).join('')+'</div><p class="gl-tip">'+esc(G.tip)+'</p></section>':'';
   return glance+
    '<section class="sd-sec iw">'+events()+'</section>'+
@@ -201,9 +247,12 @@ g.SDM_IW_PARTS={
    '<details class="iw-fold"><summary>근거·계산 메모</summary><p>'+esc(D.baselineNote)+'</p><p>'+esc(D.summary)+'</p>'+grades()+'</details></section>';
  },
  vendors:function(){
-  return '<section class="sd-sec iw"><h3>업체 목록</h3><p class="sd-lead">업체 하나에 카드 하나예요. 아이웨딩 검증 카드에는 가격 등급·포함·별도 비용·쿠폰·후기·공식 인스타가, 카페 계약사례가 있는 업체는 같은 카드 안 "카페 계약사례 메모"에 함께 들어 있어요.</p>'+grades()+
-   '<div class="sd-ctl"><div>'+chips('role',[['','전체'],['studio','스튜디오'],['dress','드레스'],['makeup','메이크업']])+'</div><div>'+chips('kind',[['','토탈·비토탈'],['total','토탈'],['nontotal','비토탈']])+chips('fabric',[['','소재 전체'],['실크','실크'],['비즈','비즈']])+chips('sort',[['focus','견적·추천 업체 먼저'],['review','후기 많은 순'],['grade','이름순']])+'</div><input id="iwVendorQ" class="sd-q" placeholder="업체명 검색 (예: 에델린, 원세컨드, 헤움)" value="'+esc(ui.q||'')+'"></div>'+
-   '<div id="iwVendors">'+vendors()+'</div></section>';
+  function sel(k,label,opts){return '<label class="vf-sel"><span>'+label+'</span><select data-iwk="'+k+'">'+opts.map(function(o){return '<option value="'+esc(o[0])+'"'+(ui[k]===o[0]?' selected':'')+'>'+esc(o[1])+'</option>';}).join('')+'</select></label>';}
+  return '<section class="sd-sec iw"><div class="vf"><div class="vf-roles">'+chips('role',[['','전체'],['studio','스튜디오'],['dress','드레스'],['makeup','메이크업']])+'</div>'+
+   '<input id="iwVendorQ" class="sd-q" type="search" placeholder="업체명 검색" value="'+esc(ui.q||'')+'">'+
+   '<div class="vf-sels">'+sel('kind','촬영',[['','전체'],['total','토탈'],['nontotal','비토탈']])+sel('fabric','소재',[['','전체'],['실크','실크'],['비즈','비즈']])+sel('sort','정렬',[['focus','견적·추천 먼저'],['review','후기 많은 순'],['grade','이름순']])+'</div></div>'+
+   '<p class="sd-lead">카드를 누르면 사진·가격 근거·포함/별도 비용·후기·카페 사례가 모두 열려요.</p>'+
+   '<div id="iwVendors">'+vendors()+'</div><details class="iw-more"><summary>가격 등급 설명</summary>'+grades()+'</details></section>';
  },
  guide:function(){
   return '<section class="sd-sec iw">'+(D.totalVs?'<h3>토탈(포괄) vs 비토탈 · 들리는 얘기 따져보기</h3>'+totalVs():'')+
@@ -215,16 +264,18 @@ g.SDM_IW_BIND=function(root){
  function q(sel){return root.querySelector(sel);}
  function redraw(){var c=q('#iwCmp');if(c)c.innerHTML=compare();root.querySelectorAll('.iw-combos').forEach(function(x){x.innerHTML=D.combos.map(comboRow).join('');});}
  var vq=q('#iwVendorQ');if(vq)vq.addEventListener('input',function(){ui.q=vq.value;var v=q('#iwVendors');if(v)v.innerHTML=vendors();});
+ root.addEventListener('click',function(e){var t=e.target.closest('[data-vid]');if(t)openVendor(+t.dataset.vid);});
  root.querySelectorAll('.iw').forEach(function(sec){
   sec.addEventListener('click',function(e){
-   var b=e.target.closest('[data-iwk]');if(!b)return;
+   var b=e.target.closest('button[data-iwk]');if(!b)return;
    ui[b.dataset.iwk]=b.dataset.iwv;
    sec.querySelectorAll('[data-iwk="'+b.dataset.iwk+'"]').forEach(function(x){x.classList.toggle('on',x===b);});
    var v=q('#iwVendors');if(v)v.innerHTML=vendors();
   });
   sec.addEventListener('change',function(e){
    var t=e.target,msg=q('#iwCmpMsg');
-   if(t.dataset.cmp){
+   if(t.tagName==='SELECT'&&t.dataset.iwk){ui[t.dataset.iwk]=t.value;var v=q('#iwVendors');if(v)v.innerHTML=vendors();}
+   else if(t.dataset.cmp){
     var id=t.dataset.cmp,i=ui.cmp.indexOf(id);
     if(t.checked&&i<0){if(ui.cmp.length>=4){t.checked=false;msg.textContent='최대 4개까지 비교할 수 있어요.';return;}ui.cmp.push(id);}
     if(!t.checked&&i>=0)ui.cmp.splice(i,1);
