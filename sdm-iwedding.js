@@ -122,6 +122,13 @@ function direct(){
   '<div class="iw-blk"><b>다이렉트 카페 금액 사례</b><ul>'+d.cases.map(function(c){return '<li>'+a(c.url,c.date+' '+c.combo)+' · '+esc(c.price)+'</li>';}).join('')+'</ul></div>'+
   '<div class="iw-links">'+d.links.map(function(l){return a(l.url,l.label+' →');}).join('')+'</div>';
 }
+function cartTable(){
+ var c=D.cart;if(!c)return '';
+ return '<h4 class="iw-h">견적함 화면 확인 · 업체별 금액</h4><p class="sd-lead">'+esc(c.basis)+'</p>'+
+  '<div class="sd-tablewrap"><table class="sd-table iw-calc"><thead><tr><th>조합 · 업체별 금액(만원)</th><th class="sd-num">비수기·첫타임·노투어</th><th>다른 선택</th></tr></thead><tbody>'+
+  c.rows.map(function(r){return '<tr><td><b>'+esc(r.combo)+'</b><small>'+esc(r.items)+'</small><small>'+esc(r.note)+'</small></td><td class="sd-num"><b>'+man(r.final)+'</b></td><td>'+esc(r.other)+'</td></tr>';}).join('')+
+  '</tbody></table></div><p class="sd-note">'+esc(c.common)+'</p>';
+}
 function grades(){return '<div class="iw-legend">'+Object.keys(D.gradeInfo).map(function(k){return '<span>'+grade(k)+' '+esc(D.gradeInfo[k])+'</span>';}).join('')+'</div>';}
 g.SDM_IW_PARTS={
  decide:function(){
@@ -130,7 +137,7 @@ g.SDM_IW_PARTS={
    '<div class="iw-base">'+b.map(function(x){return '<div><small>'+esc(x.label)+' '+grade(x.grade)+'</small><b>'+man(x.total)+'</b><span>'+esc(x.parts)+'</span></div>';}).join('')+'</div>'+
    '<details class="iw-more iw-memo"><summary>근거·계산 메모 펼치기</summary><p>'+esc(D.baselineNote)+'</p><p>'+esc(D.summary)+'</p>'+grades()+'</details>'+
    '<h4 class="iw-h">추천 TOP 3 · 비토탈</h4>'+(D.picksNote?'<p class="sd-lead">'+esc(D.picksNote)+'</p>':'')+picks()+events()+
-   calcTable()+pkgTable()+direct()+
+   cartTable()+calcTable()+pkgTable()+direct()+
    '<h4 class="iw-h">조합 비교 · 실지불액 계산</h4><p class="sd-lead">2~4개를 골라 나란히 보세요. 모든 조합에 같은 기준(헬퍼비)을 더해 비교해요. 선택 옵션은 체크한 것만 더하고, 미확인 비용은 합계에 넣지 않고 개수로만 보여줘요.</p>'+
    '<div class="iw-combos">'+D.combos.map(comboRow).join('')+'</div><p class="iw-cmpmsg" id="iwCmpMsg" aria-live="polite"></p><div id="iwCmp">'+compare()+'</div></section>';
  },
