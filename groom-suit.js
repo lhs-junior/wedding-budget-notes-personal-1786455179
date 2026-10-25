@@ -3,7 +3,6 @@
 var root=document.getElementById('p-suit');
 if(!root||typeof SUIT==='undefined')return;
 var D=SUIT;
-document.head.insertAdjacentHTML('beforeend','<style>.gs-tbl td small{display:block;color:#888;font-size:11px}.gs-tbl tr[data-vid]{cursor:pointer}.gs-tbl tr[data-vid]:hover{background:#fafafa}</style>');
 var SK='wedding-budget-notes:suit:v1';
 var st;try{st=JSON.parse(localStorage.getItem(SK)||'{}');}catch(e){st={};}
 if(st._v!==1)st={_v:1,checks:{},quotes:[]};
@@ -83,19 +82,32 @@ function vendorGrid(){
 function kinds(){var k={};V.forEach(function(v){k[v.kind]=1;});return [['','전체']].concat(Object.keys(k).map(function(x){return [x,x];}));}
 function chips(name,opts){return opts.map(function(o){return '<button class="sd-chip'+(ui[name]===o[0]?' on':'')+'" data-k="'+name+'" data-v="'+esc(o[0])+'">'+esc(o[1])+'</button>';}).join('');}
 
+/* 결정 화면: 스드메 결정 화면과 같은 구조 (결론 3개 → 사진 카드 한눈 비교 → 접힌 근거) */
+function glRow(v){
+  var thumbs=v.photos.slice(0,3).map(function(p,i){return '<button type="button" class="gl-th" data-vid="'+v.id+'"><img class="gl-img" src="'+esc(p.src)+'" alt="'+esc(v.name)+' 사진 '+(i+1)+'" loading="lazy" decoding="async"></button>';}).join('');
+  var extras=(v.extras||[]).map(function(x){return x.k+(x.v!=null?' '+man(x.v):'');}).join(' · ');
+  return '<article class="gl-row"><div class="gl-top"><span class="vc-tag'+(v.kind==='대여'?' good':'')+'">'+esc(v.kind)+'</span><h4>'+esc(v.name)+'</h4><div class="gl-price"><b>'+(v.low?man(v.low.won):'미공개')+'</b><span>'+(v.low?esc(v.low.vat):'')+'</span><em>후기 '+v.revs.length+'건</em></div></div>'+
+   '<small class="gl-note">'+(v.low?esc(v.low.item):'')+'</small>'+
+   (thumbs?'<div class="gl-thumbs">'+thumbs+'</div>':'')+
+   '<dl class="vc-facts"><dt>위치</dt><dd>'+esc(v.station||v.area||'미확인')+'</dd><dt>포함</dt><dd>'+esc((v.included||[]).join(' · ')||'미확인')+'</dd>'+(extras?'<dt>별도</dt><dd class="warn">'+esc(extras)+'</dd>':'')+'<dt>확인 필요</dt><dd>'+esc((v.unknown||[])[0]||'–')+'</dd></dl>'+
+   '<button type="button" class="sd-btn" data-vid="'+v.id+'" style="margin-top:10px">상세 보기</button></article>';
+}
 function decide(){
   var lows=V.filter(function(v){return v.low;}).map(function(v){return v.low.won;});
   var ads=D.reviews.filter(function(r){return r.ad;}).length;
-  var verdicts=(D.verdicts||[]).length?'<div class="gl-verdicts">'+D.verdicts.map(function(v){return '<div><span>'+esc(v[0])+'</span><b>'+esc(v[1])+'</b></div>';}).join('')+'</div>':'';
-  var rows=V.slice().sort(function(x,y){return (x.low?x.low.won:999)-(y.low?y.low.won:999);}).map(function(v){
-    return '<tr data-vid="'+v.id+'"><td><b>'+esc(v.name)+'</b><small>'+esc(v.kind)+' · '+esc(v.area||'')+'</small></td><td class="sd-num">'+(v.low?grade(v.low.grade)+' <b>'+man(v.low.won)+'</b><small>'+esc(v.low.vat)+'</small><small>'+esc(v.low.item)+'</small>':'미공개')+'</td><td>'+esc((v.included||[]).join(', ')||'미확인')+'</td><td>'+esc((v.unknown||[]).slice(0,2).join(' · ')||'–')+'</td><td class="sd-num">'+v.revs.length+'</td></tr>';}).join('');
-  return '<section class="sd-sec"><h3>결론</h3>'+verdicts+
+  var rows=V.slice().sort(function(x,y){return (x.low?x.low.won:999)-(y.low?y.low.won:999);});
+  /* 한눈 비교는 매장 대여 후보만. 택배 대여·열린옷장(취업 정장 중심)은 접어 둠 */
+  function cheap(v){return v.kind==='온라인 대여'||v.name==='열린옷장';}
+  var main=rows.filter(function(v){return !cheap(v);}),alt=rows.filter(cheap);
+  return '<section class="sd-sec"><h3>결론</h3><div class="gl-verdicts">'+D.verdicts.map(function(v){return '<div><span>'+esc(v[0])+'</span><b>'+esc(v[1])+'</b></div>';}).join('')+'</div>'+
+   '<h3 class="gl-h">한눈 비교</h3><p class="sd-lead">매장 대여 후보를 가장 싼 상하의 1벌 공개가 순으로 놓았어요. '+esc(D.checked)+' 업체 공식 페이지 기준이고, 사진이나 상세 보기를 누르면 가격 근거·대여 규정·후기가 열려요.</p>'+
+   '<div class="gl">'+main.map(glRow).join('')+'</div><p class="gl-tip">'+esc(D.tip)+'</p></section>'+
+   '<section class="sd-sec"><details class="iw-fold"><summary>저가·택배 대여 '+alt.length+'곳 (매장 피팅 없음·후기 거의 없음)</summary><div class="gl">'+alt.map(glRow).join('')+'</div></details>'+
+   '<details class="iw-fold"><summary>근거·가격 메모</summary>'+
    '<div class="sd-kpi"><div><small>조사한 업체</small><b>'+V.length+'곳</b><span>'+esc(kinds().slice(1).map(function(k){return k[1]+' '+V.filter(function(v){return v.kind===k[0];}).length;}).join(' · '))+'</span></div>'+
    '<div><small>공개 대여가 (가장 싼 상품 기준)</small><b>'+(lows.length?man(Math.min.apply(null,lows))+' ~ '+man(Math.max.apply(null,lows)):'–')+'</b><span>업체 공식 페이지 · '+esc(D.checked)+' 확인</span></div>'+
    '<div><small>원문 확인한 후기</small><b>'+D.reviews.length+'건</b><span>협찬·광고 고지 '+ads+'건</span></div></div>'+
-   '<p class="sd-note">'+esc(D.basis)+'</p></section>'+
-   '<section class="sd-sec"><h3>한눈 비교</h3><p class="sd-lead">줄을 누르면 사진·가격 근거·포함/별도 비용·대여 규정·후기가 열려요.</p><div class="sd-tablewrap"><table class="sd-table gs-tbl"><thead><tr><th>업체</th><th>가장 낮은 대여가</th><th>포함</th><th>확인 필요</th><th>후기</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
-   '<details class="iw-more"><summary>가격 등급 설명</summary><div class="iw-legend">'+Object.keys(D.gradeInfo).map(function(k){return '<span>'+grade(k)+' '+esc(D.gradeInfo[k])+'</span>';}).join('')+'</div></details></section>';
+   '<p class="sd-note">'+esc(D.basis)+'</p><div class="iw-legend">'+Object.keys(D.gradeInfo).map(function(k){return '<span>'+grade(k)+' '+esc(D.gradeInfo[k])+'</span>';}).join('')+'</div></details></section>';
 }
 function reviews(){
   var pat=(D.patterns||[]).map(function(p){return '<li><b>'+esc(p.k)+'</b><small>'+esc(p.why)+'</small><small>'+(p.urls||[]).map(function(u,i){return a(u,'근거 '+(i+1));}).join(' · ')+'</small></li>';}).join('');
@@ -145,7 +157,7 @@ var view;try{view=sessionStorage.getItem('suit:view')||'decide';}catch(e){view='
 function panel(id,html){return '<div class="sd-panel" data-view="'+id+'"'+(view===id?'':' hidden')+'>'+html+'</div>';}
 function render(){
   root.innerHTML='<div class="sd">'+
-  '<header class="sd-hero"><h2>신랑 예복 렌탈</h2><p>'+esc(D.checked)+' 기준 공개 정보 · 2027.9.12(일) L65 본식</p></header>'+
+  '<header class="sd-hero"><h2>신랑 예복</h2></header>'+
   '<nav class="sd-subnav" role="tablist" aria-label="예복 메뉴">'+VIEWS.map(function(v){return '<button role="tab" data-view="'+v[0]+'" aria-selected="'+(view===v[0])+'"'+(view===v[0]?' class="on"':'')+'>'+v[1]+'</button>';}).join('')+'</nav>'+
   panel('decide',decide())+
   panel('vendors','<section class="sd-sec"><div class="vf"><div class="vf-roles">'+chips('kind',kinds())+'</div><input id="gsQ" class="sd-q" type="search" placeholder="업체명·지역 검색" value="'+esc(ui.q)+'"></div><p class="sd-lead">카드를 누르면 사진·가격 근거·포함/별도 비용·대여 규정·후기가 모두 열려요.</p><div id="gsVendors">'+vendorGrid()+'</div></section>')+
