@@ -30,6 +30,31 @@ var SDM_PAIN_GUIDE = {
 };
 
 var SDM_VENDOR_RESEARCH = {
+ 'dress|메라키웨딩':{
+  researched:'2026-10-25',
+  reviewEvidence:{recent:2,latest:'2026-10-17',note:'2026-10-17 아이웨딩 박람회 무료 피팅 실경험 + 2026-04 드레스투어/촬영가봉 후기. 플랫폼 게재·제휴성 가능성과 본식 최종 실착 후기 부족을 구분해야 함. 2024년 및 2023년 후기는 보조 참고만.'},
+  links:[
+   {label:'2026.10.17 박람회 피팅 후기',url:'https://oh-wedding.com/review/wedding-%EB%A9%94%EB%9D%BC%ED%82%A4%EC%9B%A8%EB%94%A9-%EB%93%9C%EB%A0%88%EC%8A%A4-%EB%AC%B4%EB%A3%8C-%ED%94%BC%ED%8C%85-%ED%9B%84%EA%B8%B0-%EB%B0%8F-%EC%95%84%EC%9D%B4%EC%9B%A8%EB%94%A9-%EB%B0%95%EB%9E%8C%ED%9A%8C-%EC%A0%95%EB%B3%B4-498913-20261017'},
+   {label:'2026.04 투어 후기',url:'https://thewedd.com/2026/04/19/%EB%A9%94%EB%9D%BC%ED%82%A4%EC%9B%A8%EB%94%A9-%EB%93%9C%EB%A0%88%EC%8A%A4-%ED%88%AC%EC%96%B4-%ED%9B%84%EA%B8%B0-%EC%B5%9C%EC%A2%85-%EC%84%A0%ED%83%9D-%EC%9D%B4%EC%9C%A0/'},
+   {label:'다이렉트웨딩 업체 안내/FAQ',url:'https://www.directwedding.co.kr/dress/meraki'},
+   {label:'신부야 스타일 정보',url:'https://www.incheon.sinbuya.com/search?q=%EC%8B%A4%ED%81%AC&type=wedding'}
+  ],
+  style:'자체제작 국내드레스·실크/레이스/비즈; 2026 박람회 피팅 후기에서는 잔비즈·화이트비즈 및 오프숄더/탑 변형 확인. 실크 오간자도 착용 사례 있음.',
+  includes:['2026.10 아이웨딩 박람회에서 무료 피팅을 경험한 사례(상시 무료가 아님)','다이렉트 업체 FAQ의 일반 기본 구성: 촬영 3벌+본식 화이트 1벌(개별 메라키 계약 조건은 재확인)'],
+  costTriggers:['2026.10 후기의 추가금 없음은 해당 박람회 계약 특전, 전체 상품 보장 아님','촬영 추가 드레스·본식 2부 드레스·프리미엄 라벨 업그레이드 비용 별도 가능','드레스 무게가 상당했다는 피팅 후기: 본식 이동/착석 실착 검증 필요'],
+  pain:[
+    '아이웨딩 박람회 참가 후기의 무료 피팅과 추가금 없음 계약 조건은 특정 행사 특전이다. 일반 계약가에 그대로 적용할 수 없다.',
+    '2026년 10월 사례는 피팅 경험 및 미래 본식 가봉 예약에 관한 후기이지 실제 본식 결과 평가가 아니다.',
+    '착용자가 드레스의 무게를 언급해 본식 버진로드·계단·장시간 대기에서 움직임 확인이 필요하다.',
+    '다이렉트 업체 페이지의 추가금 30만원부터 안내는 드레스샵 업계 일반 FAQ로, 메라키 실제 추가금 견적이 아니다.'
+  ],
+  avoid:['기본 라벨 실크와 비즈 각 2벌 이상 입고 실물 상태·색감·무게 비교','홀 조명에 따른 비즈 반사/실크 광택을 실제 예식 사진으로 비교','2027년 예식일 원하는 드레스 재고, 최종 피팅 회차, 당일 특전 계약서 명시','촬영/본식 헬퍼 및 드레스투어 피팅비·프리미엄 라벨 추가금 서면 확인','2026년 말 이후 독립적인 본식 완료 후기를 추가 확보'],
+  sources:[
+   {label:'2026.10.17 아이웨딩 박람회 실피팅',url:'https://oh-wedding.com/review/wedding-%EB%A9%94%EB%9D%BC%ED%82%A4%EC%9B%A8%EB%94%A9-%EB%93%9C%EB%A0%88%EC%8A%A4-%EB%AC%B4%EB%A3%8C-%ED%94%BC%ED%8C%85-%ED%9B%84%EA%B8%B0-%EB%B0%8F-%EC%95%84%EC%9D%B4%EC%9B%A8%EB%94%A9-%EB%B0%95%EB%9E%8C%ED%9A%8C-%EC%A0%95%EB%B3%B4-498913-20261017',kind:'플랫폼 실피팅 후기'},
+   {label:'2026.04 투어·촬영가봉 후기',url:'https://thewedd.com/2026/04/19/%EB%A9%94%EB%9D%BC%ED%82%A4%EC%9B%A8%EB%94%A9-%EB%93%9C%EB%A0%88%EC%8A%A4-%ED%88%AC%EC%96%B4-%ED%9B%84%EA%B8%B0-%EC%B5%9C%EC%A2%85-%EC%84%A0%ED%83%9D-%EC%9D%B4%EC%9C%A0/',kind:'투어 후기'},
+   {label:'다이렉트 기본구성 안내',url:'https://www.directwedding.co.kr/dress/meraki',kind:'판매자 일반 FAQ'}
+  ]
+ },
  'studio|세미앙':{
   researched:'2026-10-06',
   reviewEvidence:{recent:2,latest:'2025-09',note:'2025년 후기 2건 확인. 다이렉트 우수후기는 제휴/리워드 가능성을 감안해 개인 블로그 후기와 함께 판단.'},
