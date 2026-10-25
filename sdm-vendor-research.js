@@ -32,10 +32,10 @@ var SDM_PAIN_GUIDE = {
 var SDM_VENDOR_RESEARCH = {
  'dress|메라키웨딩':{
   researched:'2026-10-25',
-  reviewEvidence:{recent:2,latest:'2026-10-17',note:'2026-10-17 아이웨딩 박람회 무료 피팅 실경험 + 2026-04 드레스투어/촬영가봉 후기. 플랫폼 게재·제휴성 가능성과 본식 최종 실착 후기 부족을 구분해야 함. 2024년 및 2023년 후기는 보조 참고만.'},
+  reviewEvidence:{recent:1,latest:'2026-10-17',note:'2026-10-17 아이웨딩 박람회 무료 피팅 실경험. 2026-04 thewedd.com 투어 글은 제이드블랑 글과 문장이 같은 템플릿이라 2026-10-25 재검증에서 집계 제외. 플랫폼 게재·제휴성 가능성과 본식 최종 실착 후기 부족을 구분해야 함. 2024년 및 2023년 후기는 보조 참고만.'},
   links:[
    {label:'2026.10.17 박람회 피팅 후기',url:'https://oh-wedding.com/review/wedding-%EB%A9%94%EB%9D%BC%ED%82%A4%EC%9B%A8%EB%94%A9-%EB%93%9C%EB%A0%88%EC%8A%A4-%EB%AC%B4%EB%A3%8C-%ED%94%BC%ED%8C%85-%ED%9B%84%EA%B8%B0-%EB%B0%8F-%EC%95%84%EC%9D%B4%EC%9B%A8%EB%94%A9-%EB%B0%95%EB%9E%8C%ED%9A%8C-%EC%A0%95%EB%B3%B4-498913-20261017'},
-   {label:'2026.04 투어 후기',url:'https://thewedd.com/2026/04/19/%EB%A9%94%EB%9D%BC%ED%82%A4%EC%9B%A8%EB%94%A9-%EB%93%9C%EB%A0%88%EC%8A%A4-%ED%88%AC%EC%96%B4-%ED%9B%84%EA%B8%B0-%EC%B5%9C%EC%A2%85-%EC%84%A0%ED%83%9D-%EC%9D%B4%EC%9C%A0/'},
+   {label:'2026.04 투어 글(템플릿 의심·집계 제외)',url:'https://thewedd.com/2026/04/19/%EB%A9%94%EB%9D%BC%ED%82%A4%EC%9B%A8%EB%94%A9-%EB%93%9C%EB%A0%88%EC%8A%A4-%ED%88%AC%EC%96%B4-%ED%9B%84%EA%B8%B0-%EC%B5%9C%EC%A2%85-%EC%84%A0%ED%83%9D-%EC%9D%B4%EC%9C%A0/'},
    {label:'다이렉트웨딩 업체 안내/FAQ',url:'https://www.directwedding.co.kr/dress/meraki'},
    {label:'신부야 스타일 정보',url:'https://www.incheon.sinbuya.com/search?q=%EC%8B%A4%ED%81%AC&type=wedding'}
   ],

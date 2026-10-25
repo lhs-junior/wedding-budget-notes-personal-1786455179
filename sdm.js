@@ -212,6 +212,7 @@ function render(){
    '<div class="sd-kpi"><div><small>비동행 계약가 중간값</small><b>'+man(medAll)+'</b><span>업체명 공개 '+base.length+'건 · 서울만 '+seoul.length+'건은 '+man(medSeoul)+'</span></div>'+
    '<div><small>거의 항상 붙는 추가금</small><b>+55~100만</b><span>원본·수정본 44 · 헬퍼 50 · 투어비 11</span></div>'+
    '<div><small>L65 기준 목표 실지출</small><b>280~320만</b><span>계약가 220~250 + 추가금. 본식 원판·DVD는 식장 필수라 별도</span></div></div></header>'+
+  (window.SDM_IW_HTML?SDM_IW_HTML():'')+
   vendorSection()+
   '<section class="sd-sec"><h3>실제 계약 사례</h3><p class="sd-lead">줄을 누르면 포함·별도 항목과 원문 링크가 나와요. 업체명을 누르면 그 업체가 들어간 사례만 모아 봐요.</p>'+controls()+'<div id="sdCases">'+caseRows()+'</div>'+
    '<p class="sd-note">다이렉트 카페 글이 많아요. 다이렉트 카페는 운영사가 직접 운영하고 후기 작성 시 포인트를 줘서 “광고성”으로 표시했어요. 금액은 원문 그대로입니다.</p></section>'+
@@ -222,6 +223,7 @@ function render(){
   '<section class="sd-sec"><h3>내 견적 기록</h3><div id="sdQuotes">'+quotes()+'</div></section>'+
   '</div>';
   bind();
+  if(window.SDM_IW_BIND)SDM_IW_BIND(root);
 }
 function refreshCases(){document.getElementById('sdCases').innerHTML=caseRows();bindCases();}
 function bindCases(){
