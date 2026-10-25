@@ -36,17 +36,24 @@ function vendorCard(v){
   '<div class="sd-vendor-block sd-cost"><b>확인된 별도 비용</b>'+money(v.extras)+'</div>'+
   '<div class="sd-vendor-block sd-pain"><b>아직 확인 안 된 비용·조건</b>'+li(v.unknown,'없음')+'</div>'+
   '<div class="sd-vendor-block"><b>후기 '+(r.items||[]).length+'건</b>'+((r.items||[]).length?'<ul class="iw-revlist">'+r.items.map(function(x){return '<li><span class="iw-kind">'+esc(x.kind)+'</span> '+a(x.url,x.date+' '+(x.title||''))+(x.ad?' <span class="sd-ad sd-ad-y">'+esc(x.ad)+'</span>':'')+(x.paid?'<small>지불 '+esc(x.paid)+'</small>':'')+(x.good?'<small>+ '+esc(x.good)+'</small>':'')+(x.bad?'<small>− '+esc(x.bad)+'</small>':'')+'</li>';}).join('')+'</ul>':'<p class="sd-muted">확보한 최근 후기 없음</p>')+(r.note?'<p class="sd-evidence-note">'+esc(r.note)+'</p>':'')+'</div>'+
-  '</details>'+
+  '</details>'+(g.SDM_OLD?g.SDM_OLD.memo(v.role,v.name):'')+
   '<footer>'+(v.iwUrl?a(v.iwUrl,'아이웨딩 업체정보'):'')+((v.links||[]).length?' · '+v.links.map(function(l){return a(l.url,l.label);}).join(' · '):'')+'</footer></article>';
 }
 function vendors(){
+ var q=(ui.q||'').trim().toLowerCase(),O=g.SDM_OLD;
+ var hit=function(name){return !q||name.toLowerCase().indexOf(q)>=0;};
  var rows=D.vendors.filter(function(v){
   if(ui.role&&v.role!==ui.role)return false;
   if(ui.kind&&!(v.role==='studio'&&(v.total==='both'||(ui.kind==='total'?v.total:!v.total))))return false;
   if(ui.fabric&&!(v.role==='dress'&&String(v.fabric||'').indexOf(ui.fabric)>=0))return false;
-  return true;});
+  return hit(v.name);});
  rows.sort(function(x,y){return ui.sort==='review'?((y.reviews||{}).independent||0)-((x.reviews||{}).independent||0):(x.role+x.name).localeCompare(y.role+y.name);});
- return rows.length?'<div class="iw-grid">'+rows.map(vendorCard).join('')+'</div>':'<p class="sd-muted">조건에 맞는 업체가 없어요.</p>';
+ // 아이웨딩 카드와 겹치지 않는 카페 계약사례 업체 (토탈·소재 정보가 없어 그 필터에선 숨김)
+ var used={};if(O)D.vendors.forEach(function(v){O.matches(v.role,v.name).forEach(function(m){used[m.role+'|'+m.name]=1;});});
+ var olds=O&&!ui.kind&&!ui.fabric?O.list().filter(function(v){return !used[v.role+'|'+v.name]&&(!ui.role||v.role===ui.role)&&hit(v.name);}):[];
+ var hidden=O&&(ui.kind||ui.fabric)?'<p class="sd-note">카페 계약사례 업체는 토탈·소재 정보가 없어 이 필터에서는 숨겼어요.</p>':'';
+ var cnt='<p class="sd-stat">검증 업체 <b>'+rows.length+'곳</b> · 카페 계약사례 업체 <b>'+olds.length+'곳</b></p>';
+ return (rows.length||olds.length)?cnt+'<div class="iw-grid">'+rows.map(vendorCard).join('')+olds.map(O.card).join('')+'</div>'+hidden:'<p class="sd-muted">조건에 맞는 업체가 없어요.</p>'+hidden;
 }
 
 function comboRow(c){
@@ -102,6 +109,19 @@ function pkgTable(){
   k.rows.slice().sort(function(x,y){return x.max-y.max;}).map(function(r){return '<tr><td>'+a(r.url,r.name)+'<small>'+esc(r.opts)+'</small></td><td class="sd-num">'+man(r.final)+'</td><td class="sd-num"><b>'+man(r.max)+'</b>'+(r.match?'':'<small>헤드라인 최대혜택가와 불일치</small>')+'</td><td>'+esc(r.silk)+'</td></tr>';}).join('')+
   '</tbody></table></div>';
 }
+function events(){
+ var e=D.events;if(!e)return '';
+ return '<h4 class="iw-h">다가오는 현장 혜택 · 마감 일정</h4><p class="sd-lead">'+esc(e.summary)+'</p>'+
+  '<ul class="iw-events">'+e.rows.map(function(r){return '<li><b>'+esc(r.when)+'</b><span>'+a(r.url,r.what)+(r.note?'<small>'+esc(r.note)+'</small>':'')+'</span></li>';}).join('')+'</ul>'+
+  (e.none&&e.none.length?'<details class="iw-more"><summary>공지가 없던 곳</summary><ul>'+e.none.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></details>':'');
+}
+function direct(){
+ var d=D.direct;if(!d)return '';
+ return '<h4 class="iw-h">다이렉트결혼준비와 비교</h4><p class="sd-lead">'+esc(d.summary)+'</p>'+
+  '<div class="iw-blk"><b>다이렉트 견적이 더 싸 보일 수 있는 이유 (원문 근거)</b><ul>'+d.why.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>'+
+  '<div class="iw-blk"><b>다이렉트 카페 금액 사례</b><ul>'+d.cases.map(function(c){return '<li>'+a(c.url,c.date+' '+c.combo)+' · '+esc(c.price)+'</li>';}).join('')+'</ul></div>'+
+  '<div class="iw-links">'+d.links.map(function(l){return a(l.url,l.label+' →');}).join('')+'</div>';
+}
 function grades(){return '<div class="iw-legend">'+Object.keys(D.gradeInfo).map(function(k){return '<span>'+grade(k)+' '+esc(D.gradeInfo[k])+'</span>';}).join('')+'</div>';}
 g.SDM_IW_PARTS={
  decide:function(){
@@ -109,14 +129,14 @@ g.SDM_IW_PARTS={
   return '<section class="sd-sec iw"><h3>받은 견적 · 검증 '+esc(D.checked)+'</h3>'+
    '<div class="iw-base">'+b.map(function(x){return '<div><small>'+esc(x.label)+' '+grade(x.grade)+'</small><b>'+man(x.total)+'</b><span>'+esc(x.parts)+'</span></div>';}).join('')+'</div>'+
    '<details class="iw-more iw-memo"><summary>근거·계산 메모 펼치기</summary><p>'+esc(D.baselineNote)+'</p><p>'+esc(D.summary)+'</p>'+grades()+'</details>'+
-   '<h4 class="iw-h">추천 TOP 3 · 비토탈</h4>'+(D.picksNote?'<p class="sd-lead">'+esc(D.picksNote)+'</p>':'')+picks()+
-   calcTable()+pkgTable()+
+   '<h4 class="iw-h">추천 TOP 3 · 비토탈</h4>'+(D.picksNote?'<p class="sd-lead">'+esc(D.picksNote)+'</p>':'')+picks()+events()+
+   calcTable()+pkgTable()+direct()+
    '<h4 class="iw-h">조합 비교 · 실지불액 계산</h4><p class="sd-lead">2~4개를 골라 나란히 보세요. 모든 조합에 같은 기준(헬퍼비)을 더해 비교해요. 선택 옵션은 체크한 것만 더하고, 미확인 비용은 합계에 넣지 않고 개수로만 보여줘요.</p>'+
    '<div class="iw-combos">'+D.combos.map(comboRow).join('')+'</div><p class="iw-cmpmsg" id="iwCmpMsg" aria-live="polite"></p><div id="iwCmp">'+compare()+'</div></section>';
  },
  vendors:function(){
-  return '<section class="sd-sec iw"><h3>아이웨딩 상세페이지·후기 검증 업체</h3><p class="sd-lead">가격 근거 등급, 포함·별도 비용, 쿠폰·특전, 후기, 공식 인스타를 한 카드에 모았어요.</p>'+grades()+
-   '<div class="sd-ctl"><div>'+chips('role',[['','전체'],['studio','스튜디오'],['dress','드레스'],['makeup','메이크업']])+'</div><div>'+chips('kind',[['','토탈·비토탈'],['total','토탈'],['nontotal','비토탈']])+chips('fabric',[['','소재 전체'],['실크','실크'],['비즈','비즈']])+chips('sort',[['grade','이름순'],['review','후기 많은 순']])+'</div></div>'+
+  return '<section class="sd-sec iw"><h3>업체 목록</h3><p class="sd-lead">업체 하나에 카드 하나예요. 아이웨딩 검증 카드에는 가격 등급·포함·별도 비용·쿠폰·후기·공식 인스타가, 카페 계약사례가 있는 업체는 같은 카드 안 "카페 계약사례 메모"에 함께 들어 있어요.</p>'+grades()+
+   '<div class="sd-ctl"><div>'+chips('role',[['','전체'],['studio','스튜디오'],['dress','드레스'],['makeup','메이크업']])+'</div><div>'+chips('kind',[['','토탈·비토탈'],['total','토탈'],['nontotal','비토탈']])+chips('fabric',[['','소재 전체'],['실크','실크'],['비즈','비즈']])+chips('sort',[['grade','이름순'],['review','후기 많은 순']])+'</div><input id="iwVendorQ" class="sd-q" placeholder="업체명 검색 (예: 에델린, 원세컨드, 헤움)" value="'+esc(ui.q||'')+'"></div>'+
    '<div id="iwVendors">'+vendors()+'</div></section>';
  },
  guide:function(){
@@ -128,6 +148,7 @@ g.SDM_IW_PARTS={
 g.SDM_IW_BIND=function(root){
  function q(sel){return root.querySelector(sel);}
  function redraw(){var c=q('#iwCmp');if(c)c.innerHTML=compare();root.querySelectorAll('.iw-combos').forEach(function(x){x.innerHTML=D.combos.map(comboRow).join('');});}
+ var vq=q('#iwVendorQ');if(vq)vq.addEventListener('input',function(){ui.q=vq.value;var v=q('#iwVendors');if(v)v.innerHTML=vendors();});
  root.querySelectorAll('.iw').forEach(function(sec){
   sec.addEventListener('click',function(e){
    var b=e.target.closest('[data-iwk]');if(!b)return;

@@ -89,45 +89,57 @@ function buildVendors(){
  return Object.keys(map).map(function(k){var v=map[k],p=v.cases.map(function(c){return c.c;});v.med=median(p);v.min=Math.min.apply(null,p);v.max=Math.max.apply(null,p);v.contracts=v.cases.filter(function(c){return c.st==='계약';}).length;v.extraList=Object.keys(v.extras).sort(function(a,b){return v.extras[b]-v.extras[a];}).slice(0,4);return v;});
 }
 var VENDORS=buildVendors();
-function vendorCards(){
- var q=vendorUi.q.trim().toLowerCase(),rows=VENDORS.filter(function(v){return (!vendorUi.role||v.role===vendorUi.role)&&(!q||v.name.toLowerCase().indexOf(q)>=0);});
- rows.sort(function(a,b){return b.cases.length-a.cases.length||a.name.localeCompare(b.name);});
- if(!rows.length)return '<p class="sd-muted">조건에 맞는 업체가 없어요.</p>';
- return '<div class="sd-vendor-grid">'+rows.slice(0,36).map(function(v){
-  var r=ROLE_INFO[v.role];
+function rrFor(key){return (typeof SDM_VENDOR_RESEARCH!=='undefined'&&SDM_VENDOR_RESEARCH[key])||null;}
+/* 카페 계약사례 기반 정보 블록: 단독 카드와 아이웨딩 카드 안 메모에서 함께 사용 */
+function caseBlocks(v){
   var extras=v.extraList.length?v.extraList.map(function(e){return esc(e)+'('+v.extras[e]+'건)';}).join(' · '):'확인된 별도비용 없음';
   var notes=v.notes.slice(0,2).map(function(n){return '<li>'+esc(n)+'</li>';}).join('');
   var src=v.cases.slice(0,3).map(function(c){return '<a href="'+esc(c.src)+'" target="_blank" rel="noopener">'+esc(c.date)+' '+esc(c.co)+'</a>';}).join(' · ');
-  var key=v.role+'|'+v.name,rr=(typeof SDM_VENDOR_RESEARCH!=='undefined'&&SDM_VENDOR_RESEARCH[key])||null;
-  var painGuide=(typeof SDM_PAIN_GUIDE!=='undefined'&&SDM_PAIN_GUIDE[v.role])||r.checks;
+  return '<div class="sd-vendor-metrics"><div><small>가격 사례</small><b>'+v.cases.length+'건</b><span>실계약 '+v.contracts+'건</span></div><div><small>조합 계약가</small><b>'+man(v.med)+'</b><span>'+man(v.min)+' ~ '+man(v.max)+'</span></div><div><small>카페 업체명</small><b>'+esc(v.name)+'</b><span>'+ROLE_INFO[v.role].label+'</span></div></div>'+
+   '<div class="sd-vendor-block"><b>현재 계약사례의 추가비</b><p>'+extras+'</p></div>'+
+   '<div class="sd-vendor-block"><b>기존 계약 메모</b>'+(notes?'<ul>'+notes+'</ul>':'<p class="sd-muted">구체 메모 없음</p>')+'</div>'+
+   (src?'<p class="sd-src">'+src+'</p>':'');
+}
+function researchBlocks(rr,role){
+  var r=ROLE_INFO[role];
+  var painGuide=(typeof SDM_PAIN_GUIDE!=='undefined'&&SDM_PAIN_GUIDE[role])||r.checks;
   var ev=rr&&rr.reviewEvidence?rr.reviewEvidence:null;
-  var researched=rr?'<span class="sd-researched">후기 조사 '+esc(rr.researched)+'</span>':'<span class="sd-researched sd-unresearched">업체별 불편후기 추가 조사 필요</span>';
   var evBadge=ev&&ev.recent>=2?'<span class="sd-evidence-ok">최근 후기 '+ev.recent+'건'+(ev.latest?' · 최신 '+esc(ev.latest):'')+'</span>':'<span class="sd-evidence-warn">최근 후기 부족 · 판단 보류</span>';
   var evNote=ev?'<p class="sd-evidence-note">'+esc(ev.note||'최근 24개월 내 독립 후기 2건 이상 확보해야 업체 판단에 사용')+'</p>':'<p class="sd-evidence-note">최근 24개월 내 독립 후기 2건 이상 확보하기 전에는 후기 평가는 참고만 하세요.</p>';
-  var rrMedia=rr?((rr.hero?'<a class="sd-heroimg" href="'+esc((rr.links&&rr.links[0]&&rr.links[0].url)||rr.hero)+'" target="_blank" rel="noopener"><img src="'+esc(rr.hero)+'" alt="'+esc(v.name)+' 대표 이미지" loading="lazy" onerror="this.parentNode.style.display=\'none\'"></a>':'')+(rr.links&&rr.links.length?'<div class="sd-linkbar">'+rr.links.map(function(l){return '<a href="'+esc(l.url)+'" target="_blank" rel="noopener">'+esc(l.label)+'</a>';}).join('')+'</div>':'')):'';
+  var rrMedia=rr?((rr.hero?'<a class="sd-heroimg" href="'+esc((rr.links&&rr.links[0]&&rr.links[0].url)||rr.hero)+'" target="_blank" rel="noopener"><img src="'+esc(rr.hero)+'" alt="대표 이미지" loading="lazy" onerror="this.parentNode.style.display=\'none\'"></a>':'')+(rr.links&&rr.links.length?'<div class="sd-linkbar">'+rr.links.map(function(l){return '<a href="'+esc(l.url)+'" target="_blank" rel="noopener">'+esc(l.label)+'</a>';}).join('')+'</div>':'')):'';
   var rrStyle=rr?'<div class="sd-vendor-block"><b>어떤 스타일?</b><p>'+esc(rr.style)+'</p></div>':'';
   var rrInc=rr&&rr.includes&&rr.includes.length?'<div class="sd-vendor-block"><b>확인된 구성</b><p>'+rr.includes.map(esc).join(' · ')+'</p></div>':'';
   var rrCost=rr&&rr.costTriggers&&rr.costTriggers.length?'<div class="sd-vendor-block sd-cost"><b>💸 돈이 더 붙는 지점</b><ul>'+rr.costTriggers.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>':'';
   var rrPain=rr&&rr.pain&&rr.pain.length?'<div class="sd-vendor-block sd-pain"><b>⚠ 후기에서 먼저 볼 불편·고생 포인트</b><ul>'+rr.pain.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>':'<div class="sd-vendor-block sd-pain"><b>⚠ 이 업체 후기에서 꼭 찾을 것</b><ul>'+painGuide.slice(0,4).map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>';
   var rrAvoid=rr&&rr.avoid&&rr.avoid.length?'<div class="sd-vendor-block sd-avoid"><b>우리의 방어법</b><ul>'+rr.avoid.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>':'';
-  var rrSrc=rr&&rr.sources&&rr.sources.length?rr.sources.map(function(s){return '<a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.label)+' · '+esc(s.kind)+'</a>';}).join(' · '):'';
-  return '<article class="sd-vendor-card"><header><div><span class="sd-role">'+r.label+'</span><h4>'+esc(v.name)+'</h4>'+researched+'</div><span class="sd-confidence">가격사례 '+v.cases.length+'건</span></header>'+
-   '<p class="sd-vendor-what"><b>'+r.title+'</b> · '+r.desc+'</p>'+
-   rrMedia+rrStyle+
-   '<div class="sd-vendor-metrics"><div><small>가격 사례</small><b>'+v.cases.length+'건</b><span>실계약 '+v.contracts+'건</span></div><div><small>조합 계약가</small><b>'+man(v.med)+'</b><span>'+man(v.min)+' ~ '+man(v.max)+'</span></div><div><small>최근 후기</small>'+evBadge+'<span>최근성·출처 수 기준</span></div></div>'+evNote+
-   rrInc+rrCost+rrPain+rrAvoid+
-   '<div class="sd-vendor-block"><b>현재 계약사례의 추가비</b><p>'+extras+'</p></div>'+
-   '<div class="sd-vendor-block"><b>기존 계약 메모</b>'+(notes?'<ul>'+notes+'</ul>':'<p class="sd-muted">구체 메모 없음</p>')+'</div>'+
-   '<div class="sd-vendor-block"><b>상담 때 기본 확인</b><p>'+r.checks.map(esc).join(' · ')+'</p></div><footer>'+(rrSrc?rrSrc+(src?' · ':''):'')+src+'</footer></article>';
- }).join('')+'</div>';
+  var rrSrc=rr&&rr.sources&&rr.sources.length?'<p class="sd-src">'+rr.sources.map(function(s){return '<a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.label)+' · '+esc(s.kind)+'</a>';}).join(' · ')+'</p>':'';
+  return rrMedia+rrStyle+'<div class="sd-vendor-block"><b>최근 후기 (조사 '+(rr?esc(rr.researched):'전')+')</b>'+evBadge+'</div>'+evNote+rrInc+rrCost+rrPain+rrAvoid+rrSrc;
 }
+function oldCard(v){
+  var r=ROLE_INFO[v.role],rr=rrFor(v.role+'|'+v.name);
+  var researched=rr?'<span class="sd-researched">후기 조사 '+esc(rr.researched)+'</span>':'<span class="sd-researched sd-unresearched">업체별 불편후기 추가 조사 필요</span>';
+  return '<article class="sd-vendor-card"><header><div><span class="sd-role">'+r.label+' · 카페 계약사례</span><h4>'+esc(v.name)+'</h4>'+researched+'</div><span class="sd-confidence">가격사례 '+v.cases.length+'건</span></header>'+
+   '<p class="sd-vendor-what"><b>'+r.title+'</b> · '+r.desc+'</p>'+caseBlocks(v)+researchBlocks(rr,v.role)+
+   '<div class="sd-vendor-block"><b>상담 때 기본 확인</b><p>'+r.checks.map(esc).join(' · ')+'</p></div></article>';
+}
+var normName=function(s){return String(s).replace(/\s|\(.*$/g,'').replace(/스튜디오$/,'');};
+/* 아이웨딩 카드와 같은 업체인 카페 사례 업체 */
+function oldMatches(role,name){var n=normName(name);return VENDORS.filter(function(v){var o=normName(v.name);return v.role===role&&o.length>=2&&(n.indexOf(o)===0||o.indexOf(n)===0);});}
+window.SDM_OLD={
+  list:function(){return VENDORS.slice().sort(function(a,b){return b.cases.length-a.cases.length||a.name.localeCompare(b.name);});},
+  matches:oldMatches,
+  card:oldCard,
+  memo:function(role,name){
+    var m=oldMatches(role,name),keys=[role+'|'+name.replace(/\s*\(.*$/,'')].concat(m.map(function(v){return v.role+'|'+v.name;})),seen={},rrHtml='';
+    keys.forEach(function(k){var rr=rrFor(k);if(rr&&!seen[k]){seen[k]=1;rrHtml+=researchBlocks(rr,role);}});
+    if(!m.length&&!rrHtml)return '';
+    return '<details class="iw-more"><summary>카페 계약사례·불편 후기 메모'+(m.length?' ('+m.map(function(v){return esc(v.name)+' '+v.cases.length+'건';}).join(', ')+')':'')+'</summary>'+m.map(caseBlocks).join('')+rrHtml+'</details>';
+  }
+};
 function vendorSection(){
- var btns=[['','전체'],['studio','스튜디오'],['dress','드레스'],['makeup','메이크업']].map(function(x){return '<button class="sd-chip'+(vendorUi.role===x[0]?' on':'')+'" data-vrole="'+x[0]+'">'+x[1]+'</button>';}).join('');
- var researchCount=typeof SDM_VENDOR_RESEARCH!=='undefined'?Object.keys(SDM_VENDOR_RESEARCH).length:0;
- return '<section class="sd-sec"><h3>카페 계약사례 기반 업체 메모</h3><p class="sd-lead">무엇을 해주는 곳인지 → <b>후기에서 실제로 고생한 지점</b> → 추가금 발생 조건 → 피하는 방법 → 최종가 순서로 봐요. 현재 업체별 심층후기 '+researchCount+'곳 조사 완료.</p>'+
+ return '<section class="sd-sec"><h3>업체를 볼 때 순서</h3><p class="sd-lead">무엇을 해주는 곳인지 → <b>후기에서 실제로 고생한 지점</b> → 추가금 발생 조건 → 피하는 방법 → 최종가 순서로 봐요. 아래 업체 목록은 아이웨딩 검증 업체와 카페 계약사례 업체('+VENDORS.length+'곳)를 한 목록으로 합쳤어요.</p>'+
   '<div class="sd-meaning-grid">'+Object.keys(ROLE_INFO).map(function(k){var r=ROLE_INFO[k];return '<article><span>'+r.label+'</span><b>'+r.title+'</b><p>'+r.desc+'</p><small>'+r.checks.join(' · ')+'</small></article>';}).join('')+'</div>'+
-  '<div class="sd-value-rule"><b>가성비 판단 순서</b><span>① 원하는 결과에 맞는가 → ② 기본가 포함 범위 → ③ 필수 추가비 포함 최종가 → ④ 실제 후기·근거 수 → ⑤ 같은 조건 업체 비교</span></div>'+
-  '<div class="sd-ctl"><div>'+btns+'</div><input id="sdVendorQ" class="sd-q" placeholder="업체명 검색" value="'+esc(vendorUi.q)+'"></div><div id="sdVendors">'+vendorCards()+'</div></section>';
+  '<div class="sd-value-rule"><b>가성비 판단 순서</b><span>① 원하는 결과에 맞는가 → ② 기본가 포함 범위 → ③ 필수 추가비 포함 최종가 → ④ 실제 후기·근거 수 → ⑤ 같은 조건 업체 비교</span></div></section>';
 }
 function check(k,t,sub){return '<label class="sd-task'+(st.checks[k]?' done':'')+'"><input type="checkbox" data-ck="'+k+'"'+(st.checks[k]?' checked':'')+'><span>'+t+(sub?'<small>'+sub+'</small>':'')+'</span></label>';}
 var QUESTIONS=[
@@ -215,7 +227,7 @@ function render(){
   '<header class="sd-hero"><h2>스드메</h2></header>'+
   '<nav class="sd-subnav" role="tablist" aria-label="스드메 메뉴">'+VIEWS.map(function(v){return '<button role="tab" data-view="'+v[0]+'" aria-selected="'+(view===v[0])+'"'+(view===v[0]?' class="on"':'')+'>'+v[1]+'</button>';}).join('')+'</nav>'+
   panel('decide',(IW?IW.decide():''))+
-  panel('vendors',(IW?IW.vendors():'')+vendorSection())+
+  panel('vendors',vendorSection()+(IW?IW.vendors():''))+
   panel('cases',
    '<section class="sd-sec"><h3>실제 계약 사례</h3><p class="sd-lead">네이버 카페 원문 '+SDM_CASES.length+'건을 직접 열어 업체 조합과 금액을 정리했어요. (2026-09-24 수집) 줄을 누르면 포함·별도 항목과 원문 링크가 나와요. 업체명을 누르면 그 업체가 들어간 사례만 모아 봐요.</p>'+
     '<div class="sd-kpi"><div><small>비동행 계약가 중간값</small><b>'+man(medAll)+'</b><span>업체명 공개 '+base.length+'건 · 서울만 '+seoul.length+'건은 '+man(medSeoul)+'</span></div>'+
@@ -244,8 +256,6 @@ function bindCases(){
   root.querySelectorAll('.sd-v').forEach(function(b){b.onclick=function(ev){ev.stopPropagation();ui.q=b.dataset.q;ui.how='';ui.contractOnly=false;view='cases';try{sessionStorage.setItem('sdm:view',view);}catch(e){}render();var t=document.getElementById('sdQ');if(t)t.scrollIntoView({block:'center'});};});
 }
 function bind(){
-  root.querySelectorAll('[data-vrole]').forEach(function(b){b.onclick=function(){vendorUi.role=b.dataset.vrole;root.querySelectorAll('[data-vrole]').forEach(function(x){x.classList.toggle('on',x===b);});document.getElementById('sdVendors').innerHTML=vendorCards();};});
-  var vq=document.getElementById('sdVendorQ');if(vq)vq.oninput=function(){vendorUi.q=vq.value;document.getElementById('sdVendors').innerHTML=vendorCards();};
   root.querySelectorAll('.sd-chip[data-k]').forEach(function(b){b.onclick=function(){ui[b.dataset.k]=b.dataset.v;root.querySelectorAll('.sd-chip[data-k="'+b.dataset.k+'"]').forEach(function(x){x.classList.toggle('on',x===b);});refreshCases();};});
   var co=document.getElementById('sdContractOnly');if(co)co.onchange=function(){ui.contractOnly=co.checked;refreshCases();};
   var q=document.getElementById('sdQ');if(q)q.oninput=function(){ui.q=q.value;refreshCases();};
