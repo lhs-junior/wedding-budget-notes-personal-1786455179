@@ -95,6 +95,13 @@ function calcTable(){
   c.rows.slice().sort(function(x,y){return (x.final==null)-(y.final==null)||x.final-y.final;}).map(function(r){return '<tr'+(r===c.rows[0]?' class="iw-calc-base"':'')+'><td>'+esc(r.combo)+(r.final==null?'<small>'+esc(r.status+' · '+r.note)+'</small>':'')+'</td><td class="sd-num"><b>'+(r.final==null?'계산 불가':man(r.final))+'</b></td><td class="sd-num">'+(r.final==null?'–':r===c.rows[0]?'기준':diff(r.final,base))+'</td></tr>';}).join('')+
   '</tbody></table></div>';
 }
+function pkgTable(){
+ var k=D.pkgs;if(!k)return '';
+ return '<h4 class="iw-h">인물 중심 스튜디오 비토탈 기성 패키지 · 300만 이하</h4><p class="sd-lead">'+esc(k.basis)+'</p>'+
+  '<div class="sd-tablewrap"><table class="sd-table iw-calc"><thead><tr><th>패키지</th><th class="sd-num">최종 혜택가</th><th class="sd-num">옵션 적용가</th><th>드레스 실크 근거</th></tr></thead><tbody>'+
+  k.rows.slice().sort(function(x,y){return x.max-y.max;}).map(function(r){return '<tr><td>'+a(r.url,r.name)+'<small>'+esc(r.opts)+'</small></td><td class="sd-num">'+man(r.final)+'</td><td class="sd-num"><b>'+man(r.max)+'</b>'+(r.match?'':'<small>헤드라인 최대혜택가와 불일치</small>')+'</td><td>'+esc(r.silk)+'</td></tr>';}).join('')+
+  '</tbody></table></div>';
+}
 function grades(){return '<div class="iw-legend">'+Object.keys(D.gradeInfo).map(function(k){return '<span>'+grade(k)+' '+esc(D.gradeInfo[k])+'</span>';}).join('')+'</div>';}
 g.SDM_IW_PARTS={
  decide:function(){
@@ -103,7 +110,7 @@ g.SDM_IW_PARTS={
    '<div class="iw-base">'+b.map(function(x){return '<div><small>'+esc(x.label)+' '+grade(x.grade)+'</small><b>'+man(x.total)+'</b><span>'+esc(x.parts)+'</span></div>';}).join('')+'</div>'+
    '<details class="iw-more iw-memo"><summary>근거·계산 메모 펼치기</summary><p>'+esc(D.baselineNote)+'</p><p>'+esc(D.summary)+'</p>'+grades()+'</details>'+
    '<h4 class="iw-h">추천 TOP 3 · 비토탈</h4>'+(D.picksNote?'<p class="sd-lead">'+esc(D.picksNote)+'</p>':'')+picks()+
-   calcTable()+
+   calcTable()+pkgTable()+
    '<h4 class="iw-h">조합 비교 · 실지불액 계산</h4><p class="sd-lead">2~4개를 골라 나란히 보세요. 모든 조합에 같은 기준(헬퍼비)을 더해 비교해요. 선택 옵션은 체크한 것만 더하고, 미확인 비용은 합계에 넣지 않고 개수로만 보여줘요.</p>'+
    '<div class="iw-combos">'+D.combos.map(comboRow).join('')+'</div><p class="iw-cmpmsg" id="iwCmpMsg" aria-live="polite"></p><div id="iwCmp">'+compare()+'</div></section>';
  },
