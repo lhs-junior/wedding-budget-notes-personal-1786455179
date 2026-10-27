@@ -754,7 +754,6 @@ details li{margin:.3em 0}
 <div style="display:grid;gap:6px">
 <div style="padding:10px;background:#f0faf0;border-radius:6px;font-size:12px;line-height:1.6"><b>베뉴비안</b> · 총액 <b style="color:var(--g)">960만</b><span style="color:#aaa"> · 27년 프로모션 대관무료+식대48K · 신풍역 1분</span><br><span style="color:#666;font-size:11px">"후기가 거의 없어서 직접 올려! 가격 대비 만족"</span></div>
 <div style="padding:10px;background:#f0faf0;border-radius:6px;font-size:12px;line-height:1.6"><b>아벤티움</b> · <s style="color:#bbb">정가 2,900만</s> → <b style="color:var(--g)">할인 1,220만</b><span style="color:#aaa"> · 밥벤티움 · 비수기 저녁 · 충정로역</span> <span style="font-size:10px;color:#f59e0b">★9.3/160후기</span><br><span style="color:#666;font-size:11px">"밥벤티움이라 불릴 정도로 맛있고, 기대해도 실망할 수 없었다"</span></div>
-<div style="padding:10px;background:#fafafa;border-radius:6px;font-size:12px;line-height:1.6"><b>해군호텔</b> · 총액 <b>1,280만</b><span style="color:#aaa"> · 꽃포함 · 주차 800~1,200대</span></div>
 <div style="padding:10px;background:#fafafa;border-radius:6px;font-size:12px;line-height:1.6"><b>신도림 웨딩시티</b> · 총액 <b>1,295만</b>(잔여)<span style="color:#aaa"> · 신도림역 직결 · 주차 2,500대</span> <span style="font-size:10px;color:#f59e0b">★9.1/323후기</span><br><span style="color:#666;font-size:11px">"서울에서 이 가격이라니... 꽃, 풍선이벤트 모두 포함!"</span></div>
 <div style="padding:10px;background:#fafafa;border-radius:6px;font-size:12px;line-height:1.6"><b>공군호텔</b> · 총액 <b>1,390만</b><span style="color:#aaa"> · 꽃포함 · 주차 500대/3시간</span></div>
 <div style="padding:10px;background:#fafafa;border-radius:6px;font-size:12px;line-height:1.6"><b>레노스블랑쉬</b> · 총액 <b>1,430만</b><span style="color:#aaa"> · 단독홀 · 옥상폐백 · 왕십리역</span></div>
@@ -1735,17 +1734,6 @@ var HALL_VERDICTS = [
     links: [
       { title: "공식 홈페이지", url: "https://www.hwcc.co.kr/" },
       { title: "다이렉트웨딩", url: "https://www.directwedding.co.kr/weddinghall/hall0010" }
-    ]
-  },
-  {
-    name: "국방컨벤션", fit: "good", badge: "저가 재검토권", area: "용산 삼각지 · 4/6호선 삼각지역 도보 6분",
-    meal: "48,000~58,000원", guarantee: "100~400명 · 시간대별 변동", parking: "80대 · 2시간 무료", timing: "90분 간격 · 주말 11:30/13:00/14:30/16:00/17:30 확인",
-    summary: "최근 계약/본식 후기까지 보면 예산 적합성은 매우 강하고 음식 평도 안정적입니다. 다만 차량 하객 비중이 높으면 주차 체감은 아주 강한 편이 아닙니다.",
-    pros: ["식대와 대관료가 모두 낮아 총비용 압박이 작음", "삼각지역 도보권이라 지하철 하객 접근성이 좋음", "최근 본식 후기에서도 음식 만족, 하객 2시간 무료, 군인 비가족도 이용 가능 신호가 반복됨"],
-    cons: ["주차 80대로 차량 하객 비중이 높으면 약점", "피크 시간대 최소보증은 150~200명대로 올라갈 수 있음"],
-    links: [
-      { title: "공식 홈페이지", url: "https://www.mndconvention.co.kr/" },
-      { title: "2024 계약 후기", url: "https://our-growth-story.tistory.com/71" }
     ]
   },
   {
@@ -3928,6 +3916,7 @@ HALL_DETAIL["더빅토리아웨딩파티"] = {
 
 </script>
 <script src="hall-refresh-2026-10.js"></script>
+<script>/* 공식 홀 사진이 없는 곳은 예식장으로 보지 않고 목록에서 뺌 */HALLS=HALLS.filter(function(h){return HALL_IMAGES[h[0]];});</script>
 <script>
 
 /* ── 비밀번호 (바꾸려면 이 한 줄만 수정) ── */
