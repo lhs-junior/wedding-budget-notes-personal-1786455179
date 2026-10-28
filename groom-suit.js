@@ -27,7 +27,9 @@ var V=D.vendors.map(function(v,i){
   /* 카드 대표가: 상하의 1벌 이상인 공개가 중 가장 낮은 값 (상의만·셔츠만 같은 단품 제외) */
   var ps=(v.prices||[]).filter(function(p){return p.won>0&&!p.part;}).sort(function(x,y){return x.won-y.won;});
   v.low=ps[0]||null;
-  v.reg=v.kind==='온라인 대여'?'택배':/종로|광진|건대/.test(v.area||'')?'강북':'강남';
+  var ar=(v.area||'')+' '+(v.address||'');
+  v.reg=v.kind==='온라인 대여'?'택배':/경기|성남|분당|수원|일산|고양|부천|구리|남양주|인천|용인|하남|안양/.test(ar)?'경기':/강남|서초|청담|신사|논현|압구정|역삼|삼성|잠원|송파|잠실|강동/.test(ar)?'강남':'강북';
+  v.near=v.reg!=='택배'&&/동대문|청량리|중랑|성북|광진|건대|성동|왕십리|종로/.test(ar);
   return v;});
 /* 결론 카드에 이름이 나온 업체 = 스드메의 "받은 견적·추천" 표시에 해당 */
 var PICK=D.verdicts.map(function(x){return x[1].split(' ')[0];});
@@ -36,7 +38,7 @@ function ext(v,k){return (v.extras||[]).some(function(x){return x.k.indexOf(k)>=
 /* 카드 태그: 스드메처럼 업체 성격(포함 범위·VAT·위치)만 */
 function tagsOf(v){
   var t=function(s,c){return '<span class="vc-tag'+(c?' '+c:'')+'">'+esc(s)+'</span>';};
-  return (v.low?t(v.low.vat,v.low.vat==='VAT 포함'?'good':''):'')+(inc(v,'셔츠')?t('셔츠 포함','good'):'')+(inc(v,'구두')?t('구두 포함','good'):ext(v,'구두')?t('구두 별도','warn'):'')+(v.reg==='강북'?t('L65 가까움','good'):'');
+  return (v.low?t(v.low.vat,v.low.vat==='VAT 포함'?'good':''):'')+(inc(v,'셔츠')?t('셔츠 포함','good'):'')+(inc(v,'구두')?t('구두 포함','good'):ext(v,'구두')?t('구두 별도','warn'):'')+(v.near?t('L65 가까움','good'):'');
 }
 function thumb(v,cls){var p=v.photos[0];return p?'<img class="'+cls+'" src="'+esc(p.src)+'" alt="'+esc(v.name)+' 대표 사진" loading="lazy" decoding="async">':'<span class="'+cls+' vt-ph" aria-hidden="true">'+esc(v.name.slice(0,2))+'</span>';}
 function slides(v){
@@ -118,10 +120,12 @@ function decide(){
   var rows=V.slice().sort(function(x,y){return (x.low?x.low.won:999)-(y.low?y.low.won:999);});
   /* 한눈 비교는 매장 대여 후보만. 택배 대여·열린옷장(취업 정장 중심)은 접어 둠 */
   function cheap(v){return v.kind==='온라인 대여'||v.name==='열린옷장';}
-  var main=rows.filter(function(v){return !cheap(v);}),alt=rows.filter(cheap);
+  var store=rows.filter(function(v){return !cheap(v);}),alt=rows.filter(cheap);
+  /* 매장이 50곳이 넘어 한눈 비교는 결론 후보 + 공식 가격(B) 확인된 싼 곳만 8곳. 나머지는 업체 탭 */
+  var main=store.filter(function(v){return PICK.indexOf(v.name)>=0;}).concat(store.filter(function(v){return PICK.indexOf(v.name)<0&&v.low&&v.low.grade==='B';})).slice(0,8);
   return '<section class="sd-sec"><h3>결론</h3><div class="gl-verdicts">'+D.verdicts.map(function(v){return '<div><span>'+esc(v[0])+'</span><b>'+esc(v[1])+'</b></div>';}).join('')+'</div>'+
-   '<h3 class="gl-h">한눈 비교</h3><p class="sd-lead">매장 대여 후보를 가장 싼 상하의 1벌 공개가 순으로 놓았어요. '+esc(D.checked)+' 업체 공식 페이지 기준이고, 사진이나 상세 보기를 누르면 가격 근거·대여 규정·후기가 열려요.</p>'+
-   '<div class="gl">'+main.map(glRow).join('')+'</div><p class="gl-tip">'+esc(D.tip)+'</p></section>'+
+   '<h3 class="gl-h">한눈 비교</h3><p class="sd-lead">결론 후보와, 업체 공식 페이지에서 가격을 확인한 싼 매장을 놓았어요. '+esc(D.checked)+' 업체 공식 페이지 기준이고, 사진이나 상세 보기를 누르면 가격 근거·대여 규정·후기가 열려요.</p>'+
+   '<div class="gl">'+main.map(glRow).join('')+'</div><p class="sd-note">매장 대여 '+store.length+'곳 중 '+main.length+'곳만 놓았어요. 나머지는 업체 탭에서 위치·가격순으로 볼 수 있어요.</p><p class="gl-tip">'+esc(D.tip)+'</p></section>'+
    '<section class="sd-sec"><details class="iw-fold"><summary>저가·택배 대여 '+alt.length+'곳 (매장 피팅 없음·후기 거의 없음)</summary><div class="gl">'+alt.map(glRow).join('')+'</div></details>'+
    '<details class="iw-fold"><summary>근거·가격 메모</summary>'+
    '<div class="sd-kpi"><div><small>조사한 업체</small><b>'+V.length+'곳</b><span>'+esc(kinds().slice(1).map(function(k){return k[1]+' '+V.filter(function(v){return v.kind===k[0];}).length;}).join(' · '))+'</span></div>'+
@@ -152,7 +156,7 @@ function reviews(){
   return '<section class="sd-sec"><h3>실제 이용 후기</h3><p class="sd-lead">네이버 블로그·카페·인스타 원문 '+D.reviews.length+'건을 직접 열어 금액과 불편한 점을 정리했어요. (2026-10-25 수집) 줄을 누르면 체형·광고 고지·원문 링크가 나와요.</p>'+
    '<div class="sd-kpi"><div><small>원문 확인한 후기</small><b>'+D.reviews.length+'건</b><span>블로그 '+n('블로그')+' · 카페 '+n('카페')+' · 인스타 '+n('인스타')+'</span></div>'+
    '<div><small>광고·협찬 고지</small><b>'+ads+'건</b><span>카페 포인트·협찬 문구가 원문에 있는 글</span></div>'+
-   '<div><small>매장 대여 1벌 공개가</small><b>'+(function(){var w=V.filter(function(v){return v.low&&v.reg!=='택배'&&v.name!=='열린옷장';}).map(function(v){return v.low.won;});return man(Math.min.apply(null,w))+'~'+man(Math.max.apply(null,w));})()+'</b><span>업체 공식 페이지 기준 · 결정 화면 참고</span></div></div>'+
+   '<div><small>매장 대여 1벌 공개가</small><b>'+(function(){var w=V.filter(function(v){return v.low&&v.low.grade==='B'&&v.reg!=='택배'&&v.name!=='열린옷장';}).map(function(v){return v.low.won;});return man(Math.min.apply(null,w))+'~'+man(Math.max.apply(null,w));})()+'</b><span>업체 공식 페이지 기준 · 결정 화면 참고</span></div></div>'+
    '<div class="sd-ctl"><div>'+chips('src',[['','전체'],['블로그','블로그'],['카페','카페'],['인스타','인스타']])+
    '<label class="sd-chk"><input type="checkbox" id="gsNoAd"'+(ui.noAd?' checked':'')+'> 광고성 빼기</label></div>'+
    '<input id="gsRQ" class="sd-q" placeholder="업체명으로 찾기 (예: 루쏘소, 르셀루)" value="'+esc(ui.rq)+'"></div>'+
@@ -230,7 +234,7 @@ function render(){
   '<nav class="sd-subnav" role="tablist" aria-label="예복 메뉴">'+VIEWS.map(function(v){return '<button role="tab" data-view="'+v[0]+'" aria-selected="'+(view===v[0])+'"'+(view===v[0]?' class="on"':'')+'>'+v[1]+'</button>';}).join('')+'</nav>'+
   panel('decide',decide())+
   panel('vendors','<section class="sd-sec"><div class="vf"><div class="vf-roles">'+chips('kind',kinds())+'</div><input id="gsQ" class="sd-q" type="search" placeholder="업체명 검색" value="'+esc(ui.q)+'">'+
-   '<div class="vf-sels">'+sel('reg','위치',[['','전체'],['강북','종로·건대'],['강남','강남권'],['택배','택배']])+sel('sort','정렬',[['pick','결론 후보 먼저'],['price','낮은 가격 순'],['review','후기 많은 순']])+'</div></div>'+
+   '<div class="vf-sels">'+sel('reg','위치',[['','전체'],['강북','서울(강남 외)'],['강남','강남권'],['경기','경기'],['택배','택배']])+sel('sort','정렬',[['pick','결론 후보 먼저'],['price','낮은 가격 순'],['review','후기 많은 순']])+'</div></div>'+
    '<p class="sd-lead">카드를 누르면 사진·가격 근거·포함/별도 비용·대여 규정·후기가 모두 열려요.</p><div id="gsVendors">'+vendorGrid()+'</div><details class="iw-more"><summary>가격 등급 설명</summary><div class="iw-legend">'+Object.keys(D.gradeInfo).map(function(k){return '<span>'+grade(k)+' '+esc(D.gradeInfo[k])+'</span>';}).join('')+'</div></details></section>')+
   panel('reviews',reviews())+
   panel('guide','<section class="sd-sec">'+rentVs()+'</section><section class="sd-sec"><h3>피팅 가이드</h3>'+guide()+'</section>')+
