@@ -230,7 +230,7 @@ function snapSection(){
 function bindSnap(){
   root.querySelectorAll('[data-snapt]').forEach(function(b){b.onclick=function(){snapUi.tier=b.dataset.snapt;root.querySelectorAll('[data-snapt]').forEach(function(x){x.classList.toggle('on',x.dataset.snapt===snapUi.tier);});document.getElementById('snapRows').innerHTML=snapRows();labelTables();};});
 }
-var VIEWS=[['decide','결정'],['vendors','업체'],['cases','계약 사례'],['snap','본식 스냅'],['guide','준비 가이드'],['mine','내 견적']];
+var VIEWS=[['decide','결정'],['vendors','업체'],['dress','드레스 혜택'],['cases','계약 사례'],['snap','본식 스냅'],['guide','준비 가이드'],['mine','내 견적']];
 var view;try{view=sessionStorage.getItem('sdm:view')||'decide';}catch(e){view='decide';}
 function panel(id,html){return '<div class="sd-panel" data-view="'+id+'"'+(view===id?'':' hidden')+'>'+html+'</div>';}
 function render(){
@@ -240,6 +240,7 @@ function render(){
   '<nav class="sd-subnav" role="tablist" aria-label="스드메 메뉴">'+VIEWS.map(function(v){return '<button role="tab" data-view="'+v[0]+'" aria-selected="'+(view===v[0])+'"'+(view===v[0]?' class="on"':'')+'>'+v[1]+'</button>';}).join('')+'</nav>'+
   panel('decide',(IW?IW.decide():''))+
   panel('vendors',(IW?IW.vendors():'')+'<section class="sd-sec"><details class="iw-fold"><summary>업체를 볼 때 순서 (설명)</summary>'+vendorSection()+'</details></section>')+
+  panel('dress',(typeof SDM_DRESS_PERKS!=='undefined'?SDM_DRESS_PERKS():''))+
   panel('cases',
    '<section class="sd-sec"><h3>실제 계약 사례</h3><p class="sd-lead">네이버 카페 원문 '+SDM_CASES.length+'건을 직접 열어 업체 조합과 금액을 정리했어요. (2026-09-24 수집) 줄을 누르면 포함·별도 항목과 원문 링크가 나와요. 업체명을 누르면 그 업체가 들어간 사례만 모아 봐요.</p>'+
     '<div class="sd-kpi"><div><small>비동행 계약가 중간값</small><b>'+man(medAll)+'</b><span>업체명 공개 '+base.length+'건 · 서울만 '+seoul.length+'건은 '+man(medSeoul)+'</span></div>'+
