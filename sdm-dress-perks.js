@@ -136,20 +136,71 @@ var DRESS_PERKS={
  ]
 };
 
-function SDM_DRESS_PERKS(){
- var D=DRESS_PERKS;
- function ig(h,sc){return '<a href="https://www.instagram.com/'+esc(h)+'/" target="_blank" rel="noopener">@'+esc(h)+'</a><br>'+(sc>0?sc+'/5':sc<0?'기준':'사진 판단 보류');}
- function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
- return '<section class="sd-sec"><h3>르블랑 대체 드레스샵 혜택</h3>'+
-  '<p class="sd-lead">조건: 퍼스트 무료 · 촬영 컬러 무료 · 애프터 무료 · 실크·오간자·잔잔한 비즈. 아이웨딩 상품과 쿠폰 원문은 '+D.checked+'에 확인했어요. 피팅비·헬퍼비는 어느 샵이나 따로 붙어서 비교에서 뺐어요.</p>'+
-  '<p class="sd-note"><b>성수기·비수기:</b> 조사한 곳 모두 원문에서 시즌 구분을 확인하지 못해서 <b>미확인</b>으로 둬요. 상품 페이지와 쿠폰을 빠짐없이 다 읽었다고는 할 수 없어서 “제한 없음”으로 쓰지 않았어요. 쿠폰 마감일은 계약 기한이지 예식일 기준이 아니에요. 9월 일요일은 보통 성수기라 상담할 때 꼭 물어보세요. 세 혜택을 한 계약에서 모두 받을 수 있다고 확인된 곳도 없어요.</p>'+
-  D.groups.map(function(g){
-   var rows=D.shops.filter(function(s){return s.g===g[0];}).sort(function(a,b){function k(x){return x.sim<0?9:x.sim;}return k(b)-k(a);});
-   return '<h4>'+g[1]+' ('+rows.length+')</h4><div class="sd-tablewrap"><table class="sd-table"><thead><tr><th>샵</th><th>인스타 · 르블랑 유사도</th><th>스타일</th><th>퍼스트 일반가</th><th>혜택 원문 (조건·마감)</th><th>2027.9.12 기준</th><th>출처</th></tr></thead><tbody>'+
-    rows.map(function(s){return '<tr><td><b>'+esc(s.n)+'</b></td><td>'+ig(s.ig,s.sim)+'</td><td>'+esc(s.style)+'</td><td>'+esc(s.first)+'</td><td>'+s.perks.map(esc).join('<br>')+'</td><td>'+esc(s.sept)+'</td><td>'+s.src.map(function(l){return '<a href="'+esc(l[1])+'" target="_blank" rel="noopener">'+esc(l[0])+'</a>';}).join('<br>')+'</td></tr>';}).join('')+
-    '</tbody></table></div>';
+/* 업체 탭과 같은 카드(.vt) + 상세 모달(.md). 사진은 SDM_PHOTOS에서 샵 이름으로 찾음 */
+(function(g){
+var D=DRESS_PERKS,dlg=null;
+var TAG={first:['퍼스트 무료','good'],both:['컬러+애프터 무료','good'],one:['하나만 무료·할인','warn'],none:['혜택 미확인','']};
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function base(n){return String(n).replace(/\s*\(.*\)$/,'');}
+var ALIAS={'브라이드케이':'브라이드K'};
+function photos(s){var P=g.SDM_PHOTOS||{},n=ALIAS[base(s.n)]||base(s.n);if(P[n])return P[n];for(var k in P)if(k.indexOf(n)===0)return P[k];return [];}
+function sim(s){return s.sim>0?'르블랑 유사 '+s.sim+'/5':s.sim<0?'기준 샵':'사진 판단 보류';}
+function tags(s){var t=TAG[s.g];return '<span class="vc-tag'+(t[1]?' '+t[1]:'')+'">'+t[0]+'</span><span class="vc-tag'+(s.sim>=4?' good':'')+'">'+sim(s)+'</span>';}
+function img(s){
+ var ps=photos(s).slice(0,8);
+ if(!ps.length)return '<span class="vt-img vt-ph vt-dress" aria-hidden="true">'+esc(base(s.n).slice(0,2))+'</span>';
+ if(ps.length<2)return '<img class="vt-img" src="'+esc(ps[0].src)+'" alt="'+esc(base(s.n))+' 사진" loading="lazy" decoding="async">';
+ return '<span class="vt-slides vt-img">'+ps.map(function(p,i){return '<img class="'+(i?'':'on')+'" src="'+esc(p.src)+'" alt="'+(i?'':esc(base(s.n))+' 사진')+'" loading="lazy" decoding="async">';}).join('')+
+  '<span class="vt-dots" aria-hidden="true">'+ps.map(function(p,i){return '<i'+(i?'':' class="on"')+'></i>';}).join('')+'</span></span>';
+}
+function tile(s){
+ return '<button type="button" class="vt" data-dp="'+D.shops.indexOf(s)+'">'+img(s)+
+  '<span class="vt-body"><span class="vt-role">'+esc(s.style)+'</span><b class="vt-name">'+esc(s.n)+'</b>'+
+  '<span class="vt-price">퍼스트 <b>'+esc(s.first.replace(/\s*\(.*\)$/,''))+'</b></span>'+
+  '<span class="vt-tags">'+tags(s)+'</span><span class="vt-meta">@'+esc(s.ig)+'</span></span></button>';
+}
+function sec(t,b,cls){return '<section class="md-sec'+(cls?' '+cls:'')+'"><h5>'+t+'</h5>'+b+'</section>';}
+function detail(s){
+ var ps=photos(s);
+ var gal=ps.length?'<div class="md-galw"><button type="button" class="md-nav" data-gal="-1" aria-label="이전 사진">‹</button><button type="button" class="md-nav md-next" data-gal="1" aria-label="다음 사진">›</button><div class="md-gal">'+
+  ps.map(function(x,i){return '<a href="'+esc(x.from||x.src)+'" target="_blank" rel="noopener"><img src="'+esc(x.src)+'" alt="'+esc(base(s.n))+' 사진 '+(i+1)+'" loading="'+(i<2?'eager':'lazy')+'" decoding="async"'+(x.w&&x.h?' style="aspect-ratio:'+x.w+'/'+x.h+'"':'')+'></a>';}).join('')+
+  '</div></div><p class="md-src">사진 '+ps.length+'장 · 사진을 누르면 원본 게시물</p>'
+  :'<div class="md-nogal"><span class="md-ph vt-ph vt-dress" aria-hidden="true">'+esc(base(s.n).slice(0,2))+'</span><p>모은 사진이 없어요. 인스타에서 보세요.</p></div>';
+ return '<div class="md-top"><button type="button" class="md-x" data-close aria-label="닫기">←</button><b>'+esc(s.n)+'</b></div>'+gal+
+  '<header class="md-head"><span class="vt-role">'+esc(s.style)+'</span><h4>'+esc(s.n)+'</h4><div class="vt-tags">'+tags(s)+'</div>'+
+  '<div class="md-ig"><a class="vc-ig" href="https://www.instagram.com/'+esc(s.ig)+'/" target="_blank" rel="noopener">인스타 @'+esc(s.ig)+'</a></div></header>'+
+  '<div class="md-kpi"><div><small>퍼스트 일반가</small><b>'+esc(s.first.replace(/\s*\(.*\)$/,''))+'</b><span>'+esc((s.first.match(/\((.*)\)$/)||['',''])[1])+'</span></div>'+
+  '<div><small>혜택</small><b>'+TAG[s.g][0]+'</b><span>쿠폰 원문 기준</span></div>'+
+  '<div><small>르블랑 느낌</small><b>'+(s.sim>0?s.sim+'/5':s.sim<0?'기준':'보류')+'</b><span>인스타 사진 비교</span></div></div>'+
+  sec('혜택 원문 · 조건 · 마감','<ul>'+s.perks.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>')+
+  sec('2027.9.12(일) 본식 기준','<p>'+esc(s.sept)+'</p><p class="sd-muted">성수기 제한·혜택 중복은 미확인 — 상담 때 서면으로 받기</p>','md-unk')+
+  '<div class="iw-links md-links">'+s.src.map(function(l){return '<a href="'+esc(l[1])+'" target="_blank" rel="noopener">'+esc(l[0])+' →</a>';}).join('')+'</div>';
+}
+function close(){if(history.state&&history.state.dressPerk!=null)history.back();else if(dlg)dlg.close();}
+function open(i){
+ var s=D.shops[i];if(!s)return;
+ if(!dlg){dlg=document.createElement('dialog');dlg.className='md';document.body.appendChild(dlg);
+  dlg.addEventListener('click',function(e){var n=e.target.closest('[data-gal]');if(n){var gl=dlg.querySelector('.md-gal');gl.scrollBy({left:+n.dataset.gal*gl.clientWidth*0.8,behavior:'smooth'});return;}
+   if(e.target===dlg||e.target.closest('[data-close]'))close();});
+  dlg.addEventListener('cancel',function(e){e.preventDefault();close();});
+  g.addEventListener('popstate',function(){if(dlg.open)dlg.close();});}
+ dlg.innerHTML='<div class="md-in">'+detail(s)+'</div>';
+ if(!dlg.open){dlg.showModal();history.pushState({dressPerk:i},'');}
+ dlg.querySelector('.md-in').scrollTop=0;
+}
+if(typeof document!=='undefined')document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('[data-dp]');if(t)open(+t.dataset.dp);});
+g.SDM_DRESS_PERKS=function(){
+ var nPh=D.shops.filter(function(s){return photos(s).length;}).length;
+ return '<section class="sd-sec iw"><h3>르블랑 대체 드레스샵 혜택</h3>'+
+  '<p class="sd-lead">조건: 퍼스트 무료 · 촬영 컬러 무료 · 애프터 무료 · 실크·오간자·잔잔한 비즈. 카드를 누르면 사진·혜택 원문·마감·출처가 열려요. 쿠폰 원문은 '+D.checked+'에 확인했고, 피팅비·헬퍼비는 어느 샵이나 따로 붙어서 비교에서 뺐어요.</p>'+
+  '<p class="sd-note"><b>성수기·비수기:</b> 조사한 곳 모두 원문에서 시즌 구분을 확인하지 못해서 <b>미확인</b>이에요. 쿠폰 마감일은 계약 기한이지 예식일 기준이 아니고, 9월 일요일은 보통 성수기라 상담 때 꼭 물어보세요. 세 혜택을 한 계약에서 모두 받을 수 있다고 확인된 곳은 없어요.</p>'+
+  '<p class="sd-stat"><b>'+D.shops.length+'곳</b> · 사진 있는 곳 '+nPh+'곳 · 그룹 안에서는 르블랑 느낌이 비슷한 순</p>'+
+  D.groups.map(function(gr){
+   var rows=D.shops.filter(function(s){return s.g===gr[0];}).sort(function(a,b){function k(x){return x.sim<0?9:x.sim;}return k(b)-k(a);});
+   return '<h4 class="iw-h">'+gr[1]+' ('+rows.length+')</h4><div class="vt-grid">'+rows.map(tile).join('')+'</div>';
   }).join('')+
   '<p class="sd-note">'+esc(D.igNote)+' (인스타 확인 '+D.igChecked+')</p>'+
-  '<h4>상담 때 서면으로 받을 질문</h4><ol>'+D.asks.map(function(q){return '<li>'+esc(q)+'</li>';}).join('')+'</ol>'+
+  '<details class="iw-fold"><summary>상담 때 서면으로 받을 질문</summary><ol>'+D.asks.map(function(q){return '<li>'+esc(q)+'</li>';}).join('')+'</ol></details>'+
   '</section>';
-}
+};
+})(typeof window!=='undefined'?window:globalThis);
